@@ -7,13 +7,6 @@ CREATE TABLE Alumno(
 	`Nombres` varchar(150) NOT NULL,
 	`ApellidoPaterno` varchar(150) NOT NULL,
 	`ApellidoMaterno` varchar(150) NOT NULL,
-	`Created` Datetime(6) NOT NULL,
-	`CreatedBy` varchar(10) NULL,
-	`LastModified` Datetime(6) NULL,
-	`LastModifiedBy` varchar(10) NULL,
-	`Deleted` Datetime(6) NULL,
-	`DeletedBy` varchar(10) NULL,
-	`Active` Tinyint NOT NULL,
 	`IdInstitucion` int NULL,
  CONSTRAINT `PK_Alumno` PRIMARY KEY 
 (
@@ -26,7 +19,6 @@ CREATE TABLE AlumnoCurso(
 	`IdCurso` int NOT NULL,
 	`Periodo` int NOT NULL,
 	`FechaInscripcion` Datetime(6) NOT NULL,
-	`Active` Tinyint NOT NULL,
 	`IdDocente` int NOT NULL DEFAULT 0,
  CONSTRAINT `PK_AlumnoCurso` PRIMARY KEY 
 (
@@ -41,13 +33,6 @@ CREATE TABLE Cuestionario(
 	`IdDocente` int NOT NULL,
 	`FechaDisponible` Datetime(6) NOT NULL,
 	`FechaExpiracion` Datetime(6) NULL,
-	`Created` Datetime(6) NOT NULL,
-	`CreatedBy` varchar(10) NULL,
-	`LastModified` Datetime(6) NULL,
-	`LastModifiedBy` varchar(10) NULL,
-	`Deleted` Datetime(6) NULL,
-	`DeletedBy` varchar(10) NULL,
-	`Active` Tinyint NOT NULL,
 	`IdCurso` int NOT NULL DEFAULT 0,
 	`Nombre` varchar(255) NULL,
  CONSTRAINT `PK_Cuestionario` PRIMARY KEY 
@@ -72,13 +57,6 @@ CREATE TABLE Curso(
 	`Id` int AUTO_INCREMENT NOT NULL,
 	`Descripcion` varchar(150) NOT NULL,
 	`IdNivel` int NOT NULL,
-	`Created` Datetime(6) NOT NULL,
-	`CreatedBy` varchar(10) NULL,
-	`LastModified` Datetime(6) NULL,
-	`LastModifiedBy` varchar(10) NULL,
-	`Deleted` Datetime(6) NULL,
-	`DeletedBy` varchar(10) NULL,
-	`Active` Tinyint NOT NULL,
 	`IdInstitucion` int NULL,
  CONSTRAINT `PK_Curso` PRIMARY KEY 
 (
@@ -92,13 +70,6 @@ CREATE TABLE Docente(
 	`Nombres` varchar(150) NOT NULL,
 	`ApellidoPaterno` varchar(150) NOT NULL,
 	`ApellidoMaterno` varchar(150) NOT NULL,
-	`Created` Datetime(6) NOT NULL,
-	`CreatedBy` varchar(10) NULL,
-	`LastModified` Datetime(6) NULL,
-	`LastModifiedBy` varchar(10) NULL,
-	`Deleted` Datetime(6) NULL,
-	`DeletedBy` varchar(10) NULL,
-	`Active` Tinyint NOT NULL,
  CONSTRAINT `PK_Docente` PRIMARY KEY 
 (
 	`Id` ASC
@@ -122,13 +93,6 @@ CREATE TABLE DocenteCurso(
 CREATE TABLE Institucion(
 	`Id` int AUTO_INCREMENT NOT NULL,
 	`Nombre` varchar(255) NOT NULL,
-	`Created` Datetime(6) NOT NULL,
-	`CreatedBy` varchar(10) NULL,
-	`LastModified` Datetime(6) NULL,
-	`LastModifiedBy` varchar(10) NULL,
-	`Deleted` Datetime(6) NULL,
-	`DeletedBy` varchar(10) NULL,
-	`Active` Tinyint NOT NULL,
  CONSTRAINT `PK_Institucion` PRIMARY KEY 
 (
 	`Id` ASC
@@ -139,7 +103,6 @@ CREATE TABLE Institucion(
 CREATE TABLE InstitucionDocente(
 	`IdInstitucion` int NOT NULL,
 	`IdDocente` int NOT NULL,
-	`Active` Tinyint NOT NULL,
  CONSTRAINT `PK_InstitucionDocente` PRIMARY KEY 
 (
 	`IdInstitucion` ASC,
@@ -151,13 +114,6 @@ CREATE TABLE InstitucionDocente(
 CREATE TABLE Nivel(
 	`Id` int AUTO_INCREMENT NOT NULL,
 	`Descripcion` varchar(150) NOT NULL,
-	`Created` Datetime(6) NOT NULL,
-	`CreatedBy` varchar(10) NULL,
-	`LastModified` Datetime(6) NULL,
-	`LastModifiedBy` varchar(10) NULL,
-	`Deleted` Datetime(6) NULL,
-	`DeletedBy` varchar(10) NULL,
-	`Active` Tinyint NOT NULL,
  CONSTRAINT `PK_Nivel` PRIMARY KEY 
 (
 	`Id` ASC
@@ -169,13 +125,6 @@ CREATE TABLE Pregunta(
 	`Id` int AUTO_INCREMENT NOT NULL,
 	`Texto` varchar(250) NOT NULL,
 	`Tipo` Longtext NULL,
-	`Created` Datetime(6) NOT NULL,
-	`CreatedBy` varchar(10) NULL,
-	`LastModified` Datetime(6) NULL,
-	`LastModifiedBy` varchar(10) NULL,
-	`Deleted` Datetime(6) NULL,
-	`DeletedBy` varchar(10) NULL,
-	`Active` Tinyint NOT NULL,
 	`IdCurso` int NOT NULL DEFAULT 0,
 	`IdDocente` int NOT NULL DEFAULT 0,
 	`IdInstitucion` int NOT NULL DEFAULT 0,
@@ -191,13 +140,6 @@ CREATE TABLE PreguntaOpcion(
 	`Texto` varchar(250) NOT NULL,
 	`Correcta` Tinyint NOT NULL,
 	`IdPregunta` int NOT NULL,
-	`Created` Datetime(6) NOT NULL,
-	`CreatedBy` varchar(10) NULL,
-	`LastModified` Datetime(6) NULL,
-	`LastModifiedBy` varchar(10) NULL,
-	`Deleted` Datetime(6) NULL,
-	`DeletedBy` varchar(10) NULL,
-	`Active` Tinyint NOT NULL,
  CONSTRAINT `PK_PreguntaOpcion` PRIMARY KEY 
 (
 	`Id` ASC
@@ -211,13 +153,6 @@ CREATE TABLE Recurso(
 	`Contenido` varchar(500) NOT NULL,
 	`Tipo` nchar(1) NOT NULL,
 	`IdInstitucion` int NOT NULL,
-	`Created` Datetime(6) NOT NULL,
-	`CreatedBy` varchar(10) NULL,
-	`LastModified` Datetime(6) NULL,
-	`LastModifiedBy` varchar(10) NULL,
-	`Deleted` Datetime(6) NULL,
-	`DeletedBy` varchar(10) NULL,
-	`Active` Tinyint NOT NULL,
 	`OriginalFilename` varchar(500) NULL,
 	`Miniatura` Longtext NULL,
 	`Titulo` varchar(500) NOT NULL DEFAULT N'',
@@ -234,13 +169,6 @@ CREATE TABLE SolucionCuestionario(
 	`IdCuestionario` int NOT NULL,
 	`FechaSolucion` Datetime(6) NOT NULL,
 	`FechaRevision` Datetime(6) NULL,
-	`Created` Datetime(6) NOT NULL,
-	`CreatedBy` varchar(10) NULL,
-	`LastModified` Datetime(6) NULL,
-	`LastModifiedBy` varchar(10) NULL,
-	`Deleted` Datetime(6) NULL,
-	`DeletedBy` varchar(10) NULL,
-	`Active` Tinyint NOT NULL,
  CONSTRAINT `PK_SolucionCuestionario` PRIMARY KEY 
 (
 	`Id` ASC
@@ -253,13 +181,6 @@ CREATE TABLE SolucionPregunta(
 	`IdPregunta` int NOT NULL,
 	`Respuesta` varchar(250) NOT NULL,
 	`Puntaje` decimal(10, 2) NULL,
-	`Created` Datetime(6) NOT NULL,
-	`CreatedBy` varchar(10) NULL,
-	`LastModified` Datetime(6) NULL,
-	`LastModifiedBy` varchar(10) NULL,
-	`Deleted` Datetime(6) NULL,
-	`DeletedBy` varchar(10) NULL,
-	`Active` Tinyint NOT NULL,
 	`IdSolucion` int NOT NULL DEFAULT 0,
 	`Intentos` int NOT NULL DEFAULT 0,
 	`IdOpcion` int NULL,
@@ -280,13 +201,6 @@ CREATE TABLE Usuario(
 	`Locked` Tinyint NOT NULL,
 	`Token` Char(36) NULL,
 	`TokenExpiration` Datetime(6) NULL,
-	`Created` Datetime(6) NOT NULL,
-	`CreatedBy` varchar(10) NULL,
-	`LastModified` Datetime(6) NULL,
-	`LastModifiedBy` varchar(10) NULL,
-	`Deleted` Datetime(6) NULL,
-	`DeletedBy` varchar(10) NULL,
-	`Active` Tinyint NOT NULL,
 	`IdAlumno` int NULL,
 	`IdDocente` int NULL,
  CONSTRAINT `PK_Usuario` PRIMARY KEY 
