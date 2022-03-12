@@ -1,4 +1,5 @@
 from django.db import models
+from apps.cursos.models import Curso
 from educasec.utils.models import BaseModel
 
 # Create your models here.
@@ -20,7 +21,7 @@ class InstitucionDocente(BaseModel):
 class DocenteCurso(BaseModel):
    institucion_id = models.ForeignKey(Institucion, on_delete=models.CASCADE)
    docente_id = models.ForeignKey(Docente, on_delete=models.CASCADE)
-   #curso_id = models.ForeignKey(Curso, on_delete=models.CASCADE)
+   curso_id = models.ForeignKey(Curso, on_delete=models.CASCADE)
 
 
 
