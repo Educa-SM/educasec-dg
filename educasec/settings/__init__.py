@@ -130,5 +130,5 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#AUTH_USER_MODEL = 'login.User'
-#AUTH_GROUP_MODEL = 'login.Cargo'
+AUTH_USER_MODEL = 'seguridad.User'
+#AUTH_GROUP_MODEL = 'seguridad.Cargo'

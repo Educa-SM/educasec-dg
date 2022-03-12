@@ -1,15 +1,23 @@
 from django.db import models
-from apps.cursos.models import Cuestionario, Pregunta, PreguntaOpcion
-from apps.institucion.models import Institucion
+from apps.cursos.models import Cuestionario, Curso, Pregunta, PreguntaOpcion
+from apps.institucion.models import Docente, Institucion, TipoDocIdentidad
 from educasec.utils.models import BaseModel
+
+# Create your models here.
 
 
 class Alumno(BaseModel):
+   nro_documento = models.CharField('Numero de Documento de Identidad',primary_key=True, max_length=12)
    nombres = models.CharField('Nombres', max_length=150, blank=False)
    apellido_paterno = models.CharField('Apellido Paterno', max_length=150, blank=False)
    apellido_materno = models.CharField('Apellido Materno', max_length=150, blank=False)
    institucion_id = models.ForeignKey(Institucion, on_delete=models.CASCADE)
-
+   tipo_documento = models.CharField('Tipo de Documento', 
+            max_length=3,
+            choices=TipoDocIdentidad.choices,
+            default=TipoDocIdentidad.DNI
+   )
+   
 class SolucionCuestionario(BaseModel):
    fecha_solucion = models.DateTimeField('Fecha de Solucion')
    fecha_revision = models.DateTimeField('Apellido Paterno')
@@ -34,3 +42,12 @@ class SolucionPregunta(BaseModel):
    """
    Los intentos_posibles y puntaje_pregunta son asignados por el docente en un inicio
    """
+
+
+class AlumnoCurso(BaseModel):
+   periodo = models.IntegerField( null=False, default=1)
+   fecha_inscripcion = models.DateTimeField(auto_now_add=True)
+   
+   alumno_id = models.ForeignKey(Alumno, on_delete=models.CASCADE)
+   curso_id = models.ForeignKey(Curso, on_delete=models.CASCADE)
+   docente_id = models.ForeignKey(Docente, on_delete=models.CASCADE)

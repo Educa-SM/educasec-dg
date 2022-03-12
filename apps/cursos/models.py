@@ -1,5 +1,4 @@
 from django.db import models
-from apps.alumno.models import Alumno
 from apps.institucion.models import Docente, Institucion
 from educasec.utils.models import BaseModel
 from django.utils.translation import gettext_lazy as _
@@ -51,13 +50,6 @@ class CuestionarioPregunta(BaseModel):
    cuestionario_id = models.ForeignKey(Cuestionario, on_delete=models.CASCADE)
    pregunta_id = models.ForeignKey(Pregunta, on_delete=models.CASCADE)
 
-class AlumnoCurso(BaseModel):
-   periodo = models.IntegerField( null=False, default=1)
-   fecha_inscripcion = models.DateTimeField(auto_now_add=True)
-   
-   alumno_id = models.ForeignKey(Alumno, on_delete=models.CASCADE)
-   curso_id = models.ForeignKey(Curso, on_delete=models.CASCADE)
-   docente_id = models.ForeignKey(Docente, on_delete=models.CASCADE)
 
 class PreguntaOpcion(BaseModel):
    texto = models.CharField(max_length=250, null=False)
@@ -69,3 +61,8 @@ class PreguntaOpcion(BaseModel):
    pregunta_id = models.ForeignKey(Pregunta, on_delete=models.CASCADE)
 
 
+
+class DocenteCurso(BaseModel):
+   institucion_id = models.ForeignKey(Institucion, on_delete=models.CASCADE)
+   docente_id = models.ForeignKey(Docente, on_delete=models.CASCADE)
+   curso_id = models.ForeignKey(Curso, on_delete=models.CASCADE)
