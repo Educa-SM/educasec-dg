@@ -1,4 +1,5 @@
 from django.db import models
+from apps.seguridad.models import User
 from educasec.utils.models import BaseModel
 from django.utils.translation import gettext_lazy as _
 
@@ -21,9 +22,13 @@ class Docente(BaseModel):
             choices=TipoDocIdentidad.choices,
             default=TipoDocIdentidad.DNI
    )
+   nro_documento = models.CharField('Numero de Documento de Identidad',unique=True, max_length=12)
+   
+   user = models.OneToOneField(User, on_delete=models.CASCADE)
+
 class InstitucionDocente(BaseModel):
-   institucion_id = models.ForeignKey(Institucion, on_delete=models.CASCADE)
-   docente_id = models.ForeignKey(Docente, on_delete=models.CASCADE)
+   institucion = models.ForeignKey(Institucion, on_delete=models.CASCADE)
+   docente = models.ForeignKey(Docente, on_delete=models.CASCADE)
 
 
 

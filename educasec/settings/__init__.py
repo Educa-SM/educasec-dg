@@ -31,9 +31,9 @@ LOCAL_APPS= [
 THIRD_APPS = [
    'rest_framework',
    'rest_framework.authtoken',
-   #'corsheaders',
+   'corsheaders',
    #'reversion',
-   #'import_export',
+   'import_export',
 ]
 
 INSTALLED_APPS = BASE_APPS + LOCAL_APPS + THIRD_APPS 
@@ -52,7 +52,7 @@ MIDDLEWARE = [
    'django.contrib.auth.middleware.AuthenticationMiddleware',
    'django.contrib.messages.middleware.MessageMiddleware',
    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-   #'corsheaders.middleware.CorsMiddleware',
+   'corsheaders.middleware.CorsMiddleware',
    #'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 

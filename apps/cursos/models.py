@@ -20,16 +20,16 @@ class Nivel(BaseModel):
 
 class Curso(BaseModel):
    nombre = models.CharField('Nombre', max_length=150, blank=False, null=False)
-   nivel_id = models.ForeignKey(Nivel, on_delete=models.CASCADE)
-   institucion_id = models.ForeignKey(Institucion, on_delete=models.CASCADE)
+   nivel = models.ForeignKey(Nivel, on_delete=models.CASCADE)
+   institucion = models.ForeignKey(Institucion, on_delete=models.CASCADE)
 
 class Cuestionario(BaseModel):
    fecha_disponible = models.DateTimeField(auto_now_add=True)
    fecha_expiracion = models.DateTimeField(auto_now_add=True)
    nombre = models.CharField('Nombre', max_length=150, blank=False, null=False)
 
-   docente_id = models.ForeignKey(Docente, on_delete=models.CASCADE)
-   curso_id = models.ForeignKey(Curso, on_delete=models.CASCADE)
+   docente = models.ForeignKey(Docente, on_delete=models.CASCADE)
+   curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
 
 
 class Pregunta(BaseModel):
@@ -40,15 +40,15 @@ class Pregunta(BaseModel):
             default=TipoPregunta.RESPUESTA_SIMPRE
    )
 
-   docente_id = models.ForeignKey(Docente, on_delete=models.CASCADE)
-   curso_id = models.ForeignKey(Curso, on_delete=models.CASCADE)
-   institucion_id = models.ForeignKey(Institucion, on_delete=models.CASCADE)
+   docente = models.ForeignKey(Docente, on_delete=models.CASCADE)
+   curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
+   institucion = models.ForeignKey(Institucion, on_delete=models.CASCADE)
 
 class CuestionarioPregunta(BaseModel):
    reintentos = models.IntegerField( null=False, default=1)
    puntaje = models.DecimalField( null=False, max_digits=12, decimal_places=2, default=0.0)
-   cuestionario_id = models.ForeignKey(Cuestionario, on_delete=models.CASCADE)
-   pregunta_id = models.ForeignKey(Pregunta, on_delete=models.CASCADE)
+   cuestionario = models.ForeignKey(Cuestionario, on_delete=models.CASCADE)
+   pregunta = models.ForeignKey(Pregunta, on_delete=models.CASCADE)
 
 
 class PreguntaOpcion(BaseModel):
@@ -58,11 +58,11 @@ class PreguntaOpcion(BaseModel):
             choices=SituacionPregunta.choices,
             default=SituacionPregunta.INCORRECTA
    )
-   pregunta_id = models.ForeignKey(Pregunta, on_delete=models.CASCADE)
+   pregunta = models.ForeignKey(Pregunta, on_delete=models.CASCADE)
 
 
 
 class DocenteCurso(BaseModel):
-   institucion_id = models.ForeignKey(Institucion, on_delete=models.CASCADE)
-   docente_id = models.ForeignKey(Docente, on_delete=models.CASCADE)
-   curso_id = models.ForeignKey(Curso, on_delete=models.CASCADE)
+   institucion = models.ForeignKey(Institucion, on_delete=models.CASCADE)
+   docente = models.ForeignKey(Docente, on_delete=models.CASCADE)
+   curso = models.ForeignKey(Curso, on_delete=models.CASCADE)

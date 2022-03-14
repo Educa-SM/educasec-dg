@@ -1,28 +1,33 @@
 from django.db import models
 from apps.cursos.models import Cuestionario, Curso, Pregunta, PreguntaOpcion
 from apps.institucion.models import Docente, Institucion, TipoDocIdentidad
+from apps.seguridad.models import User
 from educasec.utils.models import BaseModel
 
 # Create your models here.
 
 
 class Alumno(BaseModel):
-   nro_documento = models.CharField('Numero de Documento de Identidad',primary_key=True, max_length=12)
+   nro_documento = models.CharField('Numero de Documento de Identidad',unique=True, max_length=12)
    nombres = models.CharField('Nombres', max_length=150, blank=False)
    apellido_paterno = models.CharField('Apellido Paterno', max_length=150, blank=False)
    apellido_materno = models.CharField('Apellido Materno', max_length=150, blank=False)
-   institucion_id = models.ForeignKey(Institucion, on_delete=models.CASCADE)
    tipo_documento = models.CharField('Tipo de Documento', 
             max_length=3,
             choices=TipoDocIdentidad.choices,
             default=TipoDocIdentidad.DNI
    )
+
+   user = models.OneToOneField(User, on_delete=models.CASCADE)
+   institucion = models.ForeignKey(Institucion, on_delete=models.CASCADE, null=True, blank=True)
+
    
 class SolucionCuestionario(BaseModel):
    fecha_solucion = models.DateTimeField('Fecha de Solucion')
    fecha_revision = models.DateTimeField('Apellido Paterno')
-   alumno_id = models.ForeignKey(Alumno, on_delete=models.CASCADE)
-   cuestionario_id = models.ForeignKey(Cuestionario, on_delete=models.CASCADE)
+
+   alumno = models.ForeignKey(Alumno, on_delete=models.CASCADE)
+   cuestionario = models.ForeignKey(Cuestionario, on_delete=models.CASCADE)
 
 
 class SolucionPregunta(BaseModel):
@@ -35,9 +40,9 @@ class SolucionPregunta(BaseModel):
    intentos_posibles = models.IntegerField('Cantidad de Intentos',  blank=False, default=0)
    puntaje_pregunta = models.DecimalField('Puntaje de la Pregunta', max_digits=14, decimal_places=2,blank=False,default=0)
 
-   solucion_id = models.ForeignKey(SolucionCuestionario, on_delete=models.CASCADE)
-   pregunta_id = models.ForeignKey(Pregunta, on_delete=models.CASCADE)
-   opcion_id = models.ForeignKey(PreguntaOpcion, on_delete=models.CASCADE)
+   solucion = models.ForeignKey(SolucionCuestionario, on_delete=models.CASCADE)
+   pregunta = models.ForeignKey(Pregunta, on_delete=models.CASCADE)
+   opcion_pregunta = models.ForeignKey(PreguntaOpcion, on_delete=models.CASCADE)
 
    """
    Los intentos_posibles y puntaje_pregunta son asignados por el docente en un inicio
