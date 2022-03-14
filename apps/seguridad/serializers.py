@@ -4,8 +4,6 @@ from apps.institucion.models import Docente
 from .models import User
 
 class UserSerializer(serializers.ModelSerializer):
-   #groups_id = serializers.PrimaryKeyRelatedField(many=True, queryset=Group.objects.all(), source='groups')
-   #groups = GroupSerializer(many=True,read_only=True)
    groups = serializers.SlugRelatedField(
       many=True, read_only=True, slug_field='name'
    )
@@ -15,7 +13,6 @@ class UserSerializer(serializers.ModelSerializer):
          'id',
          'username',
          'password',
-         #'groups_id',
          'groups',
       ]
       extra_kwargs = {
@@ -38,17 +35,20 @@ class DocenteSerializer(serializers.ModelSerializer):
          'tipo_documento',
          'nro_documento'
       ]
-      extra_kwargs = {'id': {'read_only': True}}
+      extra_kwargs = {'id': 
+         {'read_only': True}
+      }
    
    def create(self, validated_data):
       data_user = validated_data.pop('user')
       user = User(**data_user)
       user.set_password(data_user['password'])
-      print(user.password)
       user.save()
       user.groups.add(2)
       docente = Docente(**validated_data,user=user)
       docente.save()
+      if not docente.id:
+         user.delete()
       return docente
 
 class AlumnoSerializer(serializers.ModelSerializer):
@@ -64,17 +64,18 @@ class AlumnoSerializer(serializers.ModelSerializer):
          'tipo_documento',
          'nro_documento'
       ]
-      extra_kwargs = {'id': {'read_only': True}}
+      extra_kwargs = {'id': 
+         {'read_only': True}
+      }
    
    def create(self, validated_data):
       data_user = validated_data.pop('user')
       user = User(**data_user)
       user.set_password(data_user['password'])
-      print(user.password)
       user.save()
       user.groups.add(4)
-      docente = Alumno(**validated_data,user=user)
-      docente.save()
-      if not docente.id:
+      alumno = Alumno(**validated_data,user=user)
+      alumno.save()
+      if not alumno.id:
          user.delete()
-      return docente
+      return alumno

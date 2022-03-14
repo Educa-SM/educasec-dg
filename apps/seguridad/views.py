@@ -1,14 +1,10 @@
-from django.shortcuts import render
 from rest_framework.views import APIView
-
 from apps.seguridad.serializers import AlumnoSerializer, DocenteSerializer
-# Create your views here.
 from rest_framework.response import Response
-
 
 class RegisterDocenteView(APIView):
    def post(self, request):
-      serializer = DocenteSerializer(data= request.data)
+      serializer = DocenteSerializer(data = request.data)
       if serializer.is_valid():
          serializer.save()
          return Response(serializer.data, 201)
@@ -16,7 +12,7 @@ class RegisterDocenteView(APIView):
 
 class RegisterAlumnoView(APIView):
    def post(self, request):
-      serializer = AlumnoSerializer(data= request.data)
+      serializer = AlumnoSerializer(data = request.data)
       if serializer.is_valid():
          serializer.save()
          return Response(serializer.data, 201)
