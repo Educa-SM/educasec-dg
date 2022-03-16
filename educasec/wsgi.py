@@ -13,6 +13,6 @@ else:
 
 """
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'educasec.settings.local')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'educasec.settings')
 
 application = get_wsgi_application()

@@ -1,8 +1,5 @@
-from . import *
 #import dj_database_url
 #from decouple import config
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -22,12 +19,24 @@ ALLOWED_HOSTS = ['*']
     )
 }"""
 
-#conexion con react
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ORIGIN_WHITELIST = ('*',)
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'educasec',
+        'USER': 'alonso',
+        'PASSWORD': 'alonso',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
+}
 
+#conexion con react
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_WHITELIST = (
+   'http://localhost:4200',
+)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
