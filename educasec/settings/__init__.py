@@ -136,7 +136,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'seguridad.User'
 #AUTH_GROUP_MODEL = 'seguridad.Cargo'
 
-if not DEBUG:
+if DEBUG:
    from .local import *
 else:
    from .production import *
