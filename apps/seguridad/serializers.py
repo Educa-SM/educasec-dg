@@ -23,7 +23,9 @@ class UserSerializer(serializers.ModelSerializer):
 
 class DocenteSerializer(serializers.ModelSerializer):
    user = UserSerializer()
-
+   instituciones = serializers.SlugRelatedField(
+      many=True, read_only=True, slug_field='id'
+   )
    class Meta:
       model = Docente
       fields = [
@@ -33,9 +35,12 @@ class DocenteSerializer(serializers.ModelSerializer):
          'apellido_paterno',
          'direccion',
          'tipo_documento',
-         'nro_documento'
+         'nro_documento',
+         'instituciones'
       ]
       extra_kwargs = {'id': 
+         {'read_only': True},
+         'instituciones': 
          {'read_only': True}
       }
    

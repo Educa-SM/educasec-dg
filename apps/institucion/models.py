@@ -25,10 +25,8 @@ class Docente(BaseModel):
    nro_documento = models.CharField('Numero de Documento de Identidad',unique=True, max_length=12)
    
    user = models.OneToOneField(User, on_delete=models.CASCADE)
+   instituciones = models.ManyToManyField(Institucion)
 
-class InstitucionDocente(BaseModel):
-   institucion = models.ForeignKey(Institucion, on_delete=models.CASCADE)
-   docente = models.ForeignKey(Docente, on_delete=models.CASCADE)
 
 
 

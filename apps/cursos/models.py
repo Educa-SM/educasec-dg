@@ -22,6 +22,7 @@ class Curso(BaseModel):
    nombre = models.CharField('Nombre', max_length=150, blank=False, null=False)
    nivel = models.ForeignKey(Nivel, on_delete=models.CASCADE)
    institucion = models.ForeignKey(Institucion, on_delete=models.CASCADE)
+   docentes = models.ManyToManyField(Docente)
 
 class Cuestionario(BaseModel):
    fecha_disponible = models.DateTimeField(auto_now_add=True)
@@ -62,7 +63,3 @@ class PreguntaOpcion(BaseModel):
 
 
 
-class DocenteCurso(BaseModel):
-   institucion = models.ForeignKey(Institucion, on_delete=models.CASCADE)
-   docente = models.ForeignKey(Docente, on_delete=models.CASCADE)
-   curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
