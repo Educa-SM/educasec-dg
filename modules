@@ -1,0 +1,26 @@
+recursos
+	recurso
+	tipo juego
+	juego
+	opcion juego
+institucion
+	institucion
+	docente
+	alumno
+	
+Cursos
+	nivel
+	grado
+	curso
+	docente institucion
+	curso docente
+	alumno inscripcion curso
+
+Cuestionarios
+	cuestionario
+	cuestionario pregunta
+	pregunta
+	pregunta opcion
+	cuestionario curso
+	solucion cuestionario
+	solucion pregunta	

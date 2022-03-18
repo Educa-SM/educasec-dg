@@ -3,7 +3,7 @@ from .models import *
 # Register your models here.
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
-
+"""
 # Nivel
 class NivelResouce(resources.ModelResource):
    class Meta:
@@ -51,4 +51,4 @@ class PreguntaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 
 admin.site.register(Nivel, NivelAdmin)
 admin.site.register(Curso, CursoAdmin)
-admin.site.register(Cuestionario, CuestionarioAdmin)
+admin.site.register(Cuestionario, CuestionarioAdmin)"""

@@ -25,8 +25,21 @@ class Docente(BaseModel):
    nro_documento = models.CharField('Numero de Documento de Identidad',unique=True, max_length=12)
    
    user = models.OneToOneField(User, on_delete=models.CASCADE)
-   instituciones = models.ManyToManyField(Institucion)
 
+
+class Alumno(BaseModel):
+   nro_documento = models.CharField('Numero de Documento de Identidad',unique=True, max_length=12)
+   nombres = models.CharField('Nombres', max_length=150, blank=False)
+   apellido_paterno = models.CharField('Apellido Paterno', max_length=150, blank=False)
+   apellido_materno = models.CharField('Apellido Materno', max_length=150, blank=False)
+   tipo_documento = models.CharField('Tipo de Documento', 
+            max_length=3,
+            choices=TipoDocIdentidad.choices,
+            default=TipoDocIdentidad.DNI
+   )
+
+   user = models.OneToOneField(User, on_delete=models.CASCADE)
+   institucion = models.ForeignKey(Institucion, on_delete=models.CASCADE, null=True, blank=True)
 
 
 

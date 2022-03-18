@@ -23,3 +23,16 @@ class Recurso(BaseModel):
         blank=True,
         null=True
     )
+
+class TipoJuego(BaseModel):
+    nombre = models.CharField('Nombre', max_length=100, null=False, unique=True)
+
+class Juego(BaseModel):
+    texto = models.CharField('Texto', max_length=255, null=True, blank=True)
+    recurso = models.ForeignKey(Recurso, on_delete=models.CASCADE)
+    tipo_juego = models.ForeignKey(TipoJuego, on_delete=models.CASCADE)
+
+class OpcionJuego(BaseModel):
+    pregunta = models.CharField('Pregunta', blank=True, null=True, max_length=255)
+    texto = models.CharField('Texto', max_length=255, blank=False, null=False)
+    juego = models.ForeignKey(Juego, on_delete=models.CASCADE)

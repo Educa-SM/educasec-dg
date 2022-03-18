@@ -1,8 +1,5 @@
 from rest_framework.views import APIView
-from apps.alumno.models import Alumno
-from apps.institucion.models import Docente
-from apps.seguridad.models import User
-from apps.seguridad.serializers import AlumnoSerializer, DocenteSerializer, UserSerializer
+from apps.seguridad.serializers import *
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.hashers import check_password

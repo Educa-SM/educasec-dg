@@ -24,11 +24,11 @@ BASE_APPS =[
    'django.contrib.staticfiles',
 ]
 LOCAL_APPS= [
-   'apps.alumno',
-   'apps.cursos',
    'apps.institucion',
-   'apps.recursos',
    'apps.seguridad',
+   'apps.recursos',
+   'apps.cuestionarios',
+   'apps.cursos',
 ]
 
 THIRD_APPS = [
