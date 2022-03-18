@@ -65,11 +65,6 @@ class PreguntaOpcion(BaseModel):
 
 
 # ******************  Inscripcion de Cursos   *********************
-class DocenteInstitucion(BaseModel):
-   institucion = models.ForeignKey(Institucion, on_delete=models.CASCADE)
-   docente = models.ForeignKey(Docente, on_delete=models.CASCADE)
-   class Meta:
-      unique_together = ('institucion', 'docente',)
 
 
 class CursoDocente(BaseModel):
@@ -77,7 +72,8 @@ class CursoDocente(BaseModel):
    año = models.IntegerField( null=False, blank=False)
    nombre = models.CharField('Nombre', max_length=150, blank=False, null=False)
    curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
-   docente_institucion = models.ForeignKey(DocenteInstitucion, on_delete=models.CASCADE)
+   docente = models.ForeignKey(Docente, on_delete=models.CASCADE)
+   institucion = models.ForeignKey(Institucion, on_delete=models.CASCADE)
    codigo_inscripcion = models.CharField('Codigo', max_length=10,null=False,blank=False)
 
 # la inscripcion -> estado=1(registrado)   estado=2

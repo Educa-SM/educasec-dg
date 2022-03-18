@@ -3,7 +3,7 @@ from .models import *
 # Register your models here.
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
-"""
+
 # Nivel
 class NivelResouce(resources.ModelResource):
    class Meta:
@@ -15,40 +15,52 @@ class NivelAdmin(ImportExportModelAdmin, admin.ModelAdmin):
    list_display =('nombre',)
    resources_class = NivelResouce
 
+# Grado
+class GradoResouce(resources.ModelResource):
+   class Meta:
+      model = Grado
+      fields = ('nombre','nivel')
+
+class GradoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+   search_fields = ['nombre','nivel']
+   list_display =('nombre','nivel')
+   resources_class = GradoResouce
+
 # curso
 class CursoResouce(resources.ModelResource):
    class Meta:
       model = Curso
-      fields = ('nombre','nivel','institucion')
+      fields = ('nombre','grado')
 
 class CursoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-   search_fields = ['nombre','nivel','institucion']
-   list_display =('nombre','nivel','institucion')
+   search_fields = ['nombre','grado']
+   list_display =('nombre','grado')
    resources_class = CursoResouce
 
 # cuestionario
 class CuestionarioResouce(resources.ModelResource):
    class Meta:
       model = Cuestionario
-      fields = ('nombre','docente','curso','fecha_disponible','fecha_expiracion')
+      fields = ('nombre','curso',)
 
 class CuestionarioAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-   search_fields = ['nombre','docente','curso','fecha_disponible','fecha_expiracion']
-   list_display =('nombre','docente','curso','fecha_disponible','fecha_expiracion')
+   search_fields = ['nombre','curso',]
+   list_display =('nombre','curso',)
    resources_class = CuestionarioResouce
 
 # pregunta
 class PreguntaResouce(resources.ModelResource):
    class Meta:
       model = Pregunta
-      fields = ('texto','tipo','docente','curso','institucion')
+      fields = ('texto','tipo','curso',)
 
 class PreguntaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-   search_fields = ['texto','tipo','docente','curso','institucion']
-   list_display =('texto','tipo','docente','curso','institucion')
+   search_fields = ['texto','tipo','curso',]
+   list_display =('texto','tipo','curso',)
    resources_class = PreguntaResouce
 
 
 admin.site.register(Nivel, NivelAdmin)
+admin.site.register(Grado, GradoAdmin)
 admin.site.register(Curso, CursoAdmin)
-admin.site.register(Cuestionario, CuestionarioAdmin)"""
+admin.site.register(Cuestionario, CuestionarioAdmin)

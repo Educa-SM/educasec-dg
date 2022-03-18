@@ -3,7 +3,7 @@ from .models import *
 # Register your models here.
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
-"""
+
 class DocenteResource (resources.ModelResource):
    class Meta:
       model = Docente
@@ -24,6 +24,17 @@ class InstitucionAdmin(ImportExportModelAdmin, admin.ModelAdmin):
    list_display = ('id','nombre','direccion',)
    resources_class = InstitucionResource
 
+
+class AlumnoResource (resources.ModelResource):
+   class Meta:
+      model = Alumno
+      fields = ('nro_documento','nombres','apellido_paterno','apellido_materno','tipo_documento','user')
+
+class AlumnoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+   search_fields = ['nro_documento','nombres','apellido_paterno','apellido_materno']
+   list_display =('nro_documento','tipo_documento','nombres','apellido_paterno','apellido_materno','user')
+   resources_class = AlumnoResource
+
+
 admin.site.register(Docente, DocenteAdmin)
 admin.site.register(Institucion, InstitucionAdmin)
-"""
