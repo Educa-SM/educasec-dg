@@ -11,6 +11,8 @@ class TipoDocIdentidad(models.TextChoices):
 class Institucion(BaseModel):
    nombre = models.CharField('Nombre',max_length=255, null=False, blank=False)
    direccion = models.CharField('Direccion', max_length=255, blank=True, null=True)
+   def __str__(self):
+      return self.nombre
 
 class Docente(BaseModel):
    nombres = models.CharField('Nombres',max_length=150, null=False, blank=False)
@@ -26,6 +28,8 @@ class Docente(BaseModel):
    
    user = models.OneToOneField(User, on_delete=models.CASCADE)
    instituciones = models.ManyToManyField(Institucion)
+   def __str__(self):
+      return self.nombres +' '+self.apellido_paterno+''+self.apellido_materno
 
 
 class Alumno(BaseModel):
@@ -40,6 +44,9 @@ class Alumno(BaseModel):
    )
 
    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+   def __str__(self):
+      return self.nombres +' '+self.apellido_paterno+''+self.apellido_materno
 
 
 

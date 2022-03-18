@@ -13,7 +13,8 @@ class CuestionarioCurso(BaseModel):
 
    curso_docente = models.ForeignKey(CursoDocente, on_delete=models.CASCADE)
    cuestionario = models.ForeignKey(Cuestionario, on_delete=models.CASCADE)
-
+   def __str__(self):
+      return self.nombre
 
 class SolucionCuestionario(BaseModel):
    fecha_solucion = models.DateTimeField('Fecha de Solucion')
@@ -23,6 +24,7 @@ class SolucionCuestionario(BaseModel):
    cuestionario_curso = models.ForeignKey(CuestionarioCurso, on_delete=models.CASCADE)
    class Meta:
       unique_together = ('alumno', 'cuestionario_curso',)
+   
 
 class SolucionPregunta(BaseModel):
    #cuando se responde la pregunta
@@ -39,3 +41,6 @@ class SolucionPregunta(BaseModel):
 
    class Meta:
       unique_together = ('solucion', 'pregunta_opcion',)
+   
+   def __str__(self):
+      return self.respuesta

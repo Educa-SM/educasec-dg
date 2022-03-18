@@ -23,16 +23,24 @@ class Recurso(BaseModel):
         blank=True,
         null=True
     )
+    def __str__(self):
+      return self.titulo
 
 class TipoJuego(BaseModel):
     nombre = models.CharField('Nombre', max_length=100, null=False, unique=True)
+    def __str__(self):
+      return self.nombre
 
 class Juego(BaseModel):
     texto = models.CharField('Texto', max_length=255, null=True, blank=True)
     recurso = models.ForeignKey(Recurso, on_delete=models.CASCADE)
     tipo_juego = models.ForeignKey(TipoJuego, on_delete=models.CASCADE)
+    def __str__(self):
+      return self.texto
 
 class OpcionJuego(BaseModel):
     pregunta = models.CharField('Pregunta', blank=True, null=True, max_length=255)
     texto = models.CharField('Texto', max_length=255, blank=False, null=False)
     juego = models.ForeignKey(Juego, on_delete=models.CASCADE)
+    def __str__(self):
+      return self.texto

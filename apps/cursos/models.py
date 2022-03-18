@@ -18,14 +18,20 @@ class SituacionPregunta(models.TextChoices):
 #*****  Cursos  *
 class Nivel(BaseModel):
    nombre = models.CharField('Nombre', max_length=150, blank=False, null=False, unique=True)
+   def __str__(self):
+      return self.nombre
 
 class Grado(BaseModel):
    nombre = models.CharField('Nombre', max_length=150, blank=False, null=False)
-   nivel = models.ForeignKey(Nivel, on_delete=models.CASCADE)
+   nivel = models.ForeignKey(Nivel,related_name='grados', on_delete=models.CASCADE)
+   def __str__(self):
+      return self.nombre
 
 class Curso(BaseModel):
    nombre = models.CharField('Nombre', max_length=150, blank=False, null=False)
-   grado = models.ForeignKey(Grado, on_delete=models.CASCADE)
+   grado = models.ForeignKey(Grado,related_name='cursos', on_delete=models.CASCADE)
+   def __str__(self):
+      return self.nombre
 
 
 #*****************   Cuestionario    *******************
@@ -34,6 +40,8 @@ class Cuestionario(BaseModel):
    nombre = models.CharField('Nombre', max_length=150, blank=False, null=False)
    #imagen = models.ImageField
    curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
+   def __str__(self):
+      return self.nombre
 
 
 class Pregunta(BaseModel):
@@ -45,14 +53,19 @@ class Pregunta(BaseModel):
    )
    #imagen = models.ImageField
    curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
+   def __str__(self):
+      return self.texto
 
 class CuestionarioPregunta(BaseModel):
    reintentos = models.IntegerField( null=False, default=1)
    puntaje = models.DecimalField( null=False, max_digits=12, decimal_places=2, default=0.0)
+   nombre = models.CharField('Nombre', max_length=150, blank=False, null=False)
    cuestionario = models.ForeignKey(Cuestionario, on_delete=models.CASCADE)
    pregunta = models.ForeignKey(Pregunta, on_delete=models.CASCADE)
    class Meta:
       unique_together = ('pregunta', 'cuestionario',)
+   def __str__(self):
+      return self.nombre
 
 class PreguntaOpcion(BaseModel):
    texto = models.CharField(max_length=250, null=False)
@@ -62,6 +75,8 @@ class PreguntaOpcion(BaseModel):
             default=SituacionPregunta.INCORRECTA
    )
    pregunta = models.ForeignKey(Pregunta, on_delete=models.CASCADE)
+   def __str__(self):
+      return self.texto
 
 
 # ******************  Inscripcion de Cursos   *********************
