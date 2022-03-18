@@ -14,4 +14,16 @@ class AlumnoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
    list_display =('nro_documento','tipo_documento','nombres','apellido_paterno','apellido_materno','user')
    resources_class = AlumnoResouce
 
+class AlumnoCursoResouce(resources.ModelResource):
+   class Meta:
+      model = AlumnoCurso
+      fields = ('periodo','fecha_inscripcion','alumno','curso','docente')
+
+class AlumnoCursoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+   search_fields = ['periodo','fecha_inscripcion','alumno','curso','docente']
+   list_display =('periodo','fecha_inscripcion','alumno','curso','docente')
+   resources_class = AlumnoCursoResouce
+
+
 admin.site.register(Alumno, AlumnoAdmin)
+admin.site.register(AlumnoCurso, AlumnoCursoAdmin)

@@ -53,6 +53,6 @@ class AlumnoCurso(BaseModel):
    periodo = models.IntegerField( null=False, default=1)
    fecha_inscripcion = models.DateTimeField(auto_now_add=True)
    
-   alumno_id = models.ForeignKey(Alumno, on_delete=models.CASCADE)
-   curso_id = models.ForeignKey(Curso, on_delete=models.CASCADE)
-   docente_id = models.ForeignKey(Docente, on_delete=models.CASCADE)
+   alumno = models.ForeignKey(Alumno, on_delete=models.CASCADE)
+   curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
+   docente = models.ForeignKey(Docente, on_delete=models.CASCADE)

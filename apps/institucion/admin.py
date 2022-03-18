@@ -14,4 +14,15 @@ class DocenteAdmin(ImportExportModelAdmin, admin.ModelAdmin):
    list_display =('nro_documento','tipo_documento','nombres','apellido_paterno','apellido_materno','user')
    resources_class = DocenteResource
 
+class InstitucionResource(resources.ModelResource):
+   class Meta:
+      model = Institucion
+      fields = ('id','nombre', 'direccion',)
+
+class InstitucionAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+   search_fields = ['nombre','direccion']
+   list_display = ('id','nombre','direccion',)
+   resources_class = InstitucionResource
+
 admin.site.register(Docente, DocenteAdmin)
+admin.site.register(Institucion, InstitucionAdmin)
