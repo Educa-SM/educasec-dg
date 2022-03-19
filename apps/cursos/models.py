@@ -84,7 +84,7 @@ class PreguntaOpcion(BaseModel):
 
 class CursoDocente(BaseModel):
    periodo = models.IntegerField( null=False, default=1)
-   año = models.IntegerField( null=False, blank=False)
+   year = models.IntegerField( null=False, blank=False)
    nombre = models.CharField('Nombre', max_length=150, blank=False, null=False)
    curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
    docente = models.ForeignKey(Docente, on_delete=models.CASCADE)

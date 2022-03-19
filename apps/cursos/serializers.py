@@ -1,13 +1,24 @@
 from rest_framework import serializers
 
-from .models import Cuestionario, Curso, Grado, Nivel, Pregunta
+from .models import *
+class CursoSerializer(serializers.ModelSerializer):
+   class Meta:
+      model = Curso
+      fields = [
+         'id',
+         'nombre',
+      ]
+
+      extra_kwargs = { 'id': {'read_only': True} }
 
 class GradoSerializer(serializers.ModelSerializer):
+   cursos = CursoSerializer(many = True, read_only = True )
    class Meta:
       model = Grado
       fields = [
          'id',
          'nombre',
+         'cursos'
       ]
       extra_kwargs = { 'id': {'read_only': True} }
 
@@ -24,16 +35,27 @@ class NivelSerializer(serializers.ModelSerializer):
 
 
 
-class CursoSerializer(serializers.ModelSerializer):
+
+
+class CursoDocenteSerializer(serializers.ModelSerializer):
+   institucion_id = serializers.PrimaryKeyRelatedField( 
+            queryset=Institucion.objects.all(), source='institucion')
+   curso_id = serializers.PrimaryKeyRelatedField( 
+            queryset=Curso.objects.all(), source='curso')
+   docente_id = serializers.PrimaryKeyRelatedField( 
+            queryset=Docente.objects.all(), source='docente')
    class Meta:
-      model = Curso
+      model = CursoDocente
       fields = [
          'id',
          'nombre',
-         'nivel',
-         'institucion',
+         'periodo',
+         'year',
+         'codigo_inscripcion',
+         'institucion_id',
+         'curso_id',
+         'docente_id'
       ]
-
       extra_kwargs = { 'id': {'read_only': True} }
 
 class CuestionarioSerializer(serializers.ModelSerializer):
