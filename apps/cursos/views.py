@@ -18,18 +18,26 @@ class CursoDocenteView(APIView):
       serializer = CursoDocenteSerializer(data=request.data)
       user_ser = UserSerializer(request.user)
       if user_ser.data['groups'][0]==2:
+         docente = Docente.objects.get(nro_documento=user_ser.data['username'])
+         #cursoDocente = CursoDocente(**serializer.data)
+         #cursoDocente.docente= docente
+         #serializer = CursoDocenteSerializer(data=cursoDocente)
+         #serializer.docente_id=docente.id
          if serializer.is_valid():
-            serializer.save()
+            serializer.save(docente=docente)
             return Response(serializer.data, 201)
          return Response(serializer.errors, 404)
       else:
          return Response({'msg':'No autorizado'})
-   
-   def get(self,request):
+
+class CursoDocenteIDView(APIView):
+   # id dela institucion
+   def get(self,request,id):
       user_ser = UserSerializer(request.user)
       if user_ser.data['groups'][0]==2:
          docente = Docente.objects.get(nro_documento=user_ser.data['username'])
-         cursos = CursoDocente.objects.filter(docente=docente)
+         institucion =  Institucion.objects.get(id=id)
+         cursos = CursoDocente.objects.filter(docente=docente, institucion=institucion)
          serializer = CursoDocenteSerializer(cursos, many=True)
          return Response(serializer.data,200)
       else:

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from apps.institucion.models import Alumno, Docente
+from apps.institucion.models import Alumno, Docente, Institucion
 from .models import User
 
 class UserSerializer(serializers.ModelSerializer):
@@ -18,13 +18,21 @@ class UserSerializer(serializers.ModelSerializer):
          'id': {'read_only': True},
          'password': {'write_only': True}
       }
-      
+
+class InstitucionesSerializer(serializers.ModelSerializer):
+   class Meta:
+      model= Institucion
+      fields = [
+         'id',
+         'nombre'
+      ]      
 
 class DocenteSerializer(serializers.ModelSerializer):
    user = UserSerializer()
-   instituciones = serializers.SlugRelatedField(
+   """instituciones = serializers.SlugRelatedField(
       many=True, read_only=True, slug_field='id'
-   )
+   )"""
+   instituciones = InstitucionesSerializer(many=True, read_only=True)
    class Meta:
       model = Docente
       fields = [

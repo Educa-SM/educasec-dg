@@ -34,16 +34,12 @@ class NivelSerializer(serializers.ModelSerializer):
       extra_kwargs = { 'id': {'read_only': True} }
 
 
-
-
-
 class CursoDocenteSerializer(serializers.ModelSerializer):
    institucion_id = serializers.PrimaryKeyRelatedField( 
             queryset=Institucion.objects.all(), source='institucion')
    curso_id = serializers.PrimaryKeyRelatedField( 
             queryset=Curso.objects.all(), source='curso')
-   docente_id = serializers.PrimaryKeyRelatedField( 
-            queryset=Docente.objects.all(), source='docente')
+   docente = serializers.SlugRelatedField( read_only=True, slug_field='id')
    class Meta:
       model = CursoDocente
       fields = [
@@ -54,9 +50,16 @@ class CursoDocenteSerializer(serializers.ModelSerializer):
          'codigo_inscripcion',
          'institucion_id',
          'curso_id',
-         'docente_id'
+         'docente',
+         'creation_date'
       ]
-      extra_kwargs = { 'id': {'read_only': True} }
+      extra_kwargs = { 
+         'id': {'read_only': True}, 
+         'docente': {'read_only': True},
+         'creation_date': {'read_only': True} 
+      }
+
+   
 
 class CuestionarioSerializer(serializers.ModelSerializer):
    class Meta:
