@@ -89,7 +89,17 @@ class CursoDocente(BaseModel):
    curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
    docente = models.ForeignKey(Docente, on_delete=models.CASCADE)
    institucion = models.ForeignKey(Institucion, on_delete=models.CASCADE)
-   codigo_inscripcion = models.CharField('Codigo', max_length=10,null=False,blank=False)
+   codigo_inscripcion = models.CharField('Codigo',max_length= 50,unique=True,null=False,blank=True)
+
+   def __str__(self) :
+      return self.nombre
+
+   def save(self, **kwargs):
+      self.codigo_inscripcion = (self.nombre[0] + self.curso.nombre[0]+
+                     self.docente.nombres[0]+self.institucion.nombre[0]+
+                     str(CursoDocente.objects.count()+1))
+      super(CursoDocente, self).save(**kwargs)
+
 
 # la inscripcion -> estado=1(registrado)   estado=2
 class AlumnoInscripcionCurso(BaseModel):

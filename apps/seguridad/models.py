@@ -23,7 +23,7 @@ class User (AbstractBaseUser, PermissionsMixin):
    email = models.EmailField("Correo", max_length=100, blank=True)
    first_name = models.CharField("Nombres", max_length=120, blank=True)
    last_name = models.CharField("Apellidos", max_length=120, blank=True)
-   birth_date = models.DateField("fecha de Cumpleaño",null=True)
+   birth_date = models.DateField("fecha de Cumpleaño",auto_now=True)
    is_active = models.BooleanField(default=True)
    is_staff = models.BooleanField(default=False)
    objects = UserManager()
