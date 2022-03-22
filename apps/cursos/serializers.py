@@ -33,8 +33,68 @@ class NivelSerializer(serializers.ModelSerializer):
       ]
       extra_kwargs = { 'id': {'read_only': True} }
 
+# cursos Admin para docentes
+class AlumnoSerializer(serializers.ModelSerializer):
+   class Meta:
+      model = Alumno
+      fields = [
+         'nombres',
+         'apellido_paterno',
+         'apellido_materno',
+         'nro_documento',
+         'tipo_documento'
+      ]
+
+class IncripcionCursoDocenteSerializer(serializers.ModelSerializer):
+   alumno = AlumnoSerializer(read_only=True)
+   class Meta:
+      model  = AlumnoInscripcionCurso
+      fields = [
+         'id',
+         'creation_date',
+         'alumno',
+         'estate'
+      ]
+      extra_kwargs = {
+         'id': {'read_only': True},
+         'creation_date': {'read_only': True},
+      }
 
 class CursoDocenteSerializer(serializers.ModelSerializer):
+   institucion_id = serializers.PrimaryKeyRelatedField( 
+            queryset=Institucion.objects.all(), source='institucion')
+   curso_id = serializers.PrimaryKeyRelatedField(
+            queryset=Curso.objects.all(), source='curso')
+   docente = serializers.SlugRelatedField( read_only=True, slug_field='id')
+   curso = serializers.SlugRelatedField( read_only=True, slug_field='nombre')
+   inscripciones = IncripcionCursoDocenteSerializer(read_only=True, many=True)
+   class Meta:
+      model = CursoDocente
+      fields = [
+         'id',
+         'nombre',
+         'periodo',
+         'year',
+         'codigo_inscripcion',
+         'institucion_id',
+         'curso_id',
+         'docente',
+         'curso',
+         'creation_date',
+         'inscripciones'
+      ]
+      extra_kwargs = { 
+         'id': {'read_only': True}, 
+         'docente': {'read_only': True},
+         'codigo_inscripcion': {'read_only': True},
+         'curso': {'read_only': True},
+         'creation_date': {'read_only': True},
+         'inscripciones': {'read_only': True}  
+      }
+
+
+#cursos Admin para 
+class CursoDocenteInscripcionSerializer(serializers.ModelSerializer):
    institucion_id = serializers.PrimaryKeyRelatedField( 
             queryset=Institucion.objects.all(), source='institucion')
    curso_id = serializers.PrimaryKeyRelatedField(
@@ -53,18 +113,11 @@ class CursoDocenteSerializer(serializers.ModelSerializer):
          'curso_id',
          'docente',
          'curso',
-         'creation_date'
+         'creation_date',
       ]
-      extra_kwargs = { 
-         'id': {'read_only': True}, 
-         'docente': {'read_only': True},
-         'codigo_inscripcion': {'read_only': True},
-         'curso': {'read_only': True},
-         'creation_date': {'read_only': True} 
-      }
 
 class IncripcionCursoSerializer(serializers.ModelSerializer):
-   curso_docente = CursoDocenteSerializer(read_only = True )
+   curso_docente = CursoDocenteInscripcionSerializer(read_only = True )
    class Meta:
       model  = AlumnoInscripcionCurso
       fields = [
@@ -79,6 +132,9 @@ class IncripcionCursoSerializer(serializers.ModelSerializer):
          'alumno': {'read_only': True},
       }
 
+
+
+#cuestionarios Banco
 class CuestionarioSerializer(serializers.ModelSerializer):
    class Meta:
       model = Cuestionario
@@ -93,6 +149,7 @@ class CuestionarioSerializer(serializers.ModelSerializer):
 
       extra_kwargs = { 'id': {'read_only': True} }
 
+#preguntas banco
 class PreguntaSerializer(serializers.ModelSerializer):
    class Meta:
       model = Pregunta

@@ -27,6 +27,7 @@ class CursoDocenteListView(APIView):
          return Response({'msg':'No autorizado'},401)
 
 class CursoDocenteView(APIView):
+   permission_classes = [IsAuthenticated]
    # id dela institucion
    def get(self,request,id):
       user_ser = UserSerializer(request.user)
@@ -37,7 +38,7 @@ class CursoDocenteView(APIView):
             cursos = CursoDocente.objects.filter(
                      docente=docente, 
                      institucion=institucion, 
-                     estate='A')
+                     estate='A').order_by('id').reverse()
             serializer = CursoDocenteSerializer(cursos, many=True)
             return Response(serializer.data,200)
          except CursoDocente.DoesNotExist or Docente.DoesNotExist or Institucion.DoesNotExist:
@@ -82,6 +83,7 @@ class CursoDocenteView(APIView):
          return Response({'msg':'No autorizado'},401)
 
 class CursoInscripcionView(APIView):
+   permission_classes = [IsAuthenticated]
    def get(self, request):
       user_ser = UserSerializer(request.user)
       if 4  in user_ser.data['groups']:

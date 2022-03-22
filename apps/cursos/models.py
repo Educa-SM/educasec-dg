@@ -104,6 +104,6 @@ class CursoDocente(BaseModel):
 # la inscripcion -> estado=1(registrado)   estado=2
 class AlumnoInscripcionCurso(BaseModel):
    alumno = models.ForeignKey(Alumno, on_delete=models.CASCADE)
-   curso_docente = models.ForeignKey(CursoDocente, on_delete=models.CASCADE)
+   curso_docente = models.ForeignKey(CursoDocente, on_delete=models.CASCADE, related_name='inscripciones')
    class Meta:
       unique_together = ('alumno', 'curso_docente',)
