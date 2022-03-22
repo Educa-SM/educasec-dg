@@ -38,3 +38,4 @@ class AlumnoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 
 admin.site.register(Docente, DocenteAdmin)
 admin.site.register(Institucion, InstitucionAdmin)
+admin.site.register(Alumno, AlumnoAdmin)

@@ -63,7 +63,21 @@ class CursoDocenteSerializer(serializers.ModelSerializer):
          'creation_date': {'read_only': True} 
       }
 
-   
+class IncripcionCursoSerializer(serializers.ModelSerializer):
+   curso_docente = CursoDocenteSerializer(read_only = True )
+   class Meta:
+      model  = AlumnoInscripcionCurso
+      fields = [
+         'id',
+         'curso_docente',
+         'creation_date',
+         'estate'
+      ]
+      extra_kwargs = {
+         'id': {'read_only': True},
+         'creation_date': {'read_only': True},
+         'alumno': {'read_only': True},
+      }
 
 class CuestionarioSerializer(serializers.ModelSerializer):
    class Meta:

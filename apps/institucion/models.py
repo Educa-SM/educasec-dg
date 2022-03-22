@@ -46,7 +46,7 @@ class Alumno(BaseModel):
    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
    def __str__(self):
-      return self.nombres +' '+self.apellido_paterno+''+self.apellido_materno
+      return self.nombres +' '+self.apellido_paterno+' '+self.apellido_materno
 
 
 
