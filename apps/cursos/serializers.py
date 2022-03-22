@@ -37,7 +37,7 @@ class NivelSerializer(serializers.ModelSerializer):
 class CursoDocenteSerializer(serializers.ModelSerializer):
    institucion_id = serializers.PrimaryKeyRelatedField( 
             queryset=Institucion.objects.all(), source='institucion')
-   curso_id = serializers.PrimaryKeyRelatedField( write_only=True,
+   curso_id = serializers.PrimaryKeyRelatedField(
             queryset=Curso.objects.all(), source='curso')
    docente = serializers.SlugRelatedField( read_only=True, slug_field='id')
    curso = serializers.SlugRelatedField( read_only=True, slug_field='nombre')

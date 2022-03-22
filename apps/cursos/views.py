@@ -55,6 +55,27 @@ class CursoDocenteView(APIView):
                curso.estate='I'
                curso.save()
                return Response(status = 204)
+            else:
+               return Response({'msg':'No le pertenece este curso'},401)
+         except CursoDocente.DoesNotExist or Docente.DoesNotExist:
+            return Response({'msg':'No Existe'},404)
+      else:
+         return Response({'msg':'No autorizado'},401)
+   
+   def put(self,request,id):
+      user_ser = UserSerializer(request.user)
+      if user_ser.data['groups'][0]==2:
+         try:
+            curso = CursoDocente.objects.get(id=id)
+            docente = Docente.objects.get(nro_documento=user_ser.data['username'])
+            if curso.docente==docente:
+               serializer= CursoDocenteSerializer(curso,data=request.data)
+               if serializer.is_valid():
+                  serializer.save()
+                  return Response(serializer.data, 200)
+               return Response(serializer.errors, 404)
+            else:
+               return Response({'msg':'No le pertenece este curso'},401)
          except CursoDocente.DoesNotExist or Docente.DoesNotExist:
             return Response({'msg':'No Existe'},404)
       else:
