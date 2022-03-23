@@ -19,7 +19,7 @@ class GroupAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 
 class UserAdmin(UserAdmin, admin.ModelAdmin):
    search_fileds = ['username','first_name', 'last_name','email']
-   list_display = ['username']
+   list_display = ['username','alumno','docente']
    fieldsets = (('Usuario', {'fields': ('username', 'password')}),
                 ('Informacion Personal', {'fields': ('first_name','last_name','email','groups')}),
                 ('Permissions', {'fields': ('is_active','is_staff',)}),)

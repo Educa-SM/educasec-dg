@@ -8,6 +8,7 @@ urlpatterns = [
    path('curso-docente/<int:id>/', CursoDocenteView.as_view()),
    path('curso-docente/id/<int:id>/',CursoDocenteIdView.as_view()),
    path('curso-inscripcion/<int:id>/', CursoInscripcionDocenteView.as_view()),
+   path('banco-pregunta/<int:id>/', PreguntasBancoView.as_view()),
    #estudiante
    path('curso-inscripcion/', CursoInscripcionView.as_view())
 ]

@@ -139,6 +139,51 @@ class CursoInscripcionDocenteView(APIView):
       else:
          return Response({'msg':'No autorizado'},401)
 
+#--------------   Preguntas      -----------------------------------
+class PreguntasBancoView(APIView):
+   permission_classes = [IsAuthenticated]
+   # id del Curso
+   def post(self, request,id):
+      try:
+         curso = Curso.objects.get(id=id)
+         user_ser = UserSerializer(request.user)
+         if 2 in user_ser.data['groups']:
+            serializer = PreguntaSerializer(data=request.data)
+            if serializer.is_valid():
+               serializer.save(curso=curso)
+               return Response(serializer.data, 201)
+            return Response(serializer.errors, 404)
+         else:
+            return Response({'msg':'No autorizado'},401)
+      except Curso.DoesNotExist :
+            return Response({'msg':'El curso No Existe'},404)
+   # id del Curso
+   def get(self, request,id):
+      try:
+         curso = Curso.objects.get(id=id)
+         user_ser = UserSerializer(request.user)
+         if 2 in user_ser.data['groups']:
+            preguntas = Pregunta.objects.filter(curso=curso)
+            serializer = PreguntaSerializer(preguntas, many=True)
+            return Response(serializer.data, 200)
+         else:
+            return Response({'msg':'No autorizado'},401)
+      except Curso.DoesNotExist :
+            return Response({'msg':'El curso No Existe'},404)
+   # id de la pregunta
+   def delete(self, request, id):
+      user_ser = UserSerializer(request.user)
+      if 2 in user_ser.data['groups']:
+         try:
+            pregunta = Pregunta.objects.get(id=id)
+            pregunta.delete()
+            return Response({'msg':'Eliminado'}, 200)
+         except Pregunta.DoesNotExist :
+            return Response({'msg':'La pregunta No Existe'},404)
+      else:
+         return Response({'msg':'No autorizado'},401)
+     
+
 """           ALUMNO         """
 class CursoInscripcionView(APIView):
    permission_classes = [IsAuthenticated]

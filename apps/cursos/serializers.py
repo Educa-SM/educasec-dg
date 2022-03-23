@@ -142,32 +142,67 @@ class IncripcionCursoSerializer(serializers.ModelSerializer):
 
 
 
+
+#preguntas banco
+class PreguntaOpcionSerializer(serializers.ModelSerializer):
+   class Meta:
+      model = PreguntaOpcion
+      fields = [
+         'id',
+         'texto',
+         'correcta'
+      ]
+      extra_kwargs = { 
+         'id': {'read_only': True},
+         'correcta': {'required': True} 
+      }
+
+class PreguntaSerializer(serializers.ModelSerializer):
+   curso = serializers.SlugRelatedField( read_only=True, slug_field='nombre')
+   #curso_id = serializers.PrimaryKeyRelatedField( 
+   #         queryset=Curso.objects.all(), source='curso')
+   opciones = PreguntaOpcionSerializer(many=True, required=False)
+   class Meta:
+      model = Pregunta
+      fields = [
+         'id',
+         'texto',
+         'tipo',
+         'curso',
+         #'curso_id',
+         'opciones'
+      ]
+
+      extra_kwargs = { 
+         'id': {'read_only': True},
+         'tipo': {'required': True}
+      }
+   def create(self, validated_data):
+      opciones = validated_data.pop('opciones',[])
+      pregunta =  Pregunta.objects.create(**validated_data)
+      if validated_data['tipo']=='O':
+
+         for opcion in opciones:
+            PreguntaOpcion.objects.create(pregunta=pregunta,**opcion)
+      return pregunta
+
+
 #cuestionarios Banco
 class CuestionarioSerializer(serializers.ModelSerializer):
+   curso = serializers.SlugRelatedField( read_only=True, slug_field='nombre')
+   curso_id = serializers.PrimaryKeyRelatedField( 
+            queryset=Curso.objects.all(), source='curso')
+   
    class Meta:
       model = Cuestionario
       fields = [
          'id',
          'nombre',
-         'fecha_disponible',
-         'fecha_expiracion',
-         'docente',
-         'curso'
-      ]
-
-      extra_kwargs = { 'id': {'read_only': True} }
-
-#preguntas banco
-class PreguntaSerializer(serializers.ModelSerializer):
-   class Meta:
-      model = Pregunta
-      fields = [
-         'texto',
-         'tipo',
-         'docente',
          'curso',
+         'curso_id'
       ]
 
-      extra_kwargs = { 'id': {'read_only': True} }
-
+      extra_kwargs = { 
+         'id': {'read_only': True}
+      }
 

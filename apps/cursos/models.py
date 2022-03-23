@@ -35,15 +35,6 @@ class Curso(BaseModel):
 
 
 #*****************   Cuestionario    *******************
-
-class Cuestionario(BaseModel):
-   nombre = models.CharField('Nombre', max_length=150, blank=False, null=False)
-   #imagen = models.ImageField
-   curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
-   def __str__(self):
-      return self.nombre
-
-
 class Pregunta(BaseModel):
    texto = models.CharField('Texto', max_length=150, blank=False, null=False)
    tipo = models.CharField('Tipo de Pregunta', 
@@ -56,6 +47,24 @@ class Pregunta(BaseModel):
    def __str__(self):
       return self.texto
 
+class PreguntaOpcion(BaseModel):
+   texto = models.CharField(max_length=250, null=False)
+   correcta = models.CharField('¿Es correcta?', 
+            max_length=1,
+            choices=SituacionPregunta.choices,
+            default=SituacionPregunta.INCORRECTA
+   )
+   pregunta = models.ForeignKey(Pregunta, on_delete=models.CASCADE, related_name='opciones')
+   def __str__(self):
+      return self.texto
+
+class Cuestionario(BaseModel):
+   nombre = models.CharField('Nombre', max_length=150, blank=False, null=False)
+   #imagen = models.ImageField
+   curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
+   def __str__(self):
+      return self.nombre
+
 class CuestionarioPregunta(BaseModel):
    reintentos = models.IntegerField( null=False, default=1)
    puntaje = models.DecimalField( null=False, max_digits=12, decimal_places=2, default=0.0)
@@ -66,17 +75,6 @@ class CuestionarioPregunta(BaseModel):
       unique_together = ('pregunta', 'cuestionario',)
    def __str__(self):
       return self.nombre
-
-class PreguntaOpcion(BaseModel):
-   texto = models.CharField(max_length=250, null=False)
-   correcta = models.CharField('¿Es correcta?', 
-            max_length=1,
-            choices=SituacionPregunta.choices,
-            default=SituacionPregunta.INCORRECTA
-   )
-   pregunta = models.ForeignKey(Pregunta, on_delete=models.CASCADE)
-   def __str__(self):
-      return self.texto
 
 
 # ******************  Inscripcion de Cursos   *********************
