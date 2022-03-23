@@ -67,7 +67,7 @@ class CursoDocenteSerializer(serializers.ModelSerializer):
             queryset=Curso.objects.all(), source='curso')
    docente = serializers.SlugRelatedField( read_only=True, slug_field='id')
    curso = serializers.SlugRelatedField( read_only=True, slug_field='nombre')
-   inscripciones = IncripcionCursoDocenteSerializer(read_only=True, many=True)
+   #inscripciones = IncripcionCursoDocenteSerializer(read_only=True, many=True)
    class Meta:
       model = CursoDocente
       fields = [
@@ -80,26 +80,34 @@ class CursoDocenteSerializer(serializers.ModelSerializer):
          'curso_id',
          'docente',
          'curso',
-         'creation_date',
-         'inscripciones'
+         'creation_date'
       ]
       extra_kwargs = { 
          'id': {'read_only': True}, 
          'docente': {'read_only': True},
          'codigo_inscripcion': {'read_only': True},
          'curso': {'read_only': True},
-         'creation_date': {'read_only': True},
-         'inscripciones': {'read_only': True}  
+         'creation_date': {'read_only': True}
       }
 
 
 #cursos Admin para 
+class DocenteSerializer(serializers.ModelSerializer):
+   class Meta:
+      model = Docente
+      fields = [
+         'nombres',
+         'apellido_paterno',
+         'apellido_materno',
+         'nro_documento',
+         'tipo_documento'
+      ]
 class CursoDocenteInscripcionSerializer(serializers.ModelSerializer):
    institucion_id = serializers.PrimaryKeyRelatedField( 
             queryset=Institucion.objects.all(), source='institucion')
    curso_id = serializers.PrimaryKeyRelatedField(
             queryset=Curso.objects.all(), source='curso')
-   docente = serializers.SlugRelatedField( read_only=True, slug_field='id')
+   docente = DocenteSerializer(read_only=True)
    curso = serializers.SlugRelatedField( read_only=True, slug_field='nombre')
    class Meta:
       model = CursoDocente

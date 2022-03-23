@@ -12,6 +12,7 @@ class NivelesView(APIView):
       serializer_levels = NivelSerializer(niveles, many=True)
       return Response(serializer_levels.data,201)
 
+"""               DOCENTE       """
 class CursoDocenteListView(APIView):
    permission_classes = [IsAuthenticated]
    def post(self,request):
@@ -45,7 +46,7 @@ class CursoDocenteView(APIView):
             return Response({'msg':'No Existe'},404)
       else:
          return Response({'msg':'No autorizado'},401)
-   
+   # id de Curso Docente
    def delete(self,request,id):
       user_ser = UserSerializer(request.user)
       if 2 in user_ser.data['groups']:
@@ -62,7 +63,7 @@ class CursoDocenteView(APIView):
             return Response({'msg':'No Existe'},404)
       else:
          return Response({'msg':'No autorizado'},401)
-   
+   # id de Curso Docente
    def put(self,request,id):
       user_ser = UserSerializer(request.user)
       if 2 in user_ser.data['groups']:
@@ -82,6 +83,63 @@ class CursoDocenteView(APIView):
       else:
          return Response({'msg':'No autorizado'},401)
 
+class CursoDocenteIdView(APIView):
+   permission_classes = [IsAuthenticated]
+   # id de CursoDocente-> Especificado
+   def get(self,request,id):
+      user_ser = UserSerializer(request.user)
+      if 2 in user_ser.data['groups']:
+         try:
+            curso = CursoDocente.objects.get(id = id)
+            docente = Docente.objects.get(nro_documento = user_ser.data['username'])
+            if curso.docente == docente or curso.estate == 'A':
+               serializer = CursoDocenteSerializer(curso)
+               return Response(serializer.data,200)
+            else:
+               return Response({'msg':'Recurso no disponible'},404)
+         except CursoDocente.DoesNotExist or Docente.DoesNotExist:
+            return Response({'msg':'No Existe'},404)
+      else:
+         return Response({'msg':'No autorizado'},401)
+
+
+class CursoInscripcionDocenteView(APIView):
+   permission_classes = [IsAuthenticated]
+   # id del CursoDocente retorna las inscripciones
+   def get(self, request,id):
+      user_ser = UserSerializer(request.user)
+      if 2  in user_ser.data['groups']:
+         try:
+            docente = Docente.objects.get(nro_documento=user_ser.data['username'])
+            curso = CursoDocente.objects.get(id=id, docente=docente)
+            inscripciones = AlumnoInscripcionCurso.objects.filter(curso_docente = curso).order_by('id').reverse()
+            serializer = IncripcionCursoDocenteSerializer(inscripciones, many=True)
+            return Response(serializer.data,200)
+            #return Response({'msg':'ok'},200)
+         except Alumno.DoesNotExist or CursoDocente.DoesNotExist:
+            return Response({'msg':'No Existe el curso'},404)
+      else:
+         return Response({'msg':'No autorizado'},401)
+   
+   # actualizar el registro -> AlumnoInscripcionCurso : ID=> alumno Incripcion
+   def put(self,request,id):
+      user_ser = UserSerializer(request.user)
+      if 2 in user_ser.data['groups']:
+         try:
+            inscripcion = AlumnoInscripcionCurso.objects.get(id=id)
+            docente = Docente.objects.get(nro_documento=user_ser.data['username'])
+            if inscripcion.curso_docente.docente==docente:
+               inscripcion.estate = 'D'
+               inscripcion.save()
+               return Response({'msg':'Exito'}, 200)
+            else:
+               return Response({'msg':'No le pertenece este curso'},401)
+         except AlumnoInscripcionCurso.DoesNotExist or Docente.DoesNotExist:
+            return Response({'msg':'No Existe'},404)
+      else:
+         return Response({'msg':'No autorizado'},401)
+
+"""           ALUMNO         """
 class CursoInscripcionView(APIView):
    permission_classes = [IsAuthenticated]
    def get(self, request):
@@ -115,22 +173,3 @@ class CursoInscripcionView(APIView):
       else:
          return Response({'msg':'No autorizado'},401)
 
-   # actualizar el registro aceptar
-   def put(self,request,id):
-      user_ser = UserSerializer(request.user)
-      if 2 in user_ser.data['groups']:
-         try:
-            curso = CursoDocente.objects.get(id=id)
-            docente = Docente.objects.get(nro_documento=user_ser.data['username'])
-            if curso.docente==docente:
-               serializer= CursoDocenteSerializer(curso,data=request.data)
-               if serializer.is_valid():
-                  serializer.save()
-                  return Response(serializer.data, 200)
-               return Response(serializer.errors, 404)
-            else:
-               return Response({'msg':'No le pertenece este curso'},401)
-         except CursoDocente.DoesNotExist or Docente.DoesNotExist:
-            return Response({'msg':'No Existe'},404)
-      else:
-         return Response({'msg':'No autorizado'},401)

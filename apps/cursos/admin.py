@@ -60,7 +60,7 @@ class PreguntaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
    resources_class = PreguntaResouce
 
 class CursoDocenteAdmin(admin.ModelAdmin):
-   list_display = ('nombre','codigo_inscripcion','periodo','year','estate')
+   list_display = ('id', 'nombre','codigo_inscripcion','periodo','year','estate')
 
 
 admin.site.register(Nivel, NivelAdmin)
