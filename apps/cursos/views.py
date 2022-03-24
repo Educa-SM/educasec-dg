@@ -163,7 +163,7 @@ class PreguntasBancoView(APIView):
          curso = Curso.objects.get(id=id)
          user_ser = UserSerializer(request.user)
          if 2 in user_ser.data['groups']:
-            preguntas = Pregunta.objects.filter(curso=curso)
+            preguntas = Pregunta.objects.filter(curso=curso).order_by('id').reverse()
             serializer = PreguntaSerializer(preguntas, many=True)
             return Response(serializer.data, 200)
          else:

@@ -158,7 +158,7 @@ class PreguntaOpcionSerializer(serializers.ModelSerializer):
       }
 
 class PreguntaSerializer(serializers.ModelSerializer):
-   curso = serializers.SlugRelatedField( read_only=True, slug_field='nombre')
+   curso = serializers.SlugRelatedField( read_only=True, slug_field='id')
    #curso_id = serializers.PrimaryKeyRelatedField( 
    #         queryset=Curso.objects.all(), source='curso')
    opciones = PreguntaOpcionSerializer(many=True, required=False)
@@ -170,12 +170,14 @@ class PreguntaSerializer(serializers.ModelSerializer):
          'tipo',
          'curso',
          #'curso_id',
-         'opciones'
+         'opciones',
+         'creation_date',
       ]
 
       extra_kwargs = { 
          'id': {'read_only': True},
-         'tipo': {'required': True}
+         'tipo': {'required': True},
+         'creation_date': {'read_only': True}
       }
    def create(self, validated_data):
       opciones = validated_data.pop('opciones',[])
