@@ -182,6 +182,21 @@ class PreguntasBancoView(APIView):
             return Response({'msg':'La pregunta No Existe'},404)
       else:
          return Response({'msg':'No autorizado'},401)
+   # id de la pregunta
+   def put(self, request, id):
+      user_ser = UserSerializer(request.user)
+      if 2 in user_ser.data['groups']:
+         try:
+            pregunta = Pregunta.objects.get(id=id)
+            serializer = PreguntaSerializer(pregunta, data=request.data)
+            if serializer.is_valid():
+               serializer.save()
+               return Response(serializer.data, 200)
+            return Response(serializer.errors, 400)
+         except Pregunta.DoesNotExist :
+            return Response({'msg':'La pregunta No Existe'},404)
+      else:
+         return Response({'msg':'No autorizado'},401)
      
 
 """           ALUMNO         """

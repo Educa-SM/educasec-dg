@@ -59,6 +59,10 @@ class PreguntaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
    list_display =('texto','tipo','curso',)
    resources_class = PreguntaResouce
 
+class PreguntaOpcionAdmin(admin.ModelAdmin):
+   list_display = ('id', 'texto','pregunta','correcta')
+
+
 class CursoDocenteAdmin(admin.ModelAdmin):
    list_display = ('id', 'nombre','codigo_inscripcion','periodo','year','estate')
 
@@ -66,5 +70,7 @@ class CursoDocenteAdmin(admin.ModelAdmin):
 admin.site.register(Nivel, NivelAdmin)
 admin.site.register(Grado, GradoAdmin)
 admin.site.register(Curso, CursoAdmin)
+admin.site.register(Pregunta,  PreguntaAdmin)
+admin.site.register(PreguntaOpcion, PreguntaOpcionAdmin)
 admin.site.register(Cuestionario, CuestionarioAdmin)
 admin.site.register(CursoDocente, CursoDocenteAdmin)

@@ -145,6 +145,7 @@ class IncripcionCursoSerializer(serializers.ModelSerializer):
 
 #preguntas banco
 class PreguntaOpcionSerializer(serializers.ModelSerializer):
+   id = serializers.IntegerField(required=False)
    class Meta:
       model = PreguntaOpcion
       fields = [
@@ -153,7 +154,7 @@ class PreguntaOpcionSerializer(serializers.ModelSerializer):
          'correcta'
       ]
       extra_kwargs = { 
-         'id': {'read_only': True},
+         'id': {'required': False},
          'correcta': {'required': True} 
       }
 
@@ -183,10 +184,25 @@ class PreguntaSerializer(serializers.ModelSerializer):
       opciones = validated_data.pop('opciones',[])
       pregunta =  Pregunta.objects.create(**validated_data)
       if validated_data['tipo']=='O':
-
          for opcion in opciones:
             PreguntaOpcion.objects.create(pregunta=pregunta,**opcion)
       return pregunta
+      
+   def update(self, instance, validated_data):
+      opciones = validated_data.pop('opciones',[])
+      instance.texto = validated_data.get('texto', instance.texto)
+      instance.tipo = validated_data.get('tipo', instance.tipo)
+      instance.save()
+      if instance.tipo=='O':
+         for opcion in opciones:
+            if not 'id' in opcion:
+               PreguntaOpcion.objects.create(pregunta=instance,**opcion)
+            else:
+               opcion_instance = PreguntaOpcion.objects.get(id=opcion['id'])
+               opcion_instance.texto = opcion['texto']
+               opcion_instance.correcta = opcion['correcta']
+               opcion_instance.save()
+      return instance
 
 
 #cuestionarios Banco
