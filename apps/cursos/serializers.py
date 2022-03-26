@@ -194,6 +194,9 @@ class PreguntaSerializer(serializers.ModelSerializer):
       instance.tipo = validated_data.get('tipo', instance.tipo)
       instance.save()
       if instance.tipo=='O':
+         for opcion in instance.opciones.all():
+            if not [el for el in opciones if ('id' in el) and (el['id']==opcion.id)]:
+               opcion.delete()          
          for opcion in opciones:
             if not 'id' in opcion:
                PreguntaOpcion.objects.create(pregunta=instance,**opcion)
@@ -217,7 +220,6 @@ class CuestionarioPregunta(serializers.ModelSerializer):
          'id',
          'intentos_disponibles',
          'puntaje_asignado',
-         'numero_orden',
          'nombre',
 
          'pregunta',
@@ -233,8 +235,8 @@ class CuestionarioPregunta(serializers.ModelSerializer):
 #cuestionarios Banco
 class CuestionarioSerializer(serializers.ModelSerializer):
    curso = serializers.SlugRelatedField( read_only=True, slug_field='nombre')
-   curso_id = serializers.PrimaryKeyRelatedField( 
-            queryset=Curso.objects.all(), source='curso')
+   #curso_id = serializers.PrimaryKeyRelatedField( 
+   #         queryset=Curso.objects.all(), source='curso')
    preguntas = CuestionarioPregunta(many=True, required=False)
    class Meta:
       model = Cuestionario
@@ -242,7 +244,7 @@ class CuestionarioSerializer(serializers.ModelSerializer):
          'id',
          'nombre',
          'curso',
-         'curso_id',
+         #'curso_id',
          'preguntas'
       ]
 
@@ -269,6 +271,6 @@ class CuestionarioSerializer(serializers.ModelSerializer):
             pregunta_instance = CuestionarioPregunta.objects.get(id=pregunta['id'])
             pregunta_instance.intentos_disponibles = pregunta['intentos_disponibles']
             pregunta_instance.puntaje_asignado = pregunta['puntaje_asignado']
-            # pregunta_instance.nombre = pregunta['nombre']
+            #pregunta_instance.nombre = pregunta['nombre']
             pregunta_instance.save()
       return instance

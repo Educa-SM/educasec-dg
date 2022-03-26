@@ -64,7 +64,7 @@ class PreguntaOpcionAdmin(admin.ModelAdmin):
 
 
 class CursoDocenteAdmin(admin.ModelAdmin):
-   list_display = ('id', 'nombre','codigo_inscripcion','periodo','year','estate')
+   list_display = ('id', 'nombre','codigo_inscripcion','periodo','year','estate','creation_date')
 
 
 admin.site.register(Nivel, NivelAdmin)
