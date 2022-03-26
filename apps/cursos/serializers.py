@@ -141,7 +141,7 @@ class IncripcionCursoSerializer(serializers.ModelSerializer):
       }
 
 
-
+"""**********************   Preguntas Banco       ***************************"""
 
 #preguntas banco
 class PreguntaOpcionSerializer(serializers.ModelSerializer):
@@ -205,22 +205,70 @@ class PreguntaSerializer(serializers.ModelSerializer):
       return instance
 
 
+"""**********************   Cuestionarios Banco       ***************************"""
+# cuestonario pregunta
+class CuestionarioPregunta(serializers.ModelSerializer):
+   pregunta = PreguntaSerializer(read_only=True)
+   pregunta_id = serializers.PrimaryKeyRelatedField( 
+            queryset=Pregunta.objects.all(), source='pregunta_id')
+   class Meta:
+      model = CuestionarioPregunta
+      fields = [
+         'id',
+         'intentos_disponibles',
+         'puntaje_asignado',
+         'numero_orden',
+         'nombre',
+
+         'pregunta',
+         'pregunta_id',
+         'creation_date'
+      ]
+      extra_kwargs = { 
+         'id': {'read_only': True},
+         'creation_date': {'read_only': True},
+         'nombre': {'required': False},
+      }
+
 #cuestionarios Banco
 class CuestionarioSerializer(serializers.ModelSerializer):
    curso = serializers.SlugRelatedField( read_only=True, slug_field='nombre')
    curso_id = serializers.PrimaryKeyRelatedField( 
             queryset=Curso.objects.all(), source='curso')
-   
+   preguntas = CuestionarioPregunta(many=True, required=False)
    class Meta:
       model = Cuestionario
       fields = [
          'id',
          'nombre',
          'curso',
-         'curso_id'
+         'curso_id',
+         'preguntas'
       ]
 
       extra_kwargs = { 
          'id': {'read_only': True}
       }
 
+   def create(self, validated_data):
+      preguntas = validated_data.pop('preguntas',[])
+      cuestionario =  Cuestionario.objects.create(**validated_data)
+      for pregunta in preguntas:
+         CuestionarioPregunta.objects.create(cuestionario=cuestionario,**pregunta)
+      return cuestionario
+   
+   def update(self, instance, validated_data):
+      preguntas = validated_data.pop('preguntas',[])
+      instance.nombre = validated_data.get('nombre', instance.nombre)
+      instance.curso = validated_data.get('curso', instance.curso)
+      instance.save()
+      for pregunta in preguntas:
+         if not 'id' in pregunta:
+            CuestionarioPregunta.objects.create(cuestionario=instance,**pregunta)
+         else:
+            pregunta_instance = CuestionarioPregunta.objects.get(id=pregunta['id'])
+            pregunta_instance.intentos_disponibles = pregunta['intentos_disponibles']
+            pregunta_instance.puntaje_asignado = pregunta['puntaje_asignado']
+            # pregunta_instance.nombre = pregunta['nombre']
+            pregunta_instance.save()
+      return instance

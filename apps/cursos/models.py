@@ -68,8 +68,8 @@ class Cuestionario(BaseModel):
 class CuestionarioPregunta(BaseModel):
    intentos_disponibles = models.IntegerField( null=False, default=1)
    puntaje_asignado = models.DecimalField( null=False, max_digits=12, decimal_places=2, default=0.0)
-   nombre = models.CharField('Nombre', max_length=150, blank=False, null=False)
-   cuestionario = models.ForeignKey(Cuestionario, on_delete=models.CASCADE)
+   nombre = models.CharField('Nombre', max_length=150, blank=True, null=True)
+   cuestionario = models.ForeignKey(Cuestionario, on_delete=models.CASCADE, related_name='preguntas')
    pregunta = models.ForeignKey(Pregunta, on_delete=models.CASCADE)
    class Meta:
       unique_together = ('pregunta', 'cuestionario',)
