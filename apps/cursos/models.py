@@ -66,8 +66,8 @@ class Cuestionario(BaseModel):
       return self.nombre
 
 class CuestionarioPregunta(BaseModel):
-   reintentos = models.IntegerField( null=False, default=1)
-   puntaje = models.DecimalField( null=False, max_digits=12, decimal_places=2, default=0.0)
+   intentos_disponibles = models.IntegerField( null=False, default=1)
+   puntaje_asignado = models.DecimalField( null=False, max_digits=12, decimal_places=2, default=0.0)
    nombre = models.CharField('Nombre', max_length=150, blank=False, null=False)
    cuestionario = models.ForeignKey(Cuestionario, on_delete=models.CASCADE)
    pregunta = models.ForeignKey(Pregunta, on_delete=models.CASCADE)
