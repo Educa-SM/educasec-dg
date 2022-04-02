@@ -159,6 +159,7 @@ class PreguntaOpcionSerializer(serializers.ModelSerializer):
       }
 
 class PreguntaSerializer(serializers.ModelSerializer):
+   id = serializers.IntegerField(required=False)
    curso = serializers.SlugRelatedField( read_only=True, slug_field='id')
    #curso_id = serializers.PrimaryKeyRelatedField( 
    #         queryset=Curso.objects.all(), source='curso')
@@ -176,7 +177,7 @@ class PreguntaSerializer(serializers.ModelSerializer):
       ]
 
       extra_kwargs = { 
-         'id': {'read_only': True},
+         'id': {'required': False},
          'tipo': {'required': True},
          'creation_date': {'read_only': True}
       }
@@ -210,10 +211,10 @@ class PreguntaSerializer(serializers.ModelSerializer):
 
 """**********************   Cuestionarios Banco       ***************************"""
 # cuestonario pregunta
-class CuestionarioPregunta(serializers.ModelSerializer):
-   pregunta = PreguntaSerializer(read_only=True)
-   pregunta_id = serializers.PrimaryKeyRelatedField( 
-            queryset=Pregunta.objects.all(), source='pregunta_id')
+class CuestionarioPreguntaSerializer(serializers.ModelSerializer):
+   pregunta = PreguntaSerializer(required=True)
+   #pregunta_id = serializers.PrimaryKeyRelatedField( 
+   #         queryset=Pregunta.objects.all(), source='pregunta_id')
    class Meta:
       model = CuestionarioPregunta
       fields = [
@@ -223,7 +224,7 @@ class CuestionarioPregunta(serializers.ModelSerializer):
          'nombre',
 
          'pregunta',
-         'pregunta_id',
+         #'pregunta_id',
          'creation_date'
       ]
       extra_kwargs = { 
@@ -237,7 +238,7 @@ class CuestionarioSerializer(serializers.ModelSerializer):
    curso = serializers.SlugRelatedField( read_only=True, slug_field='nombre')
    #curso_id = serializers.PrimaryKeyRelatedField( 
    #         queryset=Curso.objects.all(), source='curso')
-   preguntas = CuestionarioPregunta(many=True, required=False)
+   preguntas = CuestionarioPreguntaSerializer(many=True, required=False)
    class Meta:
       model = Cuestionario
       fields = [
@@ -245,21 +246,32 @@ class CuestionarioSerializer(serializers.ModelSerializer):
          'nombre',
          'curso',
          #'curso_id',
-         'preguntas'
+         'preguntas',
+         'creation_date'
       ]
 
       extra_kwargs = { 
-         'id': {'read_only': True}
+         'id': {'read_only': True},
+         'creation_date': {'read_only': True}
       }
 
    def create(self, validated_data):
       preguntas = validated_data.pop('preguntas',[])
       cuestionario =  Cuestionario.objects.create(**validated_data)
-      for pregunta in preguntas:
-         CuestionarioPregunta.objects.create(cuestionario=cuestionario,**pregunta)
+      for preguntaCuestion in preguntas:
+         data_pregunta = preguntaCuestion.pop('pregunta',{})
+         if 'id' in data_pregunta:
+            pregunta = Pregunta.objects.get(id=data_pregunta['id'])
+         else:
+            opciones = data_pregunta.pop('opciones',[])
+            pregunta =  Pregunta.objects.create(**data_pregunta, curso=cuestionario.curso)
+            if data_pregunta['tipo']=='O':
+               for opcion in opciones:
+                  PreguntaOpcion.objects.create(pregunta=pregunta,**opcion)
+         CuestionarioPregunta.objects.create(cuestionario=cuestionario,pregunta=pregunta,nombre=data_pregunta['texto'], **preguntaCuestion)
       return cuestionario
    
-   def update(self, instance, validated_data):
+   """def update(self, instance, validated_data):
       preguntas = validated_data.pop('preguntas',[])
       instance.nombre = validated_data.get('nombre', instance.nombre)
       instance.curso = validated_data.get('curso', instance.curso)
@@ -273,4 +285,4 @@ class CuestionarioSerializer(serializers.ModelSerializer):
             pregunta_instance.puntaje_asignado = pregunta['puntaje_asignado']
             #pregunta_instance.nombre = pregunta['nombre']
             pregunta_instance.save()
-      return instance
+      return instance"""
