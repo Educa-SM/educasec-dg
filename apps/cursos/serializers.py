@@ -67,7 +67,6 @@ class CursoDocenteSerializer(serializers.ModelSerializer):
             queryset=Curso.objects.all(), source='curso')
    docente = serializers.SlugRelatedField( read_only=True, slug_field='id')
    curso = serializers.SlugRelatedField( read_only=True, slug_field='nombre')
-   #inscripciones = IncripcionCursoDocenteSerializer(read_only=True, many=True)
    class Meta:
       model = CursoDocente
       fields = [
@@ -161,8 +160,6 @@ class PreguntaOpcionSerializer(serializers.ModelSerializer):
 class PreguntaSerializer(serializers.ModelSerializer):
    id = serializers.IntegerField(required=False)
    curso = serializers.SlugRelatedField( read_only=True, slug_field='id')
-   #curso_id = serializers.PrimaryKeyRelatedField( 
-   #         queryset=Curso.objects.all(), source='curso')
    opciones = PreguntaOpcionSerializer(many=True, required=False)
    class Meta:
       model = Pregunta
@@ -171,7 +168,6 @@ class PreguntaSerializer(serializers.ModelSerializer):
          'texto',
          'tipo',
          'curso',
-         #'curso_id',
          'opciones',
          'creation_date',
       ]
@@ -212,9 +208,8 @@ class PreguntaSerializer(serializers.ModelSerializer):
 """**********************   Cuestionarios Banco       ***************************"""
 # cuestonario pregunta
 class CuestionarioPreguntaSerializer(serializers.ModelSerializer):
+   id = serializers.IntegerField(required=False)
    pregunta = PreguntaSerializer(required=True)
-   #pregunta_id = serializers.PrimaryKeyRelatedField( 
-   #         queryset=Pregunta.objects.all(), source='pregunta_id')
    class Meta:
       model = CuestionarioPregunta
       fields = [
@@ -222,13 +217,11 @@ class CuestionarioPreguntaSerializer(serializers.ModelSerializer):
          'intentos_disponibles',
          'puntaje_asignado',
          'nombre',
-
          'pregunta',
-         #'pregunta_id',
          'creation_date'
       ]
       extra_kwargs = { 
-         'id': {'read_only': True},
+         'id': {'required': False},
          'creation_date': {'read_only': True},
          'nombre': {'required': False},
       }
@@ -236,8 +229,6 @@ class CuestionarioPreguntaSerializer(serializers.ModelSerializer):
 #cuestionarios Banco
 class CuestionarioSerializer(serializers.ModelSerializer):
    curso = serializers.SlugRelatedField( read_only=True, slug_field='nombre')
-   #curso_id = serializers.PrimaryKeyRelatedField( 
-   #         queryset=Curso.objects.all(), source='curso')
    preguntas = CuestionarioPreguntaSerializer(many=True, required=False)
    class Meta:
       model = Cuestionario
@@ -258,6 +249,7 @@ class CuestionarioSerializer(serializers.ModelSerializer):
    def create(self, validated_data):
       preguntas = validated_data.pop('preguntas',[])
       cuestionario =  Cuestionario.objects.create(**validated_data)
+      #pregunta del cuestionario
       for preguntaCuestion in preguntas:
          data_pregunta = preguntaCuestion.pop('pregunta',{})
          if 'id' in data_pregunta:
@@ -271,18 +263,48 @@ class CuestionarioSerializer(serializers.ModelSerializer):
          CuestionarioPregunta.objects.create(cuestionario=cuestionario,pregunta=pregunta,nombre=data_pregunta['texto'], **preguntaCuestion)
       return cuestionario
    
-   """def update(self, instance, validated_data):
+   def update(self, instance, validated_data):
       preguntas = validated_data.pop('preguntas',[])
       instance.nombre = validated_data.get('nombre', instance.nombre)
-      instance.curso = validated_data.get('curso', instance.curso)
       instance.save()
-      for pregunta in preguntas:
-         if not 'id' in pregunta:
-            CuestionarioPregunta.objects.create(cuestionario=instance,**pregunta)
+      # eliminar preguntasCuestionario no ha sido enviado
+      for preguntaCuestion in instance.preguntas.all():
+         if not [el for el in preguntas if ('id' in el) and (el['id']==preguntaCuestion.id)]:
+            #print("delete"+ preguntaCuestion.id)
+            preguntaCuestion.delete()  
+      for preguntaCuestion in preguntas:
+         # pregunta cuestionario no tiene id
+         if not 'id' in preguntaCuestion:
+            # PREGUNTA
+            data_pregunta = preguntaCuestion.pop('pregunta',{})
+            if 'id' in data_pregunta:
+               pregunta = Pregunta.objects.get(id=data_pregunta['id'])
+            else:
+               opciones = data_pregunta.pop('opciones',[])
+               pregunta =  Pregunta.objects.create(**data_pregunta, curso=instance.curso)
+               if data_pregunta['tipo']=='O':
+                  for opcion in opciones:
+                     PreguntaOpcion.objects.create(pregunta=pregunta,**opcion)
+            CuestionarioPregunta.objects.create(cuestionario=instance,pregunta=pregunta,nombre=data_pregunta['texto'], **preguntaCuestion)
          else:
-            pregunta_instance = CuestionarioPregunta.objects.get(id=pregunta['id'])
-            pregunta_instance.intentos_disponibles = pregunta['intentos_disponibles']
-            pregunta_instance.puntaje_asignado = pregunta['puntaje_asignado']
-            #pregunta_instance.nombre = pregunta['nombre']
-            pregunta_instance.save()
-      return instance"""
+            print(preguntaCuestion['id'])
+            # PREGUNTA CUESTIONARIO tiene id
+            pregunta_cuestionario_instance = CuestionarioPregunta.objects.get(id=preguntaCuestion['id'])
+            pregunta_cuestionario_instance.intentos_disponibles = preguntaCuestion['intentos_disponibles']
+            pregunta_cuestionario_instance.puntaje_asignado = preguntaCuestion['puntaje_asignado']
+
+            data_pregunta = preguntaCuestion.pop('pregunta',{})
+            # pregunta BANCO tiene id
+            if 'id' in data_pregunta:
+               pregunta = Pregunta.objects.get(id=data_pregunta['id'])
+            else:
+               # pregunta BANCO no tiene id
+               opciones = data_pregunta.pop('opciones',[])
+               pregunta =  Pregunta.objects.create(**data_pregunta, curso=instance.curso)
+               if data_pregunta['tipo']=='O':
+                  for opcion in opciones:
+                     PreguntaOpcion.objects.create(pregunta=pregunta,**opcion)
+            pregunta_cuestionario_instance.pregunta = pregunta
+            pregunta_cuestionario_instance.nombre = data_pregunta['texto']
+            pregunta_cuestionario_instance.save()
+      return instance

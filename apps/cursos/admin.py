@@ -74,3 +74,5 @@ admin.site.register(Pregunta,  PreguntaAdmin)
 admin.site.register(PreguntaOpcion, PreguntaOpcionAdmin)
 admin.site.register(Cuestionario, CuestionarioAdmin)
 admin.site.register(CursoDocente, CursoDocenteAdmin)
+
+admin.site.register(CuestionarioPregunta)
