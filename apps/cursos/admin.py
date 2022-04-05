@@ -66,6 +66,11 @@ class PreguntaOpcionAdmin(admin.ModelAdmin):
 class CursoDocenteAdmin(admin.ModelAdmin):
    list_display = ('id', 'nombre','codigo_inscripcion','periodo','year','estate','creation_date')
 
+class CuestionarioPreguntaAdmin(admin.ModelAdmin):
+   list_display = ('id', 'pregunta','cuestionario','intentos_disponibles','puntaje_asignado','creation_date')
+
+class AlumnoInscripcionCursoAdmin(admin.ModelAdmin):
+   list_display = ('id', 'alumno','curso_docente','creation_date')
 
 admin.site.register(Nivel, NivelAdmin)
 admin.site.register(Grado, GradoAdmin)
@@ -75,4 +80,5 @@ admin.site.register(PreguntaOpcion, PreguntaOpcionAdmin)
 admin.site.register(Cuestionario, CuestionarioAdmin)
 admin.site.register(CursoDocente, CursoDocenteAdmin)
 
-admin.site.register(CuestionarioPregunta)
+admin.site.register(CuestionarioPregunta,CuestionarioPreguntaAdmin)
+admin.site.register(AlumnoInscripcionCurso,AlumnoInscripcionCursoAdmin)

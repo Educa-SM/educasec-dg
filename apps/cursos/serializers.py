@@ -228,6 +228,7 @@ class CuestionarioPreguntaSerializer(serializers.ModelSerializer):
 
 #cuestionarios Banco
 class CuestionarioSerializer(serializers.ModelSerializer):
+   id = serializers.IntegerField(required=False)
    curso = serializers.SlugRelatedField( read_only=True, slug_field='nombre')
    preguntas = CuestionarioPreguntaSerializer(many=True, required=False)
    class Meta:
@@ -236,13 +237,12 @@ class CuestionarioSerializer(serializers.ModelSerializer):
          'id',
          'nombre',
          'curso',
-         #'curso_id',
          'preguntas',
          'creation_date'
       ]
 
       extra_kwargs = { 
-         'id': {'read_only': True},
+         'id': {'required': False},
          'creation_date': {'read_only': True}
       }
 
@@ -287,7 +287,6 @@ class CuestionarioSerializer(serializers.ModelSerializer):
                      PreguntaOpcion.objects.create(pregunta=pregunta,**opcion)
             CuestionarioPregunta.objects.create(cuestionario=instance,pregunta=pregunta,nombre=data_pregunta['texto'], **preguntaCuestion)
          else:
-            print(preguntaCuestion['id'])
             # PREGUNTA CUESTIONARIO tiene id
             pregunta_cuestionario_instance = CuestionarioPregunta.objects.get(id=preguntaCuestion['id'])
             pregunta_cuestionario_instance.intentos_disponibles = preguntaCuestion['intentos_disponibles']

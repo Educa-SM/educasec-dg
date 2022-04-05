@@ -226,7 +226,7 @@ class CuestionarioBancoView(APIView):
             return Response(serializer.data, 200)
          else:
             return Response({'msg':'No autorizado'},401)
-      except Cuestionario.DoesNotExist :
+      except Cuestionario.DoesNotExist or Curso.DoesNotExist :
             return Response({'msg':'El cuestionario No Existe'},404)
    # id del Cuestionario
    def delete(self, request, id):
