@@ -230,6 +230,8 @@ class CuestionarioPreguntaSerializer(serializers.ModelSerializer):
 class CuestionarioSerializer(serializers.ModelSerializer):
    id = serializers.IntegerField(required=False)
    curso = serializers.SlugRelatedField( read_only=True, slug_field='nombre')
+   curso_id = serializers.PrimaryKeyRelatedField(
+            queryset=Curso.objects.all(), source='curso', required=False, write_only=True)
    preguntas = CuestionarioPreguntaSerializer(many=True, required=False)
    class Meta:
       model = Cuestionario
@@ -238,12 +240,14 @@ class CuestionarioSerializer(serializers.ModelSerializer):
          'nombre',
          'curso',
          'preguntas',
-         'creation_date'
+         'creation_date',
+         'curso_id'
       ]
 
       extra_kwargs = { 
          'id': {'required': False},
-         'creation_date': {'read_only': True}
+         'creation_date': {'read_only': True},
+         'curso_id': {'required': False},
       }
 
    def create(self, validated_data):

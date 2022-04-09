@@ -8,6 +8,7 @@ from .models import *
 class CuestionarioCursoSerializer(serializers.ModelSerializer):
    curso_docente = serializers.SlugRelatedField( read_only=True, slug_field='nombre')
    cuestionario = CuestionarioSerializer(required=True)
+
    class Meta:
       model = CuestionarioCurso
       fields = [
@@ -17,11 +18,12 @@ class CuestionarioCursoSerializer(serializers.ModelSerializer):
          'fecha_expiracion',
          'cuestionario',
          'curso_docente',
-         'creation_date'
+         'creation_date',
       ]
       extra_kwargs = { 
          'id': {'read_only': True},
-         'creation_date': {'read_only': True}
+         'creation_date': {'read_only': True},
+         
       }
    def create(self, validated_data):
       data_cuestionario = validated_data.pop('cuestionario')
@@ -29,8 +31,8 @@ class CuestionarioCursoSerializer(serializers.ModelSerializer):
       if 'id' in data_cuestionario:
          cuestionario = Cuestionario.objects.get(id=data_cuestionario['id'])
       else:
-         preguntas = validated_data.pop('preguntas',[])
-         cuestionario =  Cuestionario.objects.create(**validated_data)
+         preguntas = data_cuestionario.pop('preguntas',[])
+         cuestionario =  Cuestionario.objects.create(**data_cuestionario)
          #pregunta del cuestionario
          for preguntaCuestion in preguntas:
             data_pregunta = preguntaCuestion.pop('pregunta',{})
