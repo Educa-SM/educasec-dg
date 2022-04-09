@@ -15,7 +15,7 @@ class CuestionarioCurso(BaseModel):
    fecha_expiracion = models.DateTimeField('Apellido Paterno')
    nombre = models.CharField('Nombre', max_length=150, blank=False, null=False)
 
-   curso_docente = models.ForeignKey(CursoDocente, on_delete=models.CASCADE)
+   curso_docente = models.ForeignKey(CursoDocente,related_name='cuestionarios_cursos', on_delete=models.CASCADE)
    cuestionario = models.ForeignKey(Cuestionario, on_delete=models.CASCADE)
    def __str__(self):
       return self.nombre
