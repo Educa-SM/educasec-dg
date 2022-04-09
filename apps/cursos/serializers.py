@@ -301,37 +301,9 @@ class CuestionarioSerializer(serializers.ModelSerializer):
       return instance
 
 ##  ------------------     Inscripciones Cursos    ---------------------
-class CuestionarioCursoReadSerializer(serializers.ModelSerializer):
-   id = serializers.IntegerField(read_only=True)
-   class Meta:
-      model = CuestionarioCurso
-      fields = [
-         'id', 
-         'nombre',
-         'fecha_asignacion',
-         'fecha_expiracion',
-         'creation_date',
-      ]
-      extra_kwargs = { 
-         'id': {'read_only': True},
-         'creation_date': {'read_only': True},
-      }
-class CursoDocenteInscripcionReadSerializer(serializers.ModelSerializer):
-   cuestionarios_cursos = CuestionarioCursoReadSerializer(many=True, read_only = True )
-   class Meta:
-      model = CursoDocente
-      fields = [
-         'id',
-         'nombre',
-         'periodo',
-         'year',
-         'codigo_inscripcion',
-         'creation_date',
-         'cuestionarios_cursos'
-      ]
-      
+
 class IncripcionCursoSerializer(serializers.ModelSerializer):
-   curso_docente = CursoDocenteInscripcionReadSerializer(read_only = True )
+   curso_docente = CursoDocenteInscripcionSerializer(read_only = True )
    class Meta:
       model  = AlumnoInscripcionCurso
       fields = [

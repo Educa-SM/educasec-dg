@@ -66,3 +66,19 @@ class CuestionarioCursoView(APIView):
             return Response({'msg':'El cuestionario No Existe'},404)
       else:
          return Response({'msg':'No autorizado'},401)
+
+class CuestionarioAlumnoView(APIView):
+   permission_classes = [IsAuthenticated]
+   # id del curso docente
+   def get(self, request, id):
+      try:
+         curso_docente = CursoDocente.objects.get(id=id)
+         user_ser = UserSerializer(request.user)
+         if 4 in user_ser.data['groups']:
+            cuestionarios = CuestionarioCurso.objects.filter(curso_docente=curso_docente).order_by('id').reverse()
+            serializer = CuestionarioCursoSerializer(cuestionarios, many=True)
+            return Response(serializer.data, 200)
+         else:
+            return Response({'msg':'No autorizado'},401)
+      except CuestionarioCurso.DoesNotExist or CursoDocente.DoesNotExist :
+         return Response({'msg':'El cuestionario No Existe'},404)
