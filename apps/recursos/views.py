@@ -1,6 +1,4 @@
-from distutils.log import error
 from django.http import Http404
-from django.shortcuts import render
 from rest_framework.views import APIView
 from apps.seguridad.serializers import UserSerializer
 from .serializers import *
@@ -23,11 +21,11 @@ class RecursoListAPIView(APIView):
             elif estate == 'false':
                 estate = 'I'
 
-            recursos = Recurso.objects.filter(estate=estate)
+            recursos = Recurso.objects.filter(estate=estate).order_by('id').reverse()
         else:
-            recursos = Recurso.objects.all()
+            recursos = Recurso.objects.all().order_by('id').reverse()
 
-        serializer = RecursoSerializer(recursos, many=True)
+        serializer = RecursoSerializer2(recursos, many=True)
         return Response(serializer.data, status.HTTP_200_OK)
 
     def post(self, request, format=None):
