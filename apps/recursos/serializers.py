@@ -10,10 +10,11 @@ class RecursoSerializer(serializers.ModelSerializer):
             'descripcion',
             'contenido',
             'tipo',
+            'miniatura'
         ]
 
-    def to_representation(self, instance):
-        return instance.to_dict()
+    """def to_representation(self, instance):
+        return instance.to_dict()"""
 
 
 class RecursoSerializer2(serializers.ModelSerializer):

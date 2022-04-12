@@ -86,3 +86,20 @@ class RecursoDetailAPIView(APIView):
                 return Response({'msg': 'El recurso no existe'}, status=status.HTTP_404_NOT_FOUND)
         else:
             return Response({'msg': 'Usuario no autorizado para realizar esta acción'}, status=status.HTTP_401_UNAUTHORIZED)
+
+class RecursoPublicView(APIView):
+    def get(self, request, format=None):
+        try:
+            recurso = Recurso.objects.all().order_by('id').reverse()
+            serializer = RecursoSerializer(recurso, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Recurso.DoesNotExist:
+            return Response({'msg': 'Los recurso no existe'}, status=status.HTTP_404_NOT_FOUND)
+class RecursoPublicDetailView(APIView):
+    def get(self, request,id, format=None):
+        try:
+            recurso = Recurso.objects.get(id=id)
+            serializer = RecursoSerializer2(recurso, many=False)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Recurso.DoesNotExist:
+            return Response({'msg': 'Los recurso no existe'}, status=status.HTTP_404_NOT_FOUND)
