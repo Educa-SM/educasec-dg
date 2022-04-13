@@ -6,6 +6,7 @@ class RecursoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Recurso
         fields = [
+            'id',
             'titulo',
             'descripcion',
             'contenido',
