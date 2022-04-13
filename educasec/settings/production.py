@@ -1,18 +1,20 @@
 #import dj_database_url
 #from decouple import config
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    '217.21.78.46',
+]
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-#DATABASES = {
+# DATABASES = {
 #    'default': {
 #        'ENGINE': 'django.db.backends.sqlite3',
 #        'NAME': BASE_DIR / 'db.sqlite3',
 #    }
-#}
-#conexion con postgresql
+# }
+# conexion con postgresql
 """DATABASES = {
     'default': dj_database_url.config(
         default = config('DATABASE_URL')
@@ -21,19 +23,19 @@ ALLOWED_HOSTS = ['*']
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'educasec',
-        'USER': 'alonso',
-        'PASSWORD': 'alonso',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'HOST': 'localhost',
-        'PORT': '3306',
+        'PORT': '5432',
+        'NAME': 'educasec',
+        'USER': 'postgres',
+        'PASSWORD': '123456',
     }
 }
 
-#conexion con react
+# conexion con react
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = (
-   'http://localhost:4200',
+    'http://localhost:4200',
 )
 
 # Static files (CSS, JavaScript, Images)
