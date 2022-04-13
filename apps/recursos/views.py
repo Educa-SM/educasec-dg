@@ -80,6 +80,10 @@ class RecursoDetailAPIView(APIView):
         if 3 in user.data['groups']:
             try:
                 recurso = Recurso.objects.get(id=id)
+                if recurso.miniatura:
+                    recurso.miniatura.delete()
+                if recurso.original_filename:
+                    recurso.original_filename.delete()
                 recurso.delete()
                 return Response({'msg': 'Recurso eliminado correctamente'}, status=status.HTTP_200_OK)
             except Recurso.DoesNotExist:
