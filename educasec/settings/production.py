@@ -35,14 +35,13 @@ DATABASES = {
     }
 }
 
-# conexion con react
 CORS_ORIGIN_ALLOW_ALL = False
-CORS_ORIGIN_WHITELIST = ['https://educasm-peru2.web.app/mundo-lector']
+CORS_ORIGIN_WHITELIST = (
+   'http://localhost:4200',
+   'https://educasm-peru2.web.app'
+)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 #STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
