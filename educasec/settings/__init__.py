@@ -54,8 +54,9 @@ MIDDLEWARE = [
    'django.middleware.csrf.CsrfViewMiddleware',
    'django.contrib.auth.middleware.AuthenticationMiddleware',
    'django.contrib.messages.middleware.MessageMiddleware',
-   'django.middleware.clickjacking.XFrameOptionsMiddleware',
    'corsheaders.middleware.CorsMiddleware',
+   'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
    #'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
@@ -135,6 +136,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'seguridad.User'
 #AUTH_GROUP_MODEL = 'seguridad.Cargo'
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+XS_SHARING_ALLOWED_METHODS = ['POST','GET','OPTIONS', 'PUT', 'DELETE']
+
+
 
 if DEBUG:
    from .local import *
