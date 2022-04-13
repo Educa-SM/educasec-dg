@@ -1,8 +1,11 @@
 #import dj_database_url
 #from decouple import config
+from pathlib import Path
+import os
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 ALLOWED_HOSTS = [
-    '217.21.78.46',
+    '*',
 ]
 
 # Database
@@ -33,10 +36,13 @@ DATABASES = {
 }
 
 # conexion con react
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ORIGIN_WHITELIST = ['*']
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_WHITELIST = ['https://educasm-peru2.web.app/mundo-lector']
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 #STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
