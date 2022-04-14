@@ -21,7 +21,7 @@ class Recurso(BaseModel):
     )
     miniatura = models.ImageField(
         'Miniatura',
-        upload_to='miniaturas/',
+        upload_to=upload_to(model='recurso', path=dt.today().strftime('%Y/%m/%d')),
         blank=False,
         null=False
     )
