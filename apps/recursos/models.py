@@ -31,7 +31,8 @@ class Recurso(BaseModel):
     def to_dict(self):
       dict = model_to_dict(self, exclude=['update_date', 'original_filename', 'miniatura'])
       dict['tipo'] = TipoRecursoChoices(self.tipo).to_dict()
-      dict['miniatura'] = self.miniatura.url
+      if self.miniatura:
+        dict['miniatura'] = self.miniatura.url
       #dict['original_filename'] = self.original_filename.url
       return dict
 
