@@ -1,5 +1,9 @@
 *.sqlite3
 server/
+staticfiles/
+# Django
+**/migrations/*.py
+!**/__init__.py
 
 # Django #
 *.log
