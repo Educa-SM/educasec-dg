@@ -34,6 +34,7 @@ class RecursoSerializer2(serializers.ModelSerializer):
         extra_kwargs = { 
             'id': {'read_only': True},
             'original_filename': {'required': False},
+            'miniatura': {'required': False},
             'contenido': {'required': False},
             'creation_date': {'read_only': True},
         }

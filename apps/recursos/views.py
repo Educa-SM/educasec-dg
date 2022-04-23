@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from rest_framework.authentication import TokenAuthentication
+from django.core.paginator import Paginator
 
 
 class RecursoListAPIView(APIView):
@@ -14,7 +15,8 @@ class RecursoListAPIView(APIView):
 
     def get(self, request, format=None, *args, **kwargs):
         estate = request.query_params.get('estate', None)
-
+        page_number = request.query_params.get('page',1)
+        page_size = request.query_params.get('page_size',1)
         if estate:
             if estate == 'true':
                 estate = 'A'
@@ -24,9 +26,12 @@ class RecursoListAPIView(APIView):
             recursos = Recurso.objects.filter(estate=estate).order_by('id').reverse()
         else:
             recursos = Recurso.objects.all().order_by('id').reverse()
-
-        serializer = RecursoSerializer2(recursos, many=True)
-        return Response(serializer.data, status.HTTP_200_OK)
+        paginator = Paginator(recursos, page_size)
+        serializer = RecursoSerializer2(paginator.get_page(page_number), many=True)
+        return Response({
+            'data':serializer.data,
+            'numPages':paginator.num_pages,
+        }, status.HTTP_200_OK)
 
     def post(self, request, format=None):
         try:
@@ -65,8 +70,12 @@ class RecursoDetailAPIView(APIView):
         if 3 in user_ser.data['groups']:
             try:
                 recurso = self.get_object(id)
-                serializer = RecursoSerializer(recurso, data=request.data)
+                serializer = RecursoSerializer2(recurso, data=request.data)
                 if serializer.is_valid():
+                    if 'miniatura' in serializer.validated_data :
+                        recurso.miniatura.delete()
+                    if 'original_filename' in serializer.validated_data:
+                        recurso.original_filename.delete()
                     serializer.save()
                     return Response(serializer.data, status=status.HTTP_200_OK)
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
