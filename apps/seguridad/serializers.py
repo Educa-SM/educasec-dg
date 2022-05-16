@@ -28,11 +28,12 @@ class InstitucionesSerializer(serializers.ModelSerializer):
       ]      
 
 class DocenteSerializer(serializers.ModelSerializer):
-   user = UserSerializer()
-   """instituciones = serializers.SlugRelatedField(
-      many=True, read_only=True, slug_field='id'
-   )"""
+   user = UserSerializer(read_only=True)
    instituciones = InstitucionesSerializer(many=True, read_only=True)
+   instituciones_id = serializers.PrimaryKeyRelatedField(
+      queryset=Institucion.objects.all(), source='instituciones', required=False, 
+      write_only=True, many=True
+   )
    class Meta:
       model = Docente
       fields = [
@@ -43,24 +44,29 @@ class DocenteSerializer(serializers.ModelSerializer):
          'direccion',
          'tipo_documento',
          'nro_documento',
-         'instituciones'
+         'instituciones',
+         'instituciones_id'
       ]
-      extra_kwargs = {'id': 
-         {'read_only': True},
-         'instituciones': 
-         {'read_only': True}
+      extra_kwargs = {
+         'id': {'read_only': True},
+         'instituciones': {'read_only': True},
+         'user': {'read_only': True}
       }
    
    def create(self, validated_data):
-      data_user = validated_data.pop('user')
-      user = User(**data_user)
-      user.set_password(data_user['password'])
+      #data_user = validated_data.pop('user')
+      user = User(username=validated_data['nro_documento'])
+      user.set_password(validated_data['nro_documento'])
       user.save()
       user.groups.add(2)
+      instituciones = validated_data.pop('instituciones')
       docente = Docente(**validated_data,user=user)
       docente.save()
       if not docente.id:
          user.delete()
+      else:
+         for inst in instituciones:
+            docente.instituciones.add(inst)
       return docente
 
 class AlumnoSerializer(serializers.ModelSerializer):
