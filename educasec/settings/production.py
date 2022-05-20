@@ -1,49 +1,31 @@
-#import dj_database_url
-#from decouple import config
-from pathlib import Path
-import os
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
+from decouple import config
+from . import BASE_DIR
+
 
 ALLOWED_HOSTS = [
     'educasm-peru.site',
     '217.21.78.46',
-    'www.educasm-peru.site'
+    'www.educasm-peru.site',
 ]
+
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'HOST': config('DB_HOST', default='localhost'),
+        'PORT': config('DB_PORT', default='5432'),
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
     }
 }
-# conexion con postgresql
-"""DATABASES = {
-    'default': dj_database_url.config(
-        default = config('DATABASE_URL')
-    )
-}"""
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#        'HOST': 'localhost',
-#        'PORT': '5432',
-#        'NAME': 'educasec',
-#        'USER': 'postgres',
-#        'PASSWORD': '123456',
-#    }
-#}
 
 CORS_ORIGIN_ALLOW_ALL = False
+
 CORS_ORIGIN_WHITELIST = (
-   'http://localhost:4200',
-   'https://educasm-peru2.web.app'
+    'http://localhost:4200',
+    'https://educasm-peru2.web.app',
 )
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.1/howto/static-files/
-
-#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
