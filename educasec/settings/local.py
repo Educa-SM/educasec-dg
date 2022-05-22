@@ -1,4 +1,4 @@
-from . import BASE_DIR
+from . import db
 
 
 ALLOWED_HOSTS = [
@@ -8,12 +8,7 @@ ALLOWED_HOSTS = [
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+DATABASES = db.SQLITE
 
 
 CORS_ORIGIN_ALLOW_ALL = False
