@@ -1,4 +1,3 @@
-from decouple import config
 from . import db
 
 
@@ -21,5 +20,6 @@ DATABASES = db.SQLITE
 CORS_ORIGIN_ALLOW_ALL = False
 
 CORS_ORIGIN_WHITELIST = (
+    'http://localhost:4200',
     'https://educasm-peru2.web.app',
 )
