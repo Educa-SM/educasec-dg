@@ -29,7 +29,7 @@ class Docente(BaseModel):
    user = models.OneToOneField(User, on_delete=models.CASCADE)
    instituciones = models.ManyToManyField(Institucion)
    def __str__(self):
-      return self.nombres +' '+self.apellido_paterno+''+self.apellido_materno
+      return self.nombres +' '+self.apellido_paterno+' '+self.apellido_materno
 
 
 class Alumno(BaseModel):
