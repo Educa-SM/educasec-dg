@@ -46,3 +46,22 @@ class CuestionarioCursoSerializer(serializers.ModelSerializer):
                      PreguntaOpcion.objects.create(pregunta=pregunta,**opcion)
             CuestionarioPregunta.objects.create(cuestionario=cuestionario,pregunta=pregunta,nombre=data_pregunta['texto'], **preguntaCuestion)
       return CuestionarioCurso.objects.create(cuestionario=cuestionario, **validated_data)
+
+
+
+class CuestionarioCursoAlumnoSerializer(serializers.ModelSerializer):
+   curso_docente = serializers.SlugRelatedField( read_only=True, slug_field='nombre')
+   class Meta:
+      model = CuestionarioCurso
+      fields = [
+         'id', 
+         'nombre',
+         'fecha_asignacion',
+         'fecha_expiracion',
+         'curso_docente',
+         'creation_date',
+      ]
+      extra_kwargs = { 
+         'id': {'read_only': True},
+         'creation_date': {'read_only': True},
+      }
