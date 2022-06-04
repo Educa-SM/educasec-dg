@@ -12,8 +12,8 @@ def update_filename(instance, filename, model_name, path_name):
     return os.path.join(path, filename)
 
 
-''' upload_to:
-    - Rename file to unique uuid4
-'''
+# ''' upload_to:
+#     - Rename file to unique uuid4
+# '''
 def upload_to(model, path=None):
     return partial(update_filename, model_name=model, path_name=path)

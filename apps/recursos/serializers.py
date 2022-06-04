@@ -14,9 +14,6 @@ class RecursoSerializer(serializers.ModelSerializer):
             'miniatura'
         ]
 
-    """def to_representation(self, instance):
-        return instance.to_dict()"""
-
 
 class RecursoSerializer2(serializers.ModelSerializer):
     class Meta:
@@ -31,7 +28,7 @@ class RecursoSerializer2(serializers.ModelSerializer):
             'original_filename',
             'creation_date',
         ]
-        extra_kwargs = { 
+        extra_kwargs = {
             'id': {'read_only': True},
             'original_filename': {'required': False},
             'miniatura': {'required': False},
@@ -39,5 +36,19 @@ class RecursoSerializer2(serializers.ModelSerializer):
             'creation_date': {'read_only': True},
         }
 
-    #def to_representation(self, instance):
-    #    return instance.to_dict()
+
+class PatrocinadorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Patrocinador
+        fields = [
+            'id',
+            'nombre',
+            'descripcion',
+            'logo',
+        ]
+
+
+class MiembroProyectoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MiembroProyecto
+        fields = '__all__'

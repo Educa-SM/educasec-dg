@@ -25,18 +25,17 @@ BASE_APPS = [
     'django.contrib.staticfiles',
 ]
 LOCAL_APPS = [
-    'apps.institucion',
-    'apps.seguridad',
-    'apps.recursos',
     'apps.cuestionarios',
     'apps.cursos',
+    'apps.institucion',
+    'apps.recursos',
+    'apps.seguridad',
 ]
 THIRD_APPS = [
     'corsheaders',
     'import_export',
     'rest_framework',
     'rest_framework.authtoken',
-    # 'reversion',
 ]
 
 INSTALLED_APPS = BASE_APPS + LOCAL_APPS + THIRD_APPS
@@ -58,8 +57,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
-    # 'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'educasec.urls'
@@ -136,11 +133,10 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'seguridad.User'
-# AUTH_GROUP_MODEL = 'seguridad.Cargo'
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
-XS_SHARING_ALLOWED_METHODS = ['POST', 'GET', 'OPTIONS', 'PUT', 'DELETE']
+XS_SHARING_ALLOWED_METHODS = ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', ]
 
 
 if DEBUG:
