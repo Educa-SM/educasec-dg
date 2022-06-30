@@ -8,10 +8,10 @@ from .choices import SituacionRespuesta
 
 class CuestionarioCurso(BaseModel):
     fecha_asignacion = DateTimeField(
-        'Fecha de Solucion',
+        'Fecha de Asignacion',
     )
     fecha_expiracion = DateTimeField(
-        'Apellido Paterno',
+        'Fecha de Expiracion',
     )
     nombre = CharField(
         'Nombre',
@@ -56,6 +56,9 @@ class SolucionCuestionario(BaseModel):
 
     class Meta:
         unique_together = ('alumno', 'cuestionario_curso',)
+
+    def __str__(self):
+        return f'SolucionCuestionario {self.id}'
 
 
 class SolucionPregunta(BaseModel):

@@ -21,7 +21,6 @@ class CuestionarioCursoSerializer(ModelSerializer):
         extra_kwargs = {
             'id': {'read_only': True},
             'creation_date': {'read_only': True},
-
         }
 
     def create(self, validated_data):
