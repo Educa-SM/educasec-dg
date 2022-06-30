@@ -26,6 +26,7 @@ class CuestionarioCurso(BaseModel):
     cuestionario = ForeignKey(
         Cuestionario,
         on_delete=CASCADE,
+        related_name='cuestionarios_curso'
     )
 
     def __str__(self):

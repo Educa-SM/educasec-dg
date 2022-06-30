@@ -161,7 +161,6 @@ class PreguntaSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(required=False)
     curso = serializers.SlugRelatedField(read_only=True, slug_field='id')
     opciones = PreguntaOpcionSerializer(many=True, required=False)
-
     class Meta:
         model = Pregunta
         fields = [
@@ -171,12 +170,14 @@ class PreguntaSerializer(serializers.ModelSerializer):
             'curso',
             'opciones',
             'creation_date',
+            'cuestionarios_pregunta'
         ]
 
         extra_kwargs = {
             'id': {'required': False},
             'tipo': {'required': True},
-            'creation_date': {'read_only': True}
+            'creation_date': {'read_only': True},
+            'cuestionarios_pregunta': {'read_only': True}
         }
 
     def create(self, validated_data):
@@ -249,12 +250,14 @@ class CuestionarioSerializer(serializers.ModelSerializer):
             'curso',
             'preguntas',
             'creation_date',
-            'curso_id'
+            'curso_id',
+            'cuestionarios_curso'
         ]
 
         extra_kwargs = {
             'id': {'required': False},
             'creation_date': {'read_only': True},
+            'cuestionarios_curso': {'read_only': True},
             'curso_id': {'required': False},
         }
 

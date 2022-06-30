@@ -147,6 +147,7 @@ class CuestionarioPregunta(BaseModel):
     pregunta = ForeignKey(
         Pregunta,
         on_delete=CASCADE,
+        related_name='cuestionarios_pregunta'
     )
 
     class Meta:
