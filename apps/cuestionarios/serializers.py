@@ -51,7 +51,7 @@ class CuestionarioCursoSerializer(ModelSerializer):
 
 class CuestionarioCursoAlumnoSerializer(ModelSerializer):
     curso_docente = SlugRelatedField(read_only=True, slug_field='nombre')
-
+    #soluciones = SlugRelatedField(many=True, read_only=True, slug_field='id')
     class Meta:
         model = CuestionarioCurso
         fields = [
@@ -61,8 +61,61 @@ class CuestionarioCursoAlumnoSerializer(ModelSerializer):
             'fecha_expiracion',
             'curso_docente',
             'creation_date',
+            #'soluciones'
         ]
         extra_kwargs = {
             'id': {'read_only': True},
             'creation_date': {'read_only': True},
         }
+
+"""
+Solucion de cuestionarios por parte del alumno
+"""
+class PreguntaSolucionSerializer(ModelSerializer):
+    cuestionario_pregunta_id = serializers.PrimaryKeyRelatedField(
+        queryset=CuestionarioPregunta.objects.all(), source='cuestionario_pregunta')
+    pregunta_opcion_id = serializers.PrimaryKeyRelatedField(
+        queryset=PreguntaOpcion.objects.all(), source='pregunta_opcion', required=False)
+    
+    class Meta:
+        model = SolucionPregunta
+        fields = [
+            'id',
+            'respuesta', #string
+            'intentos_tomados',
+            'cuestionario_pregunta_id',
+            'pregunta_opcion_id',
+            'puntaje_obtenido',
+            'comentario',
+            'situacion_respuesta'
+        ]
+        extra_kwargs = {
+            'id': {'read_only': True},
+            'comentario': {'required': False},
+            'puntaje_obtenido': {'required': False},
+            'pregunta_opcion_id': {'required': False},
+        }
+
+class SolucionSerializer(ModelSerializer):
+    cuestionario_curso_id = serializers.PrimaryKeyRelatedField(
+        queryset=CuestionarioCurso.objects.all(), source='cuestionario_curso')
+    soluciones = PreguntaSolucionSerializer(many=True)
+    class Meta:
+        model = SolucionCuestionario
+        fields = [
+            'id',
+            'comentario',
+            'cuestionario_curso_id',
+            'soluciones'
+        ]
+        extra_kwargs = {
+            'id': {'read_only': True},
+            'comentario': {'required': False}
+        }
+    
+    def create(self, validated_data):
+        soluciones = validated_data.pop('soluciones', [])
+        solucion = SolucionCuestionario.objects.create(**validated_data)
+        for opcion in soluciones:
+            SolucionPregunta.objects.create(solucion=solucion, **opcion)
+        return solucion

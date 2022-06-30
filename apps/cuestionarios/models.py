@@ -36,9 +36,11 @@ class CuestionarioCurso(BaseModel):
 class SolucionCuestionario(BaseModel):
     fecha_solucion = DateTimeField(
         'Fecha de Solucion',
+        auto_now_add=True,
     )
     fecha_revision = DateTimeField(
         'Apellido Paterno',
+        auto_now=True,
     )
     comentario = CharField(
         'Comentario',
@@ -53,6 +55,7 @@ class SolucionCuestionario(BaseModel):
     cuestionario_curso = ForeignKey(
         CuestionarioCurso,
         on_delete=CASCADE,
+        related_name='soluciones'
     )
 
     class Meta:
@@ -96,10 +99,12 @@ class SolucionPregunta(BaseModel):
     solucion = ForeignKey(
         SolucionCuestionario,
         on_delete=CASCADE,
+        related_name='soluciones'
     )
     cuestionario_pregunta = ForeignKey(
         CuestionarioPregunta,
         on_delete=CASCADE,
+        related_name='soluciones'
     )
     pregunta_opcion = ForeignKey(
         PreguntaOpcion,
