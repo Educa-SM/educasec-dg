@@ -117,5 +117,7 @@ class SolucionSerializer(ModelSerializer):
         soluciones = validated_data.pop('soluciones', [])
         solucion = SolucionCuestionario.objects.create(**validated_data)
         for opcion in soluciones:
+            
             SolucionPregunta.objects.create(solucion=solucion, **opcion)
+
         return solucion
