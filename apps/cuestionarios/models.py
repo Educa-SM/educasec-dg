@@ -39,7 +39,7 @@ class SolucionCuestionario(BaseModel):
         auto_now_add=True,
     )
     fecha_revision = DateTimeField(
-        'Apellido Paterno',
+        'Fecha Revision',
         auto_now=True,
     )
     comentario = CharField(
