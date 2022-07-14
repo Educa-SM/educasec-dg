@@ -193,19 +193,26 @@ class SolucionCuestionarioCursoView(APIView):
 """
 Soluciones de cueestionario pasa -> cuestionario_curso_id
 """
-class SolucionCuestionarioAlumnoViewDetail(APIView):
+class SolucionCuestionarioView(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication]
-    #****   aLUMNO  -> id = del cuestionario curso  ** * ***
+    #****   id = del cuestionario curso  ** * ***
     def get(self, request,id):
         try:
             user_ser = UserSerializer(request.user)
+            # alumno
             if 4 in user_ser.data['groups']:
                 alumno = Alumno.objects.get(user=request.user)
                 solucion = SolucionCuestionario.objects.filter(alumno=alumno,cuestionario_curso__id=id).first()
                 serializer = SolucionSerializer(solucion)
                 return Response(serializer.data, 200)
+            # docente
+            if 2 in user_ser.data['groups']:
+                data = SolucionCuestionario.objects.filter(cuestionario_curso__id=id).order_by('id').reverse()
+                serializer = SolucionSerializer(data, many=True)
+                return Response(serializer.data, 200)
             else:
                 return Response({'msg': 'No autorizado'}, 401)
         except CursoDocente.DoesNotExist:
             return Response({'msg': 'El curso No Existe'}, 404)
+
