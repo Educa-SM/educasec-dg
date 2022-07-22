@@ -118,12 +118,14 @@ class CursoDocenteIdView(APIView):
             return Response({'msg': 'No autorizado'}, 401)
 
 
-class CursoInscripcionDocenteView(APIView):
+class CursoInscripcionDetailView(APIView):
     permission_classes = [IsAuthenticated]
 
     # id del CursoDocente retorna las inscripciones
+    # id del curso inscripcion del alumno
     def get(self, request, id):
         user_ser = UserSerializer(request.user)
+        # *** DOCENTE  -> id CursoDocente
         if 2 in user_ser.data['groups']:
             try:
                 docente = Docente.objects.get(
@@ -136,6 +138,17 @@ class CursoInscripcionDocenteView(APIView):
                 return Response(serializer.data, 200)
                 # return Response({'msg':'ok'},200)
             except Alumno.DoesNotExist or CursoDocente.DoesNotExist:
+                return Response({'msg': 'No Existe el curso'}, 404)
+        elif 4 in user_ser.data['groups']:
+            try:
+                alumno = Alumno.objects.get(
+                    nro_documento=user_ser.data['username'])
+                inscripciones = AlumnoInscripcionCurso.objects.filter(
+                    alumno=alumno, id=id)
+                serializer = IncripcionCursoSerializer(
+                    inscripciones)
+                return Response(serializer.data, 200)
+            except Alumno.DoesNotExist or AlumnoInscripcionCurso.DoesNotExist:
                 return Response({'msg': 'No Existe el curso'}, 404)
         else:
             return Response({'msg': 'No autorizado'}, 401)

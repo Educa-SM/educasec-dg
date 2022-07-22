@@ -1,4 +1,4 @@
-from django.db.models import CharField, DateTimeField, DecimalField, ForeignKey, IntegerField
+from django.db.models import CharField, DateTimeField, DecimalField, ForeignKey, IntegerField, BooleanField
 from django.db.models.deletion import CASCADE, SET_NULL
 from apps.cursos.models import Cuestionario, CuestionarioPregunta, CursoDocente, PreguntaOpcion
 from apps.institucion.models import Alumno
@@ -57,7 +57,6 @@ class SolucionCuestionario(BaseModel):
         on_delete=CASCADE,
         related_name='soluciones'
     )
-
     class Meta:
         unique_together = ('alumno', 'cuestionario_curso',)
 

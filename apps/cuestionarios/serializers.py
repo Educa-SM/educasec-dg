@@ -108,11 +108,13 @@ class SolucionSerializer(ModelSerializer):
             'id',
             'comentario',
             'cuestionario_curso_id',
-            'soluciones'
+            'soluciones',
+            'is_revisado'
         ]
         extra_kwargs = {
             'id': {'read_only': True},
-            'comentario': {'required': False}
+            'is_revisado': {'read_only': True},
+            'comentario': {'required': False},
         }
     
     def create(self, validated_data):
@@ -123,3 +125,26 @@ class SolucionSerializer(ModelSerializer):
             SolucionPregunta.objects.create(solucion=solucion, **opcion)
 
         return solucion
+
+
+class SolucionDocenteSerializer(ModelSerializer):
+    cuestionario_curso_id = serializers.PrimaryKeyRelatedField(
+        queryset=CuestionarioCurso.objects.all(), source='cuestionario_curso')
+    soluciones = PreguntaSolucionSerializer(many=True)
+    alumno = AlumnoSerializer(read_only=True)
+    class Meta:
+        model = SolucionCuestionario
+        fields = [
+            'id',
+            'comentario',
+            'cuestionario_curso_id',
+            'soluciones',
+            'alumno',
+            'creation_date',
+            'is_revisado'
+        ]
+        extra_kwargs = {
+            'id': {'read_only': True},
+            'comentario': {'required': False},
+            'creation_date': {'read_only': True},
+        }
