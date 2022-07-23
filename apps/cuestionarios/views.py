@@ -7,58 +7,189 @@ from rest_framework.views import APIView
 from apps.seguridad.serializers import UserSerializer
 from .serializers import *
 
+
+# --------------   Preguntas      -----------------------------------
+class PreguntaBancoView(APIView):
+    permission_classes = [IsAuthenticated]
+    # id del TipoCurso
+    def post(self, request, id):
+        try:
+            tipo_curso = TipoCurso.objects.get(id=id)
+            user_ser = UserSerializer(request.user)
+            if 2 in user_ser.data['groups']:
+                serializer = PreguntaBancoSerializer(data=request.data)
+                if serializer.is_valid():
+                    serializer.save(tipo_curso=tipo_curso)
+                    return Response(serializer.data, 201)
+                return Response(serializer.errors, 404)
+            else:
+                return Response({'msg': 'No autorizado'}, 401)
+        except TipoCurso.DoesNotExist:
+            return Response({'msg': 'El curso No Existe'}, 404)
+
+    # id del TipoCurso
+    def get(self, request, id):
+        try:
+            tipo_curso = TipoCurso.objects.get(id=id)
+            user_ser = UserSerializer(request.user)
+            if 2 in user_ser.data['groups']:
+                preguntas = PreguntaBanco.objects.filter(
+                    tipo_curso=tipo_curso).order_by('id').reverse()
+                serializer = PreguntaBancoSerializer(preguntas, many=True)
+                return Response(serializer.data, 200)
+            else:
+                return Response({'msg': 'No autorizado'}, 401)
+        except TipoCurso.DoesNotExist or PreguntaBanco.DoesNotExist:
+            return Response({'msg': 'No Existe'}, 404)
+
+    # id de la pregunta
+    def delete(self, request, id):
+        user_ser = UserSerializer(request.user)
+        if 2 in user_ser.data['groups']:
+            try:
+                pregunta = PreguntaBanco.objects.get(id=id)
+                pregunta.delete()
+                return Response({'msg': 'Eliminado'}, 200)
+            except PreguntaBanco.DoesNotExist:
+                return Response({'msg': 'La pregunta No Existe'}, 404)
+        else:
+            return Response({'msg': 'No autorizado'}, 401)
+
+    # id de la pregunta
+    def put(self, request, id):
+        user_ser = UserSerializer(request.user)
+        if 2 in user_ser.data['groups']:
+            try:
+                pregunta = PreguntaBanco.objects.get(id=id)
+                serializer = PreguntaBancoSerializer(pregunta, data=request.data)
+                if serializer.is_valid():
+                    serializer.save()
+                    return Response(serializer.data, 200)
+                return Response(serializer.errors, 400)
+            except PreguntaBanco.DoesNotExist:
+                return Response({'msg': 'La pregunta No Existe'}, 404)
+        else:
+            return Response({'msg': 'No autorizado'}, 401)
+
+
+# --------------   Cuestionarios      -----------------------------------
+class CuestionarioBancoView(APIView):
+    permission_classes = [IsAuthenticated]
+    # id del TipoCurso
+    def post(self, request, id):
+        try:
+            tipo_curso = TipoCurso.objects.get(id=id)
+            user_ser = UserSerializer(request.user)
+            if 2 in user_ser.data['groups']:
+                serializer = CuestionarioBancoSerializer(data=request.data)
+                if serializer.is_valid():
+                    serializer.save(tipo_curso=tipo_curso)
+                    return Response(serializer.data, 201)
+                return Response(serializer.errors, 404)
+            else:
+                return Response({'msg': 'No autorizado'}, 401)
+        except TipoCurso.DoesNotExist:
+            return Response({'msg': 'El curso No Existe'}, 404)
+
+    # id del tipo_curso
+    def get(self, request, id):
+        try:
+            tipo_curso = TipoCurso.objects.get(id=id)
+            user_ser = UserSerializer(request.user)
+            if 2 in user_ser.data['groups']:
+                cuestionarios = CuestionarioBanco.objects.filter(
+                    tipo_curso=tipo_curso).order_by('id').reverse()
+                serializer = CuestionarioSerializer(cuestionarios, many=True)
+                return Response(serializer.data, 200)
+            else:
+                return Response({'msg': 'No autorizado'}, 401)
+        except Cuestionario.DoesNotExist or TipoCurso.DoesNotExist:
+            return Response({'msg': 'El curso No Existe'}, 404)
+
+    # id del Cuestionario
+    def delete(self, request, id):
+        user_ser = UserSerializer(request.user)
+        if 2 in user_ser.data['groups']:
+            try:
+                cuestionario = CuestionarioBanco.objects.get(id=id)
+                cuestionario.delete()
+                return Response({'msg': 'Eliminado'}, 200)
+            except CuestionarioBanco.DoesNotExist:
+                return Response({'msg': 'El cuestionario No Existe'}, 404)
+        else:
+            return Response({'msg': 'No autorizado'}, 401)
+
+    # id del Cuestionario
+    def put(self, request, id):
+        user_ser = UserSerializer(request.user)
+        if 2 in user_ser.data['groups']:
+            try:
+                cuestionario = CuestionarioBanco.objects.get(id=id)
+                serializer = CuestionarioSerializer(
+                    cuestionario, data=request.data)
+                if serializer.is_valid():
+                    serializer.save()
+                    return Response(serializer.data, 200)
+                return Response(serializer.errors, 400)
+            except CuestionarioBanco.DoesNotExist:
+                return Response({'msg': 'El cuestionario No Existe'}, 404)
+        else:
+            return Response({'msg': 'No autorizado'}, 401)
+
+
+
 # *********************** DOCENTE *****************************************
-class CuestionarioCursoView(APIView):
+class CuestionarioView(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication]
 
-    # id de CursoDocente
+    # id de Curso
     def get_object(self, id):
         try:
-            return CursoDocente.objects.get(id=id)
-        except CursoDocente.DoesNotExist:
+            return Curso.objects.get(id=id)
+        except Curso.DoesNotExist:
             raise Http404
 
-    # Cuestionarios de CursoDocente
+    # Cuestionarios de Curso
     def get(self, request, id):
         try:
             object = self.get_object(id)
             user_ser = UserSerializer(request.user)
 
             if 2 in user_ser.data['groups']:
-                cuestionarios = CuestionarioCurso.objects.filter(curso_docente=object).order_by('-id')
-                serializer = CuestionarioCursoSerializer(cuestionarios, many=True)
+                cuestionarios = Cuestionario.objects.filter(curso=object).order_by('id')
+                serializer = CuestionarioSerializer(cuestionarios, many=True)
                 return Response(serializer.data, status.HTTP_200_OK)
             else:
                 return Response({'msg': 'No Autorizado.'}, status.HTTP_401_UNAUTHORIZED)
-        except CuestionarioCurso.DoesNotExist or CursoDocente.DoesNotExist:
+        except Cuestionario.DoesNotExist or Curso.DoesNotExist:
             return Response({'msg': 'Error inesperado.'}, status.HTTP_400_BAD_REQUEST)
 
-    # id del Curso Docente  ????????????????????????????????
+    # id del Curso  ????????????????????????????????
     def post(self, request, id):
         try:
             object = self.get_object(id)
             user_ser = UserSerializer(request.user)
             if 2 in user_ser.data['groups']:
-                serializer = CuestionarioCursoSerializer(data=request.data)
+                serializer = CuestionarioSerializer(data=request.data)
                 if serializer.is_valid():
-                    serializer.save(curso_docente=object)
+                    serializer.save(curso=object)
                     return Response(serializer.data, 201)
                 return Response(serializer.errors, 404)
             else:
                 return Response({'msg': 'No autorizado'}, 401)
-        except CursoDocente.DoesNotExist:
+        except Curso.DoesNotExist:
             return Response({'msg': 'El curso No Existe'}, 404)
 
-    # Eliminar CuestionarioCurso
+    # Eliminar Cuestionario
     def delete(self, request, id):
         user_ser = UserSerializer(request.user)
         if 2 in user_ser.data['groups']:
             try:
-                cuestionario = CuestionarioCurso.objects.get(id=id)
+                cuestionario = Cuestionario.objects.get(id=id)
                 cuestionario.delete()
                 return Response({'msg': 'Eliminado'}, 200)
-            except CuestionarioCurso.DoesNotExist:
+            except Cuestionario.DoesNotExist:
                 return Response({'msg': 'El cuestionario No Existe'}, 404)
         else:
             return Response({'msg': 'No autorizado'}, 401)
@@ -68,72 +199,128 @@ class CuestionarioCursoView(APIView):
         user_ser = UserSerializer(request.user)
         if 2 in user_ser.data['groups']:
             try:
-                cuestionario_curso = CuestionarioCurso.objects.get(id=id)
-                serializer = CuestionarioCursoSerializer(cuestionario_curso, data=request.data)
+                cuestionario = Cuestionario.objects.get(id=id)
+                serializer = CuestionarioSerializer(cuestionario, data=request.data)
                 if serializer.is_valid():
                     serializer.save()
                     return Response(serializer.data, 200)
                 return Response(serializer.errors, 400)
-            except CuestionarioCurso.DoesNotExist:
+            except Cuestionario.DoesNotExist:
                 return Response({'msg': 'El cuestionario No Existe'}, 404)
         else:
             return Response({'msg': 'No autorizado'}, 401)
 
-
-
 """
-Evaluar las soluciones de los alumnos -> Docente
-"""
-class EvaluarCuestionarioCursoView(APIView):
-    permission_classes = [IsAuthenticated]
-    authentication_classes = [TokenAuthentication]
-    # metodo del docente
-    def post(self, request, id):
-        try:
-            user_ser = UserSerializer(request.user)
-            if 2 in user_ser.data['groups']:
-                print(request.data)
-                return Response({'msg': 'Ok'}, 200)
-            else:
-                return Response({'msg': 'No autorizado'}, 401)
-        except CursoDocente.DoesNotExist:
-            return Response({'msg': 'El curso No Existe'}, 404)
-
-
-
-
-"""
-Soluciones de cueestionario pasa -> cuestionario_curso_id
+Soluciones de cueestionario 
 """
 class SolucionCuestionarioView(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication]
-    #****   id = del cuestionario curso  ** * ***
+    #****   id = del cuestionario   ** * ***
     def get(self, request,id):
         try:
             user_ser = UserSerializer(request.user)
             # alumno
             if 4 in user_ser.data['groups']:
                 alumno = Alumno.objects.get(user=request.user)
-                solucion = SolucionCuestionario.objects.filter(alumno=alumno,cuestionario_curso__id=id).first()
+                solucion = Solucion.objects.filter(alumno=alumno,cuestionario__id=id).first()
                 serializer = SolucionSerializer(solucion)
                 return Response(serializer.data, 200)
             # docente
             if 2 in user_ser.data['groups']:
-                data = SolucionCuestionario.objects.filter(cuestionario_curso__id=id).order_by('id').reverse()
+                data = Solucion.objects.filter(cuestionario__id=id).order_by('id').reverse()
                 serializer = SolucionDocenteSerializer(data, many=True)
                 return Response(serializer.data, 200)
             else:
                 return Response({'msg': 'No autorizado'}, 401)
-        except CursoDocente.DoesNotExist:
+        except Solucion.DoesNotExist:
+            return Response({'msg': 'El curso No Existe'}, 404)
+    
+    # metodo del docente -> id de la solucin
+    def put(self, request, id):
+        try:
+            user_ser = UserSerializer(request.user)
+            if 2 in user_ser.data['groups']:
+                solucion = Solucion.objects.get(id=id)
+                serializer = SolucionDocenteSerializer(solucion, data=request.data)
+                if serializer.is_valid():
+                    serializer.save()
+                    return Response(serializer.data, 200)
+                return Response(serializer.errors, 400)
+            else:
+                return Response({'msg': 'No autorizado'}, 401)
+        except Curso.DoesNotExist:
             return Response({'msg': 'El curso No Existe'}, 404)
 
 
 #*************************ALUMNO*************************************************
+""" 
+listar cueestionario de un alumno por su id de curso docente 
+CUESTIONARIOS QUE AUN NO RESUELVE
+"""
+class ListCuestionarioAlumnoView(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+    # id del curso 
+    def get(self, request, id):
+        try:
+            curso_docente = Curso.objects.get(id=id)
+            user_ser = UserSerializer(request.user)
+            if 4 in user_ser.data['groups']:
+                alumno = Alumno.objects.get(user=request.user)
+                cuestionarios = Cuestionario.objects.filter(
+                    curso_docente=curso_docente).exclude(soluciones__alumno=alumno).order_by('id').reverse()
+                serializer = CuestionarioAlumnoSerializer(
+                    cuestionarios, many=True)
+                return Response(serializer.data, 200)
+            else:
+                return Response({'msg': 'No autorizado'}, 401)
+        except Cuestionario.DoesNotExist or Curso.DoesNotExist:
+            return Response({'msg': 'El cuestionario No Existe'}, 404)
+"""
+lISTA DE CUESTIONARIOS RESUELTOS POR EL ALUMNO
+"""
+class ListCuestionarioResueltosView(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+    # id del curso docente --->
+    def get(self, request, id):
+        try:
+            curso_docente = Curso.objects.get(id=id)
+            user_ser = UserSerializer(request.user)
+            if 4 in user_ser.data['groups']:
+                alumno = Alumno.objects.get(user=request.user)
+                cuestionarios = Cuestionario.objects.filter(
+                    curso_docente=curso_docente).filter(soluciones__alumno=alumno).order_by('id').reverse()
+                serializer = CuestionarioAlumnoSerializer(
+                    cuestionarios, many=True)
+                return Response(serializer.data, 200)
+            else:
+                return Response({'msg': 'No autorizado'}, 401)
+        except Cuestionario.DoesNotExist or Curso.DoesNotExist:
+            return Response({'msg': 'El cuestionario No Existe'}, 404)
+
+# cuestionarios de un alumno por su curso -> lista de preguntas
+class CuestionarioAlumnoView(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+    # id del cuestionario
+    def get(self, request, id):
+        try:
+            user_ser = UserSerializer(request.user)
+            if 4 in user_ser.data['groups']:
+                cuestionarios = Cuestionario.objects.get(id=id)
+                serializer = CuestionarioSerializer(cuestionarios)
+                return Response(serializer.data, 200)
+            else:
+                return Response({'msg': 'No autorizado'}, 401)
+        except Cuestionario.DoesNotExist:
+            return Response({'msg': 'El cuestionario No Existe'}, 404)
+
 """
 Solucion de cuestionarios por parte del alumno
 """
-class SolucionCuestionarioCursoView(APIView):
+class SolucionCursoView(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication]
     #****   aLUMNO   ** * ***
@@ -149,71 +336,5 @@ class SolucionCuestionarioCursoView(APIView):
                 return Response(serializer.errors, 404)
             else:
                 return Response({'msg': 'No autorizado'}, 401)
-        except CursoDocente.DoesNotExist:
+        except Curso.DoesNotExist:
             return Response({'msg': 'El curso No Existe'}, 404)
-
-""" 
-listar cueestionario de un alumno por su id de curso docente 
-CUESTIONARIOS QUE AUN NO RESUELVE
-"""
-class ListCuestionarioAlumnoView(APIView):
-    permission_classes = [IsAuthenticated]
-    authentication_classes = [TokenAuthentication]
-    # id del curso docente --->
-    # *** Alumno ***
-    def get(self, request, id):
-        try:
-            curso_docente = CursoDocente.objects.get(id=id)
-            user_ser = UserSerializer(request.user)
-            if 4 in user_ser.data['groups']:
-                alumno = Alumno.objects.get(user=request.user)
-                cuestionarios = CuestionarioCurso.objects.filter(
-                    curso_docente=curso_docente).exclude(soluciones__alumno=alumno).order_by('id').reverse()
-                serializer = CuestionarioCursoAlumnoSerializer(
-                    cuestionarios, many=True)
-                return Response(serializer.data, 200)
-            else:
-                return Response({'msg': 'No autorizado'}, 401)
-        except CuestionarioCurso.DoesNotExist or CursoDocente.DoesNotExist:
-            return Response({'msg': 'El cuestionario No Existe'}, 404)
-"""
-lISTA DE CUESTIONARIOS RESUELTOS POR EL ALUMNO
-"""
-class ListCuestionarioResueltosView(APIView):
-    permission_classes = [IsAuthenticated]
-    authentication_classes = [TokenAuthentication]
-    # id del curso docente --->
-    # *** Alumno ***
-    def get(self, request, id):
-        try:
-            curso_docente = CursoDocente.objects.get(id=id)
-            user_ser = UserSerializer(request.user)
-            if 4 in user_ser.data['groups']:
-                alumno = Alumno.objects.get(user=request.user)
-                cuestionarios = CuestionarioCurso.objects.filter(
-                    curso_docente=curso_docente).filter(soluciones__alumno=alumno).order_by('id').reverse()
-                serializer = CuestionarioCursoAlumnoSerializer(
-                    cuestionarios, many=True)
-                return Response(serializer.data, 200)
-            else:
-                return Response({'msg': 'No autorizado'}, 401)
-        except CuestionarioCurso.DoesNotExist or CursoDocente.DoesNotExist:
-            return Response({'msg': 'El cuestionario No Existe'}, 404)
-
-# cuestionarios de un alumno por su cursodocente -> lista de preguntas
-class CuestionarioAlumnoView(APIView):
-    permission_classes = [IsAuthenticated]
-    authentication_classes = [TokenAuthentication]
-    # id del cuestionario
-    # ** alumno ***
-    def get(self, request, id):
-        try:
-            user_ser = UserSerializer(request.user)
-            if 4 in user_ser.data['groups']:
-                cuestionarios = CuestionarioCurso.objects.get(id=id)
-                serializer = CuestionarioCursoSerializer(cuestionarios)
-                return Response(serializer.data, 200)
-            else:
-                return Response({'msg': 'No autorizado'}, 401)
-        except CuestionarioCurso.DoesNotExist or CursoDocente.DoesNotExist:
-            return Response({'msg': 'El cuestionario No Existe'}, 404)

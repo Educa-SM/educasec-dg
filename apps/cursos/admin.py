@@ -32,68 +32,30 @@ class GradoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 
 
 # curso
-class CursoResouce(resources.ModelResource):
+class TipoCursoResouce(resources.ModelResource):
     class Meta:
-        model = Curso
+        model = TipoCurso
         fields = ('nombre', 'grado')
 
 
-class CursoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+class TipoCursoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     search_fields = ['nombre', 'grado']
     list_display = ('nombre', 'grado')
-    resources_class = CursoResouce
+    resources_class = TipoCursoResouce
 
 
-# cuestionario
-class CuestionarioResouce(resources.ModelResource):
-    class Meta:
-        model = Cuestionario
-        fields = ('nombre', 'curso',)
-
-
-class CuestionarioAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    search_fields = ['nombre', 'curso', ]
-    list_display = ('nombre', 'curso',)
-    resources_class = CuestionarioResouce
-
-
-# pregunta
-class PreguntaResouce(resources.ModelResource):
-    class Meta:
-        model = Pregunta
-        fields = ('texto', 'tipo', 'curso',)
-
-
-class PreguntaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    search_fields = ['texto', 'tipo', 'curso', ]
-    list_display = ('texto', 'tipo', 'curso',)
-    resources_class = PreguntaResouce
-
-
-class PreguntaOpcionAdmin(admin.ModelAdmin):
-    list_display = ('id', 'texto', 'pregunta', 'correcta')
-
-
-class CursoDocenteAdmin(admin.ModelAdmin):
+class CursoAdmin(admin.ModelAdmin):
     list_display = ('id', 'nombre', 'codigo_inscripcion',
                     'periodo', 'year', 'estate', 'creation_date')
 
 
-class CuestionarioPreguntaAdmin(admin.ModelAdmin):
-    list_display = ('id', 'pregunta', 'cuestionario',
-                    'intentos_disponibles', 'puntaje_asignado', 'creation_date')
-
 
 class AlumnoInscripcionCursoAdmin(admin.ModelAdmin):
-    list_display = ('id', 'alumno', 'curso_docente', 'creation_date')
+    list_display = ('id', 'alumno', 'curso', 'creation_date')
 
 
 admin.site.register(Nivel, NivelAdmin)
 admin.site.register(Grado, GradoAdmin)
+admin.site.register(TipoCurso, TipoCursoAdmin)
 admin.site.register(Curso, CursoAdmin)
-admin.site.register(Pregunta,  PreguntaAdmin)
-admin.site.register(PreguntaOpcion, PreguntaOpcionAdmin)
-admin.site.register(Cuestionario, CuestionarioAdmin)
-admin.site.register(CursoDocente, CursoDocenteAdmin)
-admin.site.register(CuestionarioPregunta, CuestionarioPreguntaAdmin)
 admin.site.register(AlumnoInscripcionCurso, AlumnoInscripcionCursoAdmin)
