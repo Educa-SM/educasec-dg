@@ -160,6 +160,8 @@ class CuestionarioBancoSerializer(serializers.ModelSerializer):
                 else:
                     PreguntaOpcion.objects.filter(pregunta_banco=pregunta_instance).delete()
                 pregunta_instance.save()
+                if CuestionarioBanco.objects.filter(preguntas_banco__id=pregunta_instance.id).count()==0:
+                    instance.preguntas_banco.add(pregunta_instance)
         return instance
 
 
@@ -167,8 +169,8 @@ class CuestionarioBancoSerializer(serializers.ModelSerializer):
 # cuestonario pregunta
 class CuestionarioPreguntaSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(required=False)
-    pregunta_banco = PreguntaBancoSerializer(required=True)
-
+    pregunta_banco_id = serializers.PrimaryKeyRelatedField(
+        queryset=PreguntaBanco.objects.all(), source='pregunta_banco', required=False)
     class Meta:
         model = CuestionarioPregunta
         fields = [
@@ -176,7 +178,7 @@ class CuestionarioPreguntaSerializer(serializers.ModelSerializer):
             'intentos_disponibles',
             'puntaje_asignado',
             'nombre',
-            'pregunta_banco',
+            'pregunta_banco_id',
             'creation_date'
         ]
         extra_kwargs = {
@@ -188,7 +190,7 @@ class CuestionarioPreguntaSerializer(serializers.ModelSerializer):
 class CuestionarioSerializer(ModelSerializer):
     curso = SlugRelatedField(read_only=True, slug_field='nombre')
     cuestionario_banco = CuestionarioBancoSerializer(required=True)
-
+    cuestionario_preguntas = CuestionarioPreguntaSerializer(many=True, required=False)
     class Meta:
         model = Cuestionario
         fields = [
@@ -199,7 +201,8 @@ class CuestionarioSerializer(ModelSerializer):
             'cuestionario_banco',
             'curso',
             'creation_date',
-            'soluciones'
+            'soluciones',
+            'cuestionario_preguntas'
         ]
         extra_kwargs = {
             'id': {'read_only': True},
@@ -209,12 +212,13 @@ class CuestionarioSerializer(ModelSerializer):
 
     def create(self, validated_data):
         data_cuestionario = validated_data.pop('cuestionario_banco')
-        # cuestionario create
+        data_cuestionario_preguntas = validated_data.pop('cuestionario_preguntas')
+        # cuestionario banco
         if 'id' in data_cuestionario:
-            cuestionario = CuestionarioBanco.objects.get(id=data_cuestionario['id'])
+            cuestionario_banco = CuestionarioBanco.objects.get(id=data_cuestionario['id'])
         else:
             preguntas = data_cuestionario.pop('preguntas', [])
-            cuestionario = CuestionarioBanco.objects.create(**data_cuestionario)
+            cuestionario_banco = CuestionarioBanco.objects.create(**data_cuestionario)
             # pregunta del cuestionario
             for pregunta_banco in preguntas:
                 if 'id' in pregunta_banco:
@@ -222,13 +226,19 @@ class CuestionarioSerializer(ModelSerializer):
                 else:
                     opciones = pregunta_banco.pop('opciones', [])
                     pregunta = PreguntaBanco.objects.create(
-                        **pregunta_banco, tipo_curso=cuestionario.tipo_curso)
+                        **pregunta_banco, tipo_curso=cuestionario_banco.tipo_curso)
                     if pregunta_banco['tipo'] == 'O':
                         for opcion in opciones:
                             PreguntaOpcion.objects.create(
                                 pregunta=pregunta, **opcion)
-                cuestionario.preguntas_banco.add(pregunta)
-        return Cuestionario.objects.create(cuestionario_banco=cuestionario, **validated_data)
+                cuestionario_banco.preguntas_banco.add(pregunta)
+        cuestionario = Cuestionario.objects.create(cuestionario_banco=cuestionario_banco, **validated_data)
+        # preguntas del cuestionario
+        index = 0
+        for cuest_pregunta in cuestionario_banco.preguntas_banco.all():
+            CuestionarioPregunta.objects.create(**data_cuestionario_preguntas[index],cuestionario=cuestionario, pregunta_banco=cuest_pregunta)
+            index += 1
+        return cuestionario
 
     def update(self, instance, validated_data):
         data_cuestionario = validated_data.pop('cuestionario_banco')
