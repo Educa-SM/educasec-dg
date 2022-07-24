@@ -41,11 +41,11 @@ class PreguntaBancoSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         opciones = validated_data.pop('opciones', [])
-        pregunta = PreguntaBanco.objects.create(**validated_data)
+        pregunta_banco = PreguntaBanco.objects.create(**validated_data)
         if validated_data['tipo'] == 'O':
             for opcion in opciones:
-                PreguntaOpcion.objects.create(pregunta=pregunta, **opcion)
-        return pregunta
+                PreguntaOpcion.objects.create(pregunta_banco=pregunta_banco, **opcion)
+        return pregunta_banco
 
     def update(self, instance, validated_data):
         opciones = validated_data.pop('opciones', [])
@@ -69,29 +69,6 @@ class PreguntaBancoSerializer(serializers.ModelSerializer):
 
 
 """**********************   Cuestionarios Banco       ***************************"""
-
-
-# cuestonario pregunta
-class CuestionarioPreguntaSerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField(required=False)
-    pregunta_banco = PreguntaBancoSerializer(required=True)
-
-    class Meta:
-        model = CuestionarioPregunta
-        fields = [
-            'id',
-            'intentos_disponibles',
-            'puntaje_asignado',
-            'nombre',
-            'pregunta_banco',
-            'creation_date'
-        ]
-        extra_kwargs = {
-            'id': {'required': False},
-            'creation_date': {'read_only': True},
-            'nombre': {'required': False},
-        }
-
 
 # cuestionarios Banco
 class CuestionarioBancoSerializer(serializers.ModelSerializer):
@@ -126,7 +103,7 @@ class CuestionarioBancoSerializer(serializers.ModelSerializer):
         # pregunta del cuestionario
         for pregunta in preguntas:
             if 'id' in pregunta:
-                data_pregunta = PreguntaBanco.objects.get(id=data_pregunta['id'])
+                data_pregunta = PreguntaBanco.objects.get(id=pregunta['id'])
             else:
                 opciones = pregunta.pop('opciones', [])
                 data_pregunta = PreguntaBanco.objects.create(
@@ -173,7 +150,7 @@ class CuestionarioBancoSerializer(serializers.ModelSerializer):
                             opcion.delete()
                     for opcion in opciones:
                         if not 'id' in opcion:
-                            PreguntaOpcion.objects.create(pregunta_banco=instance, **opcion)
+                            PreguntaOpcion.objects.create(pregunta_banco=pregunta_instance, **opcion)
                         else:
                             opcion_instance = PreguntaOpcion.objects.get(
                                 id=opcion['id'])
@@ -181,11 +158,32 @@ class CuestionarioBancoSerializer(serializers.ModelSerializer):
                             opcion_instance.correcta = opcion['correcta']
                             opcion_instance.save()
                 else:
-                    PreguntaOpcion.objects.filter(pregunta_banco=instance).delete()
+                    PreguntaOpcion.objects.filter(pregunta_banco=pregunta_instance).delete()
                 pregunta_instance.save()
         return instance
 
 
+
+# cuestonario pregunta
+class CuestionarioPreguntaSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(required=False)
+    pregunta_banco = PreguntaBancoSerializer(required=True)
+
+    class Meta:
+        model = CuestionarioPregunta
+        fields = [
+            'id',
+            'intentos_disponibles',
+            'puntaje_asignado',
+            'nombre',
+            'pregunta_banco',
+            'creation_date'
+        ]
+        extra_kwargs = {
+            'id': {'required': False},
+            'creation_date': {'read_only': True},
+            'nombre': {'required': False},
+        }
 
 class CuestionarioSerializer(ModelSerializer):
     curso = SlugRelatedField(read_only=True, slug_field='nombre')

@@ -125,8 +125,8 @@ class CursoInscripcionDetailView(APIView):
                     nro_documento=user_ser.data['username'])
                 curso = Curso.objects.get(id=id, docente=docente)
                 inscripciones = AlumnoInscripcionCurso.objects.filter(
-                    curso_docente=curso).order_by('id').reverse()
-                serializer = IncripcionCursoSerializer(
+                    curso=curso).order_by('id').reverse()
+                serializer = IncripcionCursoDocenteSerializer(
                     inscripciones, many=True)
                 return Response(serializer.data, 200)
                 # return Response({'msg':'ok'},200)
@@ -154,7 +154,7 @@ class CursoInscripcionDetailView(APIView):
                 inscripcion = AlumnoInscripcionCurso.objects.get(id=id)
                 docente = Docente.objects.get(
                     nro_documento=user_ser.data['username'])
-                if inscripcion.curso_docente.docente == docente:
+                if inscripcion.curso.docente == docente:
                     inscripcion.estate = 'D'
                     inscripcion.save()
                     return Response({'msg': 'Exito'}, 200)
@@ -189,16 +189,16 @@ class CursoInscripcionView(APIView):
         user_ser = UserSerializer(request.user)
         if 4 in user_ser.data['groups']:
             try:
-                curso_docente = Curso.objects.get(
+                curso = Curso.objects.get(
                     codigo_inscripcion=request.data['codigo'])
                 alumno = Alumno.objects.get(
                     nro_documento=user_ser.data['username'])
                 if AlumnoInscripcionCurso.objects.filter(alumno=alumno,
-                                                         curso_docente=curso_docente).exists():
+                                                         curso=curso).exists():
                     return Response({'msg': 'Usted ya se a registrado a este curso'}, 400)
                 else:
                     inscripcion = AlumnoInscripcionCurso(
-                        alumno=alumno, curso_docente=curso_docente)
+                        alumno=alumno, curso=curso)
                     inscripcion.save()
                     return Response({'msg': 'Creado'}, 201)
             except Curso.DoesNotExist or Alumno.DoesNotExist:

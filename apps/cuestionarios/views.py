@@ -99,7 +99,7 @@ class CuestionarioBancoView(APIView):
             if 2 in user_ser.data['groups']:
                 cuestionarios = CuestionarioBanco.objects.filter(
                     tipo_curso=tipo_curso).order_by('id').reverse()
-                serializer = CuestionarioSerializer(cuestionarios, many=True)
+                serializer = CuestionarioBancoSerializer(cuestionarios, many=True)
                 return Response(serializer.data, 200)
             else:
                 return Response({'msg': 'No autorizado'}, 401)
@@ -125,7 +125,7 @@ class CuestionarioBancoView(APIView):
         if 2 in user_ser.data['groups']:
             try:
                 cuestionario = CuestionarioBanco.objects.get(id=id)
-                serializer = CuestionarioSerializer(
+                serializer = CuestionarioBancoSerializer(
                     cuestionario, data=request.data)
                 if serializer.is_valid():
                     serializer.save()
@@ -264,12 +264,12 @@ class ListCuestionarioAlumnoView(APIView):
     # id del curso 
     def get(self, request, id):
         try:
-            curso_docente = Curso.objects.get(id=id)
+            curso = Curso.objects.get(id=id)
             user_ser = UserSerializer(request.user)
             if 4 in user_ser.data['groups']:
                 alumno = Alumno.objects.get(user=request.user)
                 cuestionarios = Cuestionario.objects.filter(
-                    curso_docente=curso_docente).exclude(soluciones__alumno=alumno).order_by('id').reverse()
+                    curso=curso).exclude(soluciones__alumno=alumno).order_by('id').reverse()
                 serializer = CuestionarioAlumnoSerializer(
                     cuestionarios, many=True)
                 return Response(serializer.data, 200)
@@ -286,12 +286,12 @@ class ListCuestionarioResueltosView(APIView):
     # id del curso docente --->
     def get(self, request, id):
         try:
-            curso_docente = Curso.objects.get(id=id)
+            curso = Curso.objects.get(id=id)
             user_ser = UserSerializer(request.user)
             if 4 in user_ser.data['groups']:
                 alumno = Alumno.objects.get(user=request.user)
                 cuestionarios = Cuestionario.objects.filter(
-                    curso_docente=curso_docente).filter(soluciones__alumno=alumno).order_by('id').reverse()
+                    curso=curso).filter(soluciones__alumno=alumno).order_by('id').reverse()
                 serializer = CuestionarioAlumnoSerializer(
                     cuestionarios, many=True)
                 return Response(serializer.data, 200)

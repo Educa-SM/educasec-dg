@@ -14,14 +14,14 @@ class TipoCursoSerializer(serializers.ModelSerializer):
 
 
 class GradoSerializer(serializers.ModelSerializer):
-    cursos = TipoCursoSerializer(many=True, read_only=True)
+    tipos_cursos = TipoCursoSerializer(many=True, read_only=True)
 
     class Meta:
         model = Grado
         fields = [
             'id',
             'nombre',
-            'cursos'
+            'tipos_cursos'
         ]
         extra_kwargs = {'id': {'read_only': True}}
 
@@ -73,7 +73,7 @@ class CursoSerializer(serializers.ModelSerializer):
     institucion_id = serializers.PrimaryKeyRelatedField(
         queryset=Institucion.objects.all(), source='institucion')
     tipo_curso_id = serializers.PrimaryKeyRelatedField(
-        queryset=Curso.objects.all(), source='tipo_curso')
+        queryset=TipoCurso.objects.all(), source='tipo_curso')
     docente = serializers.SlugRelatedField(read_only=True, slug_field='id')
     tipo_curso = serializers.SlugRelatedField(read_only=True, slug_field='nombre')
 
@@ -139,13 +139,13 @@ class CursoInscripcionSerializer(serializers.ModelSerializer):
 
 # ------------------     Inscripciones Cursos    ---------------------
 class IncripcionCursoSerializer(serializers.ModelSerializer):
-    curso_docente = CursoInscripcionSerializer(read_only=True)
+    curso = CursoInscripcionSerializer(read_only=True)
 
     class Meta:
         model = AlumnoInscripcionCurso
         fields = [
             'id',
-            'curso_docente',
+            'curso',
             'creation_date',
             'estate',
 
