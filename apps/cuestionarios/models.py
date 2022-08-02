@@ -1,6 +1,6 @@
 from datetime import datetime as dt
 from django.db.models import (
-    CharField,ImageField, DateTimeField, 
+    CharField, ImageField, DateTimeField,
     DecimalField, ForeignKey, IntegerField,
     ManyToManyField
 )
@@ -10,6 +10,7 @@ from apps.institucion.models import Alumno
 from educasec.utils.models import BaseModel
 from .choices import SituacionPregunta, SituacionRespuesta, TipoPregunta
 from educasec.utils.defs import upload_to
+
 
 # *****************   Cuestionario    *******************
 class PreguntaBanco(BaseModel):
@@ -22,12 +23,11 @@ class PreguntaBanco(BaseModel):
         'Tipo de Pregunta',
         max_length=1,
         choices=TipoPregunta.choices,
-        default=TipoPregunta.RESPUESTA_SIMPRE,
+        default=TipoPregunta.RESPUESTA_SIMPLE,
     )
     imagen = ImageField(
         'Imagen',
-        upload_to=upload_to(
-            model='pregunta_banco', path=dt.today().strftime('%Y/%m/%d')),
+        upload_to=upload_to(model='pregunta_banco', path=dt.today().strftime('%Y/%m/%d')),
         blank=True,
         null=True,
     )
@@ -75,13 +75,14 @@ class CuestionarioBanco(BaseModel):
     imagen = ImageField(
         'Imagen',
         upload_to=upload_to(
-            model='cuestionario_banco', 
+            model='cuestionario_banco',
             path=dt.today().strftime('%Y/%m/%d')
         ),
         blank=True,
         null=True,
     )
     preguntas_banco = ManyToManyField(PreguntaBanco)
+
     def __str__(self):
         return self.nombre
 
@@ -111,6 +112,7 @@ class Cuestionario(BaseModel):
 
     def __str__(self):
         return self.nombre
+
 
 class CuestionarioPregunta(BaseModel):
     intentos_disponibles = IntegerField(
@@ -171,6 +173,7 @@ class Solucion(BaseModel):
         on_delete=CASCADE,
         related_name='soluciones'
     )
+
     class Meta:
         unique_together = ('alumno', 'cuestionario',)
 

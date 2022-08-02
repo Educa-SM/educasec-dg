@@ -1,6 +1,5 @@
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
-from django.db import models
-
+from django.db.models import BooleanField, CharField, DateField, EmailField
 from apps.seguridad.choices import GroupChoices
 
 
@@ -20,13 +19,13 @@ class UserManager(BaseUserManager):
 
 
 class User (AbstractBaseUser, PermissionsMixin):
-    username = models.CharField('Usuario', max_length=10, unique=True)
-    email = models.EmailField('Correo', max_length=100, blank=True)
-    first_name = models.CharField('Nombres', max_length=120, blank=True)
-    last_name = models.CharField('Apellidos', max_length=120, blank=True)
-    birth_date = models.DateField('fecha de Cumpleaño', auto_now=True)
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
+    username = CharField('Usuario', max_length=10, unique=True)
+    email = EmailField('Correo', max_length=100, blank=True)
+    first_name = CharField('Nombres', max_length=120, blank=True)
+    last_name = CharField('Apellidos', max_length=120, blank=True)
+    birth_date = DateField('fecha de Cumpleaño', auto_now=True)
+    is_active = BooleanField(default=True)
+    is_staff = BooleanField(default=False)
     objects = UserManager()
 
     USERNAME_FIELD = 'username'
@@ -60,11 +59,11 @@ class User (AbstractBaseUser, PermissionsMixin):
     def is_admin_sistema(self):
         return self.is_user_group(GroupChoices.ADMIN_SISTEMA)
 
-    def is_admin_docente(self):
+    def is_docente(self):
         return self.is_user_group(GroupChoices.DOCENTE)
 
     def is_admin_recursos(self):
         return self.is_user_group(GroupChoices.ADMIN_RECURSOS)
 
-    def is_admin_alumno(self):
+    def is_alumno(self):
         return self.is_user_group(GroupChoices.ALUMNO)

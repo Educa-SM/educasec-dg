@@ -14,54 +14,53 @@ class RecursoListAPIView(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication]
 
-    # ???????????????
-    def get(self, request, format=None, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
+        data = {}
         estate = request.query_params.get('estate', None)
-        page_number = request.query_params.get('page', 1)
+        page = request.query_params.get('page', 1)
         page_size = request.query_params.get('page_size', 1)
+        recursos = Recurso.objects.all().order_by('-id')
+
         if estate:
             if estate == 'true':
                 estate = 'A'
             elif estate == 'false':
                 estate = 'I'
+            recursos = recursos.filter(estate=estate)
 
-            recursos = Recurso.objects.filter(
-                estate=estate).order_by('id').reverse()
-        else:
-            recursos = Recurso.objects.all().order_by('id').reverse()
         paginator = Paginator(recursos, page_size)
-        serializer = RecursoSerializer2(
-            paginator.get_page(page_number), many=True)
-        data = {
-            'data': serializer.data,
-            'numPages': paginator.num_pages,
-        }
+        serializer = RecursoSerializer2(paginator.get_page(page), many=True)
+
+        data['data'] = serializer.data
+        data['numPages'] = paginator.num_pages
+
         return Response(data, status.HTTP_200_OK)
 
     # Creacion de Recurso
-    def post(self, request, format=None):
+    def post(self, request):
+        data = {}
         try:
-            user_ser = UserSerializer(request.user)
-            if 3 in user_ser.data['groups']:
+            usuario = request.user
+            if usuario.is_admin_recursos():
                 serializer = RecursoSerializer2(data=request.data)
                 if serializer.is_valid():
-                    institucion = None
                     institucion_id = request.data.get('institucion', None)
-                    try:
-                        institucion = Institucion.objects.get(
-                            id=institucion_id)
-                    except:
-                        pass
+                    institucion = Institucion.objects.filter(id=institucion_id).first()
                     if institucion:
                         serializer.save(institucion=institucion)
                     else:
                         serializer.save()
-                    return Response(serializer.data, status=status.HTTP_201_CREATED)
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                    data = serializer.data
+                    return Response(data, status.HTTP_201_CREATED)
+
+                data = serializer.errors
+                return Response(data, status.HTTP_400_BAD_REQUEST)
             else:
-                return Response({'msg': 'No Autorizado.'}, status=status.HTTP_401_UNAUTHORIZED)
+                data['msg'] = 'No Autorizado.'
+                return Response(data, status.HTTP_401_UNAUTHORIZED)
         except:
-            return Response({'msg': 'Error inesperado.'}, status=status.HTTP_400_BAD_REQUEST)
+            data['msg'] = 'Error inesperado.'
+            return Response(data, status.HTTP_400_BAD_REQUEST)
 
 
 class RecursoDetailAPIView(APIView):
@@ -75,15 +74,18 @@ class RecursoDetailAPIView(APIView):
             raise Http404
 
     # Obtener Recurso con id
-    def get(self, request, id, format=None, *args, **kwargs):
+    def get(self, request, id, *args, **kwargs):
+        data = {}
         object = self.get_object(id)
         serializer = RecursoSerializer(object, many=False)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        data = serializer.data
+        return Response(data, status.HTTP_200_OK)
 
     # Modificar Recurso con id
-    def put(self, request, id, format=None):
-        user_ser = UserSerializer(request.user)
-        if 3 in user_ser.data['groups']:
+    def put(self, request, id):
+        data = {}
+        usuario = request.user
+        if usuario.is_admin_recursos():
             try:
                 recurso = self.get_object(id)
                 serializer = RecursoSerializer2(recurso, data=request.data)
@@ -93,17 +95,22 @@ class RecursoDetailAPIView(APIView):
                     if 'original_filename' in serializer.validated_data:
                         recurso.original_filename.delete()
                     serializer.save()
-                    return Response(serializer.data, status=status.HTTP_200_OK)
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                    data = serializer.data
+                    return Response(data, status.HTTP_200_OK)
+                data = serializer.errors
+                return Response(data, status.HTTP_400_BAD_REQUEST)
             except Recurso.DoesNotExist:
-                return Response({'msg': 'Recurso no encontrado.'}, status=status.HTTP_404_NOT_FOUND)
+                data['msg'] = 'Recurso no encontrado.'
+                return Response(data, status.HTTP_404_NOT_FOUND)
         else:
-            return Response({'msg': 'No autorizado.'}, status=status.HTTP_401_UNAUTHORIZED)
+            data['msg'] = 'No autorizado.'
+            return Response(data, status.HTTP_401_UNAUTHORIZED)
 
     # Eliminar Recurso con id
-    def delete(self, request, id, format=None):
-        user = UserSerializer(request.user)
-        if 3 in user.data['groups']:
+    def delete(self, request, id):
+        data = {}
+        usuario = request.user
+        if usuario.is_admin_recursos():
             try:
                 recurso = Recurso.objects.get(id=id)
                 if recurso.miniatura:
@@ -111,22 +118,28 @@ class RecursoDetailAPIView(APIView):
                 if recurso.original_filename:
                     recurso.original_filename.delete()
                 recurso.delete()
-                return Response({'msg': 'Recurso eliminado correctamente.'}, status=status.HTTP_200_OK)
+                data['msg'] = 'Recurso eliminado correctamente.'
+                return Response(data, status.HTTP_200_OK)
             except Recurso.DoesNotExist:
-                return Response({'msg': 'Recurso no encontrado.'}, status=status.HTTP_404_NOT_FOUND)
+                data['msg'] = 'Recurso no encontrado.'
+                return Response(data, status.HTTP_404_NOT_FOUND)
         else:
-            return Response({'msg': 'Usuario no autorizado para realizar esta acción.'}, status=status.HTTP_401_UNAUTHORIZED)
+            data['msg'] = 'Usuario no autorizado para realizar esta acción.'
+            return Response(data, status.HTTP_401_UNAUTHORIZED)
 
 
 class RecursoPublicAPIView(APIView):
     # Obtener Lista de Recursos
-    def get(self, request, format=None):
+    def get(self, request):
+        data = {}
         try:
-            recurso = Recurso.objects.all().order_by('id').reverse()
+            recurso = Recurso.objects.all().order_by('-id')
             serializer = RecursoSerializer(recurso, many=True)
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            data = serializer.data
+            return Response(data, status.HTTP_200_OK)
         except:
-            return Response({'msg': 'Error Inesperado.'}, status=status.HTTP_400_BAD_REQUEST)
+            data['msg'] = 'Error Inesperado.'
+            return Response(data, status.HTTP_400_BAD_REQUEST)
 
 
 class RecursoPublicDetailAPIView(APIView):
@@ -137,13 +150,16 @@ class RecursoPublicDetailAPIView(APIView):
             raise Http404
 
     # Obtener Recurso con id
-    def get(self, request, id, format=None):
+    def get(self, request, id):
+        data = {}
         try:
             recurso = self.get_object(id)
             serializer = RecursoSerializer2(recurso, many=False)
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            data = serializer.data
+            return Response(data, status.HTTP_200_OK)
         except Recurso.DoesNotExist:
-            return Response({'msg': 'Error inesperado.'}, status=status.HTTP_400_BAD_REQUEST)
+            data['msg'] = 'Error inesperado.'
+            return Response(data, status.HTTP_400_BAD_REQUEST)
 
 
 ############################# Patrocinador #############################
@@ -152,19 +168,20 @@ class PatrocinadorListAPIView(APIView):
     authentication_classes = [TokenAuthentication]
 
     # Creacion de Patrocinador
-    def post(self, request, format=None):
+    def post(self, request):
         try:
             user_ser = UserSerializer(request.user)
-            if 3 in user_ser.data['groups']:
+            usuario = request.user
+            if usuario.is_admin_recursos():
                 serializer = PatrocinadorSerializer(data=request.data)
                 if serializer.is_valid():
                     serializer.save()
-                    return Response(serializer.data, status=status.HTTP_201_CREATED)
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                    return Response(serializer.data, status.HTTP_201_CREATED)
+                return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
             else:
-                return Response({'msg': 'No Autorizado.'}, status=status.HTTP_401_UNAUTHORIZED)
+                return Response({'msg': 'No Autorizado.'}, status.HTTP_401_UNAUTHORIZED)
         except:
-            return Response({'msg': 'Error inesperado.'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'msg': 'Error inesperado.'}, status.HTTP_400_BAD_REQUEST)
 
 
 class PatrocinadorDetailAPIView(APIView):
@@ -181,12 +198,13 @@ class PatrocinadorDetailAPIView(APIView):
     def get(self, request, id, format=None, *args, **kwargs):
         object = self.get_object(id)
         serializer = PatrocinadorSerializer(object, many=False)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.data, status.HTTP_200_OK)
 
     # Modificar Patrocinador con id
-    def put(self, request, id, format=None):
+    def put(self, request, id):
         user_ser = UserSerializer(request.user)
-        if 3 in user_ser.data['groups']:
+        usuario = request.user
+        if usuario.is_admin_recursos():
             try:
                 object = self.get_object(id)
                 serializer = PatrocinadorSerializer(object, data=request.data)
@@ -194,15 +212,15 @@ class PatrocinadorDetailAPIView(APIView):
                     if 'logo' in serializer.validated_data:
                         object.logo.delete()
                     serializer.save()
-                    return Response(serializer.data, status=status.HTTP_200_OK)
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                    return Response(serializer.data, status.HTTP_200_OK)
+                return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
             except Patrocinador.DoesNotExist:
-                return Response({'msg': 'Patrocinador no encontrado.'}, status=status.HTTP_404_NOT_FOUND)
+                return Response({'msg': 'Patrocinador no encontrado.'}, status.HTTP_404_NOT_FOUND)
         else:
-            return Response({'msg': 'No autorizado.'}, status=status.HTTP_401_UNAUTHORIZED)
+            return Response({'msg': 'No autorizado.'}, status.HTTP_401_UNAUTHORIZED)
 
     # Eliminar Patrocinador con id
-    def delete(self, request, id, format=None):
+    def delete(self, request, id):
         user = UserSerializer(request.user)
         if 3 in user.data['groups']:
             try:
@@ -210,22 +228,22 @@ class PatrocinadorDetailAPIView(APIView):
                 if object.logo:
                     object.logo.delete()
                 object.delete()
-                return Response({'msg': 'Patrocinador eliminado correctamente.'}, status=status.HTTP_200_OK)
+                return Response({'msg': 'Patrocinador eliminado correctamente.'}, status.HTTP_200_OK)
             except Patrocinador.DoesNotExist:
-                return Response({'msg': 'Patrocinador no encontrado.'}, status=status.HTTP_404_NOT_FOUND)
+                return Response({'msg': 'Patrocinador no encontrado.'}, status.HTTP_404_NOT_FOUND)
         else:
-            return Response({'msg': 'Usuario no autorizado para realizar esta acción.'}, status=status.HTTP_401_UNAUTHORIZED)
+            return Response({'msg': 'Usuario no autorizado para realizar esta acción.'}, status.HTTP_401_UNAUTHORIZED)
 
 
 class PatrocinadorPublicAPIView(APIView):
     # Obtener Lista de Patrocinadores
-    def get(self, request, format=None):
+    def get(self, request):
         try:
             object = Patrocinador.objects.all().order_by('id').reverse()
             serializer = PatrocinadorSerializer(object, many=True)
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response(serializer.data, status.HTTP_200_OK)
         except:
-            return Response({'msg': 'Error Inesperado.'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'msg': 'Error Inesperado.'}, status.HTTP_400_BAD_REQUEST)
 
 
 class PatrocinadorPublicDetailAPIView(APIView):
@@ -236,13 +254,13 @@ class PatrocinadorPublicDetailAPIView(APIView):
             raise Http404
 
     # Obtener Patrocinador con id
-    def get(self, request, id, format=None):
+    def get(self, request, id):
         try:
             object = self.get_object(id)
             serializer = PatrocinadorSerializer(object, many=False)
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response(serializer.data, status.HTTP_200_OK)
         except Patrocinador.DoesNotExist:
-            return Response({'msg': 'Error inesperado.'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'msg': 'Error inesperado.'}, status.HTTP_400_BAD_REQUEST)
 
 
 ############################# MiembroProyecto #############################
@@ -251,19 +269,20 @@ class MiembroProyectoListAPIView(APIView):
     authentication_classes = [TokenAuthentication]
 
     # Creacion de MiembroProyecto
-    def post(self, request, format=None):
+    def post(self, request):
         try:
             user_ser = UserSerializer(request.user)
-            if 3 in user_ser.data['groups']:
+            usuario = request.user
+            if usuario.is_admin_recursos():
                 serializer = MiembroProyectoSerializer(data=request.data)
                 if serializer.is_valid():
                     serializer.save()
-                    return Response(serializer.data, status=status.HTTP_201_CREATED)
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                    return Response(serializer.data, status.HTTP_201_CREATED)
+                return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
             else:
-                return Response({'msg': 'No Autorizado.'}, status=status.HTTP_401_UNAUTHORIZED)
+                return Response({'msg': 'No Autorizado.'}, status.HTTP_401_UNAUTHORIZED)
         except:
-            return Response({'msg': 'Error inesperado.'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'msg': 'Error inesperado.'}, status.HTTP_400_BAD_REQUEST)
 
 
 class MiembroProyectoDetailAPIView(APIView):
@@ -280,12 +299,13 @@ class MiembroProyectoDetailAPIView(APIView):
     def get(self, request, id, format=None, *args, **kwargs):
         object = self.get_object(id)
         serializer = MiembroProyectoSerializer(object, many=False)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.data, status.HTTP_200_OK)
 
     # Modificar MiembroProyecto con id
-    def put(self, request, id, format=None):
+    def put(self, request, id):
         user_ser = UserSerializer(request.user)
-        if 3 in user_ser.data['groups']:
+        usuario = request.user
+        if usuario.is_admin_recursos():
             try:
                 object = self.get_object(id)
                 serializer = MiembroProyectoSerializer(
@@ -294,15 +314,15 @@ class MiembroProyectoDetailAPIView(APIView):
                     if 'logo' in serializer.validated_data:
                         object.logo.delete()
                     serializer.save()
-                    return Response(serializer.data, status=status.HTTP_200_OK)
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                    return Response(serializer.data, status.HTTP_200_OK)
+                return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
             except MiembroProyecto.DoesNotExist:
-                return Response({'msg': 'Miembro de Proyecto no encontrado.'}, status=status.HTTP_404_NOT_FOUND)
+                return Response({'msg': 'Miembro de Proyecto no encontrado.'}, status.HTTP_404_NOT_FOUND)
         else:
-            return Response({'msg': 'No autorizado.'}, status=status.HTTP_401_UNAUTHORIZED)
+            return Response({'msg': 'No autorizado.'}, status.HTTP_401_UNAUTHORIZED)
 
     # Eliminar MiembroProyecto con id
-    def delete(self, request, id, format=None):
+    def delete(self, request, id):
         user = UserSerializer(request.user)
         if 3 in user.data['groups']:
             try:
@@ -310,22 +330,22 @@ class MiembroProyectoDetailAPIView(APIView):
                 if object.logo:
                     object.logo.delete()
                 object.delete()
-                return Response({'msg': 'Miembro de Proyecto eliminado correctamente.'}, status=status.HTTP_200_OK)
+                return Response({'msg': 'Miembro de Proyecto eliminado correctamente.'}, status.HTTP_200_OK)
             except MiembroProyecto.DoesNotExist:
-                return Response({'msg': 'Miembro de Proyecto no encontrado.'}, status=status.HTTP_404_NOT_FOUND)
+                return Response({'msg': 'Miembro de Proyecto no encontrado.'}, status.HTTP_404_NOT_FOUND)
         else:
-            return Response({'msg': 'Usuario no autorizado para realizar esta acción.'}, status=status.HTTP_401_UNAUTHORIZED)
+            return Response({'msg': 'Usuario no autorizado para realizar esta acción.'}, status.HTTP_401_UNAUTHORIZED)
 
 
 class MiembroProyectoPublicAPIView(APIView):
     # Obtener Lista de Miembros de Proyecto
-    def get(self, request, format=None):
+    def get(self, request):
         try:
             object = MiembroProyecto.objects.all().order_by('id').reverse()
             serializer = MiembroProyectoSerializer(object, many=True)
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response(serializer.data, status.HTTP_200_OK)
         except:
-            return Response({'msg': 'Error Inesperado.'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'msg': 'Error Inesperado.'}, status.HTTP_400_BAD_REQUEST)
 
 
 class MiembroProyectoPublicDetailAPIView(APIView):
@@ -336,10 +356,10 @@ class MiembroProyectoPublicDetailAPIView(APIView):
             raise Http404
 
     # Obtener Miembro de Proyecto con id
-    def get(self, request, id, format=None):
+    def get(self, request, id):
         try:
             object = self.get_object(id)
             serializer = MiembroProyectoSerializer(object, many=False)
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response(serializer.data, status.HTTP_200_OK)
         except MiembroProyecto.DoesNotExist:
-            return Response({'msg': 'Error inesperado.'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'msg': 'Error inesperado.'}, status.HTTP_400_BAD_REQUEST)
