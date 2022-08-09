@@ -250,27 +250,32 @@ class CuestionarioSerializer(ModelSerializer):
 
     def update(self, instance, validated_data):
         data_cuestionario = validated_data.pop('cuestionario_banco')
+        data_cuestionario_preguntas = validated_data.pop('cuestionario_preguntas')
         instance.nombre = validated_data.get('nombre', instance.nombre)
+        instance.fecha_asignacion = validated_data.get('fecha_asignacion', instance.fecha_asignacion)
+        instance.fecha_expiracion = validated_data.get('fecha_expiracion', instance.fecha_expiracion)
         # cuestionario create
-        if instance.cuestionario_banco == data_cuestionario:
-            cuestionario = CuestionarioBanco.objects.get(id=data_cuestionario['id'])
-        else:
+        if instance.cuestionario_banco.id != data_cuestionario['id']:
             preguntas = data_cuestionario.pop('preguntas_banco', [])
-            cuestionario = CuestionarioBanco.objects.create(**data_cuestionario)
+            cuestionario_banco = CuestionarioBanco.objects.create(**data_cuestionario)
             # pregunta del cuestionario
             for pregunta_banco in preguntas:
                 if 'id' in pregunta_banco:
                     pregunta = PreguntaBanco.objects.get(id=pregunta_banco['id'])
                 else:
                     opciones = pregunta_banco.pop('opciones', [])
-                    pregunta = PreguntaBanco.objects.create(
-                        **pregunta_banco, tipo_curso=cuestionario.tipo_curso)
+                    pregunta = PreguntaBanco.objects.create(**pregunta_banco, tipo_curso=cuestionario_banco.tipo_curso)
                     if pregunta_banco['tipo'] == 'O':
                         for opcion in opciones:
                             PreguntaOpcion.objects.create(
                                 pregunta=pregunta, **opcion)
-                cuestionario.preguntas_banco.add(pregunta)
-            instance.cuestionario_banco = cuestionario
+                cuestionario_banco.preguntas_banco.add(pregunta)
+            instance.cuestionario_banco = cuestionario_banco
+        CuestionarioPregunta.objects.filter(cuestionario=instance).delete()
+        index = 0
+        for cuest_pregunta in instance.cuestionario_banco.preguntas_banco.all():
+            CuestionarioPregunta.objects.create(**data_cuestionario_preguntas[index], cuestionario=instance, pregunta_banco=cuest_pregunta)
+            index += 1
         instance.save()
         return instance
 

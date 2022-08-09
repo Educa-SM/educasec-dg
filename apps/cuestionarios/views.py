@@ -211,13 +211,10 @@ class CuestionarioView(APIView):
 """
 Soluciones de cueestionario 
 """
-
-
 class SolucionCuestionarioView(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication]
     # ****   id = del cuestionario   ** * ***
-
     def get(self, request, id):
         try:
             usuario = request.user
@@ -259,13 +256,10 @@ class SolucionCuestionarioView(APIView):
 listar cueestionario de un alumno por su id de curso docente 
 CUESTIONARIOS QUE AUN NO RESUELVE
 """
-
-
 class ListCuestionarioAlumnoView(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication]
     # id del curso
-
     def get(self, request, id):
         try:
             curso = Curso.objects.get(id=id)
@@ -286,8 +280,6 @@ class ListCuestionarioAlumnoView(APIView):
 """
 lISTA DE CUESTIONARIOS RESUELTOS POR EL ALUMNO
 """
-
-
 class ListCuestionarioResueltosView(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication]
@@ -332,8 +324,6 @@ class CuestionarioAlumnoView(APIView):
 """
 Solucion de cuestionarios por parte del alumno
 """
-
-
 class SolucionCursoView(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication]
