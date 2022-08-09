@@ -10,10 +10,9 @@ class SituacionRespuesta(TextChoices):
 
 class TipoPregunta(TextChoices):
     OPCION_MULTIPLE = 'O', _('Domiciliado')
-    RESPUESTA_SIMPRE = 'R', _('Respuesta Simple')
+    RESPUESTA_SIMPLE = 'R', _('Respuesta Simple')
 
 
 class SituacionPregunta(TextChoices):
     CORRECTA = 'C', _('Correcta')
     INCORRECTA = 'I', _('Incorrecta')
-
