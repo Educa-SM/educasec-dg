@@ -169,8 +169,7 @@ class CuestionarioBancoSerializer(serializers.ModelSerializer):
 # cuestonario pregunta
 class CuestionarioPreguntaSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(required=False)
-    pregunta_banco_id = serializers.PrimaryKeyRelatedField(
-        queryset=PreguntaBanco.objects.all(), source='pregunta_banco', required=False)
+    pregunta_banco = PreguntaBancoSerializer(read_only=True)
     class Meta:
         model = CuestionarioPregunta
         fields = [
@@ -178,7 +177,7 @@ class CuestionarioPreguntaSerializer(serializers.ModelSerializer):
             'intentos_disponibles',
             'puntaje_asignado',
             'nombre',
-            'pregunta_banco_id',
+            'pregunta_banco',
             'creation_date'
         ]
         extra_kwargs = {
@@ -217,7 +216,7 @@ class CuestionarioSerializer(ModelSerializer):
         if 'id' in data_cuestionario:
             cuestionario_banco = CuestionarioBanco.objects.get(id=data_cuestionario['id'])
         else:
-            preguntas = data_cuestionario.pop('preguntas', [])
+            preguntas = data_cuestionario.pop('preguntas_banco', [])
             cuestionario_banco = CuestionarioBanco.objects.create(**data_cuestionario)
             # pregunta del cuestionario
             for pregunta_banco in preguntas:
@@ -230,7 +229,7 @@ class CuestionarioSerializer(ModelSerializer):
                     if pregunta_banco['tipo'] == 'O':
                         for opcion in opciones:
                             PreguntaOpcion.objects.create(
-                                pregunta=pregunta, **opcion)
+                                **opcion, pregunta_banco=pregunta)
                 cuestionario_banco.preguntas_banco.add(pregunta)
         cuestionario = Cuestionario.objects.create(cuestionario_banco=cuestionario_banco, **validated_data)
         # preguntas del cuestionario
@@ -247,7 +246,7 @@ class CuestionarioSerializer(ModelSerializer):
         if instance.cuestionario_banco == data_cuestionario:
             cuestionario = CuestionarioBanco.objects.get(id=data_cuestionario['id'])
         else:
-            preguntas = data_cuestionario.pop('preguntas', [])
+            preguntas = data_cuestionario.pop('preguntas_banco', [])
             cuestionario = CuestionarioBanco.objects.create(**data_cuestionario)
             # pregunta del cuestionario
             for pregunta_banco in preguntas:
