@@ -1,7 +1,6 @@
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from apps.seguridad.serializers import UserSerializer
 from .serializers import *
 
 class NivelesView(APIView):
@@ -15,10 +14,10 @@ class CursoListView(APIView):
     permission_classes = [IsAuthenticated]
     def post(self, request):
         serializer = CursoSerializer(data=request.data)
-        user_ser = UserSerializer(request.user)
-        if 2 in user_ser.data['groups']:
+        usuario = request.user
+        if usuario.is_docente():
             docente = Docente.objects.get(
-                nro_documento=user_ser.data['username'])
+                nro_documento=usuario.username)
             if serializer.is_valid():
                 serializer.save(docente=docente)
                 return Response(serializer.data, 201)
@@ -32,12 +31,12 @@ class CursoView(APIView):
 
     # id dela institucion
     def get(self, request, id):
-        user_ser = UserSerializer(request.user)
-        if 2 in user_ser.data['groups']:
+        usuario = request.user
+        if usuario.is_docente():
             try:
                 institucion = Institucion.objects.get(id=id)
                 docente = Docente.objects.get(
-                    nro_documento=user_ser.data['username'])
+                    nro_documento=usuario.username)
                 cursos = Curso.objects.filter(
                     docente=docente,
                     institucion=institucion,
@@ -51,12 +50,12 @@ class CursoView(APIView):
 
     # id de Curso Docente
     def delete(self, request, id):
-        user_ser = UserSerializer(request.user)
-        if 2 in user_ser.data['groups']:
+        usuario = request.user
+        if usuario.is_docente():
             try:
                 curso = Curso.objects.get(id=id)
                 docente = Docente.objects.get(
-                    nro_documento=user_ser.data['username'])
+                    nro_documento=usuario.username)
                 if curso.docente == docente:
                     curso.estate = 'I'
                     curso.save()
@@ -70,12 +69,12 @@ class CursoView(APIView):
 
     # id de Curso Docente
     def put(self, request, id):
-        user_ser = UserSerializer(request.user)
-        if 2 in user_ser.data['groups']:
+        usuario = request.user
+        if usuario.is_docente():
             try:
                 curso = Curso.objects.get(id=id)
                 docente = Docente.objects.get(
-                    nro_documento=user_ser.data['username'])
+                    nro_documento=usuario.username)
                 if curso.docente == docente:
                     serializer = CursoSerializer(
                         curso, data=request.data)
@@ -95,12 +94,12 @@ class CursoIdView(APIView):
     permission_classes = [IsAuthenticated]
     # id de Curso-> Especificado
     def get(self, request, id):
-        user_ser = UserSerializer(request.user)
-        if 2 in user_ser.data['groups']:
+        usuario = request.user
+        if usuario.is_docente():
             try:
                 curso = Curso.objects.get(id=id)
                 docente = Docente.objects.get(
-                    nro_documento=user_ser.data['username'])
+                    nro_documento=usuario.username)
                 if curso.docente == docente or curso.estate == 'A':
                     serializer = CursoSerializer(curso)
                     return Response(serializer.data, 200)
@@ -117,12 +116,12 @@ class CursoInscripcionDetailView(APIView):
     # id del Curso retorna las inscripciones
     # id del curso inscripcion del alumno
     def get(self, request, id):
-        user_ser = UserSerializer(request.user)
+        usuario = request.user
         # *** DOCENTE  -> id Curso
-        if 2 in user_ser.data['groups']:
+        if usuario.is_docente():
             try:
                 docente = Docente.objects.get(
-                    nro_documento=user_ser.data['username'])
+                    nro_documento=usuario.username)
                 curso = Curso.objects.get(id=id, docente=docente)
                 inscripciones = AlumnoInscripcionCurso.objects.filter(
                     curso=curso).order_by('id').reverse()
@@ -132,10 +131,10 @@ class CursoInscripcionDetailView(APIView):
                 # return Response({'msg':'ok'},200)
             except Alumno.DoesNotExist or Curso.DoesNotExist:
                 return Response({'msg': 'No Existe el curso'}, 404)
-        elif 4 in user_ser.data['groups']:
+        elif usuario.is_alumno():
             try:
                 alumno = Alumno.objects.get(
-                    nro_documento=user_ser.data['username'])
+                    nro_documento=usuario.username)
                 inscripciones = AlumnoInscripcionCurso.objects.filter(
                     alumno=alumno, id=id)
                 serializer = IncripcionCursoSerializer(
@@ -148,12 +147,12 @@ class CursoInscripcionDetailView(APIView):
 
     # actualizar el registro -> AlumnoInscripcionCurso : ID=> alumno Incripcion
     def put(self, request, id):
-        user_ser = UserSerializer(request.user)
-        if 2 in user_ser.data['groups']:
+        usuario = request.user
+        if usuario.is_docente():
             try:
                 inscripcion = AlumnoInscripcionCurso.objects.get(id=id)
                 docente = Docente.objects.get(
-                    nro_documento=user_ser.data['username'])
+                    nro_documento=usuario.username)
                 if inscripcion.curso.docente == docente:
                     inscripcion.estate = 'D'
                     inscripcion.save()
@@ -170,11 +169,11 @@ class CursoInscripcionView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        user_ser = UserSerializer(request.user)
-        if 4 in user_ser.data['groups']:
+        usuario = request.user
+        if usuario.is_alumno():
             try:
                 alumno = Alumno.objects.get(
-                    nro_documento=user_ser.data['username'])
+                    nro_documento=usuario.username)
                 inscripciones = AlumnoInscripcionCurso.objects.filter(
                     alumno=alumno)
                 serializer = IncripcionCursoSerializer(
@@ -186,13 +185,13 @@ class CursoInscripcionView(APIView):
             return Response({'msg': 'No autorizado'}, 401)
 
     def post(self, request):
-        user_ser = UserSerializer(request.user)
-        if 4 in user_ser.data['groups']:
+        usuario = request.user
+        if usuario.is_alumno():
             try:
                 curso = Curso.objects.get(
                     codigo_inscripcion=request.data['codigo'])
                 alumno = Alumno.objects.get(
-                    nro_documento=user_ser.data['username'])
+                    nro_documento=usuario.username)
                 if AlumnoInscripcionCurso.objects.filter(alumno=alumno,
                                                          curso=curso).exists():
                     return Response({'msg': 'Usted ya se a registrado a este curso'}, 400)

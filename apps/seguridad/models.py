@@ -59,11 +59,11 @@ class User (AbstractBaseUser, PermissionsMixin):
     def is_admin_sistema(self):
         return self.is_user_group(GroupChoices.ADMIN_SISTEMA)
 
-    def is_docente(self):
+    def is_docente(self): #2
         return self.is_user_group(GroupChoices.DOCENTE)
 
     def is_admin_recursos(self):
         return self.is_user_group(GroupChoices.ADMIN_RECURSOS)
 
-    def is_alumno(self):
+    def is_alumno(self): #4
         return self.is_user_group(GroupChoices.ALUMNO)

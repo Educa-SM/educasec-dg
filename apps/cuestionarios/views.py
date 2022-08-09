@@ -4,7 +4,6 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from apps.seguridad.serializers import UserSerializer
 from .serializers import *
 
 
@@ -59,7 +58,6 @@ class PreguntaBancoView(APIView):
 
     # id de la pregunta
     def delete(self, request, id):
-        user_ser = UserSerializer(request.user)
         usuario = request.user
         if usuario.is_docente():
             try:
@@ -96,7 +94,6 @@ class CuestionarioBancoView(APIView):
     def get(self, request, id):
         try:
             tipo_curso = TipoCurso.objects.get(id=id)
-            user_ser = UserSerializer(request.user)
             usuario = request.user
             if usuario.is_docente():
                 cuestionarios = CuestionarioBanco.objects.filter(
@@ -110,7 +107,6 @@ class CuestionarioBancoView(APIView):
 
     # id del Cuestionario
     def delete(self, request, id):
-        user_ser = UserSerializer(request.user)
         usuario = request.user
         if usuario.is_docente():
             try:
@@ -124,7 +120,6 @@ class CuestionarioBancoView(APIView):
 
     # id del Cuestionario
     def put(self, request, id):
-        user_ser = UserSerializer(request.user)
         usuario = request.user
         if usuario.is_docente():
             try:
@@ -185,7 +180,6 @@ class CuestionarioView(APIView):
 
     # Eliminar Cuestionario
     def delete(self, request, id):
-        user_ser = UserSerializer(request.user)
         usuario = request.user
         if usuario.is_docente():
             try:
@@ -199,7 +193,6 @@ class CuestionarioView(APIView):
 
     # id de Cuestionario
     def put(self, request, id):
-        user_ser = UserSerializer(request.user)
         usuario = request.user
         if usuario.is_docente():
             try:
@@ -227,16 +220,15 @@ class SolucionCuestionarioView(APIView):
 
     def get(self, request, id):
         try:
-            user_ser = UserSerializer(request.user)
+            usuario = request.user
             # alumno
-            if 4 in user_ser.data['groups']:
+            if usuario.is_alumno():
                 alumno = Alumno.objects.get(user=request.user)
                 solucion = Solucion.objects.filter(alumno=alumno, cuestionario__id=id).first()
                 serializer = SolucionSerializer(solucion)
                 return Response(serializer.data, 200)
             # docente
-            usuario = request.user
-            if usuario.is_docente():
+            elif usuario.is_docente():
                 data = Solucion.objects.filter(cuestionario__id=id).order_by('id').reverse()
                 serializer = SolucionDocenteSerializer(data, many=True)
                 return Response(serializer.data, 200)
@@ -248,7 +240,6 @@ class SolucionCuestionarioView(APIView):
     # metodo del docente -> id de la solucin
     def put(self, request, id):
         try:
-            user_ser = UserSerializer(request.user)
             usuario = request.user
             if usuario.is_docente():
                 solucion = Solucion.objects.get(id=id)
@@ -278,8 +269,8 @@ class ListCuestionarioAlumnoView(APIView):
     def get(self, request, id):
         try:
             curso = Curso.objects.get(id=id)
-            user_ser = UserSerializer(request.user)
-            if 4 in user_ser.data['groups']:
+            usuario = request.user
+            if usuario.is_alumno():
                 alumno = Alumno.objects.get(user=request.user)
                 cuestionarios = Cuestionario.objects.filter(
                     curso=curso).exclude(soluciones__alumno=alumno).order_by('id').reverse()
@@ -305,8 +296,8 @@ class ListCuestionarioResueltosView(APIView):
     def get(self, request, id):
         try:
             curso = Curso.objects.get(id=id)
-            user_ser = UserSerializer(request.user)
-            if 4 in user_ser.data['groups']:
+            usuario = request.user
+            if usuario.is_alumno():
                 alumno = Alumno.objects.get(user=request.user)
                 cuestionarios = Cuestionario.objects.filter(
                     curso=curso).filter(soluciones__alumno=alumno).order_by('id').reverse()
@@ -327,8 +318,8 @@ class CuestionarioAlumnoView(APIView):
 
     def get(self, request, id):
         try:
-            user_ser = UserSerializer(request.user)
-            if 4 in user_ser.data['groups']:
+            usuario = request.user
+            if usuario.is_alumno():
                 cuestionarios = Cuestionario.objects.get(id=id)
                 serializer = CuestionarioSerializer(cuestionarios)
                 return Response(serializer.data, 200)
@@ -349,8 +340,8 @@ class SolucionCursoView(APIView):
 
     def post(self, request):
         try:
-            user_ser = UserSerializer(request.user)
-            if 4 in user_ser.data['groups']:
+            usuario = request.user
+            if usuario.is_alumno():
                 alumno = Alumno.objects.get(user=request.user)
                 serializer = SolucionSerializer(data=request.data)
                 if serializer.is_valid():

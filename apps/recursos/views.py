@@ -5,7 +5,6 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from apps.seguridad.serializers import UserSerializer
 from .serializers import *
 
 
@@ -170,7 +169,6 @@ class PatrocinadorListAPIView(APIView):
     # Creacion de Patrocinador
     def post(self, request):
         try:
-            user_ser = UserSerializer(request.user)
             usuario = request.user
             if usuario.is_admin_recursos():
                 serializer = PatrocinadorSerializer(data=request.data)
@@ -202,7 +200,6 @@ class PatrocinadorDetailAPIView(APIView):
 
     # Modificar Patrocinador con id
     def put(self, request, id):
-        user_ser = UserSerializer(request.user)
         usuario = request.user
         if usuario.is_admin_recursos():
             try:
@@ -221,8 +218,8 @@ class PatrocinadorDetailAPIView(APIView):
 
     # Eliminar Patrocinador con id
     def delete(self, request, id):
-        user = UserSerializer(request.user)
-        if 3 in user.data['groups']:
+        usuario = request.user
+        if usuario.is_admin_sistema():
             try:
                 object = self.get_object(id)
                 if object.logo:
@@ -271,7 +268,6 @@ class MiembroProyectoListAPIView(APIView):
     # Creacion de MiembroProyecto
     def post(self, request):
         try:
-            user_ser = UserSerializer(request.user)
             usuario = request.user
             if usuario.is_admin_recursos():
                 serializer = MiembroProyectoSerializer(data=request.data)
@@ -303,7 +299,6 @@ class MiembroProyectoDetailAPIView(APIView):
 
     # Modificar MiembroProyecto con id
     def put(self, request, id):
-        user_ser = UserSerializer(request.user)
         usuario = request.user
         if usuario.is_admin_recursos():
             try:
@@ -323,8 +318,8 @@ class MiembroProyectoDetailAPIView(APIView):
 
     # Eliminar MiembroProyecto con id
     def delete(self, request, id):
-        user = UserSerializer(request.user)
-        if 3 in user.data['groups']:
+        usuario = request.user
+        if usuario.is_admin_sistema():
             try:
                 object = self.get_object(id)
                 if object.logo:
