@@ -333,11 +333,15 @@ class SolucionCursoView(APIView):
             usuario = request.user
             if usuario.is_alumno():
                 alumno = Alumno.objects.get(user=request.user)
-                serializer = SolucionSerializer(data=request.data)
-                if serializer.is_valid():
-                    serializer.save(alumno=alumno)
-                    return Response(serializer.data, 201)
-                return Response(serializer.errors, 404)
+                solucion = Solucion.objects.filter(alumno=alumno, cuestionario__id=request.data['cuestionario_id'])
+                if solucion:
+                    return Response({'msg': 'Solucion ya registrada'}, 400)
+                else:
+                    serializer = SolucionSerializer(data=request.data)
+                    if serializer.is_valid():
+                        serializer.save(alumno=alumno)
+                        return Response(serializer.data, 201)
+                    return Response(serializer.errors, 404)
             else:
                 return Response({'msg': 'No autorizado'}, 401)
         except Curso.DoesNotExist:

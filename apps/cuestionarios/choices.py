@@ -9,7 +9,7 @@ class SituacionRespuesta(TextChoices):
 
 
 class TipoPregunta(TextChoices):
-    OPCION_MULTIPLE = 'O', _('Domiciliado')
+    OPCION_MULTIPLE = 'O', _('Opcion Multiple')
     RESPUESTA_SIMPLE = 'R', _('Respuesta Simple')
 
 

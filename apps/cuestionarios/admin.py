@@ -72,7 +72,8 @@ class SolucionPreguntaResouce(ModelResource):
 
 class SolucionPreguntaAdmin(ImportExportModelAdmin, ModelAdmin):
     resources_class = SolucionPreguntaResouce
-    list_display = ('id', 'respuesta', 'intentos_tomados', 'comentario',)
+    list_display = ('id', 'comentario', 'respuesta', 'intentos_tomados', 'puntaje_obtenido',
+                    'situacion_respuesta',)
     search_fields = ['id', 'respuesta', 'comentario']
 
 

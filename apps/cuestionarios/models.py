@@ -156,7 +156,8 @@ class Solucion(BaseModel):
     )
     fecha_revision = DateTimeField(
         'Fecha Revision',
-        auto_now=True,
+        blank=True,
+        null=True,
     )
     comentario = CharField(
         'Comentario',

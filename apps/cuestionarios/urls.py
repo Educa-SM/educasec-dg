@@ -14,5 +14,5 @@ urlpatterns = [
     path('alumno/<int:id>/', ListCuestionarioAlumnoView.as_view()),
     path('alumno/<int:id>/resultado/', ListCuestionarioResueltosView.as_view()),
     path('alumno/cuestionario/<int:id>/', CuestionarioAlumnoView.as_view()),
-    path('alumno/solucion/', SolucionCuestionarioView.as_view()),
+    path('alumno/solucion/', SolucionCursoView.as_view()),
 ]
