@@ -120,6 +120,7 @@ class CursoInscripcionSerializer(serializers.ModelSerializer):
         queryset=Curso.objects.all(), source='tipo_curso')
     docente = DocenteSerializer(read_only=True)
     tipo_curso = serializers.SlugRelatedField(read_only=True, slug_field='nombre')
+    institucion = serializers.SlugRelatedField(read_only=True, slug_field='nombre')
 
     class Meta:
         model = Curso
@@ -130,11 +131,15 @@ class CursoInscripcionSerializer(serializers.ModelSerializer):
             'year',
             'codigo_inscripcion',
             'institucion_id',
+            'institucion',
             'tipo_curso_id',
             'docente',
             'tipo_curso',
             'creation_date',
         ]
+        extra_kwargs = {
+            'institucion': {'read_only': True},
+        }
 
 
 # ------------------     Inscripciones Cursos    ---------------------

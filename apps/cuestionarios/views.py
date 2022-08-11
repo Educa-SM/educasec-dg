@@ -154,7 +154,7 @@ class CuestionarioView(APIView):
             object = self.get_object(id)
             usuario = request.user
             if usuario.is_docente():
-                cuestionarios = Cuestionario.objects.filter(curso=object).order_by('id')
+                cuestionarios = Cuestionario.objects.filter(curso=object).order_by('id').reverse()
                 serializer = CuestionarioSerializer(cuestionarios, many=True)
                 return Response(serializer.data, status.HTTP_200_OK)
             else:

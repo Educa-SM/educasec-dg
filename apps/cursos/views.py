@@ -132,11 +132,14 @@ class CursoInscripcionDetailView(APIView):
             except Alumno.DoesNotExist or Curso.DoesNotExist:
                 return Response({'msg': 'No Existe el curso'}, 404)
         elif usuario.is_alumno():
+            
             try:
                 alumno = Alumno.objects.get(
                     nro_documento=usuario.username)
+                curso = Curso.objects.get(id=id)
+               
                 inscripciones = AlumnoInscripcionCurso.objects.filter(
-                    alumno=alumno, id=id)
+                    alumno=alumno, curso=curso).first()
                 serializer = IncripcionCursoSerializer(
                     inscripciones)
                 return Response(serializer.data, 200)
