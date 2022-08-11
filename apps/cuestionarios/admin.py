@@ -61,7 +61,7 @@ class SolucionResouce(ModelResource):
 class SolucionAdmin(ImportExportModelAdmin, ModelAdmin):
     resources_class = SolucionResouce
     list_display = ('id', 'alumno', 'cuestionario', 'fecha_solucion',
-                    'fecha_revision', 'fecha_solucion')
+                    'fecha_revision',)
     search_fields = ['id', 'comentario', ]
 
 
