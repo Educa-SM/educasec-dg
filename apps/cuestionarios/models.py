@@ -16,7 +16,7 @@ from educasec.utils.defs import upload_to
 class PreguntaBanco(BaseModel):
     texto = CharField(
         'Texto',
-        max_length=150,
+        max_length=500,
         blank=False, null=False,
     )
     tipo = CharField(
@@ -42,7 +42,7 @@ class PreguntaBanco(BaseModel):
 
 class PreguntaOpcion(BaseModel):
     texto = CharField(
-        max_length=250,
+        max_length=300,
         null=False,
     )
     correcta = CharField(
@@ -106,8 +106,10 @@ class Cuestionario(BaseModel):
     )
     cuestionario_banco = ForeignKey(
         CuestionarioBanco,
-        on_delete=CASCADE,
-        related_name='cuestionarios'
+        on_delete=SET_NULL,
+        related_name='cuestionarios',
+        null=True,
+        blank=True,
     )
 
     def __str__(self):
@@ -138,15 +140,16 @@ class CuestionarioPregunta(BaseModel):
     )
     pregunta_banco = ForeignKey(
         PreguntaBanco,
-        on_delete=CASCADE,
-        related_name='cuestionario_preguntas'
+        on_delete=SET_NULL,
+        related_name='cuestionario_preguntas',
+        blank=True, null=True,
     )
 
     class Meta:
         unique_together = ('pregunta_banco', 'cuestionario',)
 
     def __str__(self):
-        return self.nombre
+        return f'Pregunta Cuestionario: {self.id}'
 
 
 class Solucion(BaseModel):
