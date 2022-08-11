@@ -1,12 +1,93 @@
-from django.db.models import CharField, DateTimeField, DecimalField, ForeignKey, IntegerField, BooleanField
+from datetime import datetime as dt
+from django.db.models import (
+    CharField, ImageField, DateTimeField,
+    DecimalField, ForeignKey, IntegerField,
+    ManyToManyField
+)
 from django.db.models.deletion import CASCADE, SET_NULL
-from apps.cursos.models import Cuestionario, CuestionarioPregunta, CursoDocente, PreguntaOpcion
+from apps.cursos.models import Curso, TipoCurso
 from apps.institucion.models import Alumno
 from educasec.utils.models import BaseModel
-from .choices import SituacionRespuesta
+from .choices import SituacionPregunta, SituacionRespuesta, TipoPregunta
+from educasec.utils.defs import upload_to
 
 
-class CuestionarioCurso(BaseModel):
+# *****************   Cuestionario    *******************
+class PreguntaBanco(BaseModel):
+    texto = CharField(
+        'Texto',
+        max_length=500,
+        blank=False, null=False,
+    )
+    tipo = CharField(
+        'Tipo de Pregunta',
+        max_length=1,
+        choices=TipoPregunta.choices,
+        default=TipoPregunta.RESPUESTA_SIMPLE,
+    )
+    imagen = ImageField(
+        'Imagen',
+        upload_to=upload_to(model='pregunta_banco', path=dt.today().strftime('%Y/%m/%d')),
+        blank=True,
+        null=True,
+    )
+    tipo_curso = ForeignKey(
+        TipoCurso,
+        on_delete=CASCADE,
+    )
+
+    def __str__(self):
+        return self.texto
+
+
+class PreguntaOpcion(BaseModel):
+    texto = CharField(
+        max_length=300,
+        null=False,
+    )
+    correcta = CharField(
+        '¿Es correcta?',
+        max_length=1,
+        choices=SituacionPregunta.choices,
+        default=SituacionPregunta.INCORRECTA,
+    )
+    pregunta_banco = ForeignKey(
+        PreguntaBanco,
+        on_delete=CASCADE,
+        related_name='opciones',
+    )
+
+    def __str__(self):
+        return self.texto
+
+
+class CuestionarioBanco(BaseModel):
+    nombre = CharField(
+        'Nombre',
+        max_length=150,
+        blank=False,
+        null=False,
+    )
+    tipo_curso = ForeignKey(
+        TipoCurso,
+        on_delete=CASCADE
+    )
+    imagen = ImageField(
+        'Imagen',
+        upload_to=upload_to(
+            model='cuestionario_banco',
+            path=dt.today().strftime('%Y/%m/%d')
+        ),
+        blank=True,
+        null=True,
+    )
+    preguntas_banco = ManyToManyField(PreguntaBanco)
+
+    def __str__(self):
+        return self.nombre
+
+
+class Cuestionario(BaseModel):
     fecha_asignacion = DateTimeField(
         'Fecha de Asignacion',
     )
@@ -19,28 +100,67 @@ class CuestionarioCurso(BaseModel):
         blank=False,
         null=False,
     )
-    curso_docente = ForeignKey(
-        CursoDocente,
+    curso = ForeignKey(
+        Curso,
         on_delete=CASCADE,
     )
-    cuestionario = ForeignKey(
-        Cuestionario,
-        on_delete=CASCADE,
-        related_name='cuestionarios_curso'
+    cuestionario_banco = ForeignKey(
+        CuestionarioBanco,
+        on_delete=SET_NULL,
+        related_name='cuestionarios',
+        null=True,
+        blank=True,
     )
 
     def __str__(self):
         return self.nombre
 
 
-class SolucionCuestionario(BaseModel):
+class CuestionarioPregunta(BaseModel):
+    intentos_disponibles = IntegerField(
+        null=False,
+        default=1,
+    )
+    puntaje_asignado = DecimalField(
+        null=False,
+        max_digits=12,
+        decimal_places=2,
+        default=0.0,
+    )
+    nombre = CharField(
+        'Nombre',
+        max_length=150,
+        blank=True,
+        null=True,
+    )
+    cuestionario = ForeignKey(
+        Cuestionario,
+        on_delete=CASCADE,
+        related_name='cuestionario_preguntas',
+    )
+    pregunta_banco = ForeignKey(
+        PreguntaBanco,
+        on_delete=SET_NULL,
+        related_name='cuestionario_preguntas',
+        blank=True, null=True,
+    )
+
+    class Meta:
+        unique_together = ('pregunta_banco', 'cuestionario',)
+
+    def __str__(self):
+        return f'Pregunta Cuestionario: {self.id}'
+
+
+class Solucion(BaseModel):
     fecha_solucion = DateTimeField(
         'Fecha de Solucion',
         auto_now_add=True,
     )
     fecha_revision = DateTimeField(
         'Fecha Revision',
-        auto_now=True,
+        blank=True,
+        null=True,
     )
     comentario = CharField(
         'Comentario',
@@ -52,16 +172,17 @@ class SolucionCuestionario(BaseModel):
         Alumno,
         on_delete=CASCADE,
     )
-    cuestionario_curso = ForeignKey(
-        CuestionarioCurso,
+    cuestionario = ForeignKey(
+        Cuestionario,
         on_delete=CASCADE,
         related_name='soluciones'
     )
+
     class Meta:
-        unique_together = ('alumno', 'cuestionario_curso',)
+        unique_together = ('alumno', 'cuestionario',)
 
     def __str__(self):
-        return f'SolucionCuestionario {self.id}'
+        return f'Solucion {self.id}'
 
 
 class SolucionPregunta(BaseModel):
@@ -96,14 +217,15 @@ class SolucionPregunta(BaseModel):
         default=SituacionRespuesta.PASABLE,
     )
     solucion = ForeignKey(
-        SolucionCuestionario,
+        Solucion,
         on_delete=CASCADE,
-        related_name='soluciones'
+        related_name='soluciones_preguntas'
     )
     cuestionario_pregunta = ForeignKey(
         CuestionarioPregunta,
-        on_delete=CASCADE,
-        related_name='soluciones'
+        on_delete=SET_NULL,
+        null=True,
+        blank=True,
     )
     pregunta_opcion = ForeignKey(
         PreguntaOpcion,

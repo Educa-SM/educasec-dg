@@ -1,10 +1,10 @@
-from rest_framework import serializers
+from rest_framework.serializers import CharField, ModelSerializer, PrimaryKeyRelatedField, Serializer, SlugRelatedField
 from apps.institucion.models import Alumno, Docente, Institucion
 from .models import User
 
 
-class UserSerializer(serializers.ModelSerializer):
-    groups = serializers.SlugRelatedField(
+class UserSerializer(ModelSerializer):
+    groups = SlugRelatedField(
         many=True, read_only=True, slug_field='id'
     )
 
@@ -22,7 +22,7 @@ class UserSerializer(serializers.ModelSerializer):
         }
 
 
-class InstitucionesSerializer(serializers.ModelSerializer):
+class InstitucionesSerializer(ModelSerializer):
     class Meta:
         model = Institucion
         fields = [
@@ -31,10 +31,10 @@ class InstitucionesSerializer(serializers.ModelSerializer):
         ]
 
 
-class DocenteSerializer(serializers.ModelSerializer):
+class DocenteSerializer(ModelSerializer):
     user = UserSerializer(read_only=True)
     instituciones = InstitucionesSerializer(many=True, read_only=True)
-    instituciones_id = serializers.PrimaryKeyRelatedField(
+    instituciones_id = PrimaryKeyRelatedField(
         queryset=Institucion.objects.all(), source='instituciones', required=False,
         write_only=True, many=True
     )
@@ -50,12 +50,12 @@ class DocenteSerializer(serializers.ModelSerializer):
             'tipo_documento',
             'nro_documento',
             'instituciones',
-            'instituciones_id'
+            'instituciones_id',
         ]
         extra_kwargs = {
             'id': {'read_only': True},
             'instituciones': {'read_only': True},
-            'user': {'read_only': True}
+            'user': {'read_only': True},
         }
 
     def create(self, validated_data):
@@ -75,7 +75,7 @@ class DocenteSerializer(serializers.ModelSerializer):
         return docente
 
 
-class AlumnoSerializer(serializers.ModelSerializer):
+class AlumnoSerializer(ModelSerializer):
     user = UserSerializer()
 
     class Meta:
@@ -86,11 +86,10 @@ class AlumnoSerializer(serializers.ModelSerializer):
             'apellido_materno',
             'apellido_paterno',
             'tipo_documento',
-            'nro_documento'
+            'nro_documento',
         ]
         extra_kwargs = {
-            'id':
-            {'read_only': True}
+            'id': {'read_only': True},
         }
 
     def create(self, validated_data):
@@ -106,7 +105,7 @@ class AlumnoSerializer(serializers.ModelSerializer):
         return alumno
 
 
-class ChangePasswordSerializer(serializers.Serializer):
+class ChangePasswordSerializer(Serializer):
     model = User
-    old_password = serializers.CharField(required=True)
-    new_password = serializers.CharField(required=True)
+    old_password = CharField(required=True)
+    new_password = CharField(required=True)

@@ -6,3 +6,13 @@ class SituacionRespuesta(TextChoices):
     BUENA = 'B', _('Buena')
     PASABLE = 'P', _('Pasable')
     MALA = 'M', _('Mala')
+
+
+class TipoPregunta(TextChoices):
+    OPCION_MULTIPLE = 'O', _('Opcion Multiple')
+    RESPUESTA_SIMPLE = 'R', _('Respuesta Simple')
+
+
+class SituacionPregunta(TextChoices):
+    CORRECTA = 'C', _('Correcta')
+    INCORRECTA = 'I', _('Incorrecta')

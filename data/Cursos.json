@@ -1,1 +1,58 @@
-[{"id": 7, "creation_date": "2022-04-13 16:43:37", "update_date": "2022-04-13 16:43:37", "estate": "A", "nombre": "Ciencias Sociales", "grado": 3}, {"id": 6, "creation_date": "2022-04-13 16:43:37", "update_date": "2022-04-13 16:43:37", "estate": "A", "nombre": "Comunicacion", "grado": 4}, {"id": 5, "creation_date": "2022-04-13 16:43:37", "update_date": "2022-04-13 16:43:37", "estate": "A", "nombre": "Comunicacion", "grado": 3}, {"id": 4, "creation_date": "2022-04-13 16:43:37", "update_date": "2022-04-13 16:43:37", "estate": "A", "nombre": "Matematica", "grado": 4}, {"id": 3, "creation_date": "2022-04-13 16:43:37", "update_date": "2022-04-13 16:43:37", "estate": "A", "nombre": "Matematica", "grado": 3}, {"id": 2, "creation_date": "2022-04-13 16:43:37", "update_date": "2022-04-13 16:43:37", "estate": "A", "nombre": "Dibujo", "grado": 2}, {"id": 1, "creation_date": "2022-04-13 16:43:37", "update_date": "2022-04-13 16:43:37", "estate": "A", "nombre": "Dibujo", "grado": 1}]
+[
+    {
+        "id": 7,
+        "creation_date": "2022-04-13 16:43:37",
+        "update_date": "2022-04-13 16:43:37",
+        "estate": "A",
+        "nombre": "Ciencias Sociales",
+        "grado": 3
+    },
+    {
+        "id": 6,
+        "creation_date": "2022-04-13 16:43:37",
+        "update_date": "2022-04-13 16:43:37",
+        "estate": "A",
+        "nombre": "Comunicacion",
+        "grado": 4
+    },
+    {
+        "id": 5,
+        "creation_date": "2022-04-13 16:43:37",
+        "update_date": "2022-04-13 16:43:37",
+        "estate": "A",
+        "nombre": "Comunicacion",
+        "grado": 3
+    },
+    {
+        "id": 4,
+        "creation_date": "2022-04-13 16:43:37",
+        "update_date": "2022-04-13 16:43:37",
+        "estate": "A",
+        "nombre": "Matematica",
+        "grado": 4
+    },
+    {
+        "id": 3,
+        "creation_date": "2022-04-13 16:43:37",
+        "update_date": "2022-04-13 16:43:37",
+        "estate": "A",
+        "nombre": "Matematica",
+        "grado": 3
+    },
+    {
+        "id": 2,
+        "creation_date": "2022-04-13 16:43:37",
+        "update_date": "2022-04-13 16:43:37",
+        "estate": "A",
+        "nombre": "Dibujo",
+        "grado": 2
+    },
+    {
+        "id": 1,
+        "creation_date": "2022-04-13 16:43:37",
+        "update_date": "2022-04-13 16:43:37",
+        "estate": "A",
+        "nombre": "Dibujo",
+        "grado": 1
+    }
+]

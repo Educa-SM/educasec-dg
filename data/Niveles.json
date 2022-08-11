@@ -1,1 +1,23 @@
-[{"id": 3, "creation_date": "2022-04-13 16:42:14", "update_date": "2022-04-13 16:42:14", "estate": "A", "nombre": "Secundaria"}, {"id": 2, "creation_date": "2022-04-13 16:42:14", "update_date": "2022-04-13 16:42:14", "estate": "A", "nombre": "Primaria"}, {"id": 1, "creation_date": "2022-04-13 16:42:14", "update_date": "2022-04-13 16:42:14", "estate": "A", "nombre": "Inicial"}]
+[
+    {
+        "id": 3,
+        "creation_date": "2022-04-13 16:42:14",
+        "update_date": "2022-04-13 16:42:14",
+        "estate": "A",
+        "nombre": "Secundaria"
+    },
+    {
+        "id": 2,
+        "creation_date": "2022-04-13 16:42:14",
+        "update_date": "2022-04-13 16:42:14",
+        "estate": "A",
+        "nombre": "Primaria"
+    },
+    {
+        "id": 1,
+        "creation_date": "2022-04-13 16:42:14",
+        "update_date": "2022-04-13 16:42:14",
+        "estate": "A",
+        "nombre": "Inicial"
+    }
+]

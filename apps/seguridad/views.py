@@ -1,13 +1,15 @@
-from django.contrib.auth import logout, login
+from django.contrib.auth import logout
 from django.contrib.auth.hashers import check_password
 from django.core.exceptions import ObjectDoesNotExist
+from rest_framework import status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework import status
-from apps.seguridad.serializers import *
+from apps.institucion.models import Alumno, Docente
+from apps.seguridad.models import User
+from apps.seguridad.serializers import AlumnoSerializer, ChangePasswordSerializer, DocenteSerializer
 
 
 class RegisterDocenteView(APIView):
@@ -15,8 +17,8 @@ class RegisterDocenteView(APIView):
         serializer = DocenteSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, 201)
-        return Response(serializer.errors, 404)
+            return Response(serializer.data, status.HTTP_201_CREATED)
+        return Response(serializer.errors, status.HTTP_404_NOT_FOUND)
 
 
 class RegisterAlumnoView(APIView):
@@ -24,52 +26,75 @@ class RegisterAlumnoView(APIView):
         serializer = AlumnoSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, 201)
-        return Response(serializer.errors, 404)
+            return Response(serializer.data, status.HTTP_201_CREATED)
+        return Response(serializer.errors, status.HTTP_404_NOT_FOUND)
 
 
 class LoginView(APIView):
     def post(self, request):
-        username = request.data['username']
-        password = request.data['password']
-        try:
-            user = User.objects.get(username=username)
-        except User.DoesNotExist:
-            return Response({'msg': 'El usuario no existe'}, 404)
-        pwd_Validate = check_password(password, user.password)
-        if not pwd_Validate:
-            return Response({'msg': 'Contraseña incorrecta'}, 401)
-        token, created = Token.objects.get_or_create(user=user)
-        user_ser = UserSerializer(user)
-        data = {
-            'token': token.key,
-            'created': created,
-        }
-        if user_ser.data['groups'][0] == 1:
-            data['tipo'] = 'admin'
-        if user_ser.data['groups'][0] == 2 or user_ser.data['groups'][0] == 3:
-            data['tipo'] = 'docente'
-            docente = Docente.objects.get(nro_documento=user.username)
-            data['usuario'] = DocenteSerializer(docente).data
+        data = {}
+        username = request.data.get('username', None)
+        password = request.data.get('password', None)
 
-        if user_ser.data['groups'][0] == 4:
-            data['tipo'] = 'alumno'
-            alumno = Alumno.objects.get(nro_documento=user.username)
-            data['usuario'] = AlumnoSerializer(alumno).data
+        if username and password:
+            try:
+                user = User.objects.get(username=username)
+            except User.DoesNotExist:
+                data['msg'] = 'El usuario no existe.'
+                return Response(data, status.HTTP_404_NOT_FOUND)
 
-        return Response(data, status=201)
+            valid_password = check_password(password, user.password)
+            if not valid_password:
+                data['msg'] = 'Contraseña incorrecta.'
+                return Response(data, status.HTTP_401_UNAUTHORIZED)
+
+            token, created = Token.objects.get_or_create(user=user)
+
+            data['token'] = token.key
+            data['created'] = created
+
+            if user.is_valid_user():
+                valid_user = False
+
+                if user.is_admin_sistema():
+                    data['tipo'] = 'admin'
+                    valid_user = True
+
+                elif user.is_docente() or user.is_admin_recursos():
+                    docente = Docente.objects.filter(nro_documento=user.username).first()
+                    if docente:
+                        data['usuario'] = DocenteSerializer(docente).data
+                        data['tipo'] = 'docente'
+                        valid_user = True
+
+                elif user.is_alumno():
+                    alumno = Alumno.objects.filter(nro_documento=user.username).first()
+                    if alumno:
+                        data['usuario'] = AlumnoSerializer(alumno).data
+                        data['tipo'] = 'alumno'
+                        valid_user = True
+
+                if valid_user:
+                    return Response(data, status.HTTP_200_OK)
+
+            data['msg'] = 'Usuario invalido.'
+            return Response(data, status.HTTP_401_UNAUTHORIZED)
+        data['msg'] = 'Credenciales invalidas.'
+        return Response(data, status.HTTP_406_NOT_ACCEPTABLE)
 
 
 class LogoutView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
+        data = {}
         try:
             request.user.auth_token.delete()
         except (AttributeError, ObjectDoesNotExist):
             pass
         logout(request)
-        return Response({'msg': 'Se cerró la session'}, 200)
+        data['msg'] = 'Se cerró la session'
+        return Response(data, status.HTTP_200_OK)
 
 
 class ChangePasswordView(APIView):
@@ -77,6 +102,7 @@ class ChangePasswordView(APIView):
     authentication_classes = [TokenAuthentication]
 
     def put(self, request, *args, **kwargs):
+        data = {}
         user = self.request.user
         serializer = ChangePasswordSerializer(data=request.data)
 
@@ -84,12 +110,12 @@ class ChangePasswordView(APIView):
             if user.check_password(serializer.data.get('old_password')):
                 user.set_password(serializer.data.get('new_password'))
                 user.save()
-
-                response = {
+                data = {
                     'status': 'success',
                     'code': status.HTTP_200_OK,
-                    'message': 'Contraseña actualizada correctamente',
+                    'msg': 'Contraseña actualizada correctamente',
                 }
-                return Response(response)
-            return Response({'old_password': ['Contraseña incorrecta']}, status=status.HTTP_400_BAD_REQUEST)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                return Response(data, status.HTTP_200_OK)
+            data['old_password'] = ['Contraseña incorrecta']
+            return Response(data, status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)

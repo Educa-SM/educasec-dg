@@ -1,1 +1,26 @@
-[{"id": 3, "creation_date": "2022-04-13 17:14:35", "update_date": "2022-04-13 17:14:35", "estate": "A", "nombre": "25716445", "direccion": "Piura"}, {"id": 2, "creation_date": "2022-04-13 17:14:35", "update_date": "2022-04-13 17:14:35", "estate": "A", "nombre": "Jose Quiñones", "direccion": "Piura"}, {"id": 1, "creation_date": "2022-04-13 17:14:35", "update_date": "2022-04-13 17:14:35", "estate": "A", "nombre": "Institución San Martin de Sechura", "direccion": "Sechura - Piura"}]
+[
+    {
+        "id": 3,
+        "creation_date": "2022-04-13 17:14:35",
+        "update_date": "2022-04-13 17:14:35",
+        "estate": "A",
+        "nombre": "25716445",
+        "direccion": "Piura"
+    },
+    {
+        "id": 2,
+        "creation_date": "2022-04-13 17:14:35",
+        "update_date": "2022-04-13 17:14:35",
+        "estate": "A",
+        "nombre": "Jose Quiñones",
+        "direccion": "Piura"
+    },
+    {
+        "id": 1,
+        "creation_date": "2022-04-13 17:14:35",
+        "update_date": "2022-04-13 17:14:35",
+        "estate": "A",
+        "nombre": "Institución San Martin de Sechura",
+        "direccion": "Sechura - Piura"
+    }
+]

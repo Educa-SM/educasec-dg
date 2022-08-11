@@ -5,25 +5,63 @@ from import_export.resources import ModelResource
 from .models import *
 
 
-class CuestionarioCursoResouce(ModelResource):
+# pregunta
+class PreguntaBancoResouce(ModelResource):
     class Meta:
-        model = CuestionarioCurso
+        model = PreguntaBanco
+        fields = ('texto', 'tipo', 'tipo_curso',)
 
 
-class CuestionarioCursoAdmin(ImportExportModelAdmin, ModelAdmin):
-    resources_class = CuestionarioCursoResouce
-    list_display = ('id', 'nombre', 'cuestionario',)
+class PreguntaBancoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    search_fields = ['texto', 'tipo', 'tipo_curso', ]
+    list_display = ('texto', 'tipo', 'tipo_curso',)
+    resources_class = PreguntaBancoResouce
+
+
+class PreguntaOpcionAdmin(admin.ModelAdmin):
+    list_display = ('id', 'texto', 'pregunta_banco', 'correcta')
+
+
+# cuestionario
+class CuestionarioBancoResouce(ModelResource):
+    class Meta:
+        model = CuestionarioBanco
+        fields = ('nombre', 'tipo_curso',)
+
+
+class CuestionarioBancoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    search_fields = ['nombre', 'tipo_curso', ]
+    list_display = ('nombre', 'tipo_curso',)
+    resources_class = CuestionarioBancoResouce
+
+
+class CuestionarioResouce(ModelResource):
+    class Meta:
+        model = Cuestionario
+
+
+class CuestionarioAdmin(ImportExportModelAdmin, ModelAdmin):
+    resources_class = CuestionarioResouce
+    list_display = ('id', 'nombre', 'fecha_asignacion',
+                    'fecha_expiracion', 'cuestionario_banco', 'curso',)
     search_fields = ['id', 'nombre', ]
 
 
-class SolucionCuestionarioResouce(ModelResource):
+class CuestionarioPreguntaAdmin(admin.ModelAdmin):
+    list_display = ('id', 'pregunta_banco', 'cuestionario',
+                    'intentos_disponibles', 'puntaje_asignado',
+                    'creation_date')
+
+
+class SolucionResouce(ModelResource):
     class Meta:
-        model = SolucionCuestionario
+        model = Solucion
 
 
-class SolucionCuestionarioAdmin(ImportExportModelAdmin, ModelAdmin):
-    resources_class = SolucionCuestionarioResouce
-    list_display = ('id', 'alumno', 'cuestionario_curso','fecha_solucion','fecha_revision')
+class SolucionAdmin(ImportExportModelAdmin, ModelAdmin):
+    resources_class = SolucionResouce
+    list_display = ('id', 'alumno', 'cuestionario', 'fecha_solucion',
+                    'fecha_revision', 'fecha_solucion')
     search_fields = ['id', 'comentario', ]
 
 
@@ -34,10 +72,15 @@ class SolucionPreguntaResouce(ModelResource):
 
 class SolucionPreguntaAdmin(ImportExportModelAdmin, ModelAdmin):
     resources_class = SolucionPreguntaResouce
-    list_display = ('id', 'respuesta', 'intentos_tomados',)
-    search_fields = ['id', 'respuesta', ]
+    list_display = ('id', 'comentario', 'respuesta', 'intentos_tomados', 'puntaje_obtenido',
+                    'situacion_respuesta',)
+    search_fields = ['id', 'respuesta', 'comentario']
 
 
-admin.site.register(CuestionarioCurso, CuestionarioCursoAdmin)
-admin.site.register(SolucionCuestionario, SolucionCuestionarioAdmin)
+admin.site.register(PreguntaBanco,  PreguntaBancoAdmin)
+admin.site.register(PreguntaOpcion, PreguntaOpcionAdmin)
+admin.site.register(Cuestionario, CuestionarioAdmin)
+admin.site.register(Solucion, SolucionAdmin)
 admin.site.register(SolucionPregunta, SolucionPreguntaAdmin)
+admin.site.register(CuestionarioBanco, CuestionarioBancoAdmin)
+admin.site.register(CuestionarioPregunta, CuestionarioPreguntaAdmin)
