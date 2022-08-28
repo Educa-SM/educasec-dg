@@ -132,7 +132,7 @@ class RecursoPublicAPIView(APIView):
     def get(self, request):
         data = {}
         try:
-            recurso = Recurso.objects.all().order_by('-id')
+            recurso = Recurso.objects.all().order_by('id')
             serializer = RecursoSerializer(recurso, many=True)
             data = serializer.data
             return Response(data, status.HTTP_200_OK)
