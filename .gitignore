@@ -1,9 +1,28 @@
-*.sqlite3
-server/
-staticfiles/
+########## User ##########
+
+# VScode
+.vscode/
+
+# Jet Brains IDEs
+.idea/
+
 # Django
 **/migrations/*.py
 !**/__init__.py
+
+staticfiles/
+
+# Trash
+trash/
+
+# Ignore
+ignore/
+
+# Server files
+# server/
+# *.sh
+logs/
+
 
 # Django #
 *.log
@@ -62,7 +81,7 @@ dist/
 downloads/ 
 eggs/ 
 .eggs/ 
-lib/ 
+# lib/ 
 lib64/ 
 parts/ 
 sdist/ 

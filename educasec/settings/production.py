@@ -14,7 +14,7 @@ CSRF_TRUSTED_ORIGINS = [
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-DATABASES = db.SQLITE
+DATABASES = db.POSTGRESQL
 
 
 CORS_ORIGIN_ALLOW_ALL = False
