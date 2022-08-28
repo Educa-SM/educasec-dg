@@ -12,6 +12,8 @@
 
 staticfiles/
 
+*.sqlite3
+
 # Trash
 trash/
 
