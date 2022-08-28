@@ -1,0 +1,4820 @@
+[
+    {
+        "model": "admin.logentry",
+        "pk": 1,
+        "fields": {
+            "action_time": "2022-04-13T21:41:44.119Z",
+            "user": 1,
+            "content_type": 3,
+            "object_id": "4",
+            "object_repr": "Alumno",
+            "action_flag": 1,
+            "change_message": "new through import_export"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 2,
+        "fields": {
+            "action_time": "2022-04-13T21:41:44.120Z",
+            "user": 1,
+            "content_type": 3,
+            "object_id": "3",
+            "object_repr": "Administrador de Recursos",
+            "action_flag": 1,
+            "change_message": "new through import_export"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 3,
+        "fields": {
+            "action_time": "2022-04-13T21:41:44.121Z",
+            "user": 1,
+            "content_type": 3,
+            "object_id": "2",
+            "object_repr": "Docente",
+            "action_flag": 1,
+            "change_message": "new through import_export"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 4,
+        "fields": {
+            "action_time": "2022-04-13T21:41:44.122Z",
+            "user": 1,
+            "content_type": 3,
+            "object_id": "1",
+            "object_repr": "Administrador del sistema",
+            "action_flag": 1,
+            "change_message": "new through import_export"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 5,
+        "fields": {
+            "action_time": "2022-04-13T21:42:14.558Z",
+            "user": 1,
+            "content_type": 21,
+            "object_id": "3",
+            "object_repr": "Secundaria",
+            "action_flag": 1,
+            "change_message": "new through import_export"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 6,
+        "fields": {
+            "action_time": "2022-04-13T21:42:14.559Z",
+            "user": 1,
+            "content_type": 21,
+            "object_id": "2",
+            "object_repr": "Primaria",
+            "action_flag": 1,
+            "change_message": "new through import_export"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 7,
+        "fields": {
+            "action_time": "2022-04-13T21:42:14.560Z",
+            "user": 1,
+            "content_type": 21,
+            "object_id": "1",
+            "object_repr": "Inicial",
+            "action_flag": 1,
+            "change_message": "new through import_export"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 8,
+        "fields": {
+            "action_time": "2022-04-13T21:43:06.797Z",
+            "user": 1,
+            "content_type": 24,
+            "object_id": "13",
+            "object_repr": "Quinto Año",
+            "action_flag": 1,
+            "change_message": "new through import_export"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 9,
+        "fields": {
+            "action_time": "2022-04-13T21:43:06.798Z",
+            "user": 1,
+            "content_type": 24,
+            "object_id": "12",
+            "object_repr": "Cuarto Año",
+            "action_flag": 1,
+            "change_message": "new through import_export"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 10,
+        "fields": {
+            "action_time": "2022-04-13T21:43:06.800Z",
+            "user": 1,
+            "content_type": 24,
+            "object_id": "11",
+            "object_repr": "Tercer Año",
+            "action_flag": 1,
+            "change_message": "new through import_export"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 11,
+        "fields": {
+            "action_time": "2022-04-13T21:43:06.801Z",
+            "user": 1,
+            "content_type": 24,
+            "object_id": "10",
+            "object_repr": "Segundo Año",
+            "action_flag": 1,
+            "change_message": "new through import_export"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 12,
+        "fields": {
+            "action_time": "2022-04-13T21:43:06.802Z",
+            "user": 1,
+            "content_type": 24,
+            "object_id": "9",
+            "object_repr": "Primer Año",
+            "action_flag": 1,
+            "change_message": "new through import_export"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 13,
+        "fields": {
+            "action_time": "2022-04-13T21:43:06.803Z",
+            "user": 1,
+            "content_type": 24,
+            "object_id": "8",
+            "object_repr": "Sexto Grado",
+            "action_flag": 1,
+            "change_message": "new through import_export"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 14,
+        "fields": {
+            "action_time": "2022-04-13T21:43:06.804Z",
+            "user": 1,
+            "content_type": 24,
+            "object_id": "7",
+            "object_repr": "Quinto Grado",
+            "action_flag": 1,
+            "change_message": "new through import_export"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 15,
+        "fields": {
+            "action_time": "2022-04-13T21:43:06.805Z",
+            "user": 1,
+            "content_type": 24,
+            "object_id": "6",
+            "object_repr": "Cuarto Grado",
+            "action_flag": 1,
+            "change_message": "new through import_export"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 16,
+        "fields": {
+            "action_time": "2022-04-13T21:43:06.806Z",
+            "user": 1,
+            "content_type": 24,
+            "object_id": "5",
+            "object_repr": "Tercer grado",
+            "action_flag": 1,
+            "change_message": "new through import_export"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 17,
+        "fields": {
+            "action_time": "2022-04-13T21:43:06.808Z",
+            "user": 1,
+            "content_type": 24,
+            "object_id": "4",
+            "object_repr": "Segundo Grado",
+            "action_flag": 1,
+            "change_message": "new through import_export"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 18,
+        "fields": {
+            "action_time": "2022-04-13T21:43:06.809Z",
+            "user": 1,
+            "content_type": 24,
+            "object_id": "3",
+            "object_repr": "Primer Grado",
+            "action_flag": 1,
+            "change_message": "new through import_export"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 19,
+        "fields": {
+            "action_time": "2022-04-13T21:43:06.810Z",
+            "user": 1,
+            "content_type": 24,
+            "object_id": "2",
+            "object_repr": "5 años",
+            "action_flag": 1,
+            "change_message": "new through import_export"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 20,
+        "fields": {
+            "action_time": "2022-04-13T21:43:06.811Z",
+            "user": 1,
+            "content_type": 24,
+            "object_id": "1",
+            "object_repr": "4 años",
+            "action_flag": 1,
+            "change_message": "new through import_export"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 21,
+        "fields": {
+            "action_time": "2022-04-13T21:43:37.828Z",
+            "user": 1,
+            "content_type": 20,
+            "object_id": "7",
+            "object_repr": "Ciencias Sociales",
+            "action_flag": 1,
+            "change_message": "new through import_export"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 22,
+        "fields": {
+            "action_time": "2022-04-13T21:43:37.829Z",
+            "user": 1,
+            "content_type": 20,
+            "object_id": "6",
+            "object_repr": "Comunicacion",
+            "action_flag": 1,
+            "change_message": "new through import_export"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 23,
+        "fields": {
+            "action_time": "2022-04-13T21:43:37.830Z",
+            "user": 1,
+            "content_type": 20,
+            "object_id": "5",
+            "object_repr": "Comunicacion",
+            "action_flag": 1,
+            "change_message": "new through import_export"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 24,
+        "fields": {
+            "action_time": "2022-04-13T21:43:37.832Z",
+            "user": 1,
+            "content_type": 20,
+            "object_id": "4",
+            "object_repr": "Matematica",
+            "action_flag": 1,
+            "change_message": "new through import_export"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 25,
+        "fields": {
+            "action_time": "2022-04-13T21:43:37.833Z",
+            "user": 1,
+            "content_type": 20,
+            "object_id": "3",
+            "object_repr": "Matematica",
+            "action_flag": 1,
+            "change_message": "new through import_export"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 26,
+        "fields": {
+            "action_time": "2022-04-13T21:43:37.834Z",
+            "user": 1,
+            "content_type": 20,
+            "object_id": "2",
+            "object_repr": "Dibujo",
+            "action_flag": 1,
+            "change_message": "new through import_export"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 27,
+        "fields": {
+            "action_time": "2022-04-13T21:43:37.835Z",
+            "user": 1,
+            "content_type": 20,
+            "object_id": "1",
+            "object_repr": "Dibujo",
+            "action_flag": 1,
+            "change_message": "new through import_export"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 28,
+        "fields": {
+            "action_time": "2022-04-13T21:44:25.694Z",
+            "user": 1,
+            "content_type": 9,
+            "object_id": "3",
+            "object_repr": "15161718",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Groups\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 29,
+        "fields": {
+            "action_time": "2022-04-13T22:14:35.289Z",
+            "user": 1,
+            "content_type": 7,
+            "object_id": "3",
+            "object_repr": "25716445",
+            "action_flag": 1,
+            "change_message": "new through import_export"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 30,
+        "fields": {
+            "action_time": "2022-04-13T22:14:35.290Z",
+            "user": 1,
+            "content_type": 7,
+            "object_id": "2",
+            "object_repr": "Jose Quiñones",
+            "action_flag": 1,
+            "change_message": "new through import_export"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 31,
+        "fields": {
+            "action_time": "2022-04-13T22:14:35.291Z",
+            "user": 1,
+            "content_type": 7,
+            "object_id": "1",
+            "object_repr": "Institución San Martin de Sechura",
+            "action_flag": 1,
+            "change_message": "new through import_export"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 32,
+        "fields": {
+            "action_time": "2022-04-13T23:56:16.128Z",
+            "user": 1,
+            "content_type": 8,
+            "object_id": "1",
+            "object_repr": "Tomás LopezPardo",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Instituciones\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 33,
+        "fields": {
+            "action_time": "2022-04-14T01:00:23.117Z",
+            "user": 1,
+            "content_type": 12,
+            "object_id": "1",
+            "object_repr": "ecwecw",
+            "action_flag": 1,
+            "change_message": "[{\"added\": {}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 34,
+        "fields": {
+            "action_time": "2022-04-19T20:00:24.579Z",
+            "user": 1,
+            "content_type": 12,
+            "object_id": "53",
+            "object_repr": "dc",
+            "action_flag": 1,
+            "change_message": "[{\"added\": {}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 35,
+        "fields": {
+            "action_time": "2022-04-19T20:00:50.965Z",
+            "user": 1,
+            "content_type": 12,
+            "object_id": "53",
+            "object_repr": "dc",
+            "action_flag": 3,
+            "change_message": ""
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 36,
+        "fields": {
+            "action_time": "2022-04-19T23:12:58.732Z",
+            "user": 1,
+            "content_type": 12,
+            "object_id": "53",
+            "object_repr": "Recurso 1",
+            "action_flag": 1,
+            "change_message": "[{\"added\": {}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 37,
+        "fields": {
+            "action_time": "2022-04-19T23:13:10.863Z",
+            "user": 1,
+            "content_type": 12,
+            "object_id": "53",
+            "object_repr": "Recurso 1",
+            "action_flag": 3,
+            "change_message": ""
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 38,
+        "fields": {
+            "action_time": "2022-05-27T19:00:51.240Z",
+            "user": 1,
+            "content_type": 9,
+            "object_id": "8",
+            "object_repr": "555666666",
+            "action_flag": 3,
+            "change_message": ""
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 39,
+        "fields": {
+            "action_time": "2022-05-27T19:33:31.063Z",
+            "user": 1,
+            "content_type": 9,
+            "object_id": "11",
+            "object_repr": "11223344",
+            "action_flag": 3,
+            "change_message": ""
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 40,
+        "fields": {
+            "action_time": "2022-05-27T19:36:42.329Z",
+            "user": 1,
+            "content_type": 9,
+            "object_id": "33",
+            "object_repr": "07812335",
+            "action_flag": 3,
+            "change_message": ""
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 41,
+        "fields": {
+            "action_time": "2022-06-01T04:01:05.129Z",
+            "user": 1,
+            "content_type": 9,
+            "object_id": "4",
+            "object_repr": "75081935",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Groups\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 42,
+        "fields": {
+            "action_time": "2022-06-02T02:36:54.469Z",
+            "user": 1,
+            "content_type": 12,
+            "object_id": "54",
+            "object_repr": "aaa",
+            "action_flag": 1,
+            "change_message": "[{\"added\": {}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 43,
+        "fields": {
+            "action_time": "2022-06-02T02:36:57.800Z",
+            "user": 1,
+            "content_type": 12,
+            "object_id": "54",
+            "object_repr": "aaa",
+            "action_flag": 3,
+            "change_message": ""
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 1,
+        "fields": {
+            "name": "Can add log entry",
+            "content_type": 1,
+            "codename": "add_logentry"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 2,
+        "fields": {
+            "name": "Can change log entry",
+            "content_type": 1,
+            "codename": "change_logentry"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 3,
+        "fields": {
+            "name": "Can delete log entry",
+            "content_type": 1,
+            "codename": "delete_logentry"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 4,
+        "fields": {
+            "name": "Can view log entry",
+            "content_type": 1,
+            "codename": "view_logentry"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 5,
+        "fields": {
+            "name": "Can add permission",
+            "content_type": 2,
+            "codename": "add_permission"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 6,
+        "fields": {
+            "name": "Can change permission",
+            "content_type": 2,
+            "codename": "change_permission"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 7,
+        "fields": {
+            "name": "Can delete permission",
+            "content_type": 2,
+            "codename": "delete_permission"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 8,
+        "fields": {
+            "name": "Can view permission",
+            "content_type": 2,
+            "codename": "view_permission"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 9,
+        "fields": {
+            "name": "Can add group",
+            "content_type": 3,
+            "codename": "add_group"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 10,
+        "fields": {
+            "name": "Can change group",
+            "content_type": 3,
+            "codename": "change_group"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 11,
+        "fields": {
+            "name": "Can delete group",
+            "content_type": 3,
+            "codename": "delete_group"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 12,
+        "fields": {
+            "name": "Can view group",
+            "content_type": 3,
+            "codename": "view_group"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 13,
+        "fields": {
+            "name": "Can add content type",
+            "content_type": 4,
+            "codename": "add_contenttype"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 14,
+        "fields": {
+            "name": "Can change content type",
+            "content_type": 4,
+            "codename": "change_contenttype"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 15,
+        "fields": {
+            "name": "Can delete content type",
+            "content_type": 4,
+            "codename": "delete_contenttype"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 16,
+        "fields": {
+            "name": "Can view content type",
+            "content_type": 4,
+            "codename": "view_contenttype"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 17,
+        "fields": {
+            "name": "Can add session",
+            "content_type": 5,
+            "codename": "add_session"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 18,
+        "fields": {
+            "name": "Can change session",
+            "content_type": 5,
+            "codename": "change_session"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 19,
+        "fields": {
+            "name": "Can delete session",
+            "content_type": 5,
+            "codename": "delete_session"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 20,
+        "fields": {
+            "name": "Can view session",
+            "content_type": 5,
+            "codename": "view_session"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 21,
+        "fields": {
+            "name": "Can add alumno",
+            "content_type": 6,
+            "codename": "add_alumno"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 22,
+        "fields": {
+            "name": "Can change alumno",
+            "content_type": 6,
+            "codename": "change_alumno"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 23,
+        "fields": {
+            "name": "Can delete alumno",
+            "content_type": 6,
+            "codename": "delete_alumno"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 24,
+        "fields": {
+            "name": "Can view alumno",
+            "content_type": 6,
+            "codename": "view_alumno"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 25,
+        "fields": {
+            "name": "Can add institucion",
+            "content_type": 7,
+            "codename": "add_institucion"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 26,
+        "fields": {
+            "name": "Can change institucion",
+            "content_type": 7,
+            "codename": "change_institucion"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 27,
+        "fields": {
+            "name": "Can delete institucion",
+            "content_type": 7,
+            "codename": "delete_institucion"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 28,
+        "fields": {
+            "name": "Can view institucion",
+            "content_type": 7,
+            "codename": "view_institucion"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 29,
+        "fields": {
+            "name": "Can add docente",
+            "content_type": 8,
+            "codename": "add_docente"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 30,
+        "fields": {
+            "name": "Can change docente",
+            "content_type": 8,
+            "codename": "change_docente"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 31,
+        "fields": {
+            "name": "Can delete docente",
+            "content_type": 8,
+            "codename": "delete_docente"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 32,
+        "fields": {
+            "name": "Can view docente",
+            "content_type": 8,
+            "codename": "view_docente"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 33,
+        "fields": {
+            "name": "Can add Usuario",
+            "content_type": 9,
+            "codename": "add_user"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 34,
+        "fields": {
+            "name": "Can change Usuario",
+            "content_type": 9,
+            "codename": "change_user"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 35,
+        "fields": {
+            "name": "Can delete Usuario",
+            "content_type": 9,
+            "codename": "delete_user"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 36,
+        "fields": {
+            "name": "Can view Usuario",
+            "content_type": 9,
+            "codename": "view_user"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 37,
+        "fields": {
+            "name": "Can add juego",
+            "content_type": 10,
+            "codename": "add_juego"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 38,
+        "fields": {
+            "name": "Can change juego",
+            "content_type": 10,
+            "codename": "change_juego"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 39,
+        "fields": {
+            "name": "Can delete juego",
+            "content_type": 10,
+            "codename": "delete_juego"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 40,
+        "fields": {
+            "name": "Can view juego",
+            "content_type": 10,
+            "codename": "view_juego"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 41,
+        "fields": {
+            "name": "Can add tipo juego",
+            "content_type": 11,
+            "codename": "add_tipojuego"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 42,
+        "fields": {
+            "name": "Can change tipo juego",
+            "content_type": 11,
+            "codename": "change_tipojuego"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 43,
+        "fields": {
+            "name": "Can delete tipo juego",
+            "content_type": 11,
+            "codename": "delete_tipojuego"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 44,
+        "fields": {
+            "name": "Can view tipo juego",
+            "content_type": 11,
+            "codename": "view_tipojuego"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 45,
+        "fields": {
+            "name": "Can add recurso",
+            "content_type": 12,
+            "codename": "add_recurso"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 46,
+        "fields": {
+            "name": "Can change recurso",
+            "content_type": 12,
+            "codename": "change_recurso"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 47,
+        "fields": {
+            "name": "Can delete recurso",
+            "content_type": 12,
+            "codename": "delete_recurso"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 48,
+        "fields": {
+            "name": "Can view recurso",
+            "content_type": 12,
+            "codename": "view_recurso"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 49,
+        "fields": {
+            "name": "Can add opcion juego",
+            "content_type": 13,
+            "codename": "add_opcionjuego"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 50,
+        "fields": {
+            "name": "Can change opcion juego",
+            "content_type": 13,
+            "codename": "change_opcionjuego"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 51,
+        "fields": {
+            "name": "Can delete opcion juego",
+            "content_type": 13,
+            "codename": "delete_opcionjuego"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 52,
+        "fields": {
+            "name": "Can view opcion juego",
+            "content_type": 13,
+            "codename": "view_opcionjuego"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 53,
+        "fields": {
+            "name": "Can add cuestionario curso",
+            "content_type": 14,
+            "codename": "add_cuestionariocurso"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 54,
+        "fields": {
+            "name": "Can change cuestionario curso",
+            "content_type": 14,
+            "codename": "change_cuestionariocurso"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 55,
+        "fields": {
+            "name": "Can delete cuestionario curso",
+            "content_type": 14,
+            "codename": "delete_cuestionariocurso"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 56,
+        "fields": {
+            "name": "Can view cuestionario curso",
+            "content_type": 14,
+            "codename": "view_cuestionariocurso"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 57,
+        "fields": {
+            "name": "Can add solucion cuestionario",
+            "content_type": 15,
+            "codename": "add_solucioncuestionario"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 58,
+        "fields": {
+            "name": "Can change solucion cuestionario",
+            "content_type": 15,
+            "codename": "change_solucioncuestionario"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 59,
+        "fields": {
+            "name": "Can delete solucion cuestionario",
+            "content_type": 15,
+            "codename": "delete_solucioncuestionario"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 60,
+        "fields": {
+            "name": "Can view solucion cuestionario",
+            "content_type": 15,
+            "codename": "view_solucioncuestionario"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 61,
+        "fields": {
+            "name": "Can add solucion pregunta",
+            "content_type": 16,
+            "codename": "add_solucionpregunta"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 62,
+        "fields": {
+            "name": "Can change solucion pregunta",
+            "content_type": 16,
+            "codename": "change_solucionpregunta"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 63,
+        "fields": {
+            "name": "Can delete solucion pregunta",
+            "content_type": 16,
+            "codename": "delete_solucionpregunta"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 64,
+        "fields": {
+            "name": "Can view solucion pregunta",
+            "content_type": 16,
+            "codename": "view_solucionpregunta"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 65,
+        "fields": {
+            "name": "Can add alumno inscripcion curso",
+            "content_type": 17,
+            "codename": "add_alumnoinscripcioncurso"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 66,
+        "fields": {
+            "name": "Can change alumno inscripcion curso",
+            "content_type": 17,
+            "codename": "change_alumnoinscripcioncurso"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 67,
+        "fields": {
+            "name": "Can delete alumno inscripcion curso",
+            "content_type": 17,
+            "codename": "delete_alumnoinscripcioncurso"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 68,
+        "fields": {
+            "name": "Can view alumno inscripcion curso",
+            "content_type": 17,
+            "codename": "view_alumnoinscripcioncurso"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 69,
+        "fields": {
+            "name": "Can add cuestionario",
+            "content_type": 18,
+            "codename": "add_cuestionario"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 70,
+        "fields": {
+            "name": "Can change cuestionario",
+            "content_type": 18,
+            "codename": "change_cuestionario"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 71,
+        "fields": {
+            "name": "Can delete cuestionario",
+            "content_type": 18,
+            "codename": "delete_cuestionario"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 72,
+        "fields": {
+            "name": "Can view cuestionario",
+            "content_type": 18,
+            "codename": "view_cuestionario"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 73,
+        "fields": {
+            "name": "Can add cuestionario pregunta",
+            "content_type": 19,
+            "codename": "add_cuestionariopregunta"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 74,
+        "fields": {
+            "name": "Can change cuestionario pregunta",
+            "content_type": 19,
+            "codename": "change_cuestionariopregunta"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 75,
+        "fields": {
+            "name": "Can delete cuestionario pregunta",
+            "content_type": 19,
+            "codename": "delete_cuestionariopregunta"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 76,
+        "fields": {
+            "name": "Can view cuestionario pregunta",
+            "content_type": 19,
+            "codename": "view_cuestionariopregunta"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 77,
+        "fields": {
+            "name": "Can add curso",
+            "content_type": 20,
+            "codename": "add_curso"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 78,
+        "fields": {
+            "name": "Can change curso",
+            "content_type": 20,
+            "codename": "change_curso"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 79,
+        "fields": {
+            "name": "Can delete curso",
+            "content_type": 20,
+            "codename": "delete_curso"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 80,
+        "fields": {
+            "name": "Can view curso",
+            "content_type": 20,
+            "codename": "view_curso"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 81,
+        "fields": {
+            "name": "Can add nivel",
+            "content_type": 21,
+            "codename": "add_nivel"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 82,
+        "fields": {
+            "name": "Can change nivel",
+            "content_type": 21,
+            "codename": "change_nivel"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 83,
+        "fields": {
+            "name": "Can delete nivel",
+            "content_type": 21,
+            "codename": "delete_nivel"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 84,
+        "fields": {
+            "name": "Can view nivel",
+            "content_type": 21,
+            "codename": "view_nivel"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 85,
+        "fields": {
+            "name": "Can add pregunta",
+            "content_type": 22,
+            "codename": "add_pregunta"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 86,
+        "fields": {
+            "name": "Can change pregunta",
+            "content_type": 22,
+            "codename": "change_pregunta"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 87,
+        "fields": {
+            "name": "Can delete pregunta",
+            "content_type": 22,
+            "codename": "delete_pregunta"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 88,
+        "fields": {
+            "name": "Can view pregunta",
+            "content_type": 22,
+            "codename": "view_pregunta"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 89,
+        "fields": {
+            "name": "Can add pregunta opcion",
+            "content_type": 23,
+            "codename": "add_preguntaopcion"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 90,
+        "fields": {
+            "name": "Can change pregunta opcion",
+            "content_type": 23,
+            "codename": "change_preguntaopcion"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 91,
+        "fields": {
+            "name": "Can delete pregunta opcion",
+            "content_type": 23,
+            "codename": "delete_preguntaopcion"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 92,
+        "fields": {
+            "name": "Can view pregunta opcion",
+            "content_type": 23,
+            "codename": "view_preguntaopcion"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 93,
+        "fields": {
+            "name": "Can add grado",
+            "content_type": 24,
+            "codename": "add_grado"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 94,
+        "fields": {
+            "name": "Can change grado",
+            "content_type": 24,
+            "codename": "change_grado"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 95,
+        "fields": {
+            "name": "Can delete grado",
+            "content_type": 24,
+            "codename": "delete_grado"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 96,
+        "fields": {
+            "name": "Can view grado",
+            "content_type": 24,
+            "codename": "view_grado"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 97,
+        "fields": {
+            "name": "Can add curso docente",
+            "content_type": 25,
+            "codename": "add_cursodocente"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 98,
+        "fields": {
+            "name": "Can change curso docente",
+            "content_type": 25,
+            "codename": "change_cursodocente"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 99,
+        "fields": {
+            "name": "Can delete curso docente",
+            "content_type": 25,
+            "codename": "delete_cursodocente"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 100,
+        "fields": {
+            "name": "Can view curso docente",
+            "content_type": 25,
+            "codename": "view_cursodocente"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 101,
+        "fields": {
+            "name": "Can add Token",
+            "content_type": 26,
+            "codename": "add_token"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 102,
+        "fields": {
+            "name": "Can change Token",
+            "content_type": 26,
+            "codename": "change_token"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 103,
+        "fields": {
+            "name": "Can delete Token",
+            "content_type": 26,
+            "codename": "delete_token"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 104,
+        "fields": {
+            "name": "Can view Token",
+            "content_type": 26,
+            "codename": "view_token"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 105,
+        "fields": {
+            "name": "Can add token",
+            "content_type": 27,
+            "codename": "add_tokenproxy"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 106,
+        "fields": {
+            "name": "Can change token",
+            "content_type": 27,
+            "codename": "change_tokenproxy"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 107,
+        "fields": {
+            "name": "Can delete token",
+            "content_type": 27,
+            "codename": "delete_tokenproxy"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 108,
+        "fields": {
+            "name": "Can view token",
+            "content_type": 27,
+            "codename": "view_tokenproxy"
+        }
+    },
+    {
+        "model": "auth.group",
+        "pk": 1,
+        "fields": {
+            "name": "Administrador del sistema",
+            "permissions": [
+                1,
+                2,
+                3,
+                4,
+                9,
+                10,
+                11,
+                12,
+                5,
+                6,
+                7,
+                8,
+                13,
+                14,
+                15,
+                16,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                62,
+                63,
+                64,
+                65,
+                66,
+                67,
+                68,
+                69,
+                70,
+                71,
+                72,
+                73,
+                74,
+                75,
+                76,
+                77,
+                78,
+                79,
+                80,
+                81,
+                82,
+                83,
+                84,
+                85,
+                86,
+                87,
+                88,
+                89,
+                90,
+                91,
+                92,
+                21,
+                22,
+                23,
+                24,
+                29,
+                30,
+                31,
+                32,
+                25,
+                26,
+                27,
+                28,
+                37,
+                38,
+                39,
+                40,
+                49,
+                50,
+                51,
+                52,
+                45,
+                46,
+                47,
+                48,
+                41,
+                42,
+                43,
+                44,
+                33,
+                34,
+                35,
+                36,
+                17,
+                18,
+                19,
+                20
+            ]
+        }
+    },
+    {
+        "model": "auth.group",
+        "pk": 2,
+        "fields": {
+            "name": "Docente",
+            "permissions": []
+        }
+    },
+    {
+        "model": "auth.group",
+        "pk": 3,
+        "fields": {
+            "name": "Administrador de Recursos",
+            "permissions": []
+        }
+    },
+    {
+        "model": "auth.group",
+        "pk": 4,
+        "fields": {
+            "name": "Alumno",
+            "permissions": []
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 1,
+        "fields": {
+            "app_label": "admin",
+            "model": "logentry"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 2,
+        "fields": {
+            "app_label": "auth",
+            "model": "permission"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 3,
+        "fields": {
+            "app_label": "auth",
+            "model": "group"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 4,
+        "fields": {
+            "app_label": "contenttypes",
+            "model": "contenttype"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 5,
+        "fields": {
+            "app_label": "sessions",
+            "model": "session"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 6,
+        "fields": {
+            "app_label": "institucion",
+            "model": "alumno"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 7,
+        "fields": {
+            "app_label": "institucion",
+            "model": "institucion"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 8,
+        "fields": {
+            "app_label": "institucion",
+            "model": "docente"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 9,
+        "fields": {
+            "app_label": "seguridad",
+            "model": "user"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 10,
+        "fields": {
+            "app_label": "recursos",
+            "model": "juego"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 11,
+        "fields": {
+            "app_label": "recursos",
+            "model": "tipojuego"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 12,
+        "fields": {
+            "app_label": "recursos",
+            "model": "recurso"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 13,
+        "fields": {
+            "app_label": "recursos",
+            "model": "opcionjuego"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 14,
+        "fields": {
+            "app_label": "cuestionarios",
+            "model": "cuestionariocurso"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 15,
+        "fields": {
+            "app_label": "cuestionarios",
+            "model": "solucioncuestionario"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 16,
+        "fields": {
+            "app_label": "cuestionarios",
+            "model": "solucionpregunta"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 17,
+        "fields": {
+            "app_label": "cursos",
+            "model": "alumnoinscripcioncurso"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 18,
+        "fields": {
+            "app_label": "cursos",
+            "model": "cuestionario"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 19,
+        "fields": {
+            "app_label": "cursos",
+            "model": "cuestionariopregunta"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 20,
+        "fields": {
+            "app_label": "cursos",
+            "model": "curso"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 21,
+        "fields": {
+            "app_label": "cursos",
+            "model": "nivel"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 22,
+        "fields": {
+            "app_label": "cursos",
+            "model": "pregunta"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 23,
+        "fields": {
+            "app_label": "cursos",
+            "model": "preguntaopcion"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 24,
+        "fields": {
+            "app_label": "cursos",
+            "model": "grado"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 25,
+        "fields": {
+            "app_label": "cursos",
+            "model": "cursodocente"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 26,
+        "fields": {
+            "app_label": "authtoken",
+            "model": "token"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 27,
+        "fields": {
+            "app_label": "authtoken",
+            "model": "tokenproxy"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "0eviel03o125ai5l946z6jp41f93k95y",
+        "fields": {
+            "session_data": ".eJxVjMEOwiAQRP-FsyFuwcB69O43kGVZpGpoUtpT479Lkx40mbnMm5lNBVqXEtYmcxiTuipQp98sEr-k7iA9qT4mzVNd5jHqvaIP2vR9SvK-Hd2_g0Kt9DV6tJBk6M4mARFYBx4BL10OrM2OMfqzETbAxMziCGEw3kXMPqnPF9BFN7Q:1nene7:U40HI34EPPCELagWJncjqR4NtXL_w0aS1F6GcMnX65s",
+            "expire_date": "2022-04-28T00:47:39.019Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "20upbkdbffobczdeerso8lno4rzo03xd",
+        "fields": {
+            "session_data": ".eJxVjMEOwiAQRP-FsyFuwcB69O43kGVZpGpoUtpT479Lkx40mbnMm5lNBVqXEtYmcxiTuipQp98sEr-k7iA9qT4mzVNd5jHqvaIP2vR9SvK-Hd2_g0Kt9DV6tJBk6M4mARFYBx4BL10OrM2OMfqzETbAxMziCGEw3kXMPqnPF9BFN7Q:1nemse:AdZc8Ze6fmsCYDkpzPEAeEICrdLeUaRCAZfF1QubyD4",
+            "expire_date": "2022-04-27T23:58:36.425Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "5vlqh88773roob7wkgj29ik269h48f1g",
+        "fields": {
+            "session_data": ".eJxVjMEOwiAQRP-FsyFuwcB69O43kGVZpGpoUtpT479Lkx40mbnMm5lNBVqXEtYmcxiTuipQp98sEr-k7iA9qT4mzVNd5jHqvaIP2vR9SvK-Hd2_g0Kt9DV6tJBk6M4mARFYBx4BL10OrM2OMfqzETbAxMziCGEw3kXMPqnPF9BFN7Q:1ni35s:CcKMTLxUCQ8MMQAnZrWt210wKPEp63QLfi5YFZODPV0",
+            "expire_date": "2022-05-06T23:53:44.543Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "5xayk5r5tzq6g2jo8sf4ph4zklj17yql",
+        "fields": {
+            "session_data": ".eJxVjMEOwiAQRP-FsyFuwcB69O43kGVZpGpoUtpT479Lkx40mbnMm5lNBVqXEtYmcxiTuipQp98sEr-k7iA9qT4mzVNd5jHqvaIP2vR9SvK-Hd2_g0Kt9DV6tJBk6M4mARFYBx4BL10OrM2OMfqzETbAxMziCGEw3kXMPqnPF9BFN7Q:1ngtoO:vkPA77oyYovu--A1v4CHr8oSMaxM5YowfbBIj8LCVJw",
+            "expire_date": "2022-05-03T19:46:56.683Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "69z5ablt572aqlj1tvf0wiclestk1m3e",
+        "fields": {
+            "session_data": ".eJxVjMEOwiAQRP-FsyFuwcB69O43kGVZpGpoUtpT479Lkx40mbnMm5lNBVqXEtYmcxiTuipQp98sEr-k7iA9qT4mzVNd5jHqvaIP2vR9SvK-Hd2_g0Kt9DV6tJBk6M4mARFYBx4BL10OrM2OMfqzETbAxMziCGEw3kXMPqnPF9BFN7Q:1oGujz:K84t-UgtIvS3rf-I-D_zeQ0z1JyxKjf-m09RJEFCmgI",
+            "expire_date": "2022-08-11T04:03:15.912Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "6z5rd2wuf4bz4z6mj5c7eokhyzkijz4n",
+        "fields": {
+            "session_data": ".eJxVjMEOwiAQRP-FsyFuwcB69O43kGVZpGpoUtpT479Lkx40mbnMm5lNBVqXEtYmcxiTuipQp98sEr-k7iA9qT4mzVNd5jHqvaIP2vR9SvK-Hd2_g0Kt9DV6tJBk6M4mARFYBx4BL10OrM2OMfqzETbAxMziCGEw3kXMPqnPF9BFN7Q:1nsuhB:z5eui_x-g_U0VJkxuCbZ2H32mq0Nq58d6pwJwQbuS9M",
+            "expire_date": "2022-06-05T23:09:09.688Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "8d025pmoqw466qgx2xmnnb12oy62pmf8",
+        "fields": {
+            "session_data": ".eJxVjMEOwiAQRP-FsyFuwcB69O43kGVZpGpoUtpT479Lkx40mbnMm5lNBVqXEtYmcxiTuipQp98sEr-k7iA9qT4mzVNd5jHqvaIP2vR9SvK-Hd2_g0Kt9DV6tJBk6M4mARFYBx4BL10OrM2OMfqzETbAxMziCGEw3kXMPqnPF9BFN7Q:1nsuqO:tj74pTPXUaR1iDAR8rSaM2rVBGv_2RGMfmjo4Y85Azs",
+            "expire_date": "2022-06-05T23:18:40.442Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "n9w0rzas8bbnvys9ud4eqj1kgtwnf1dy",
+        "fields": {
+            "session_data": ".eJxVjMEOwiAQRP-FsyFuwcB69O43kGVZpGpoUtpT479Lkx40mbnMm5lNBVqXEtYmcxiTuipQp98sEr-k7iA9qT4mzVNd5jHqvaIP2vR9SvK-Hd2_g0Kt9DV6tJBk6M4mARFYBx4BL10OrM2OMfqzETbAxMziCGEw3kXMPqnPF9BFN7Q:1nqabm:bJISIkT14qZllTIsexAbnEBt4xK0EC0ajwDHgKo8Ai8",
+            "expire_date": "2022-05-30T13:17:58.866Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "o5ia3k9ozeq407u2yfv9zu6pthmhimsu",
+        "fields": {
+            "session_data": ".eJxVjMEOwiAQRP-FsyFuwcB69O43kGVZpGpoUtpT479Lkx40mbnMm5lNBVqXEtYmcxiTuipQp98sEr-k7iA9qT4mzVNd5jHqvaIP2vR9SvK-Hd2_g0Kt9DV6tJBk6M4mARFYBx4BL10OrM2OMfqzETbAxMziCGEw3kXMPqnPF9BFN7Q:1nenxF:Xuzk2yfe4XtoNLldkslNqyHXuaiGIN7k-bUPqx4xSZU",
+            "expire_date": "2022-04-28T01:07:25.145Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "rnyx0n4w5rjcii2ni7ytyi13pq2bnoly",
+        "fields": {
+            "session_data": ".eJxVjMEOwiAQRP-FsyFuwcB69O43kGVZpGpoUtpT479Lkx40mbnMm5lNBVqXEtYmcxiTuipQp98sEr-k7iA9qT4mzVNd5jHqvaIP2vR9SvK-Hd2_g0Kt9DV6tJBk6M4mARFYBx4BL10OrM2OMfqzETbAxMziCGEw3kXMPqnPF9BFN7Q:1ngvBZ:O4EXo0J1tCPEJmxqMwLMKW9Dp3yLeVw6uXn2icaXQfY",
+            "expire_date": "2022-05-03T21:14:57.017Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "vhnwlmvw58epmhty8g4gw7rbiazgbbmx",
+        "fields": {
+            "session_data": ".eJxVjMEOwiAQRP-FsyFuwcB69O43kGVZpGpoUtpT479Lkx40mbnMm5lNBVqXEtYmcxiTuipQp98sEr-k7iA9qT4mzVNd5jHqvaIP2vR9SvK-Hd2_g0Kt9DV6tJBk6M4mARFYBx4BL10OrM2OMfqzETbAxMziCGEw3kXMPqnPF9BFN7Q:1nekjc:QcJo1aPgRNSF3TbMED0tDffIHxLw5AbUhhSomcOrjCM",
+            "expire_date": "2022-04-27T21:41:08.902Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "wjoyzm7fvwxan5kj46rpalu6f76bd3hg",
+        "fields": {
+            "session_data": ".eJxVjMEOwiAQRP-FsyFuwcB69O43kGVZpGpoUtpT479Lkx40mbnMm5lNBVqXEtYmcxiTuipQp98sEr-k7iA9qT4mzVNd5jHqvaIP2vR9SvK-Hd2_g0Kt9DV6tJBk6M4mARFYBx4BL10OrM2OMfqzETbAxMziCGEw3kXMPqnPF9BFN7Q:1nen6H:P3ePrKqx1ZFJWU1TTjNmIx1YaqDbRKqPcHsD0c1hgHs",
+            "expire_date": "2022-04-28T00:12:41.166Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "wluqp9c7nldlw4opoa4hw4kqrwo7oaf9",
+        "fields": {
+            "session_data": ".eJxVjMEOwiAQRP-FsyFuwcB69O43kGVZpGpoUtpT479Lkx40mbnMm5lNBVqXEtYmcxiTuipQp98sEr-k7iA9qT4mzVNd5jHqvaIP2vR9SvK-Hd2_g0Kt9DV6tJBk6M4mARFYBx4BL10OrM2OMfqzETbAxMziCGEw3kXMPqnPF9BFN7Q:1oGnZF:Q4KQJFwzvXTfPXrNM0xXh3nPs0Xyh48pXdxtHIhrK6Q",
+            "expire_date": "2022-08-10T20:23:41.883Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "z9ucpmq2mx28qgcoiswif51omnrc3u4d",
+        "fields": {
+            "session_data": ".eJxVjMEOwiAQRP-FsyFuwcB69O43kGVZpGpoUtpT479Lkx40mbnMm5lNBVqXEtYmcxiTuipQp98sEr-k7iA9qT4mzVNd5jHqvaIP2vR9SvK-Hd2_g0Kt9DV6tJBk6M4mARFYBx4BL10OrM2OMfqzETbAxMziCGEw3kXMPqnPF9BFN7Q:1nmoLM:2hkIgA0VlAyCqqv1K0rO9O_O6KoJxF6MDnUrHgN6b78",
+            "expire_date": "2022-05-20T03:09:24.634Z"
+        }
+    },
+    {
+        "model": "institucion.institucion",
+        "pk": 1,
+        "fields": {
+            "creation_date": "2022-04-13T22:14:35.286Z",
+            "update_date": "2022-04-13T22:14:35.286Z",
+            "estate": "A",
+            "nombre": "Institución San Martin de Sechura",
+            "direccion": "Sechura - Piura"
+        }
+    },
+    {
+        "model": "institucion.institucion",
+        "pk": 2,
+        "fields": {
+            "creation_date": "2022-04-13T22:14:35.284Z",
+            "update_date": "2022-04-13T22:14:35.284Z",
+            "estate": "A",
+            "nombre": "Jose Quiñones",
+            "direccion": "Piura"
+        }
+    },
+    {
+        "model": "institucion.institucion",
+        "pk": 3,
+        "fields": {
+            "creation_date": "2022-04-13T22:14:35.282Z",
+            "update_date": "2022-04-13T22:14:35.282Z",
+            "estate": "A",
+            "nombre": "25716445",
+            "direccion": "Piura"
+        }
+    },
+    {
+        "model": "institucion.docente",
+        "pk": 1,
+        "fields": {
+            "creation_date": "2022-04-13T21:44:12.584Z",
+            "update_date": "2022-04-13T23:56:16.126Z",
+            "estate": "A",
+            "nombres": "Tomás",
+            "apellido_paterno": "Lopez",
+            "apellido_materno": "Pardo",
+            "direccion": "A.H. Talvez - VDO - PIURA",
+            "tipo_documento": "DNI",
+            "nro_documento": "15161718",
+            "user": 3,
+            "instituciones": [
+                1,
+                2,
+                3
+            ]
+        }
+    },
+    {
+        "model": "institucion.docente",
+        "pk": 3,
+        "fields": {
+            "creation_date": "2022-05-25T15:40:55.206Z",
+            "update_date": "2022-05-25T15:40:55.206Z",
+            "estate": "A",
+            "nombres": "Segundo Marco",
+            "apellido_paterno": "Olaya",
+            "apellido_materno": "Sosa",
+            "direccion": "",
+            "tipo_documento": "DNI",
+            "nro_documento": "7994103",
+            "user": 12,
+            "instituciones": [
+                1
+            ]
+        }
+    },
+    {
+        "model": "institucion.docente",
+        "pk": 4,
+        "fields": {
+            "creation_date": "2022-05-25T15:41:21.754Z",
+            "update_date": "2022-05-25T15:41:21.754Z",
+            "estate": "A",
+            "nombres": "Martin",
+            "apellido_paterno": "sosa",
+            "apellido_materno": "silva",
+            "direccion": "",
+            "tipo_documento": "DNI",
+            "nro_documento": "2863104",
+            "user": 13,
+            "instituciones": [
+                1
+            ]
+        }
+    },
+    {
+        "model": "institucion.docente",
+        "pk": 5,
+        "fields": {
+            "creation_date": "2022-05-25T15:41:23.300Z",
+            "update_date": "2022-05-25T15:41:23.300Z",
+            "estate": "A",
+            "nombres": "JORGE LUIS",
+            "apellido_paterno": "ZAPATA",
+            "apellido_materno": "SANTOS",
+            "direccion": "",
+            "tipo_documento": "DNI",
+            "nro_documento": "43356284",
+            "user": 14,
+            "instituciones": [
+                1
+            ]
+        }
+    },
+    {
+        "model": "institucion.docente",
+        "pk": 6,
+        "fields": {
+            "creation_date": "2022-05-25T15:41:32.546Z",
+            "update_date": "2022-05-25T15:41:32.546Z",
+            "estate": "A",
+            "nombres": "Olga",
+            "apellido_paterno": "Vite",
+            "apellido_materno": "Vite",
+            "direccion": "",
+            "tipo_documento": "DNI",
+            "nro_documento": "2759274",
+            "user": 15,
+            "instituciones": [
+                1
+            ]
+        }
+    },
+    {
+        "model": "institucion.docente",
+        "pk": 7,
+        "fields": {
+            "creation_date": "2022-05-25T15:42:03.228Z",
+            "update_date": "2022-05-25T15:42:03.228Z",
+            "estate": "A",
+            "nombres": "Carmen Rosalva",
+            "apellido_paterno": "Nieves",
+            "apellido_materno": "Cruz",
+            "direccion": "",
+            "tipo_documento": "DNI",
+            "nro_documento": "5643578",
+            "user": 16,
+            "instituciones": [
+                1
+            ]
+        }
+    },
+    {
+        "model": "institucion.docente",
+        "pk": 8,
+        "fields": {
+            "creation_date": "2022-05-25T15:42:18.386Z",
+            "update_date": "2022-05-25T15:42:18.386Z",
+            "estate": "A",
+            "nombres": "JESSICA DEL PILAR",
+            "apellido_paterno": "ECHE",
+            "apellido_materno": "INGA",
+            "direccion": "",
+            "tipo_documento": "DNI",
+            "nro_documento": "42328420",
+            "user": 17,
+            "instituciones": [
+                1
+            ]
+        }
+    },
+    {
+        "model": "institucion.docente",
+        "pk": 9,
+        "fields": {
+            "creation_date": "2022-05-25T15:42:24.076Z",
+            "update_date": "2022-05-25T15:42:24.076Z",
+            "estate": "A",
+            "nombres": "MARIA FELIPA",
+            "apellido_paterno": "SANTOS",
+            "apellido_materno": "CHERO",
+            "direccion": "",
+            "tipo_documento": "DNI",
+            "nro_documento": "2827775",
+            "user": 18,
+            "instituciones": [
+                1
+            ]
+        }
+    },
+    {
+        "model": "institucion.docente",
+        "pk": 10,
+        "fields": {
+            "creation_date": "2022-05-25T15:42:39.336Z",
+            "update_date": "2022-05-25T15:42:39.336Z",
+            "estate": "A",
+            "nombres": "Maria Esther",
+            "apellido_paterno": "TUME",
+            "apellido_materno": "PACHECO",
+            "direccion": "",
+            "tipo_documento": "DNI",
+            "nro_documento": "44895772",
+            "user": 19,
+            "instituciones": [
+                1
+            ]
+        }
+    },
+    {
+        "model": "institucion.docente",
+        "pk": 11,
+        "fields": {
+            "creation_date": "2022-05-25T15:43:49.188Z",
+            "update_date": "2022-05-25T15:43:49.188Z",
+            "estate": "A",
+            "nombres": "Dorys Florimer",
+            "apellido_paterno": "Urcia",
+            "apellido_materno": "Canevaro",
+            "direccion": "",
+            "tipo_documento": "DNI",
+            "nro_documento": "32919494",
+            "user": 20,
+            "instituciones": [
+                1
+            ]
+        }
+    },
+    {
+        "model": "institucion.docente",
+        "pk": 12,
+        "fields": {
+            "creation_date": "2022-05-25T15:44:39.903Z",
+            "update_date": "2022-05-25T15:44:39.903Z",
+            "estate": "A",
+            "nombres": "Manuelita Janet",
+            "apellido_paterno": "Purizaca",
+            "apellido_materno": "Quispe",
+            "direccion": "",
+            "tipo_documento": "DNI",
+            "nro_documento": "42936157",
+            "user": 21,
+            "instituciones": [
+                1
+            ]
+        }
+    },
+    {
+        "model": "institucion.docente",
+        "pk": 13,
+        "fields": {
+            "creation_date": "2022-05-25T15:45:35.819Z",
+            "update_date": "2022-05-25T15:45:35.819Z",
+            "estate": "A",
+            "nombres": "Giovana",
+            "apellido_paterno": "Rumiche",
+            "apellido_materno": "Ayala",
+            "direccion": "",
+            "tipo_documento": "DNI",
+            "nro_documento": "45007535",
+            "user": 22,
+            "instituciones": [
+                1,
+                2
+            ]
+        }
+    },
+    {
+        "model": "institucion.docente",
+        "pk": 14,
+        "fields": {
+            "creation_date": "2022-05-25T15:45:53.492Z",
+            "update_date": "2022-05-25T15:45:53.492Z",
+            "estate": "A",
+            "nombres": "Elizabeth Shirley",
+            "apellido_paterno": "Pazos",
+            "apellido_materno": "Ortiz",
+            "direccion": "",
+            "tipo_documento": "DNI",
+            "nro_documento": "2831932",
+            "user": 23,
+            "instituciones": [
+                1
+            ]
+        }
+    },
+    {
+        "model": "institucion.docente",
+        "pk": 15,
+        "fields": {
+            "creation_date": "2022-05-25T15:46:29.290Z",
+            "update_date": "2022-05-25T15:46:29.290Z",
+            "estate": "A",
+            "nombres": "Wendy Esperanza",
+            "apellido_paterno": "Eche",
+            "apellido_materno": "Pingo",
+            "direccion": "",
+            "tipo_documento": "DNI",
+            "nro_documento": "72291656",
+            "user": 24,
+            "instituciones": [
+                1
+            ]
+        }
+    },
+    {
+        "model": "institucion.docente",
+        "pk": 16,
+        "fields": {
+            "creation_date": "2022-05-25T15:46:39.784Z",
+            "update_date": "2022-05-25T15:46:39.784Z",
+            "estate": "A",
+            "nombres": "MARIA CECILIA",
+            "apellido_paterno": "LACHIRA",
+            "apellido_materno": "NAMUCHE",
+            "direccion": "",
+            "tipo_documento": "DNI",
+            "nro_documento": "40022814",
+            "user": 25,
+            "instituciones": [
+                1
+            ]
+        }
+    },
+    {
+        "model": "institucion.docente",
+        "pk": 17,
+        "fields": {
+            "creation_date": "2022-05-25T15:48:33.072Z",
+            "update_date": "2022-05-25T15:48:33.073Z",
+            "estate": "A",
+            "nombres": "KAREN LOURDES",
+            "apellido_paterno": "PASTOR",
+            "apellido_materno": "FOSSA",
+            "direccion": "",
+            "tipo_documento": "DNI",
+            "nro_documento": "2661407",
+            "user": 27,
+            "instituciones": [
+                1
+            ]
+        }
+    },
+    {
+        "model": "institucion.docente",
+        "pk": 18,
+        "fields": {
+            "creation_date": "2022-05-25T15:48:55.754Z",
+            "update_date": "2022-05-25T15:48:55.754Z",
+            "estate": "A",
+            "nombres": "Karina Janet",
+            "apellido_paterno": "Chapilliquen",
+            "apellido_materno": "Periche",
+            "direccion": "",
+            "tipo_documento": "DNI",
+            "nro_documento": "42883848",
+            "user": 28,
+            "instituciones": [
+                1
+            ]
+        }
+    },
+    {
+        "model": "institucion.docente",
+        "pk": 19,
+        "fields": {
+            "creation_date": "2022-05-25T15:58:05.645Z",
+            "update_date": "2022-05-25T15:58:05.645Z",
+            "estate": "A",
+            "nombres": "JACKELIN",
+            "apellido_paterno": "RUMICHE",
+            "apellido_materno": "AYALA",
+            "direccion": "",
+            "tipo_documento": "DNI",
+            "nro_documento": "43118157",
+            "user": 29,
+            "instituciones": [
+                1
+            ]
+        }
+    },
+    {
+        "model": "institucion.docente",
+        "pk": 20,
+        "fields": {
+            "creation_date": "2022-05-25T16:08:56.938Z",
+            "update_date": "2022-05-25T16:08:56.938Z",
+            "estate": "A",
+            "nombres": "Angelica",
+            "apellido_paterno": "Silva",
+            "apellido_materno": "Silva",
+            "direccion": "",
+            "tipo_documento": "DNI",
+            "nro_documento": "80261268",
+            "user": 30,
+            "instituciones": [
+                1
+            ]
+        }
+    },
+    {
+        "model": "institucion.docente",
+        "pk": 21,
+        "fields": {
+            "creation_date": "2022-08-01T15:42:54.226Z",
+            "update_date": "2022-08-01T15:42:54.227Z",
+            "estate": "A",
+            "nombres": "jimmy erick",
+            "apellido_paterno": "romero",
+            "apellido_materno": "valle",
+            "direccion": "",
+            "tipo_documento": "DNI",
+            "nro_documento": "46584486",
+            "user": 37,
+            "instituciones": [
+                2
+            ]
+        }
+    },
+    {
+        "model": "institucion.alumno",
+        "pk": 1,
+        "fields": {
+            "creation_date": "2022-04-13T21:44:09.064Z",
+            "update_date": "2022-04-13T21:44:09.064Z",
+            "estate": "A",
+            "nro_documento": "24913415",
+            "nombres": "Juan",
+            "apellido_paterno": "Ayala",
+            "apellido_materno": "Torres",
+            "tipo_documento": "DNI",
+            "user": 2
+        }
+    },
+    {
+        "model": "institucion.alumno",
+        "pk": 2,
+        "fields": {
+            "creation_date": "2022-04-14T01:31:24.989Z",
+            "update_date": "2022-04-14T01:31:24.989Z",
+            "estate": "A",
+            "nro_documento": "75081935",
+            "nombres": "CARLOS ENRIQUE",
+            "apellido_paterno": "SERNAQUE",
+            "apellido_materno": "CALLE",
+            "tipo_documento": "DNI",
+            "user": 4
+        }
+    },
+    {
+        "model": "institucion.alumno",
+        "pk": 3,
+        "fields": {
+            "creation_date": "2022-04-14T01:31:29.220Z",
+            "update_date": "2022-04-14T01:31:29.220Z",
+            "estate": "A",
+            "nro_documento": "76838078",
+            "nombres": "Alonso",
+            "apellido_paterno": "Cordova",
+            "apellido_materno": "Sanchez",
+            "tipo_documento": "DNI",
+            "user": 5
+        }
+    },
+    {
+        "model": "institucion.alumno",
+        "pk": 4,
+        "fields": {
+            "creation_date": "2022-04-14T01:32:07.146Z",
+            "update_date": "2022-04-14T01:32:07.146Z",
+            "estate": "A",
+            "nro_documento": "72641911",
+            "nombres": "MARIA",
+            "apellido_paterno": "DONAYRE",
+            "apellido_materno": "PACHERRE",
+            "tipo_documento": "DNI",
+            "user": 6
+        }
+    },
+    {
+        "model": "institucion.alumno",
+        "pk": 5,
+        "fields": {
+            "creation_date": "2022-05-01T21:46:58.940Z",
+            "update_date": "2022-05-01T21:46:58.940Z",
+            "estate": "A",
+            "nro_documento": "78436377",
+            "nombres": "Suemi Kristell",
+            "apellido_paterno": "Chapa",
+            "apellido_materno": "Llenque",
+            "tipo_documento": "DNI",
+            "user": 7
+        }
+    },
+    {
+        "model": "institucion.alumno",
+        "pk": 7,
+        "fields": {
+            "creation_date": "2022-05-12T22:02:48.383Z",
+            "update_date": "2022-05-12T22:02:48.383Z",
+            "estate": "A",
+            "nro_documento": "933481031",
+            "nombres": "Emily",
+            "apellido_paterno": "Rumiche",
+            "apellido_materno": "Sánchez",
+            "tipo_documento": "DNI",
+            "user": 9
+        }
+    },
+    {
+        "model": "institucion.alumno",
+        "pk": 8,
+        "fields": {
+            "creation_date": "2022-05-12T22:16:04.375Z",
+            "update_date": "2022-05-12T22:16:04.375Z",
+            "estate": "A",
+            "nro_documento": "46238888",
+            "nombres": "Lucy",
+            "apellido_paterno": "Anton",
+            "apellido_materno": "Anton",
+            "tipo_documento": "DNI",
+            "user": 10
+        }
+    },
+    {
+        "model": "institucion.alumno",
+        "pk": 9,
+        "fields": {
+            "creation_date": "2022-05-25T15:48:25.030Z",
+            "update_date": "2022-05-25T15:48:25.030Z",
+            "estate": "A",
+            "nro_documento": "41770914",
+            "nombres": "DENIS IVÁN",
+            "apellido_paterno": "IPANAQUÉ",
+            "apellido_materno": "CORTEZ",
+            "tipo_documento": "DNI",
+            "user": 26
+        }
+    },
+    {
+        "model": "institucion.alumno",
+        "pk": 10,
+        "fields": {
+            "creation_date": "2022-05-27T01:14:54.197Z",
+            "update_date": "2022-05-27T01:14:54.197Z",
+            "estate": "A",
+            "nro_documento": "62377881",
+            "nombres": "Estrella Nataniel",
+            "apellido_paterno": "Fiestas Eche",
+            "apellido_materno": "Chávez Silva",
+            "tipo_documento": "DNI",
+            "user": 31
+        }
+    },
+    {
+        "model": "institucion.alumno",
+        "pk": 11,
+        "fields": {
+            "creation_date": "2022-05-27T12:05:26.252Z",
+            "update_date": "2022-05-27T12:05:26.252Z",
+            "estate": "A",
+            "nro_documento": "60962725",
+            "nombres": "Stefany Jahayra",
+            "apellido_paterno": "Purizaca",
+            "apellido_materno": "Pazo",
+            "tipo_documento": "DNI",
+            "user": 32
+        }
+    },
+    {
+        "model": "institucion.alumno",
+        "pk": 13,
+        "fields": {
+            "creation_date": "2022-06-04T21:07:14.779Z",
+            "update_date": "2022-06-04T21:07:14.779Z",
+            "estate": "A",
+            "nro_documento": "61821567",
+            "nombres": "Katty Lucero",
+            "apellido_paterno": "Periche",
+            "apellido_materno": "Curo",
+            "tipo_documento": "DNI",
+            "user": 34
+        }
+    },
+    {
+        "model": "institucion.alumno",
+        "pk": 14,
+        "fields": {
+            "creation_date": "2022-06-28T01:54:36.854Z",
+            "update_date": "2022-06-28T01:54:36.854Z",
+            "estate": "A",
+            "nro_documento": "62806185",
+            "nombres": "Sarita",
+            "apellido_paterno": "Morales",
+            "apellido_materno": "Macalopu",
+            "tipo_documento": "DNI",
+            "user": 35
+        }
+    },
+    {
+        "model": "institucion.alumno",
+        "pk": 15,
+        "fields": {
+            "creation_date": "2022-06-30T00:47:46.951Z",
+            "update_date": "2022-06-30T00:47:46.951Z",
+            "estate": "A",
+            "nro_documento": "78392722",
+            "nombres": "Cariza Fernanda",
+            "apellido_paterno": "Quispe",
+            "apellido_materno": "Dedios",
+            "tipo_documento": "DNI",
+            "user": 36
+        }
+    },
+    {
+        "model": "institucion.alumno",
+        "pk": 16,
+        "fields": {
+            "creation_date": "2022-08-11T18:53:36.821Z",
+            "update_date": "2022-08-11T18:53:36.821Z",
+            "estate": "A",
+            "nro_documento": "79357560",
+            "nombres": "Elian Jesus",
+            "apellido_paterno": "Sullon",
+            "apellido_materno": "Ayala",
+            "tipo_documento": "DNI",
+            "user": 38
+        }
+    },
+    {
+        "model": "seguridad.user",
+        "pk": 1,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$SKiO2MlMx5YLEcLioqESzO$FTObj1n1uRvspPv2AI1ZW2mBvc6oOwBINvBpvd6iY+I=",
+            "last_login": "2022-07-28T04:03:15.910Z",
+            "is_superuser": true,
+            "username": "superuser",
+            "email": "",
+            "first_name": "",
+            "last_name": "",
+            "birth_date": "2022-04-13",
+            "is_active": true,
+            "is_staff": true,
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "seguridad.user",
+        "pk": 2,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$wdj3LJgFXFMR2cWkcBDu5d$WJUdr1F9spB9JNRFb/iscKbrylFdgKcj0ofReMy91u4=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "24913415",
+            "email": "",
+            "first_name": "",
+            "last_name": "",
+            "birth_date": "2022-04-13",
+            "is_active": true,
+            "is_staff": false,
+            "groups": [
+                4
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "seguridad.user",
+        "pk": 3,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$iFRoQLCVbm3VjprQ9x5oVn$8goFbNAmJ9g3op9YoVYMyI2uqosO8IXqYdAWleHWPlU=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "15161718",
+            "email": "",
+            "first_name": "",
+            "last_name": "",
+            "birth_date": "2022-05-23",
+            "is_active": true,
+            "is_staff": false,
+            "groups": [
+                2,
+                3
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "seguridad.user",
+        "pk": 4,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$6ruwPIsRIBNupISHQnyZuo$dZxSRoufgUzjnEkaPMpiYVEuuZbmTZLJws2nVQHDfRQ=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "75081935",
+            "email": "",
+            "first_name": "",
+            "last_name": "",
+            "birth_date": "2022-05-31",
+            "is_active": true,
+            "is_staff": false,
+            "groups": [
+                3,
+                4
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "seguridad.user",
+        "pk": 5,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$Li5QMe1qrKDm7LRXhTVXun$JJrCbdNrKdvPqQeJetpWM+2IN7V3FFXYKmXOnsIh+UE=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "76838078",
+            "email": "",
+            "first_name": "",
+            "last_name": "",
+            "birth_date": "2022-05-24",
+            "is_active": true,
+            "is_staff": false,
+            "groups": [
+                4
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "seguridad.user",
+        "pk": 6,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$Yd4qUu42n46vnSYKj8G7Gr$rRIintCYB7ncwNJcy6VECo14fB5h047T5214EIXymA8=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "72641911",
+            "email": "",
+            "first_name": "",
+            "last_name": "",
+            "birth_date": "2022-04-13",
+            "is_active": true,
+            "is_staff": false,
+            "groups": [
+                4
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "seguridad.user",
+        "pk": 7,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$l7kFutZQ3v32eRcYtheGFq$Sdi6vjd+qxO36hTZ9mPmfTnhJSIwpAO9V9I+eCpwERU=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "78436377",
+            "email": "",
+            "first_name": "",
+            "last_name": "",
+            "birth_date": "2022-05-01",
+            "is_active": true,
+            "is_staff": false,
+            "groups": [
+                4
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "seguridad.user",
+        "pk": 9,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$Wnv28HWkDNDJbOIF0HWap3$AYA9XCcQViwmWva+Luzi3I6gRkUCdiLW9SiSGemVbGU=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "933481031",
+            "email": "",
+            "first_name": "",
+            "last_name": "",
+            "birth_date": "2022-05-12",
+            "is_active": true,
+            "is_staff": false,
+            "groups": [
+                4
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "seguridad.user",
+        "pk": 10,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$LtoXjG27r48o5EvK9zdnY2$sakAuxYJL4qOKKj68x/RS2py+QB+LvT7aArcSJ1jaEg=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "46238888",
+            "email": "",
+            "first_name": "",
+            "last_name": "",
+            "birth_date": "2022-05-12",
+            "is_active": true,
+            "is_staff": false,
+            "groups": [
+                4
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "seguridad.user",
+        "pk": 12,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$JqnyK9UFlNO4R1cpYXgkqN$i/OCh6KD8AXudsGJkkOAp3d3ucbzkD6eMu+tOmgJccA=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "7994103",
+            "email": "",
+            "first_name": "",
+            "last_name": "",
+            "birth_date": "2022-05-25",
+            "is_active": true,
+            "is_staff": false,
+            "groups": [
+                2
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "seguridad.user",
+        "pk": 13,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$qbMIl0j9hIJviBU3oZpf23$UyIwDaW4uLfXaQqMUFcTqXkuJDI/gHgfKzGnRCeINPQ=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "2863104",
+            "email": "",
+            "first_name": "",
+            "last_name": "",
+            "birth_date": "2022-05-25",
+            "is_active": true,
+            "is_staff": false,
+            "groups": [
+                2
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "seguridad.user",
+        "pk": 14,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$BHRCNOo7pJXs57QZG6PQ8X$49wmcLH4anicLyuueiLL6mh1pLI4YVYFzg8jAnCIxHw=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "43356284",
+            "email": "",
+            "first_name": "",
+            "last_name": "",
+            "birth_date": "2022-05-25",
+            "is_active": true,
+            "is_staff": false,
+            "groups": [
+                2
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "seguridad.user",
+        "pk": 15,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$01EA3VHvxWqrHuRozBcQrp$ANqJkQ1dh+hEJYVsBIT/6aQOCTSZm9oYk3/z1P0ijy4=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "2759274",
+            "email": "",
+            "first_name": "",
+            "last_name": "",
+            "birth_date": "2022-05-25",
+            "is_active": true,
+            "is_staff": false,
+            "groups": [
+                2
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "seguridad.user",
+        "pk": 16,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$a0y0tvZ08eIAYKKynfVwpR$k9oU+bTe0QCoiUQN79FcqvZW0nTvQRcN8S1GdVJDrs8=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "5643578",
+            "email": "",
+            "first_name": "",
+            "last_name": "",
+            "birth_date": "2022-05-25",
+            "is_active": true,
+            "is_staff": false,
+            "groups": [
+                2
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "seguridad.user",
+        "pk": 17,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$znIa4KDM1GBgEzghMFTOVo$/nAoXDrqe2FGRZr+8z83fDa/SaQbQwYkn6HLXJqpOug=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "42328420",
+            "email": "",
+            "first_name": "",
+            "last_name": "",
+            "birth_date": "2022-05-25",
+            "is_active": true,
+            "is_staff": false,
+            "groups": [
+                2
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "seguridad.user",
+        "pk": 18,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$RBClrCIMLjrgs6ZCWn9djz$wydmqJ17y/IS/U176QveCg8JTXyYszY7vkTKXPfL02w=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "2827775",
+            "email": "",
+            "first_name": "",
+            "last_name": "",
+            "birth_date": "2022-05-25",
+            "is_active": true,
+            "is_staff": false,
+            "groups": [
+                2
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "seguridad.user",
+        "pk": 19,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$PDdUY0MNfQcv1sd9te1a2W$LXpOhiWE/jdYmlF0u232WUPZhRxHLPAecrphc1AIdD0=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "44895772",
+            "email": "",
+            "first_name": "",
+            "last_name": "",
+            "birth_date": "2022-05-25",
+            "is_active": true,
+            "is_staff": false,
+            "groups": [
+                2
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "seguridad.user",
+        "pk": 20,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$1bawfsuTqI8P7InrQgnuUt$ETLNMi1aR1GUdMDq28c1vGnlFMuuj/HQGcRnxIPdl6w=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "32919494",
+            "email": "",
+            "first_name": "",
+            "last_name": "",
+            "birth_date": "2022-05-25",
+            "is_active": true,
+            "is_staff": false,
+            "groups": [
+                2
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "seguridad.user",
+        "pk": 21,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$G5PUGNQUaSUZwjQsjxNudx$wOfL5z1h6YaOZZTZhRLFNa3yqFRiYIaHKeZYpblwgHA=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "42936157",
+            "email": "",
+            "first_name": "",
+            "last_name": "",
+            "birth_date": "2022-05-25",
+            "is_active": true,
+            "is_staff": false,
+            "groups": [
+                2
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "seguridad.user",
+        "pk": 22,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$74VhheaBv0ikrGvMKavdpQ$LTpZW2/XDIdPcHIRBlxUags3M91Mbo5MYWS4e13krxo=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "45007535",
+            "email": "",
+            "first_name": "",
+            "last_name": "",
+            "birth_date": "2022-05-25",
+            "is_active": true,
+            "is_staff": false,
+            "groups": [
+                2
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "seguridad.user",
+        "pk": 23,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$jhC4wV8eLtWvglMaG0lC7B$r5ziRjduJ1uKLYnmd0Sbc4YFpfroIN91FdEj4M6NiS4=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "2831932",
+            "email": "",
+            "first_name": "",
+            "last_name": "",
+            "birth_date": "2022-05-25",
+            "is_active": true,
+            "is_staff": false,
+            "groups": [
+                2
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "seguridad.user",
+        "pk": 24,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$L0ADoPDGEeOLvMfxTbXQMP$zgNkfQroZgz4nzPLiJjc7+5c4827Ksr82NZnYogSNHI=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "72291656",
+            "email": "",
+            "first_name": "",
+            "last_name": "",
+            "birth_date": "2022-05-25",
+            "is_active": true,
+            "is_staff": false,
+            "groups": [
+                2
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "seguridad.user",
+        "pk": 25,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$pm3Nogsi6DTExFwzApyEti$Dvt2vDMl7sX94xZvZ5fcH0mtNS+NyxNl1298MKo+PVQ=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "40022814",
+            "email": "",
+            "first_name": "",
+            "last_name": "",
+            "birth_date": "2022-05-25",
+            "is_active": true,
+            "is_staff": false,
+            "groups": [
+                2
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "seguridad.user",
+        "pk": 26,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$U2AHfvwa5Z7z1IYcsQ8VUS$tJLFUAZlN+p3ESWgJlVDYelgucoSIkIkdyqJkEiKUho=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "41770914",
+            "email": "",
+            "first_name": "",
+            "last_name": "",
+            "birth_date": "2022-05-25",
+            "is_active": true,
+            "is_staff": false,
+            "groups": [
+                4
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "seguridad.user",
+        "pk": 27,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$DntSWFJQoREOy5Fo8HV1t3$lMypgF+XXiea7Gn+7gYmEHsO0AbaMnMeGCBPzv6kCU0=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "2661407",
+            "email": "",
+            "first_name": "",
+            "last_name": "",
+            "birth_date": "2022-05-25",
+            "is_active": true,
+            "is_staff": false,
+            "groups": [
+                2
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "seguridad.user",
+        "pk": 28,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$wTT18I6ZefSnycVXvrAdtb$w4UkYHaURdg2LeDBFtyBMTSIpYoYmlsckv9+BhAsu3E=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "42883848",
+            "email": "",
+            "first_name": "",
+            "last_name": "",
+            "birth_date": "2022-05-25",
+            "is_active": true,
+            "is_staff": false,
+            "groups": [
+                2
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "seguridad.user",
+        "pk": 29,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$7I0aotJARs1xWcOfzBn2G8$LT0a+/dqgqP4iQCOn9tKPBH78gWYa5eKnoInsJn5bNQ=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "43118157",
+            "email": "",
+            "first_name": "",
+            "last_name": "",
+            "birth_date": "2022-05-25",
+            "is_active": true,
+            "is_staff": false,
+            "groups": [
+                2
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "seguridad.user",
+        "pk": 30,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$FRxiuNvcxRz17FI5qFvO2R$iiNBqu/MA2hGvisQMiJjaii4Eu6amT2iQFGNCJWUI7M=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "80261268",
+            "email": "",
+            "first_name": "",
+            "last_name": "",
+            "birth_date": "2022-05-25",
+            "is_active": true,
+            "is_staff": false,
+            "groups": [
+                2
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "seguridad.user",
+        "pk": 31,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$jZUiqBJ8WfhkIUwTtas3wc$YYxCcBtccqKl1lSPxjLyOzYeVNpCe3syYBGNEItLsp0=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "62377881",
+            "email": "",
+            "first_name": "",
+            "last_name": "",
+            "birth_date": "2022-05-26",
+            "is_active": true,
+            "is_staff": false,
+            "groups": [
+                4
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "seguridad.user",
+        "pk": 32,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$5YgCL81c7WhHqamgIIxvt9$R9VP7IgDdvUR6jEz0iOG98jxNYBzcz0xSC3VxvLDsRE=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "60962725",
+            "email": "",
+            "first_name": "",
+            "last_name": "",
+            "birth_date": "2022-05-27",
+            "is_active": true,
+            "is_staff": false,
+            "groups": [
+                4
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "seguridad.user",
+        "pk": 34,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$JMFUJss639j6U3UCVInklo$/eH2ppuSYmZOuyNNoVriN/5rPfR5XiPfi/Km32mXDZw=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "61821567",
+            "email": "",
+            "first_name": "",
+            "last_name": "",
+            "birth_date": "2022-06-04",
+            "is_active": true,
+            "is_staff": false,
+            "groups": [
+                4
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "seguridad.user",
+        "pk": 35,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$hU6dhMB1YU3oG5CRvAlJ1Z$JWcYBanWpyCY4SoKHqitRZysxoeAtoavD3zj6bTllVc=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "62806185",
+            "email": "",
+            "first_name": "",
+            "last_name": "",
+            "birth_date": "2022-06-27",
+            "is_active": true,
+            "is_staff": false,
+            "groups": [
+                4
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "seguridad.user",
+        "pk": 36,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$UHWGLJXhlwJiWo7EXY6eBn$fR5LNaKzsrLL00vOYv1GWpfKToR4JiBHIRvvqxTy244=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "78392722",
+            "email": "",
+            "first_name": "",
+            "last_name": "",
+            "birth_date": "2022-06-29",
+            "is_active": true,
+            "is_staff": false,
+            "groups": [
+                4
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "seguridad.user",
+        "pk": 37,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$18i4VooCFKsVTxoz7pejwE$bbwaGa9r/WclDPyvqVyI939nyg3Xtq3CnCRFoYSMo4Y=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "46584486",
+            "email": "",
+            "first_name": "",
+            "last_name": "",
+            "birth_date": "2022-08-01",
+            "is_active": true,
+            "is_staff": false,
+            "groups": [
+                2
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "seguridad.user",
+        "pk": 38,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$z8N0vXc2TOj5t1lcM8Gnk5$Z5+PRxeQ386grUOQ97+t0RYzmGusZEtJeAlzeKGajbA=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "79357560",
+            "email": "",
+            "first_name": "",
+            "last_name": "",
+            "birth_date": "2022-08-11",
+            "is_active": true,
+            "is_staff": false,
+            "groups": [
+                4
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 19,
+        "fields": {
+            "creation_date": "2022-04-14T20:38:14.479Z",
+            "update_date": "2022-04-14T20:38:14.479Z",
+            "estate": "A",
+            "titulo": "¿Por qué son importantes las vacunas?",
+            "descripcion": "Radioteatro para reflexionar en familia sobre la importancia de las vacunas. \r\nEstudiante: Adrián David Zapata Zarpán\r\nGrado: Tercer Grado de Primaria\r\nAño: 2022",
+            "contenido": null,
+            "tipo": "P",
+            "institucion": 1,
+            "original_filename": "recurso/2022/04/13/d234f7f4887f487eb1b512327f8d5ee0.mp3",
+            "miniatura": "recurso/2022/04/13/fbe1e8e4f8f3442192fa0c8640f2b5b9.png"
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 20,
+        "fields": {
+            "creation_date": "2022-04-14T20:44:13.391Z",
+            "update_date": "2022-04-14T20:44:13.391Z",
+            "estate": "A",
+            "titulo": "¿Por qué no debemos consumir bebidas azucaradas?",
+            "descripcion": "\"Radioteatro para reflexionar\" ¿Por qué es importante no tomar bebidas azucaradas? \r\nEl Ministerio de Salud recomienda reducir el consumo de bebidas azucaradas que aportan grandes cantidades de calorías vacías al organismo, ya que pueden producir importantes consecuencias en la salud como la obesidad, la diabetes y otras enfermedades.\r\n Acompáñennos a escuchar este radioteatro y reflexionemos juntos en familia. \r\nFamilia Alarico Amaya IIE San Martín-Sechura",
+            "contenido": null,
+            "tipo": "P",
+            "institucion": 1,
+            "original_filename": "recurso/2022/04/13/33c871312f054d25be103449ae53cf52.mpeg",
+            "miniatura": "recurso/2022/04/13/048b911615da408bbc2fb7de0443aee0.jpeg"
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 21,
+        "fields": {
+            "creation_date": "2022-04-14T20:46:15.328Z",
+            "update_date": "2022-04-14T20:46:15.328Z",
+            "estate": "A",
+            "titulo": "¿Qué debemos hacer frente a un fenómeno natural?",
+            "descripcion": "\"Radioteatro para reflexionar juntos en familia\" \r\nEste radioteatro describe cómo actúa una familia frente a un sismo. ¿Y tú cómo actúas frente a un fenómeno natural? \r\nIEE San Martín - Sechura \r\nParticipación: Familia Vargas Flores\r\nGrado: 2do Grado de Primaria.\r\nAño: 2021",
+            "contenido": null,
+            "tipo": "P",
+            "institucion": 1,
+            "original_filename": "recurso/2022/04/13/90523224581f4fc983e0739084645b6d.mpeg",
+            "miniatura": "recurso/2022/04/13/93370fecf9424069ae51f7fab24250b9.jpeg"
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 23,
+        "fields": {
+            "creation_date": "2022-04-14T21:02:29.668Z",
+            "update_date": "2022-04-14T21:02:29.668Z",
+            "estate": "A",
+            "titulo": "SOMOS CIUDADANOS DEL BICENTENARIO",
+            "descripcion": "A través de este cortometraje se manifiesta la problemática social de nuestro país y el reto que tenemos cada uno de nosotros para transformar una sociedad mejor ya que de esa forma actuando con libertad pero respetando los derechos de los demás seremos ciudadanos del Bicentenario. \r\nEstudiante: Lázaro Amaya Galán IEE San Martín - Sechura",
+            "contenido": "https://youtu.be/nrDUz8zScg8",
+            "tipo": "R",
+            "institucion": 1,
+            "original_filename": "",
+            "miniatura": "recurso/2022/04/13/a1c97ab743344440ae7f362a52fc9a71.jpeg"
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 24,
+        "fields": {
+            "creation_date": "2022-04-14T21:03:49.199Z",
+            "update_date": "2022-04-14T21:03:49.199Z",
+            "estate": "A",
+            "titulo": "PERÚ, SÍ SE PUEDE",
+            "descripcion": "En el Perú de hoy, tenemos muchos retos para forjar una mejor sociedad. “IMAGINAR PARA TRANSFORMAR, EL PAÍS QUE QUEREMOS CONSTRUIR“, nos permite ser partícipes activos de los cambios y permanencias de nuestro país. \r\nCada día es una oportunidad para levantarse y decir: Perú, ¡sí, se puede! …\r\nEstudiante: Brayan Purizaca Fiestas - IEE San Martín",
+            "contenido": "https://youtu.be/8MXz7Z8sJng",
+            "tipo": "R",
+            "institucion": 1,
+            "original_filename": "",
+            "miniatura": "recurso/2022/04/13/88c0aa7a68484b20b7137a38fee0ffc7.jpeg"
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 29,
+        "fields": {
+            "creation_date": "2022-04-14T21:21:55.424Z",
+            "update_date": "2022-04-14T21:21:55.424Z",
+            "estate": "A",
+            "titulo": "¿Por qué no debemos consumir bebidas azucaradas?",
+            "descripcion": "\"Radioteatro para reflexionar\" \r\n¿Por qué es importante no tomar bebidas azucaradas?\r\nParticipantes: \r\nFamilia Antón Cumpa\r\nTercer Grado de Primaria\r\nAño 2021",
+            "contenido": null,
+            "tipo": "P",
+            "institucion": 1,
+            "original_filename": "recurso/2022/04/13/aec0cb96cdf74477a78eb4934369a965.mpeg",
+            "miniatura": "recurso/2022/04/13/5ac58777fa244f0abcba4e27a3037c55.jpeg"
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 31,
+        "fields": {
+            "creation_date": "2022-04-17T18:43:24.054Z",
+            "update_date": "2022-04-17T18:43:24.054Z",
+            "estate": "A",
+            "titulo": "Números del 1 al 5",
+            "descripcion": "Ficha interactiva ideal para estudiantes del nivel inicial.",
+            "contenido": "https://www.topworksheets.com/embed/números-del-1-al-5-61e25398bad20?language=es",
+            "tipo": "F",
+            "institucion": 1,
+            "original_filename": "",
+            "miniatura": "recurso/2022/04/13/3d90b5bea68f4a709cbeee209c626b74.png"
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 32,
+        "fields": {
+            "creation_date": "2022-04-17T18:45:11.780Z",
+            "update_date": "2022-04-17T18:45:11.780Z",
+            "estate": "A",
+            "titulo": "OBSERVO LEO Y ESCRIBO",
+            "descripcion": "Ficha de comprensión lectora. Edad: 5 - 7 años.",
+            "contenido": "https://www.topworksheets.com/embed/observo-leo-y-escribo-61e1afe84c3cd?language=es",
+            "tipo": "F",
+            "institucion": 1,
+            "original_filename": "",
+            "miniatura": "recurso/2022/04/13/4e7f21a4a0ea46388d8e88cbfacf726a.jpg"
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 33,
+        "fields": {
+            "creation_date": "2022-04-17T18:48:26.799Z",
+            "update_date": "2022-04-17T18:48:26.799Z",
+            "estate": "A",
+            "titulo": "COMPRENDO LO QUE LEO",
+            "descripcion": "Ficha de comprensión lectora. Edad: 5 - 7 años.",
+            "contenido": "https://www.topworksheets.com/embed/comprendo-lo-qie-617855634a71c?language=es",
+            "tipo": "F",
+            "institucion": 1,
+            "original_filename": "",
+            "miniatura": "recurso/2022/04/13/2c151a709c3b44f28dca842752183d5b.jpg"
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 34,
+        "fields": {
+            "creation_date": "2022-04-17T18:54:03.811Z",
+            "update_date": "2022-04-17T18:54:03.811Z",
+            "estate": "A",
+            "titulo": "EL ABRIGO DE DON PANCHO",
+            "descripcion": "Narración sechurana recopilada por Elena Guadalupe Dedios Sernaqué, alumna del Segundo Grado de la IEE San Martín de Sechura. \r\nTrata sobre un hombre que ayudó amablemente a una muchacha, sin saber que ella había fallecido años atrás.",
+            "contenido": null,
+            "tipo": "L",
+            "institucion": 1,
+            "original_filename": "recurso/2022/04/13/310f9495b93a40ab83bfab96b3c2bf34.pdf",
+            "miniatura": "recurso/2022/04/13/51e9d8a77bea4c908314b125cad08d3b.jpg"
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 35,
+        "fields": {
+            "creation_date": "2022-04-17T18:55:13.451Z",
+            "update_date": "2022-04-17T18:55:13.451Z",
+            "estate": "A",
+            "titulo": "EL FAROLITO",
+            "descripcion": "Narración sechurana recopilada por Vicente Josué De la Cruz Rumiche, estudiante de Segundo Grado B de la IEE San MArtín de Sechura. Esta historia narra sobre las apariciones de una luz misterisosa que espantaba a los choferes.",
+            "contenido": null,
+            "tipo": "L",
+            "institucion": 1,
+            "original_filename": "recurso/2022/04/13/c26ff3a6020d4adbadc2d7438500a325.pdf",
+            "miniatura": "recurso/2022/04/13/423883abc3524d458ff62bee89905262.jpg"
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 36,
+        "fields": {
+            "creation_date": "2022-04-17T18:56:59.501Z",
+            "update_date": "2022-04-17T18:56:59.501Z",
+            "estate": "A",
+            "titulo": "EL AGRICULTOR Y MARÍA DOMINGA",
+            "descripcion": "Leyenda sechurana recopilada por Mártir Alexis Querevalú Silva, estudiante de Segundo Grado de Primaria de la IEE San Martín de Sechura. Esta historia narra sobre la aparición de una bella mujer a un humilde agricultor; los pobladores la llaman María Dominga.",
+            "contenido": null,
+            "tipo": "L",
+            "institucion": 1,
+            "original_filename": "recurso/2022/04/13/110b7fadf54444b1836c41f3354c0d2d.pdf",
+            "miniatura": "recurso/2022/04/13/9e8fe69304e24a89aebbebdf70bca7b1.jpg"
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 37,
+        "fields": {
+            "creation_date": "2022-04-17T18:57:50.385Z",
+            "update_date": "2022-04-17T18:57:50.385Z",
+            "estate": "A",
+            "titulo": "EL BARCO FANTASMA",
+            "descripcion": "Leyenda sechurana recopilada por Diego Cristaldo Eche Herna, estudiante de Primer Grado de Primaria de la IEE San Martín de Sechura. Esta historia cuenta sobre un \"barco fantasma\" que siempre asusta a los pescadores en un lugar llamado \"Reventazón\" (Bayóvar).",
+            "contenido": null,
+            "tipo": "L",
+            "institucion": 1,
+            "original_filename": "recurso/2022/04/13/1210aa1191d64382b3e5dfa292cdee9d.pdf",
+            "miniatura": "recurso/2022/04/13/5c9aca4fe47b443db333c7436a182854.jpg"
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 38,
+        "fields": {
+            "creation_date": "2022-04-17T18:59:07.727Z",
+            "update_date": "2022-04-17T18:59:07.727Z",
+            "estate": "A",
+            "titulo": "EL HUMILDE GUARDIÁN",
+            "descripcion": "Cuento sechurano recopilado por Zoe Noemí Fiestas Fiestas, estudiante del Primer grado de Primaria de la IEE San Martín de Sechura. Este texto narra la historia de un gusrdián que fue sorprendido por un duendecillo bondadoso.",
+            "contenido": null,
+            "tipo": "L",
+            "institucion": 1,
+            "original_filename": "recurso/2022/04/13/b83c6ca4bbef4af186de64ebde7995fc.pdf",
+            "miniatura": "recurso/2022/04/13/cce01e798671439899b4c89cb9af7595.jpg"
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 39,
+        "fields": {
+            "creation_date": "2022-04-17T19:01:29.085Z",
+            "update_date": "2022-04-17T19:01:29.085Z",
+            "estate": "A",
+            "titulo": "El encanto de la Isla",
+            "descripcion": "Historia recopilada y adaptada por Elizabeth Valverde Suyón docente de la Institución Educativa 14745 - UGEL Paita y promotora de AYLLUMEVAL Proyecto ganador - FONDEP 2021.",
+            "contenido": null,
+            "tipo": "U",
+            "institucion": 1,
+            "original_filename": "recurso/2022/04/13/15bfd66bc3b848cabbcb210ea5a40909.pdf",
+            "miniatura": "recurso/2022/04/13/74cfa77b30824c4c9e69f2d3c62eb6b7.jpg"
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 40,
+        "fields": {
+            "creation_date": "2022-04-17T19:02:46.024Z",
+            "update_date": "2022-04-17T19:02:46.024Z",
+            "estate": "A",
+            "titulo": "LA PALOMA MISTERIOSA",
+            "descripcion": "Cuento creado por Génesis Panta Aguirre\r\nAutora: Génesis Panta Aguirre Estudiante de Segundo Grado de Primaria de la IEE San Martín - Sechura",
+            "contenido": null,
+            "tipo": "U",
+            "institucion": 1,
+            "original_filename": "recurso/2022/04/13/d81ec67e36b543f7bddae325aea896cd.pdf",
+            "miniatura": "recurso/2022/04/13/4dae0d98fe6a445aa8c529ad4cc75fac.jpg"
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 41,
+        "fields": {
+            "creation_date": "2022-04-17T19:12:47.878Z",
+            "update_date": "2022-04-17T19:12:47.878Z",
+            "estate": "A",
+            "titulo": "PROGRAMA RADIAL: CURIOSIDADES",
+            "descripcion": "En este podcast podrás escuchar el programa radial a cargo de la docente y estudiantes de tercer grado de primaria de la IE San Martín, acerca de curiosidades sobre el cuidado de nuestra salud.",
+            "contenido": null,
+            "tipo": "P",
+            "institucion": 1,
+            "original_filename": "recurso/2022/04/13/697cceb9dc7d4b2099ef2860284e088f.mp3",
+            "miniatura": "recurso/2022/04/13/5a3b1b3e379a451e9b6ae1dee7221ebd.png"
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 42,
+        "fields": {
+            "creation_date": "2022-04-17T19:20:46.721Z",
+            "update_date": "2022-04-17T19:20:46.721Z",
+            "estate": "A",
+            "titulo": "PAULA LA NIÑA QUE SOLO COMÍA ESPAGUETIS",
+            "descripcion": "La historia trata de las consecuencias que tuvo una niña por comer solamente espaguetis, pues no quería comer otro tipo de alimentos.\r\nCuento narrado por Marisol Pazos Nunura, docente de la IE San Martín de Sechura. Con la participación de estudiantes de primer grado de primaria.",
+            "contenido": null,
+            "tipo": "A",
+            "institucion": 1,
+            "original_filename": "recurso/2022/04/13/8e7620602cbd4d43bb9697baabe5544a.mp3",
+            "miniatura": "recurso/2022/04/13/6f004de11d27428cab4169537d3f483a.png"
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 43,
+        "fields": {
+            "creation_date": "2022-04-17T19:30:40.182Z",
+            "update_date": "2022-04-17T19:30:40.182Z",
+            "estate": "A",
+            "titulo": "ILLESCAS",
+            "descripcion": "En este podcast realizado por Julio César Eche Zeta, estudiante del nivel Secundario, conocerás cómo es la Zona Reservada de Illescas y cómo puede contribuir en su conservación. \r\nInvitado Especial: Biólogo Frank Suárez Pingo",
+            "contenido": null,
+            "tipo": "P",
+            "institucion": 1,
+            "original_filename": "recurso/2022/04/13/23bae66318384f6ca9b2e12eefde151e.mp3",
+            "miniatura": "recurso/2022/04/13/ff93dd58015e445e821ba0a23e87a6e4.jpg"
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 44,
+        "fields": {
+            "creation_date": "2022-04-17T19:35:03.077Z",
+            "update_date": "2022-04-17T19:35:03.077Z",
+            "estate": "A",
+            "titulo": "ÑAPIQUE, UNA PERLA EN EL DESIERTO DE SECHURA",
+            "descripcion": "En este podcast realizado por el docente Denis Ipanaqué Cortez y la participación del estudiante Luis Joel Fernández Chunga de la IE San Martín, podrás conocer una maravilla sechurana. \r\nEste podcast se realizó por celebrar el Bicentenario de nuestro país y valorar nuestra riqueza y biodiversidad.",
+            "contenido": null,
+            "tipo": "P",
+            "institucion": 1,
+            "original_filename": "recurso/2022/04/13/43e528577d9f4842bc027810c41e6f3b.mp3",
+            "miniatura": "recurso/2022/04/13/3ab0166a62d64eeea8d0bf994a216316.png"
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 45,
+        "fields": {
+            "creation_date": "2022-04-17T19:45:35.340Z",
+            "update_date": "2022-04-17T19:45:35.340Z",
+            "estate": "A",
+            "titulo": "HISTORIA DE LA VIRGEN DE LAS MERCEDES DE PAITA",
+            "descripcion": "Historia narrada por Jesús Milagritos Paiva Tume, Docente de la IE Virgen de las Mercedes-Paita",
+            "contenido": "https://padlet-uploads.storage.googleapis.com/501304694/baf21ec3a939502b9f09eb6ba83da346/videoplayback__19_.mp4",
+            "tipo": "Y",
+            "institucion": 1,
+            "original_filename": "",
+            "miniatura": "recurso/2022/04/13/38a3c163404f4fb4ab90a23c2570478d.png"
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 46,
+        "fields": {
+            "creation_date": "2022-04-17T19:47:22.478Z",
+            "update_date": "2022-04-17T19:47:22.478Z",
+            "estate": "A",
+            "titulo": "EL MITO DEL CHILALO",
+            "descripcion": "\"El mito del chilalo\" Autor: Genaro Maza Vera Adaptado por: Jesús Milagritos Paiva Tume IE Virgen de las Mercedes - Paita",
+            "contenido": "https://padlet-uploads.storage.googleapis.com/501304694/c6ce5eba9cd44fb560ab03a0fce4bcd4/videoplayback__18_.mp4",
+            "tipo": "Y",
+            "institucion": 1,
+            "original_filename": "",
+            "miniatura": "recurso/2022/04/13/3cab77c17b664dacb61dc94f6c084851.jpeg"
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 47,
+        "fields": {
+            "creation_date": "2022-04-17T19:48:29.348Z",
+            "update_date": "2022-04-17T19:48:29.348Z",
+            "estate": "A",
+            "titulo": "LEEMOS UNA HISTORIA",
+            "descripcion": "Lectura y comprensión de textos. Primer Grado de primaria.",
+            "contenido": "https://padlet-uploads.storage.googleapis.com/501304694/2ec6d5ad23d1146aa6c90ddf03447867/videoplayback__22_.mp4",
+            "tipo": "Y",
+            "institucion": 1,
+            "original_filename": "",
+            "miniatura": "recurso/2022/04/13/99aa6af06c7e4682825253e08682210b.png"
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 48,
+        "fields": {
+            "creation_date": "2022-04-17T19:49:24.241Z",
+            "update_date": "2022-04-17T19:49:24.241Z",
+            "estate": "A",
+            "titulo": "RESOLVEMOS PROBLEMAS",
+            "descripcion": "Usamos monedas y billetes para resolver problemas de compra y venta\r\nRecurso que orienta a docentes, padres y estudiantes a resolver problemas y a explicar por qué se debe sumar o restar. Primer y Segundo Grado de Primaria",
+            "contenido": "https://padlet-uploads.storage.googleapis.com/501304694/e671b1ba0b188486db39fde18938a22b/videoplayback__19_.mp4",
+            "tipo": "Y",
+            "institucion": 1,
+            "original_filename": "",
+            "miniatura": "recurso/2022/04/13/06abb83b6ed34ec88efc3e96e3800514.jpeg"
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 49,
+        "fields": {
+            "creation_date": "2022-04-17T19:50:55.927Z",
+            "update_date": "2022-04-17T19:50:55.927Z",
+            "estate": "A",
+            "titulo": "LA DUPLA MÁGICA",
+            "descripcion": "Juego matemático para estudiantes de primaria.",
+            "contenido": null,
+            "tipo": "G",
+            "institucion": 1,
+            "original_filename": "recurso/2022/04/13/526b33734dca460ab173af976b1acb31.3gpp",
+            "miniatura": "recurso/2022/04/13/0140efad713f4d619097598f7cf6465a.png"
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 50,
+        "fields": {
+            "creation_date": "2022-04-17T19:54:01.739Z",
+            "update_date": "2022-04-17T19:54:01.739Z",
+            "estate": "A",
+            "titulo": "EL ABRIGO DE DON PACHO",
+            "descripcion": "Narración sechurana recopilada por Elena Guadalupe Dedios Sernaqué, alumna del Segundo Grado de la IEE San Martín de Sechura. Trata sobre un hombre que ayudó amablemente a una muchacha, sin saber que ella había fallecido años atrás.",
+            "contenido": null,
+            "tipo": "L",
+            "institucion": 1,
+            "original_filename": "recurso/2022/04/13/515484e250ed44bf8d1210f06496028e.pdf",
+            "miniatura": "recurso/2022/04/13/ef42bd0d41d2493c820dbc35adea825e.jpg"
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 51,
+        "fields": {
+            "creation_date": "2022-04-17T19:57:56.069Z",
+            "update_date": "2022-04-17T19:57:56.069Z",
+            "estate": "A",
+            "titulo": "LA CHANCHA MISTERIOSA",
+            "descripcion": "Los cuentan los antiguos pobladores de Sechura, que hace mucho tiempo, aparecía un animal, en las noches de Luna llena. Este animal asustaba a todo aquel que salía a la calle en altas horas de la noche. ¿Quieren saber más de esta historia? Te invitamos a escuchar el cuento \"La chancha misteriosa\"\r\nHistoria narrada por la Jackelin Rumiche Ayala, docente de la IE San Martín.",
+            "contenido": null,
+            "tipo": "A",
+            "institucion": 1,
+            "original_filename": "recurso/2022/04/13/db8af31eea0147889e264b9c43e9ba02.mp3",
+            "miniatura": "recurso/2022/04/13/850c9abc73c942529cd0da4c90b7720e.png"
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 52,
+        "fields": {
+            "creation_date": "2022-04-17T20:03:17.569Z",
+            "update_date": "2022-06-01T03:04:56.864Z",
+            "estate": "A",
+            "titulo": "EL HUACO ENAMORADO",
+            "descripcion": "Historia narrada por Areliz Flores Eche, estudiante de la IE San Martín. \r\nEsta historia narra sobre un hombrecito muy pequeño que se enamoró de una humilde muchacha y de los peligros a la que se expuso por ser muy curiosa.",
+            "contenido": null,
+            "tipo": "A",
+            "institucion": 1,
+            "original_filename": "recurso/2022/04/13/3cf5fcb1e9b940388d4540999059eb92.mp3",
+            "miniatura": "recurso/2022/04/13/876686ae6c924a54894d8c0e39520184.png"
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 55,
+        "fields": {
+            "creation_date": "2022-06-04T14:13:34.933Z",
+            "update_date": "2022-06-04T14:54:49.671Z",
+            "estate": "A",
+            "titulo": "¿Qué son las Veedurías Escolares?",
+            "descripcion": "Programación de Veedurías Escolares 2022 \r\nTemática Nacional: Retorno escolar (del 11 de mayo al 5 de junio)\r\nTemáticas Regionales (Del 20 de junio al 10 de julio)\r\nTemática Nacional: Retorno escolar (del 01 al 21 de setiembre)\r\nTemáticas Regionales (Del 11 al 31 de octubre)\r\nEntérate más sobre las veedurías escolares en: https://www.gob.pe/institucion/contraloria/campa%C3%B1as/3810-veedurias-escolares-2022\r\nParticipación en video: Estudiantes del Nivel Secundaria-IEE San Martín - Sechura.",
+            "contenido": "https://youtu.be/uEqg-vx4_xw",
+            "tipo": "R",
+            "institucion": 1,
+            "original_filename": "",
+            "miniatura": "recurso/2022/06/01/3ce6e9dcd19747bd98433da8dc52c965.JPG"
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 56,
+        "fields": {
+            "creation_date": "2022-06-04T14:17:34.914Z",
+            "update_date": "2022-06-04T14:53:39.288Z",
+            "estate": "A",
+            "titulo": "Manejo y uso del agua, conocimiento ancestral incaico",
+            "descripcion": "Artículo de opinión: Manejo y uso del agua, conocimiento ancestral incaico.\r\nAutor: Yomar Lionel Cerin Eche \r\nEstudiante de 1° de Secundaria - Sección José Martí\r\nIEE San Martín - Sechura.\r\nDocente: José Mercedes Tume Fiestas.",
+            "contenido": null,
+            "tipo": "U",
+            "institucion": 1,
+            "original_filename": "recurso/2022/06/01/9f91bffeee594d2db0650a37bc7a4e4e.pdf",
+            "miniatura": "recurso/2022/06/01/fefb8d9301dd49c49bd2f81f6c2b6cca.JPG"
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 57,
+        "fields": {
+            "creation_date": "2022-06-04T14:47:18.361Z",
+            "update_date": "2022-06-04T15:00:01.535Z",
+            "estate": "A",
+            "titulo": "Nos cuidamos del dengue escribiendo RIMAS",
+            "descripcion": "Producciones realizadas por estudiantes de Segundo grado de primaria de la IEE San Martín.\r\nRimas para el cuidado y prevención del dengue.\r\nDocente: María Esther Tume Pacheco.",
+            "contenido": null,
+            "tipo": "U",
+            "institucion": 1,
+            "original_filename": "recurso/2022/06/01/92bdcda2eb40468c953b597524e20a3e.pdf",
+            "miniatura": "recurso/2022/06/01/980ce9a926ed457dabe8c80a42e31754.png"
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 60,
+        "fields": {
+            "creation_date": "2022-06-06T21:47:51.433Z",
+            "update_date": "2022-06-06T21:47:51.433Z",
+            "estate": "A",
+            "titulo": "Danza \"Las Cusqueñas\"",
+            "descripcion": "Danza típica de Sechura, bailada en la Festividad del Niño Dios. \r\nParticipantes: Elena y Milagros Dedios Sernaqué.",
+            "contenido": "https://youtu.be/aNukCa7n7Pw",
+            "tipo": "R",
+            "institucion": 1,
+            "original_filename": "",
+            "miniatura": "recurso/2022/06/06/48fa2b46795942fba242f884ad38e1ce.JPG"
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 61,
+        "fields": {
+            "creation_date": "2022-06-06T21:50:14.503Z",
+            "update_date": "2022-06-06T21:50:14.503Z",
+            "estate": "A",
+            "titulo": "¿Por qué nos contagiamos de dengue?",
+            "descripcion": "Radioteatro para reflexionar.\r\nParticipación de las familias Morales Varela y Pazo Maza-Tercer Grado de Primaria-IEE San Martín.",
+            "contenido": null,
+            "tipo": "P",
+            "institucion": 1,
+            "original_filename": "recurso/2022/06/06/b0c5c4d103c04f3b971f7158d5e85615.mp3",
+            "miniatura": "recurso/2022/06/06/2142456151bc43cf81e4d4cba3c4a268.png"
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 62,
+        "fields": {
+            "creation_date": "2022-06-06T21:54:27.954Z",
+            "update_date": "2022-06-06T21:54:27.954Z",
+            "estate": "A",
+            "titulo": "El encanto del cerro Vicús",
+            "descripcion": "Leyenda recopilada por Luana Chiroque Adanaqué.\r\nIE Jesús Divino Maestro - Chulucanas - Morropón.",
+            "contenido": null,
+            "tipo": "A",
+            "institucion": 1,
+            "original_filename": "recurso/2022/06/06/6217cac5f5514343a860fa00512bb913.mp3",
+            "miniatura": "recurso/2022/06/06/1f804f9c23cc45b09c4156cab61233f7.jpg"
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 63,
+        "fields": {
+            "creation_date": "2022-06-12T19:24:27.460Z",
+            "update_date": "2022-06-12T19:24:27.460Z",
+            "estate": "A",
+            "titulo": "¡Todos contra el dengue!",
+            "descripcion": "Teatro familiar con la participación de estudiantes del 1er Grado de Primaria de la IE San Martín - Sechura.\r\nDocente: Olga Vite Vite.",
+            "contenido": "https://youtu.be/yAcXDvLRMeM",
+            "tipo": "Y",
+            "institucion": 1,
+            "original_filename": "",
+            "miniatura": "recurso/2022/06/06/0d6ded7f69d8409aa9f13a5771b41286.jpg"
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 64,
+        "fields": {
+            "creation_date": "2022-06-12T21:03:23.088Z",
+            "update_date": "2022-06-12T21:03:23.088Z",
+            "estate": "A",
+            "titulo": "¿Por qué nos enfermamos de dengue?",
+            "descripcion": "Radioteatro para reflexionar.\r\nParticipación de la familia Elías Silva del primer grado de primaria. IE San Martín-Sechura.\r\nDocente: Olga Vite Vite.",
+            "contenido": null,
+            "tipo": "P",
+            "institucion": 1,
+            "original_filename": "recurso/2022/06/06/fe41e1873b6d4f0eb719204724a51903.mp3",
+            "miniatura": "recurso/2022/06/06/2ae96c4e0d944032833589c2c815a870.png"
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 65,
+        "fields": {
+            "creation_date": "2022-06-12T21:19:22.967Z",
+            "update_date": "2022-06-12T21:19:22.967Z",
+            "estate": "A",
+            "titulo": "Afiche para prevenir el dengue",
+            "descripcion": "Producción de Doan Antón Tume, alumno del\r\nPrimer Grado Primaria de la IE  San Martín - Sechura.\r\nDocente: Karen Lourdes Pastor Fossa.",
+            "contenido": null,
+            "tipo": "U",
+            "institucion": 1,
+            "original_filename": "recurso/2022/06/06/f8e56b667bf04412b5d4b51410cfb03d.jpeg",
+            "miniatura": "recurso/2022/06/06/e0178bcfbb4b4f38a73ff7911aa1cb5d.png"
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 66,
+        "fields": {
+            "creation_date": "2022-06-28T02:29:13.587Z",
+            "update_date": "2022-06-28T02:29:13.587Z",
+            "estate": "A",
+            "titulo": "El silbido del muerto",
+            "descripcion": "Cuento del distrito de La Arena - Piura.\r\nRecopilado por Diego Armando Ancajima Santos. IE 14123 - La Arena",
+            "contenido": null,
+            "tipo": "L",
+            "institucion": 1,
+            "original_filename": "recurso/2022/06/06/f3531bbab9704c8e92c2297ad6f72045.pdf",
+            "miniatura": "recurso/2022/06/06/d87e9f208c98411d9a995f91d1309244.JPG"
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 67,
+        "fields": {
+            "creation_date": "2022-06-28T02:33:24.731Z",
+            "update_date": "2022-06-28T02:33:24.731Z",
+            "estate": "A",
+            "titulo": "La banda de músicos y el Médano Blanco",
+            "descripcion": "Leyenda sechurana. Recopilada y adaptada por: Jackelin Rumiche Ayala y Giovanna Rumiche Ayala, docentes de la IE San Martín-Sechura. Ilustración: Estudiante Manuel Periche Llenque.",
+            "contenido": null,
+            "tipo": "L",
+            "institucion": 1,
+            "original_filename": "recurso/2022/06/06/d33e578a141d44b4a4994ba7ba582fc3.pdf",
+            "miniatura": "recurso/2022/06/06/a9a43378e4734a289eda4bc05a9bfa83.JPG"
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 68,
+        "fields": {
+            "creation_date": "2022-06-28T03:03:49.335Z",
+            "update_date": "2022-06-28T03:03:49.335Z",
+            "estate": "A",
+            "titulo": "¡Todos contra el dengue!",
+            "descripcion": "Afiche elaborado por Taylor Napanga Fiestas.\r\nEstudiante del Primer Grado de Primaria-IE San Martín - Sechura.\r\nDocente: Karina",
+            "contenido": null,
+            "tipo": "U",
+            "institucion": 1,
+            "original_filename": "recurso/2022/06/06/605108e0265449fa911b71c10f636353.jpeg",
+            "miniatura": "recurso/2022/06/06/fa5feb3e16b0463e9a7439d73c9467ac.JPG"
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 69,
+        "fields": {
+            "creation_date": "2022-06-28T03:07:58.057Z",
+            "update_date": "2022-06-28T03:07:58.057Z",
+            "estate": "A",
+            "titulo": "¡Cuidado con el dengue!",
+            "descripcion": "Representación de títeres que nos enseña a cómo cuidarnos del dengue. \r\nEstudiante: Marvin Stewar Querevalú Amaya.  1er Grado de Primaria. Docente: Karina Chapilliquén",
+            "contenido": "https://youtu.be/8R4RHdz4Vjo",
+            "tipo": "R",
+            "institucion": 1,
+            "original_filename": "",
+            "miniatura": "recurso/2022/06/06/71ac0e975c8747b79844b7e6dae4ea95.jpg"
+        }
+    },
+    {
+        "model": "recursos.recurso",
+        "pk": 70,
+        "fields": {
+            "creation_date": "2022-06-28T03:10:18.811Z",
+            "update_date": "2022-06-28T03:10:18.812Z",
+            "estate": "A",
+            "titulo": "Síntomas del Dengue",
+            "descripcion": "Afiche elaborado por Rubén Mechato Llenque. Estudiante del 1er Grado de Primaria de la IE San Martín. \r\nDocente: Karina Chapilliquén",
+            "contenido": null,
+            "tipo": "U",
+            "institucion": 1,
+            "original_filename": "recurso/2022/06/06/901524bdcffd479a9771c2972a57ee85.jpeg",
+            "miniatura": "recurso/2022/06/06/e576f5c92e7f4c3a9f46cb6b48a0dc3a.JPG"
+        }
+    },
+    {
+        "model": "cuestionarios.cuestionariocurso",
+        "pk": 6,
+        "fields": {
+            "creation_date": "2022-05-24T14:20:51.976Z",
+            "update_date": "2022-05-24T14:20:51.976Z",
+            "estate": "A",
+            "fecha_asignacion": "2022-05-25T16:00:00Z",
+            "fecha_expiracion": "2022-05-25T17:00:00Z",
+            "nombre": "Cuestionario de sumas",
+            "curso_docente": 1,
+            "cuestionario": 6
+        }
+    },
+    {
+        "model": "cuestionarios.cuestionariocurso",
+        "pk": 7,
+        "fields": {
+            "creation_date": "2022-05-27T23:49:44.460Z",
+            "update_date": "2022-05-27T23:49:44.460Z",
+            "estate": "A",
+            "fecha_asignacion": "2022-05-27T23:50:00Z",
+            "fecha_expiracion": "2022-05-30T23:49:00Z",
+            "nombre": "Cuestionario de Prueba",
+            "curso_docente": 1,
+            "cuestionario": 7
+        }
+    },
+    {
+        "model": "cuestionarios.cuestionariocurso",
+        "pk": 8,
+        "fields": {
+            "creation_date": "2022-05-27T23:51:16.193Z",
+            "update_date": "2022-05-27T23:51:16.193Z",
+            "estate": "A",
+            "fecha_asignacion": "2022-06-05T23:51:00Z",
+            "fecha_expiracion": "2022-06-24T23:51:00Z",
+            "nombre": "cueestionario 34",
+            "curso_docente": 1,
+            "cuestionario": 8
+        }
+    },
+    {
+        "model": "cursos.nivel",
+        "pk": 1,
+        "fields": {
+            "creation_date": "2022-04-13T21:42:14.555Z",
+            "update_date": "2022-04-13T21:42:14.555Z",
+            "estate": "A",
+            "nombre": "Inicial"
+        }
+    },
+    {
+        "model": "cursos.nivel",
+        "pk": 2,
+        "fields": {
+            "creation_date": "2022-04-13T21:42:14.553Z",
+            "update_date": "2022-04-13T21:42:14.553Z",
+            "estate": "A",
+            "nombre": "Primaria"
+        }
+    },
+    {
+        "model": "cursos.nivel",
+        "pk": 3,
+        "fields": {
+            "creation_date": "2022-04-13T21:42:14.551Z",
+            "update_date": "2022-04-13T21:42:14.551Z",
+            "estate": "A",
+            "nombre": "Secundaria"
+        }
+    },
+    {
+        "model": "cursos.grado",
+        "pk": 1,
+        "fields": {
+            "creation_date": "2022-04-13T21:43:06.794Z",
+            "update_date": "2022-04-13T21:43:06.794Z",
+            "estate": "A",
+            "nombre": "4 años",
+            "nivel": 1
+        }
+    },
+    {
+        "model": "cursos.grado",
+        "pk": 2,
+        "fields": {
+            "creation_date": "2022-04-13T21:43:06.791Z",
+            "update_date": "2022-04-13T21:43:06.791Z",
+            "estate": "A",
+            "nombre": "5 años",
+            "nivel": 1
+        }
+    },
+    {
+        "model": "cursos.grado",
+        "pk": 3,
+        "fields": {
+            "creation_date": "2022-04-13T21:43:06.789Z",
+            "update_date": "2022-04-13T21:43:06.789Z",
+            "estate": "A",
+            "nombre": "Primer Grado",
+            "nivel": 2
+        }
+    },
+    {
+        "model": "cursos.grado",
+        "pk": 4,
+        "fields": {
+            "creation_date": "2022-04-13T21:43:06.787Z",
+            "update_date": "2022-04-13T21:43:06.787Z",
+            "estate": "A",
+            "nombre": "Segundo Grado",
+            "nivel": 2
+        }
+    },
+    {
+        "model": "cursos.grado",
+        "pk": 5,
+        "fields": {
+            "creation_date": "2022-04-13T21:43:06.784Z",
+            "update_date": "2022-04-13T21:43:06.784Z",
+            "estate": "A",
+            "nombre": "Tercer grado",
+            "nivel": 2
+        }
+    },
+    {
+        "model": "cursos.grado",
+        "pk": 6,
+        "fields": {
+            "creation_date": "2022-04-13T21:43:06.782Z",
+            "update_date": "2022-04-13T21:43:06.782Z",
+            "estate": "A",
+            "nombre": "Cuarto Grado",
+            "nivel": 2
+        }
+    },
+    {
+        "model": "cursos.grado",
+        "pk": 7,
+        "fields": {
+            "creation_date": "2022-04-13T21:43:06.780Z",
+            "update_date": "2022-04-13T21:43:06.780Z",
+            "estate": "A",
+            "nombre": "Quinto Grado",
+            "nivel": 2
+        }
+    },
+    {
+        "model": "cursos.grado",
+        "pk": 8,
+        "fields": {
+            "creation_date": "2022-04-13T21:43:06.777Z",
+            "update_date": "2022-04-13T21:43:06.777Z",
+            "estate": "A",
+            "nombre": "Sexto Grado",
+            "nivel": 2
+        }
+    },
+    {
+        "model": "cursos.grado",
+        "pk": 9,
+        "fields": {
+            "creation_date": "2022-04-13T21:43:06.775Z",
+            "update_date": "2022-04-13T21:43:06.775Z",
+            "estate": "A",
+            "nombre": "Primer Año",
+            "nivel": 3
+        }
+    },
+    {
+        "model": "cursos.grado",
+        "pk": 10,
+        "fields": {
+            "creation_date": "2022-04-13T21:43:06.772Z",
+            "update_date": "2022-04-13T21:43:06.772Z",
+            "estate": "A",
+            "nombre": "Segundo Año",
+            "nivel": 3
+        }
+    },
+    {
+        "model": "cursos.grado",
+        "pk": 11,
+        "fields": {
+            "creation_date": "2022-04-13T21:43:06.770Z",
+            "update_date": "2022-04-13T21:43:06.770Z",
+            "estate": "A",
+            "nombre": "Tercer Año",
+            "nivel": 3
+        }
+    },
+    {
+        "model": "cursos.grado",
+        "pk": 12,
+        "fields": {
+            "creation_date": "2022-04-13T21:43:06.768Z",
+            "update_date": "2022-04-13T21:43:06.768Z",
+            "estate": "A",
+            "nombre": "Cuarto Año",
+            "nivel": 3
+        }
+    },
+    {
+        "model": "cursos.grado",
+        "pk": 13,
+        "fields": {
+            "creation_date": "2022-04-13T21:43:06.765Z",
+            "update_date": "2022-04-13T21:43:06.765Z",
+            "estate": "A",
+            "nombre": "Quinto Año",
+            "nivel": 3
+        }
+    },
+    {
+        "model": "cursos.curso",
+        "pk": 1,
+        "fields": {
+            "creation_date": "2022-04-13T21:43:37.825Z",
+            "update_date": "2022-04-13T21:43:37.825Z",
+            "estate": "A",
+            "nombre": "Dibujo",
+            "grado": 1
+        }
+    },
+    {
+        "model": "cursos.curso",
+        "pk": 2,
+        "fields": {
+            "creation_date": "2022-04-13T21:43:37.823Z",
+            "update_date": "2022-04-13T21:43:37.823Z",
+            "estate": "A",
+            "nombre": "Dibujo",
+            "grado": 2
+        }
+    },
+    {
+        "model": "cursos.curso",
+        "pk": 3,
+        "fields": {
+            "creation_date": "2022-04-13T21:43:37.821Z",
+            "update_date": "2022-04-13T21:43:37.821Z",
+            "estate": "A",
+            "nombre": "Matematica",
+            "grado": 3
+        }
+    },
+    {
+        "model": "cursos.curso",
+        "pk": 4,
+        "fields": {
+            "creation_date": "2022-04-13T21:43:37.819Z",
+            "update_date": "2022-04-13T21:43:37.819Z",
+            "estate": "A",
+            "nombre": "Matematica",
+            "grado": 4
+        }
+    },
+    {
+        "model": "cursos.curso",
+        "pk": 5,
+        "fields": {
+            "creation_date": "2022-04-13T21:43:37.816Z",
+            "update_date": "2022-04-13T21:43:37.816Z",
+            "estate": "A",
+            "nombre": "Comunicacion",
+            "grado": 3
+        }
+    },
+    {
+        "model": "cursos.curso",
+        "pk": 6,
+        "fields": {
+            "creation_date": "2022-04-13T21:43:37.814Z",
+            "update_date": "2022-04-13T21:43:37.814Z",
+            "estate": "A",
+            "nombre": "Comunicacion",
+            "grado": 4
+        }
+    },
+    {
+        "model": "cursos.curso",
+        "pk": 7,
+        "fields": {
+            "creation_date": "2022-04-13T21:43:37.811Z",
+            "update_date": "2022-04-13T21:43:37.811Z",
+            "estate": "A",
+            "nombre": "Ciencias Sociales",
+            "grado": 3
+        }
+    },
+    {
+        "model": "cursos.pregunta",
+        "pk": 1,
+        "fields": {
+            "creation_date": "2022-04-13T21:47:36.472Z",
+            "update_date": "2022-04-13T21:47:36.472Z",
+            "estate": "A",
+            "texto": "¿pregunta 11?",
+            "tipo": "R",
+            "curso": 1
+        }
+    },
+    {
+        "model": "cursos.pregunta",
+        "pk": 6,
+        "fields": {
+            "creation_date": "2022-05-24T14:20:51.957Z",
+            "update_date": "2022-05-24T14:20:51.957Z",
+            "estate": "A",
+            "texto": "10 + 15",
+            "tipo": "R",
+            "curso": 3
+        }
+    },
+    {
+        "model": "cursos.pregunta",
+        "pk": 7,
+        "fields": {
+            "creation_date": "2022-05-24T14:20:51.960Z",
+            "update_date": "2022-05-24T14:20:51.960Z",
+            "estate": "A",
+            "texto": "¿Cuánto es la suma de 12 + 2?",
+            "tipo": "O",
+            "curso": 3
+        }
+    },
+    {
+        "model": "cursos.pregunta",
+        "pk": 8,
+        "fields": {
+            "creation_date": "2022-05-24T14:20:51.968Z",
+            "update_date": "2022-05-24T14:20:51.968Z",
+            "estate": "A",
+            "texto": "11 + 4",
+            "tipo": "R",
+            "curso": 3
+        }
+    },
+    {
+        "model": "cursos.pregunta",
+        "pk": 9,
+        "fields": {
+            "creation_date": "2022-05-24T14:20:51.971Z",
+            "update_date": "2022-05-24T14:20:51.971Z",
+            "estate": "A",
+            "texto": "9 + 5",
+            "tipo": "R",
+            "curso": 3
+        }
+    },
+    {
+        "model": "cursos.pregunta",
+        "pk": 10,
+        "fields": {
+            "creation_date": "2022-05-24T14:20:51.973Z",
+            "update_date": "2022-05-24T14:20:51.973Z",
+            "estate": "A",
+            "texto": "4 + 5",
+            "tipo": "R",
+            "curso": 3
+        }
+    },
+    {
+        "model": "cursos.pregunta",
+        "pk": 11,
+        "fields": {
+            "creation_date": "2022-05-24T14:22:28.721Z",
+            "update_date": "2022-05-24T14:22:28.721Z",
+            "estate": "A",
+            "texto": "12 + 4",
+            "tipo": "R",
+            "curso": 1
+        }
+    },
+    {
+        "model": "cursos.preguntaopcion",
+        "pk": 4,
+        "fields": {
+            "creation_date": "2022-05-24T14:20:51.962Z",
+            "update_date": "2022-05-24T14:20:51.962Z",
+            "estate": "A",
+            "texto": "14",
+            "correcta": "C",
+            "pregunta": 7
+        }
+    },
+    {
+        "model": "cursos.preguntaopcion",
+        "pk": 5,
+        "fields": {
+            "creation_date": "2022-05-24T14:20:51.963Z",
+            "update_date": "2022-05-24T14:20:51.963Z",
+            "estate": "A",
+            "texto": "15",
+            "correcta": "I",
+            "pregunta": 7
+        }
+    },
+    {
+        "model": "cursos.preguntaopcion",
+        "pk": 6,
+        "fields": {
+            "creation_date": "2022-05-24T14:20:51.965Z",
+            "update_date": "2022-05-24T14:20:51.965Z",
+            "estate": "A",
+            "texto": "23",
+            "correcta": "I",
+            "pregunta": 7
+        }
+    },
+    {
+        "model": "cursos.preguntaopcion",
+        "pk": 7,
+        "fields": {
+            "creation_date": "2022-05-24T14:20:51.966Z",
+            "update_date": "2022-05-24T14:20:51.966Z",
+            "estate": "A",
+            "texto": "11",
+            "correcta": "I",
+            "pregunta": 7
+        }
+    },
+    {
+        "model": "cursos.cuestionario",
+        "pk": 6,
+        "fields": {
+            "creation_date": "2022-05-24T14:20:51.955Z",
+            "update_date": "2022-05-24T14:20:51.956Z",
+            "estate": "A",
+            "nombre": "Cuestionario de sumas",
+            "curso": 3
+        }
+    },
+    {
+        "model": "cursos.cuestionario",
+        "pk": 7,
+        "fields": {
+            "creation_date": "2022-05-27T23:49:44.452Z",
+            "update_date": "2022-05-27T23:49:44.452Z",
+            "estate": "A",
+            "nombre": "Cuestionario de Prueba",
+            "curso": 3
+        }
+    },
+    {
+        "model": "cursos.cuestionario",
+        "pk": 8,
+        "fields": {
+            "creation_date": "2022-05-27T23:51:16.185Z",
+            "update_date": "2022-05-27T23:51:16.185Z",
+            "estate": "A",
+            "nombre": "cueestionario 34",
+            "curso": 3
+        }
+    },
+    {
+        "model": "cursos.cuestionariopregunta",
+        "pk": 10,
+        "fields": {
+            "creation_date": "2022-05-24T14:20:51.959Z",
+            "update_date": "2022-05-24T14:20:51.959Z",
+            "estate": "A",
+            "intentos_disponibles": 1,
+            "puntaje_asignado": "2.00",
+            "nombre": "10 + 15",
+            "cuestionario": 6,
+            "pregunta": 6
+        }
+    },
+    {
+        "model": "cursos.cuestionariopregunta",
+        "pk": 11,
+        "fields": {
+            "creation_date": "2022-05-24T14:20:51.967Z",
+            "update_date": "2022-05-24T14:20:51.967Z",
+            "estate": "A",
+            "intentos_disponibles": 2,
+            "puntaje_asignado": "2.00",
+            "nombre": "¿Cuánto es la suma de 12 + 2?",
+            "cuestionario": 6,
+            "pregunta": 7
+        }
+    },
+    {
+        "model": "cursos.cuestionariopregunta",
+        "pk": 12,
+        "fields": {
+            "creation_date": "2022-05-24T14:20:51.969Z",
+            "update_date": "2022-05-24T14:20:51.970Z",
+            "estate": "A",
+            "intentos_disponibles": 1,
+            "puntaje_asignado": "2.00",
+            "nombre": "11 + 4",
+            "cuestionario": 6,
+            "pregunta": 8
+        }
+    },
+    {
+        "model": "cursos.cuestionariopregunta",
+        "pk": 13,
+        "fields": {
+            "creation_date": "2022-05-24T14:20:51.972Z",
+            "update_date": "2022-05-24T14:20:51.972Z",
+            "estate": "A",
+            "intentos_disponibles": 1,
+            "puntaje_asignado": "2.00",
+            "nombre": "9 + 5",
+            "cuestionario": 6,
+            "pregunta": 9
+        }
+    },
+    {
+        "model": "cursos.cuestionariopregunta",
+        "pk": 14,
+        "fields": {
+            "creation_date": "2022-05-24T14:20:51.975Z",
+            "update_date": "2022-05-24T14:20:51.975Z",
+            "estate": "A",
+            "intentos_disponibles": 1,
+            "puntaje_asignado": "2.00",
+            "nombre": "4 + 5",
+            "cuestionario": 6,
+            "pregunta": 10
+        }
+    },
+    {
+        "model": "cursos.cuestionariopregunta",
+        "pk": 15,
+        "fields": {
+            "creation_date": "2022-05-27T23:49:44.455Z",
+            "update_date": "2022-05-27T23:49:44.455Z",
+            "estate": "A",
+            "intentos_disponibles": 1,
+            "puntaje_asignado": "1.00",
+            "nombre": "4 + 5",
+            "cuestionario": 7,
+            "pregunta": 10
+        }
+    },
+    {
+        "model": "cursos.cuestionariopregunta",
+        "pk": 16,
+        "fields": {
+            "creation_date": "2022-05-27T23:49:44.457Z",
+            "update_date": "2022-05-27T23:49:44.457Z",
+            "estate": "A",
+            "intentos_disponibles": 1,
+            "puntaje_asignado": "1.00",
+            "nombre": "10 + 15",
+            "cuestionario": 7,
+            "pregunta": 6
+        }
+    },
+    {
+        "model": "cursos.cuestionariopregunta",
+        "pk": 17,
+        "fields": {
+            "creation_date": "2022-05-27T23:49:44.459Z",
+            "update_date": "2022-05-27T23:49:44.459Z",
+            "estate": "A",
+            "intentos_disponibles": 1,
+            "puntaje_asignado": "1.00",
+            "nombre": "¿Cuánto es la suma de 12 + 2?",
+            "cuestionario": 7,
+            "pregunta": 7
+        }
+    },
+    {
+        "model": "cursos.cuestionariopregunta",
+        "pk": 18,
+        "fields": {
+            "creation_date": "2022-05-27T23:51:16.188Z",
+            "update_date": "2022-05-27T23:51:16.188Z",
+            "estate": "A",
+            "intentos_disponibles": 1,
+            "puntaje_asignado": "1.00",
+            "nombre": "4 + 5",
+            "cuestionario": 8,
+            "pregunta": 10
+        }
+    },
+    {
+        "model": "cursos.cuestionariopregunta",
+        "pk": 19,
+        "fields": {
+            "creation_date": "2022-05-27T23:51:16.190Z",
+            "update_date": "2022-05-27T23:51:16.190Z",
+            "estate": "A",
+            "intentos_disponibles": 1,
+            "puntaje_asignado": "1.00",
+            "nombre": "11 + 4",
+            "cuestionario": 8,
+            "pregunta": 8
+        }
+    },
+    {
+        "model": "cursos.cuestionariopregunta",
+        "pk": 20,
+        "fields": {
+            "creation_date": "2022-05-27T23:51:16.192Z",
+            "update_date": "2022-05-27T23:51:16.192Z",
+            "estate": "A",
+            "intentos_disponibles": 1,
+            "puntaje_asignado": "1.00",
+            "nombre": "10 + 15",
+            "cuestionario": 8,
+            "pregunta": 6
+        }
+    },
+    {
+        "model": "cursos.cursodocente",
+        "pk": 1,
+        "fields": {
+            "creation_date": "2022-04-14T01:26:24.798Z",
+            "update_date": "2022-04-14T01:28:42.827Z",
+            "estate": "A",
+            "periodo": 1,
+            "year": 2022,
+            "nombre": "MATEMÁTICA-PRIMER GARDO",
+            "curso": 3,
+            "docente": 1,
+            "institucion": 1,
+            "codigo_inscripcion": "MMTI2"
+        }
+    },
+    {
+        "model": "cursos.alumnoinscripcioncurso",
+        "pk": 1,
+        "fields": {
+            "creation_date": "2022-04-14T01:32:00.630Z",
+            "update_date": "2022-04-14T01:32:45.672Z",
+            "estate": "D",
+            "alumno": 3,
+            "curso_docente": 1
+        }
+    },
+    {
+        "model": "cursos.alumnoinscripcioncurso",
+        "pk": 2,
+        "fields": {
+            "creation_date": "2022-04-14T01:32:32.053Z",
+            "update_date": "2022-04-14T01:32:58.235Z",
+            "estate": "D",
+            "alumno": 2,
+            "curso_docente": 1
+        }
+    },
+    {
+        "model": "cursos.alumnoinscripcioncurso",
+        "pk": 3,
+        "fields": {
+            "creation_date": "2022-04-14T01:32:55.127Z",
+            "update_date": "2022-04-14T01:33:18.678Z",
+            "estate": "D",
+            "alumno": 4,
+            "curso_docente": 1
+        }
+    },
+    {
+        "model": "authtoken.token",
+        "pk": "130442c1e21eb9f3d321f0135489112c73b2bfa6",
+        "fields": {
+            "user": 28,
+            "created": "2022-05-25T15:53:00.361Z"
+        }
+    },
+    {
+        "model": "authtoken.token",
+        "pk": "1cb75b982775c57b7372e4c79a9dbce8cf91d8b8",
+        "fields": {
+            "user": 12,
+            "created": "2022-05-25T15:41:47.338Z"
+        }
+    },
+    {
+        "model": "authtoken.token",
+        "pk": "254494b9aa179dfbc44f07eb6576bdaddf5abe63",
+        "fields": {
+            "user": 15,
+            "created": "2022-05-25T15:52:46.223Z"
+        }
+    },
+    {
+        "model": "authtoken.token",
+        "pk": "3423c03d3cb8c65f229c079dacd8e06c438263a0",
+        "fields": {
+            "user": 4,
+            "created": "2022-04-14T01:32:10.855Z"
+        }
+    },
+    {
+        "model": "authtoken.token",
+        "pk": "4e32f814dc97bc60550d86dff23bb594b02f1904",
+        "fields": {
+            "user": 22,
+            "created": "2022-05-25T15:48:26.812Z"
+        }
+    },
+    {
+        "model": "authtoken.token",
+        "pk": "5fbfc25d0bb916c0cd38c3b8377b77b24a54a54a",
+        "fields": {
+            "user": 1,
+            "created": "2022-05-24T02:37:57.119Z"
+        }
+    },
+    {
+        "model": "authtoken.token",
+        "pk": "6f05e3dc867d76202d0543936ffde0e90314dc43",
+        "fields": {
+            "user": 31,
+            "created": "2022-05-27T01:16:51.764Z"
+        }
+    },
+    {
+        "model": "authtoken.token",
+        "pk": "6f66a6637d19d5ccef102898281a9bb29130270c",
+        "fields": {
+            "user": 20,
+            "created": "2022-05-25T15:52:09.094Z"
+        }
+    },
+    {
+        "model": "authtoken.token",
+        "pk": "7a74352d5076e78a0bb80334d33ddc55737f2884",
+        "fields": {
+            "user": 21,
+            "created": "2022-05-25T15:58:00.863Z"
+        }
+    },
+    {
+        "model": "authtoken.token",
+        "pk": "7a90442246662e204237d6d77dd9865f3da45299",
+        "fields": {
+            "user": 13,
+            "created": "2022-05-25T15:43:32.465Z"
+        }
+    },
+    {
+        "model": "authtoken.token",
+        "pk": "901e6c1e0b2604353c0dc96a857c92e88e3b0c5d",
+        "fields": {
+            "user": 37,
+            "created": "2022-08-01T15:43:09.353Z"
+        }
+    },
+    {
+        "model": "authtoken.token",
+        "pk": "9d4759cca7134ec2745b376a83b52dbb704d6941",
+        "fields": {
+            "user": 24,
+            "created": "2022-05-25T15:47:19.096Z"
+        }
+    },
+    {
+        "model": "authtoken.token",
+        "pk": "a3db0865fc01a9d4ea3daeecd17eb5ae9f142c00",
+        "fields": {
+            "user": 29,
+            "created": "2022-05-25T16:08:59.495Z"
+        }
+    },
+    {
+        "model": "authtoken.token",
+        "pk": "a5b0e17e257fc44d942d7b2d0ba7ba5c8d4738ef",
+        "fields": {
+            "user": 16,
+            "created": "2022-05-25T15:50:55.980Z"
+        }
+    },
+    {
+        "model": "authtoken.token",
+        "pk": "b8a3195206a5a360553bbc6438a62396721b3b55",
+        "fields": {
+            "user": 27,
+            "created": "2022-05-25T15:58:31.990Z"
+        }
+    },
+    {
+        "model": "authtoken.token",
+        "pk": "c123a4f4655341d28db36b773b6846cf10bf6a3f",
+        "fields": {
+            "user": 3,
+            "created": "2022-04-13T21:44:44.325Z"
+        }
+    },
+    {
+        "model": "authtoken.token",
+        "pk": "daccc207598be35c0b4ce4b241dd599d574dff3d",
+        "fields": {
+            "user": 23,
+            "created": "2022-05-25T15:54:04.059Z"
+        }
+    },
+    {
+        "model": "authtoken.token",
+        "pk": "e022eb6b0459c5de720998fc2d452ed39af80563",
+        "fields": {
+            "user": 7,
+            "created": "2022-05-01T21:49:13.664Z"
+        }
+    },
+    {
+        "model": "authtoken.token",
+        "pk": "e57817035ed8abc0b13df8e61de2acca3293a77f",
+        "fields": {
+            "user": 14,
+            "created": "2022-05-25T15:48:42.485Z"
+        }
+    },
+    {
+        "model": "authtoken.token",
+        "pk": "e896226b6203958b1da271354f6a9145f28541c4",
+        "fields": {
+            "user": 18,
+            "created": "2022-05-25T15:56:27.774Z"
+        }
+    },
+    {
+        "model": "authtoken.token",
+        "pk": "f114019fdddf253d455905c297b75be9c8a53656",
+        "fields": {
+            "user": 25,
+            "created": "2022-05-25T15:55:38.819Z"
+        }
+    },
+    {
+        "model": "authtoken.token",
+        "pk": "fe3769cf4859fc0963dc5e44aa04f872263d72c8",
+        "fields": {
+            "user": 17,
+            "created": "2022-05-25T15:49:11.997Z"
+        }
+    }
+]
