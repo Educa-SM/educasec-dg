@@ -178,8 +178,8 @@ class PatrocinadorListAPIView(APIView):
                 return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
             else:
                 return Response({'msg': 'No Autorizado.'}, status.HTTP_401_UNAUTHORIZED)
-        except:
-            return Response({'msg': 'Error inesperado.'}, status.HTTP_400_BAD_REQUEST)
+        except Exception  as msgError:
+            return Response({'msg': 'Error inesperado.', 'data': str(msgError)}, status.HTTP_400_BAD_REQUEST)
 
 
 class PatrocinadorDetailAPIView(APIView):
@@ -219,7 +219,7 @@ class PatrocinadorDetailAPIView(APIView):
     # Eliminar Patrocinador con id
     def delete(self, request, id):
         usuario = request.user
-        if usuario.is_admin_sistema():
+        if usuario.is_admin_recursos():
             try:
                 object = self.get_object(id)
                 if object.logo:

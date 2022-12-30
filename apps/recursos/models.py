@@ -134,14 +134,14 @@ class Patrocinador(BaseModel):
     descripcion = CharField(
         'Descripción',
         max_length=150,
-        blank=False,
-        null=False,
+        blank=True,
+        null=True,
     )
     telefono = CharField(
         'Teléfono',
-        max_length=20,
-        blank=False,
-        null=False,
+        max_length=50,
+        blank=True,
+        null=True,
     )
     facebook = URLField(
         'Facebook',
@@ -149,8 +149,14 @@ class Patrocinador(BaseModel):
         blank=True,
         null=True,
     )
-    instagram = URLField(
-        'Instagram',
+    email = CharField(
+        'Email',
+        max_length=100,
+        blank=True,
+        null=True,
+    )
+    web = URLField(
+        'Web',
         max_length=100,
         blank=True,
         null=True,

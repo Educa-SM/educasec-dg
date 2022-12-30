@@ -45,7 +45,19 @@ class PatrocinadorSerializer(serializers.ModelSerializer):
             'nombre',
             'descripcion',
             'logo',
+            'telefono',
+            'facebook',
+            'email',
+            'web',
         ]
+        extra_kwargs = {
+            'id': {'read_only': True},
+            'descripcion': {'required': False},
+            'telefono': {'required': False},
+            'facebook': {'required': False},
+            'email': {'required': False},
+            'web': {'required': False},
+        }
 
 
 class MiembroProyectoSerializer(serializers.ModelSerializer):

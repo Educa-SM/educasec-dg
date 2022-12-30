@@ -7,9 +7,9 @@ urlpatterns = [
     path('recursos/<int:id>/', RecursoDetailAPIView.as_view()),
     path('public/', RecursoPublicAPIView.as_view()),
     path('public/<int:id>/', RecursoPublicDetailAPIView.as_view()),
-    path('patrocinador/', PatrocinadorListAPIView.as_view()),
-    path('patrocinador/<int:id>/', PatrocinadorDetailAPIView.as_view()),
-    path('patrocinador/public/', PatrocinadorPublicAPIView.as_view()),
+    path('patrocinador/', PatrocinadorListAPIView.as_view()), #guardar 
+    path('patrocinador/<int:id>/', PatrocinadorDetailAPIView.as_view()), #eliminar, actualizar, id
+    path('patrocinador/public/', PatrocinadorPublicAPIView.as_view()), #obtener todos
     path('patrocinador/public/<int:id>/', PatrocinadorPublicDetailAPIView.as_view()),
     path('miembro_proyecto/', MiembroProyectoListAPIView.as_view()),
     path('miembro_proyecto/<int:id>/', MiembroProyectoDetailAPIView.as_view()),
