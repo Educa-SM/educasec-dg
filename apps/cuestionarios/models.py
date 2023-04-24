@@ -1,21 +1,62 @@
 from datetime import datetime as dt
 from django.db.models import (
     CharField, ImageField, DateTimeField,
-    DecimalField, ForeignKey, IntegerField,
-    ManyToManyField
+    DecimalField, ForeignKey, IntegerField,TextField,
+    BooleanField
 )
 from django.db.models.deletion import CASCADE, SET_NULL
-from apps.cursos.models import Curso, TipoCurso
+from apps.cursos.models import Curso
 from apps.institucion.models import Alumno
-from educasec.utils.models import BaseModel
+from educasm.utils.models import BaseModel
 from .choices import SituacionPregunta, SituacionRespuesta, TipoPregunta
-from educasec.utils.defs import upload_to
+from educasm.utils.defs import upload_to
 
+class Cuestionario(BaseModel):
+    nombre = CharField(
+        'Nombre',
+        max_length=150,
+        blank=False,
+        null=False,
+    )
+    descripcion = TextField(
+        'Descripcion',
+        blank=True,
+        null=True,
+    )
+    imagen = ImageField(
+        'Imagen',
+        upload_to=upload_to(
+            model='cuestionario_banco',
+            path=dt.today().strftime('%Y/%m/%d')
+        ),
+        blank=True,
+        null=True,
+    )
+    fecha_asignacion = DateTimeField(
+        'Fecha de Asignacion',
+    )
+    fecha_expiracion = DateTimeField(
+        'Fecha de Expiracion',
+    )
+   
+    is_banco = BooleanField(
+        '¿pertenece al banco de preguntas?',
+        default=False,
+    )
+    curso = ForeignKey(
+        Curso,
+        on_delete=SET_NULL,
+        null=True,
+        blank=True,
+        related_name='cuestionarios',
+    )
+    def __str__(self):
+        return self.nombre
 
 # *****************   Cuestionario    *******************
-class PreguntaBanco(BaseModel):
+class Pregunta(BaseModel):
     texto = CharField(
-        'Texto',
+        'Detalle',
         max_length=500,
         blank=False, null=False,
     )
@@ -27,96 +68,10 @@ class PreguntaBanco(BaseModel):
     )
     imagen = ImageField(
         'Imagen',
-        upload_to=upload_to(model='pregunta_banco', path=dt.today().strftime('%Y/%m/%d')),
+        upload_to=upload_to(model='pregunta', path=dt.today().strftime('%Y/%m/%d')),
         blank=True,
         null=True,
     )
-    tipo_curso = ForeignKey(
-        TipoCurso,
-        on_delete=CASCADE,
-    )
-
-    def __str__(self):
-        return self.texto
-
-
-class PreguntaOpcion(BaseModel):
-    texto = CharField(
-        max_length=300,
-        null=False,
-    )
-    correcta = CharField(
-        '¿Es correcta?',
-        max_length=1,
-        choices=SituacionPregunta.choices,
-        default=SituacionPregunta.INCORRECTA,
-    )
-    pregunta_banco = ForeignKey(
-        PreguntaBanco,
-        on_delete=CASCADE,
-        related_name='opciones',
-    )
-
-    def __str__(self):
-        return self.texto
-
-
-class CuestionarioBanco(BaseModel):
-    nombre = CharField(
-        'Nombre',
-        max_length=150,
-        blank=False,
-        null=False,
-    )
-    tipo_curso = ForeignKey(
-        TipoCurso,
-        on_delete=CASCADE
-    )
-    imagen = ImageField(
-        'Imagen',
-        upload_to=upload_to(
-            model='cuestionario_banco',
-            path=dt.today().strftime('%Y/%m/%d')
-        ),
-        blank=True,
-        null=True,
-    )
-    preguntas_banco = ManyToManyField(PreguntaBanco)
-
-    def __str__(self):
-        return self.nombre
-
-
-class Cuestionario(BaseModel):
-    fecha_asignacion = DateTimeField(
-        'Fecha de Asignacion',
-    )
-    fecha_expiracion = DateTimeField(
-        'Fecha de Expiracion',
-    )
-    nombre = CharField(
-        'Nombre',
-        max_length=150,
-        blank=False,
-        null=False,
-    )
-    curso = ForeignKey(
-        Curso,
-        on_delete=CASCADE,
-    )
-    cuestionario_banco = ForeignKey(
-        CuestionarioBanco,
-        on_delete=SET_NULL,
-        related_name='cuestionarios',
-        null=True,
-        blank=True,
-    )
-
-    def __str__(self):
-        return self.nombre
-
-
-class CuestionarioPregunta(BaseModel):
     intentos_disponibles = IntegerField(
         null=False,
         default=1,
@@ -133,23 +88,44 @@ class CuestionarioPregunta(BaseModel):
         blank=True,
         null=True,
     )
+
+    is_banco = BooleanField(
+        '¿pertenece al banco de preguntas?',
+        default=False,
+    )
+
     cuestionario = ForeignKey(
         Cuestionario,
-        on_delete=CASCADE,
-        related_name='cuestionario_preguntas',
-    )
-    pregunta_banco = ForeignKey(
-        PreguntaBanco,
         on_delete=SET_NULL,
-        related_name='cuestionario_preguntas',
-        blank=True, null=True,
+        related_name='preguntas',
+        blank=True,
+        null=True
     )
-
-    class Meta:
-        unique_together = ('pregunta_banco', 'cuestionario',)
 
     def __str__(self):
-        return f'Pregunta Cuestionario: {self.id}'
+        return self.texto
+
+
+class OpcionPregunta(BaseModel):
+    texto = CharField(
+        max_length=300,
+        null=False,
+    )
+    correcta = CharField(
+        '¿Es correcta?',
+        max_length=1,
+        choices=SituacionPregunta.choices,
+        default=SituacionPregunta.INCORRECTA,
+    )
+    pregunta = ForeignKey(
+        Pregunta,
+        on_delete=CASCADE,
+        related_name='opciones',
+    )
+
+    def __str__(self):
+        return self.texto
+
 
 
 class Solucion(BaseModel):
@@ -189,7 +165,7 @@ class SolucionPregunta(BaseModel):
     # cuando se responde la pregunta
     respuesta = CharField(
         'Respuesta',
-        max_length=250,
+        max_length=500,
         blank=False,
     )
     puntaje_obtenido = DecimalField(
@@ -206,7 +182,7 @@ class SolucionPregunta(BaseModel):
     )
     comentario = CharField(
         'Comentario',
-        max_length=250,
+        max_length=500,
         blank=True,
         null=True,
     )
@@ -221,21 +197,21 @@ class SolucionPregunta(BaseModel):
         on_delete=CASCADE,
         related_name='soluciones_preguntas'
     )
-    cuestionario_pregunta = ForeignKey(
-        CuestionarioPregunta,
+    pregunta = ForeignKey(
+        Pregunta,
         on_delete=SET_NULL,
         null=True,
         blank=True,
     )
     pregunta_opcion = ForeignKey(
-        PreguntaOpcion,
+        OpcionPregunta,
         on_delete=SET_NULL,
         null=True,
         blank=True,
     )
 
     class Meta:
-        unique_together = ('solucion', 'cuestionario_pregunta',)
+        unique_together = ('solucion', 'pregunta',)
 
     def __str__(self):
         return self.respuesta

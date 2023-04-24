@@ -1,11 +1,11 @@
 from datetime import datetime as dt
-from django.db.models import CharField, FileField, ForeignKey, ImageField, URLField
+from django.db.models import CharField, FileField, ForeignKey, ImageField, URLField, TextField
 from django.db.models.deletion import CASCADE
 from django.forms import model_to_dict
 from apps.institucion.models import Institucion
 from apps.recursos.choices import TipoRecursoChoices
-from educasec.utils.defs import upload_to
-from educasec.utils.models import BaseModel
+from educasm.utils.defs import upload_to
+from educasm.utils.models import BaseModel
 
 
 class Recurso(BaseModel):
@@ -16,9 +16,8 @@ class Recurso(BaseModel):
         blank=False,
         null=False,
     )
-    descripcion = CharField(
+    descripcion = TextField(
         'Descripción',
-        max_length=500,
         blank=False,
         null=False,
     )
@@ -184,14 +183,14 @@ class MiembroProyecto(BaseModel):
     descripcion = CharField(
         'Descripción',
         max_length=150,
-        blank=False,
-        null=False,
+        blank=True,
+        null=True,
     )
     cargo = CharField(
         'Cargo',
         max_length=20,
-        blank=False,
-        null=False,
+        blank=True,
+        null=True,
     )
     logo = ImageField(
         'Logo',

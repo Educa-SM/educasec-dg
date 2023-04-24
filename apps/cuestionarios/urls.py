@@ -4,9 +4,13 @@ from .views import *
 
 urlpatterns = [
     # **** DOCENTE ***************
-    path('banco-pregunta/<int:id>/', PreguntaBancoView.as_view()),
-    path('banco-cuestionario/<int:id>/', CuestionarioBancoView.as_view()),
-    path('<int:id>/', CuestionarioView.as_view()),
+    path('pregunta_curso/<int:id>/', PreguntaCursoView.as_view()),
+    path('pregunta/<int:id>/', PreguntaDetailView.as_view()),
+    path('pregunta/', PreguntaView.as_view()),
+    
+    path('cuestionario_curso/<int:id>/', CuestionarioCursoView.as_view()),
+    path('cuestionario/<int:id>/', CuestionarioDetailView.as_view()),
+    path('cuestionario/', CuestionarioView.as_view()),
 
     path('solucion/<int:id>/', SolucionCuestionarioView.as_view()),
 

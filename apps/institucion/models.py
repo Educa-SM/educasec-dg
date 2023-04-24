@@ -2,7 +2,7 @@ from django.db.models import CharField, ManyToManyField, OneToOneField
 from django.db.models.deletion import CASCADE
 from django.utils.translation import gettext_lazy as _
 from apps.seguridad.models import User
-from educasec.utils.models import BaseModel
+from educasm.utils.models import BaseModel
 from .choices import TipoDocIdentidad
 
 
