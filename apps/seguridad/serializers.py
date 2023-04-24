@@ -74,7 +74,6 @@ class DocenteSerializer(ModelSerializer):
                 docente.instituciones.add(inst)
         return docente
 
-
 class AlumnoSerializer(ModelSerializer):
     user = UserSerializer()
 

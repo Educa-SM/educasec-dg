@@ -14,6 +14,14 @@ from apps.seguridad.serializers import AlumnoSerializer, ChangePasswordSerialize
 
 class RegisterDocenteView(APIView):
     def post(self, request):
+        data = {}
+        try:
+            user = User.objects.get(username=request.data.get('nro_documento', None))
+            if user:
+                data["msg"]="Ya existe el usuario"
+                return Response(data,status.HTTP_400_BAD_REQUEST)
+        except User.DoesNotExist:
+            pass
         serializer = DocenteSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()

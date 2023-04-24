@@ -77,6 +77,10 @@ class CursoSerializer(serializers.ModelSerializer):
     docente = serializers.SlugRelatedField(read_only=True, slug_field='id')
     tipo_curso = serializers.SlugRelatedField(read_only=True, slug_field='nombre')
 
+    cuestionarios = serializers.SlugRelatedField(read_only=True, slug_field='id', many=True)
+
+    inscripciones = serializers.SlugRelatedField(read_only=True, slug_field='id', many=True)
+
     class Meta:
         model = Curso
         fields = [
@@ -89,14 +93,18 @@ class CursoSerializer(serializers.ModelSerializer):
             'tipo_curso_id',
             'docente',
             'tipo_curso',
-            'creation_date'
+            'creation_date',
+            'cuestionarios',
+            'inscripciones'
         ]
         extra_kwargs = {
             'id': {'read_only': True},
             'docente': {'read_only': True},
             'codigo_inscripcion': {'read_only': True},
             'tipo_curso': {'read_only': True},
-            'creation_date': {'read_only': True}
+            'creation_date': {'read_only': True},
+            'cuestionarios': {'read_only': True},
+            'inscripciones': {'read_only': True},
         }
 
 

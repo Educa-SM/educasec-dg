@@ -1,0 +1,13 @@
+.git
+
+.firebase
+
+.editorconfig
+
+/venv
+
+.gitignore
+
+*.zip
+
+*.md

@@ -63,4 +63,16 @@ class PatrocinadorSerializer(serializers.ModelSerializer):
 class MiembroProyectoSerializer(serializers.ModelSerializer):
     class Meta:
         model = MiembroProyecto
-        fields = '__all__'
+        fields = [
+            'id',
+            'nombre',
+            'descripcion',
+            'cargo',
+            'logo'
+        ]
+        extra_kwargs = {
+            'id': {'read_only': True},
+            'descripcion': {'required': False},
+            'cargo': {'required': False},
+            'logo': {'required': False},
+        }

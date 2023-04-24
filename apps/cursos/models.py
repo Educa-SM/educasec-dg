@@ -1,9 +1,9 @@
 
 from django.db.models import CharField, ForeignKey, IntegerField
-from django.db.models.deletion import CASCADE
+from django.db.models.deletion import CASCADE, SET_NULL
 from django.utils.translation import gettext_lazy as _
 from apps.institucion.models import Alumno, Docente, Institucion
-from educasec.utils.models import BaseModel
+from educasm.utils.models import BaseModel
 
 
 class Nivel(BaseModel):
@@ -72,7 +72,9 @@ class Curso(BaseModel):
     )
     tipo_curso = ForeignKey(
         TipoCurso,
-        on_delete=CASCADE,
+        on_delete=SET_NULL,
+        blank=True,
+        null=True
     )
     docente = ForeignKey(
         Docente,

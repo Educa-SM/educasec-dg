@@ -120,11 +120,8 @@ class CursoInscripcionDetailView(APIView):
         # *** DOCENTE  -> id Curso
         if usuario.is_docente():
             try:
-                docente = Docente.objects.get(
-                    nro_documento=usuario.username)
-                curso = Curso.objects.get(id=id, docente=docente)
                 inscripciones = AlumnoInscripcionCurso.objects.filter(
-                    curso=curso).order_by('id').reverse()
+                    curso__id=id, curso__docente__nro_documento=usuario.username).order_by('id').reverse()
                 serializer = IncripcionCursoDocenteSerializer(
                     inscripciones, many=True)
                 return Response(serializer.data, 200)
