@@ -319,7 +319,7 @@ class MiembroProyectoDetailAPIView(APIView):
     # Eliminar MiembroProyecto con id
     def delete(self, request, id):
         usuario = request.user
-        if usuario.is_admin_sistema():
+        if usuario.is_admin_recursos():
             try:
                 object = self.get_object(id)
                 if object.logo:
