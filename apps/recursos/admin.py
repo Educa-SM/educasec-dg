@@ -26,6 +26,11 @@ class PatrocinadorAdmin(ImportExportModelAdmin, ModelAdmin):
     list_display = ('id', 'nombre', 'descripcion',)
     search_fields = ['id', 'nombre', ]
 
+class MiembroProyectoAdmin(ImportExportModelAdmin, ModelAdmin):
+    resources_class = PatrocinadorResouce
+    list_display = ('id', 'nombre', 'descripcion','cargo')
+    search_fields = ['id', 'nombre', ]
 
 admin.site.register(Patrocinador, PatrocinadorAdmin)
 admin.site.register(Recurso, RecursoAdmin)
+admin.site.register(MiembroProyecto, MiembroProyectoAdmin)
