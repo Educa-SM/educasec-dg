@@ -163,3 +163,6 @@ GitHub.sublime-settings
 !.vscode/extensions.json 
 .history
 www/
+
+
+*.sqlite3
