@@ -32,16 +32,6 @@ class GradoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 
 
 # curso
-class TipoCursoResouce(resources.ModelResource):
-    class Meta:
-        model = TipoCurso
-        fields = ('nombre', 'grado')
-
-
-class TipoCursoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    search_fields = ['nombre', 'grado']
-    list_display = ('nombre', 'grado')
-    resources_class = TipoCursoResouce
 
 
 class CursoAdmin(admin.ModelAdmin):
@@ -56,6 +46,5 @@ class AlumnoInscripcionCursoAdmin(admin.ModelAdmin):
 
 admin.site.register(Nivel, NivelAdmin)
 admin.site.register(Grado, GradoAdmin)
-admin.site.register(TipoCurso, TipoCursoAdmin)
 admin.site.register(Curso, CursoAdmin)
 admin.site.register(AlumnoInscripcionCurso, AlumnoInscripcionCursoAdmin)

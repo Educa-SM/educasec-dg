@@ -107,7 +107,6 @@ class CuestionarioListSerializer(serializers.ModelSerializer):
         fields = [
             'id',
             'nombre',
-            'descripcion',
             'fecha_asignacion',
             'fecha_expiracion',
             'curso',

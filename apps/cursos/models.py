@@ -36,23 +36,6 @@ class Grado(BaseModel):
         return self.nombre
 
 
-class TipoCurso(BaseModel):
-    nombre = CharField(
-        'Nombre',
-        max_length=150,
-        blank=False,
-        null=False,
-    )
-    grado = ForeignKey(
-        Grado,
-        related_name='tipos_cursos',
-        on_delete=CASCADE,
-    )
-
-    def __str__(self):
-        return f'{self.nombre} - {self.grado.nombre}'
-
-
 
 # ******************  Inscripcion de Cursos   *********************
 class Curso(BaseModel):
@@ -70,8 +53,8 @@ class Curso(BaseModel):
         blank=False,
         null=False,
     )
-    tipo_curso = ForeignKey(
-        TipoCurso,
+    grado = ForeignKey(
+        Grado,
         on_delete=SET_NULL,
         blank=True,
         null=True
@@ -96,7 +79,7 @@ class Curso(BaseModel):
         return self.nombre
 
     def save(self, **kwargs):
-        self.codigo_inscripcion = (self.nombre[0] + self.tipo_curso.nombre[0] +
+        self.codigo_inscripcion = (self.nombre[0] + self.grado.nombre[0] +
                                    self.docente.nombres[0]+self.institucion.nombre[0] +
                                    str(Curso.objects.count()+1))
         super(Curso, self).save(**kwargs)
