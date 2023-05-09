@@ -29,7 +29,7 @@ urlpatterns = [
     path('pregunta/', PreguntaView.as_view()),
     
     path('cuestionario_curso/<int:id>/', CuestionarioCursoView.as_view()),
-    path('cuestionario/imagen/<int:id>', CuestionarioImagenView.as_view()),
+    path('cuestionario/imagen/<int:id>/', CuestionarioImagenView.as_view()),
     path('cuestionario/<int:id>/', CuestionarioDetailView.as_view()),
     path('cuestionario/', CuestionarioView.as_view()),
 
