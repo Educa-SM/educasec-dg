@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from rest_framework import status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -14,9 +15,20 @@ class CuestionarioCursoView(APIView):
         try:
             usuario = request.user
             if usuario.is_docente():
-                cuestionarios = Cuestionario.objects.filter(curso__id = id).order_by('id').reverse()
-                serializer = CuestionarioListSerializer(cuestionarios, many=True)
-                return Response(serializer.data, status.HTTP_200_OK)
+                page = request.query_params.get('page', 1)
+                page_size = request.query_params.get('page_size', 1)
+                search = request.query_params.get('search', '')
+                cuestionarios = Cuestionario.objects.filter(
+                    curso__id = id
+                ).filter(
+                    nombre__icontains = search
+                ).order_by('id').reverse()
+                paginator = Paginator(cuestionarios, page_size)
+                serializer = CuestionarioListSerializer(paginator.get_page(page), many=True)
+                return Response({
+                    'data': serializer.data,
+                    'numPages': paginator.num_pages,
+                }, status.HTTP_200_OK)
             else:
                 return Response({'msg': 'No Autorizado.'}, status.HTTP_401_UNAUTHORIZED)
         except Cuestionario.DoesNotExist or Curso.DoesNotExist:

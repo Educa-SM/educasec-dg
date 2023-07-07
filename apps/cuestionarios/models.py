@@ -55,11 +55,7 @@ class Cuestionario(BaseModel):
 
 # *****************   Cuestionario    *******************
 class Pregunta(BaseModel):
-    texto = CharField(
-        'Detalle',
-        max_length=500,
-        blank=False, null=False,
-    )
+    texto = TextField( 'Detalle',blank=True, null=True)
     tipo = CharField(
         'Tipo de Pregunta',
         max_length=1,

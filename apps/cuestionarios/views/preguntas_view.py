@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -12,9 +13,18 @@ class PreguntaCursoView(APIView):
         try:
             usuario = request.user
             if usuario.is_docente():
-                preguntas = Pregunta.objects.filter(cuestionario__curso__id=id).order_by('id').reverse()
-                serializer = PreguntaSerializer(preguntas, many=True)
-                return Response(serializer.data, 200)
+                page = request.query_params.get('page', 1)
+                page_size = request.query_params.get('page_size', 1)
+                search = request.query_params.get('search', '')
+                preguntas = Pregunta.objects.filter(
+                    cuestionario__curso__id=id
+                ).filter(texto__icontains=search).order_by('-id')
+                paginator = Paginator(preguntas, page_size)
+                serializer = PreguntaSerializer(paginator.get_page(page), many=True)
+                return Response({
+                    'data': serializer.data,
+                    'numPages': paginator.num_pages,
+                }, 200)
             else:
                 return Response({'msg': 'No autorizado'}, 401)
         except Pregunta.DoesNotExist:
@@ -55,10 +65,19 @@ class PreguntaDetailView(APIView):
             grado = Grado.objects.get(id=id)
             usuario = request.user
             if usuario.is_docente():
+                page = request.query_params.get('page', 1)
+                page_size = request.query_params.get('page_size', 1)
+                search = request.query_params.get('search', '')
+
                 preguntas = Pregunta.objects.filter(
-                    cuestionario__curso__grado=grado).order_by('id').reverse()
-                serializer = PreguntaSerializer(preguntas, many=True)
-                return Response(serializer.data, 200)
+                        cuestionario__curso__grado=grado
+                    ).filter(texto__icontains=search).order_by('id').reverse()
+                paginator = Paginator(preguntas, page_size)
+                serializer = PreguntaSerializer(paginator.get_page(page), many=True)
+                return Response({
+                    'data': serializer.data,
+                    'numPages': paginator.num_pages,
+                }, 200)
             else:
                 return Response({'msg': 'No autorizado'}, 401)
         except Grado.DoesNotExist or Pregunta.DoesNotExist:
