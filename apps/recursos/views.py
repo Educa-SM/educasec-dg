@@ -14,11 +14,12 @@ class RecursoListAPIView(APIView):
     authentication_classes = [TokenAuthentication]
 
     def get(self, request, *args, **kwargs):
-        data = {}
         estate = request.query_params.get('estate', None)
         page = request.query_params.get('page', 1)
         page_size = request.query_params.get('page_size', 1)
-        recursos = Recurso.objects.all().order_by('-id')
+        search = request.query_params.get('search', '')
+
+        recursos = Recurso.objects.filter(titulo__icontains=search).order_by('-id')
 
         if estate:
             if estate == 'true':
@@ -29,10 +30,10 @@ class RecursoListAPIView(APIView):
 
         paginator = Paginator(recursos, page_size)
         serializer = RecursoSerializer2(paginator.get_page(page), many=True)
-
-        data['data'] = serializer.data
-        data['numPages'] = paginator.num_pages
-
+        data = {
+            'data':serializer.data,
+            'numPages':paginator.num_pages
+        }
         return Response(data, status.HTTP_200_OK)
 
     # Creacion de Recurso
@@ -236,9 +237,19 @@ class PatrocinadorPublicAPIView(APIView):
     # Obtener Lista de Patrocinadores
     def get(self, request):
         try:
-            object = Patrocinador.objects.all().order_by('id').reverse()
-            serializer = PatrocinadorSerializer(object, many=True)
-            return Response(serializer.data, status.HTTP_200_OK)
+            page = request.query_params.get('page', 1)
+            page_size = request.query_params.get('page_size', 1)
+            search = request.query_params.get('search', '')
+
+            patrocinadores = Patrocinador.objects.filter(nombre__icontains=search).order_by('-id')
+            paginator = Paginator(patrocinadores, page_size)
+            serializer = PatrocinadorSerializer(paginator.get_page(page), many=True)
+
+            data = {
+                'data': serializer.data,
+                'numPages': paginator.num_pages
+            }
+            return Response(data, status.HTTP_200_OK)
         except:
             return Response({'msg': 'Error Inesperado.'}, status.HTTP_400_BAD_REQUEST)
 
