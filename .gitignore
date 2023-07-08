@@ -164,6 +164,4 @@ GitHub.sublime-settings
 .history
 www/
 
-
-*.sqlite3
-db.sqlite3
+main.json

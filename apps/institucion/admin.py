@@ -46,6 +46,19 @@ class AlumnoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resources_class = AlumnoResource
 
 
+class MensajeInicioResource (resources.ModelResource):
+    class Meta:
+        model = MensajeInicio
+        fields = ('titulo', 'fecha_inicio', 'fecha_fin')
+
+
+class MensajeInicioAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    search_fields = ['titulo', ]
+    list_display = ('titulo', 'fecha_inicio', 'fecha_fin')
+    resources_class = MensajeInicioResource
+
+
 admin.site.register(Docente, DocenteAdmin)
 admin.site.register(Institucion, InstitucionAdmin)
 admin.site.register(Alumno, AlumnoAdmin)
+admin.site.register(MensajeInicio, MensajeInicioAdmin)

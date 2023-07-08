@@ -11,3 +11,9 @@ eliminar un docker
 
 -- antes de correr el sistema
 asegurarse de caargar la data.
+
+-- guardar backup
+> python manage.py dumpdata -o main.json 
+
+-- ingresar backup
+> python manage.py loaddata mydata.json
