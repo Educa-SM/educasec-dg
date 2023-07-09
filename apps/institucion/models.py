@@ -144,7 +144,7 @@ class MensajeInicio(BaseModel):
         null=True,
     )
 
-    docente = ForeignKey( Docente, on_delete=SET_NULL, blank=True, null=True)
+    usuario = ForeignKey( User, on_delete=SET_NULL, blank=True, null=True)
 
     def __str__(self):
         return self.titulo

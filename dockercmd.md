@@ -16,4 +16,4 @@ asegurarse de caargar la data.
 > python manage.py dumpdata -o main.json 
 
 -- ingresar backup
-> python manage.py loaddata mydata.json
+> python manage.py loaddata main.json
