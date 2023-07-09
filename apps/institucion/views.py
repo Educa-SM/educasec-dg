@@ -2,6 +2,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import *
 from educasm.utils.errors import NotAuthError, ServerError
+import datetime
 
 class InstitucionesView(APIView):
     def get(self, request):
@@ -11,10 +12,10 @@ class InstitucionesView(APIView):
     
 class MensajeInicioView(APIView):
     def get(self, request):
+        usuario = request.user
+        if not  usuario.is_admin_recursos():
+            raise NotAuthError("No autorizado")
         try:
-            usuario = request.user
-            if not  usuario.is_admin_recursos():
-                raise NotAuthError("No autorizado")
             mensajes = MensajeInicio.objects.all()
             serializer = MensajeInicioSerializer(mensajes, many=True)
             return Response(serializer.data)   
@@ -22,27 +23,29 @@ class MensajeInicioView(APIView):
             raise ServerError("Error inesperado")
     
     def post(self, request):
+        usuario = request.user
+        if not usuario.is_admin_recursos():
+            raise NotAuthError("No autorizado")
         try:
-            usuario = request.user
-            if not usuario.is_admin_recursos():
-                raise NotAuthError("No autorizado")
             serializer = MensajeInicioSerializer(data=request.data)
             if serializer.is_valid():
-                serializer.save()
+                serializer.save(usuario=usuario)
                 return Response(serializer.data)
             raise ServerError("Datos invalidos")
         except:
-            raise ServerError("Error inesperado")
+            raise ServerError("Error en Datos")
     
 class MensajeInicioDetailView(APIView):
     def put(self, request, id):
+        usuario = request.user
+        if not usuario.is_admin_recursos():
+            raise NotAuthError("No autorizado")
         try:
-            usuario = request.user
-            if not usuario.is_admin_recursos():
-                raise NotAuthError("No autorizado")
             mensaje = MensajeInicio.objects.get(id=id)
             serializer = MensajeInicioSerializer(mensaje, data=request.data)
             if serializer.is_valid():
+                if 'imagen' in serializer.validated_data:
+                    mensaje.imagen.delete()
                 serializer.save()
                 return Response(serializer.data)
             raise ServerError("Datos invalidos")
@@ -57,5 +60,16 @@ class MensajeInicioDetailView(APIView):
             mensaje = MensajeInicio.objects.get(id=id)
             mensaje.delete()
             return Response('Mensaje eliminado')
+        except:
+            raise ServerError("Error inesperado")
+        
+class MensajesHoyView(APIView):
+    def get(self, request):
+        try:
+            # query django for compare fecha inicio y fecha fin con la fecha actual
+            fecha_actual = datetime.date.today()
+            mensajes = MensajeInicio.objects.filter(fecha_inicio__lte=fecha_actual, fecha_fin__gte=fecha_actual)
+            serializer = MensajeInicioPublicoSerializer(mensajes, many=True)
+            return Response(serializer.data)
         except:
             raise ServerError("Error inesperado")
