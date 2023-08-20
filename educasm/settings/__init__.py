@@ -140,7 +140,7 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 XS_SHARING_ALLOWED_METHODS = ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', ]
 
 
-##if DEBUG:
-from .local import *
-##else:
-##    from .production import *
+if DEBUG:
+    from .local import *
+else:
+    from .production import *
