@@ -10,11 +10,6 @@ ALLOWED_HOSTS = [
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 DATABASES = db.SQLITE
 
-CORS_ALLOW_CREDENTIALS = True
-
-CORS_ORIGIN_ALLOW_ALL = True
-
-CORS_ALLOW_CREDENTIALS = True
 
 #CORS_ORIGIN_ALLOW_ALL = False
 
@@ -32,3 +27,9 @@ CSRF_TRUSTED_ORIGINS = [
     'http://sv-rvbfwpnmzd.cloud.elastika.pe',
     'http://localhost:4200',
 ]
+
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ALLOW_CREDENTIALS = True
