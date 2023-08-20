@@ -26,4 +26,5 @@ CSRF_TRUSTED_ORIGINS = [
     'https://sv-rvbfwpnmzd.cloud.elastika.pe',
     'http://sv-rvbfwpnmzd.cloud.elastika.pe',
     'http://localhost:4200',
+    'sv-rvbfwpnmzd.cloud.elastika.pe'
 ]
