@@ -16,4 +16,6 @@ CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:4200',
     'https://educasm-peru2.web.app',
+    'https://sv-rvbfwpnmzd.cloud.elastika.pe',
+    'sv-rvbfwpnmzd.cloud.elastika.pe'
 )
