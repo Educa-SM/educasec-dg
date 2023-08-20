@@ -26,7 +26,7 @@ CSRF_TRUSTED_ORIGINS = [
 #DATABASES = db.POSTGRESQL
 DATABASES = db.SQLITE
 
-CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_ALLOW_ALL = True
 #CORS_ORIGIN_ALLOW_ALL = False
 
 CORS_ORIGIN_WHITELIST = (
@@ -34,6 +34,12 @@ CORS_ORIGIN_WHITELIST = (
     'http://127.0.0.1:8000',
     'http://0.0.0.0:*',
     'https://sv-rvbfwpnmzd.cloud.elastika.pe',
+    'https://sv-rvbfwpnmzd.cloud.elastika.pe:*',
     'http://sv-rvbfwpnmzd.cloud.elastika.pe',
     'https://educasm-peru2.web.app',
 )
+
+
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
+SECURE_SSL_REDIRECT = False
