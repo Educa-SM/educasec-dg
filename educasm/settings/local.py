@@ -19,3 +19,11 @@ CORS_ORIGIN_WHITELIST = (
     'https://sv-rvbfwpnmzd.cloud.elastika.pe',
     'http://sv-rvbfwpnmzd.cloud.elastika.pe'
 )
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://educasm-peru.site',
+    'https://www.educasm-peru.site',
+    'https://sv-rvbfwpnmzd.cloud.elastika.pe',
+    'http://sv-rvbfwpnmzd.cloud.elastika.pe',
+    'http://localhost:4200',
+]
