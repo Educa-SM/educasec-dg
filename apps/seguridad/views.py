@@ -56,12 +56,10 @@ class LoginView(APIView):
                 data['msg'] = 'Contraseña incorrecta.'
                 return Response(data, status.HTTP_401_UNAUTHORIZED)
 
-            token, created = Token.objects.get_or_create(user=user)
-
-            data['token'] = token.key
-            data['created'] = created
-
             if user.is_valid_user():
+                token, created = Token.objects.get_or_create(user=user)
+                data['token'] = token.key
+                data['created'] = created
                 valid_user = False
 
                 if user.is_admin_sistema():
