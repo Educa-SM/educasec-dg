@@ -41,7 +41,7 @@ class CursoAdmin(admin.ModelAdmin):
 
 
 class AlumnoInscripcionCursoAdmin(admin.ModelAdmin):
-    list_display = ('id', 'alumno', 'curso', 'creation_date')
+    list_display = ('id', 'alumno', 'curso','estate' ,'creation_date')
 
 
 admin.site.register(Nivel, NivelAdmin)

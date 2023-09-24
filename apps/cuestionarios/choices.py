@@ -2,6 +2,26 @@ from django.db.models import TextChoices
 from django.utils.translation import gettext_lazy as _
 
 
+class EstadoCuestionario(TextChoices):
+    ACTIVO = 'A', _('Activo')
+    INACTIVO = 'I', _('Inactivo')
+
+class EstadoPregunta(TextChoices):
+    ACTIVO = 'A', _('Activo')
+    INACTIVO = 'I', _('Inactivo')
+
+class EstadoOpcionPregunta(TextChoices):
+    ACTIVO = 'A', _('Activo')
+    INACTIVO = 'I', _('Inactivo')
+
+class EstadoSolucion(TextChoices):
+    ACTIVO = 'A', _('Activo')
+    INACTIVO = 'I', _('Inactivo')
+
+class EstadoSolucionPregunta(TextChoices):
+    ACTIVO = 'A', _('Activo')
+    INACTIVO = 'I', _('Inactivo')
+
 class SituacionRespuesta(TextChoices):
     BUENA = 'B', _('Buena')
     PASABLE = 'P', _('Pasable')
@@ -16,3 +36,4 @@ class TipoPregunta(TextChoices):
 class SituacionPregunta(TextChoices):
     CORRECTA = 'C', _('Correcta')
     INCORRECTA = 'I', _('Incorrecta')
+

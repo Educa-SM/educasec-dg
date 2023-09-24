@@ -57,8 +57,9 @@ class CursoView(APIView):
                 docente = Docente.objects.get(
                     nro_documento=usuario.username)
                 if curso.docente == docente:
-                    curso.estate = 'I'
-                    curso.save()
+                    #curso.estate = 'I'
+                    #curso.save()
+                    curso.delete()
                     return Response(status=204)
                 else:
                     return Response({'msg': 'No le pertenece este curso'}, 401)
@@ -114,7 +115,6 @@ class CursoIdView(APIView):
 class CursoInscripcionDetailView(APIView):
     permission_classes = [IsAuthenticated]
     # id del Curso retorna las inscripciones
-    # id del curso inscripcion del alumno
     def get(self, request, id):
         usuario = request.user
         # *** DOCENTE  -> id Curso
@@ -128,15 +128,15 @@ class CursoInscripcionDetailView(APIView):
                 # return Response({'msg':'ok'},200)
             except Alumno.DoesNotExist or Curso.DoesNotExist:
                 return Response({'msg': 'No Existe el curso'}, 404)
+    # id del curso inscripcion del alumno
         elif usuario.is_alumno():
-            
             try:
                 alumno = Alumno.objects.get(
                     nro_documento=usuario.username)
                 curso = Curso.objects.get(id=id)
                
                 inscripciones = AlumnoInscripcionCurso.objects.filter(
-                    alumno=alumno, curso=curso).first()
+                    alumno=alumno, curso=curso, estate='D').first()
                 serializer = IncripcionCursoSerializer(
                     inscripciones)
                 return Response(serializer.data, 200)
