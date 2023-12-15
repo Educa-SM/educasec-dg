@@ -70,7 +70,13 @@ class SolucionCuestionarioView(APIView):
 
 """
 Solucion de cuestionarios por parte del alumno
+
+1. Iniciar solucion -> POST
+2. Obtener detalle de la solucion -> GET, POST
+
+
 """
+
 class SolucionCursoView(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication]

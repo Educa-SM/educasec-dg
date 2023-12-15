@@ -67,3 +67,13 @@ class User (AbstractBaseUser, PermissionsMixin):
 
     def is_alumno(self): #4
         return self.is_user_group(GroupChoices.ALUMNO)
+
+    def validate_user(self, option:int):
+        if option == GroupChoices.DOCENTE:
+            return self.is_docente()
+        elif option == GroupChoices.ALUMNO:
+            return self.is_alumno()
+        elif option == GroupChoices.ADMIN_RECURSOS:
+            return self.is_admin_recursos()
+        else:
+            return False

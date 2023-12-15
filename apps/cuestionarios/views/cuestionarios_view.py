@@ -126,8 +126,8 @@ class CuestionarioImagenView(APIView):
                 return Response({'msg': 'El cuestionario No Existe'}, 404)
         else:
             return Response({'msg': 'No autorizado'}, 401)
-# *************************ALUMNO*************************************************
 
+# *************************ALUMNO*************************************************
 """ 
 listar cueestionario de un alumno por su id de curso docente 
 CUESTIONARIOS QUE AUN NO RESUELVE

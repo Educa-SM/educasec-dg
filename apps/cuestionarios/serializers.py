@@ -149,9 +149,10 @@ class CuestionarioSerializer(serializers.ModelSerializer):
             'curso': {'required': False,'read_only': True},
             'imagen': {'read_only': True},
             'institucion_id': {'read_only': True},
+            'preguntas': {'required': False, 'read_only': True},
         }
 
-    def create(self, validated_data):
+    """def create(self, validated_data):
         preguntas = validated_data.pop('preguntas', [])
         cuestionario = Cuestionario.objects.create(**validated_data)
         # pregunta del cuestionario
@@ -162,31 +163,14 @@ class CuestionarioSerializer(serializers.ModelSerializer):
                 preguntaSerializer = PreguntaSerializer(pregunta)
                 data_pregunta = preguntaSerializer.create(pregunta)
             cuestionario.preguntas.add(data_pregunta)
-        return cuestionario
+        return cuestionario"""
 
     def update(self, instance, validated_data):
-        preguntas = validated_data.pop('preguntas', [])
         instance.nombre = validated_data.get('nombre', instance.nombre)
         instance.descripcion = validated_data.get('descripcion', instance.nombre)
         instance.fecha_asignacion = validated_data.get('fecha_asignacion', instance.fecha_asignacion)
         instance.fecha_expiracion = validated_data.get('fecha_expiracion', instance.fecha_expiracion)
         instance.save()
-        # eliminar preguntasCuestionario no ha sido enviado
-        """ for preguntaInst in instance.preguntas.all():
-            if not [el for el in preguntas if ('id' in el) and (el['id'] == preguntaInst.id)]:
-                #instance.preguntas.remove(preguntaInst)
-                preguntaInst.delete()
-        for preguntaInst in preguntas:
-            preguntaSerializer = PreguntaSerializer(preguntaInst)
-            # pregunta cuestionario no tiene id
-            if not 'id' in preguntaInst:
-                preguntaResp = preguntaSerializer.create(preguntaInst)
-                instance.preguntas.add(preguntaResp)
-            else:
-                pregunta = Pregunta.objects.get(id=preguntaInst["id"])
-                preguntaResp = preguntaSerializer.update(pregunta, preguntaInst)
-                if Cuestionario.objects.filter(preguntas__id=preguntaResp.id).count() == 0:
-                    instance.preguntas_banco.add(preguntaResp)"""
         return instance
 
 
