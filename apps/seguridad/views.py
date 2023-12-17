@@ -10,7 +10,7 @@ from rest_framework.views import APIView
 from apps.institucion.models import Alumno, Docente
 from apps.seguridad.models import User
 from apps.seguridad.serializers import AlumnoSerializer, ChangePasswordSerializer, DocenteSerializer
-
+from rest_framework.decorators import api_view, permission_classes
 
 class RegisterDocenteView(APIView):
     def post(self, request):
@@ -57,9 +57,6 @@ class LoginView(APIView):
                 return Response(data, status.HTTP_401_UNAUTHORIZED)
 
             if user.is_valid_user():
-                token, created = Token.objects.get_or_create(user=user)
-                data['token'] = token.key
-                data['created'] = created
                 valid_user = False
 
                 if user.is_admin_sistema():
@@ -69,6 +66,9 @@ class LoginView(APIView):
                 elif user.is_docente() or user.is_admin_recursos():
                     docente = Docente.objects.filter(nro_documento=user.username).first()
                     if docente:
+                        if docente.estate == 'P':
+                            data['msg'] = 'Usuario pendiente de aprobación.'
+                            return Response(data, status.HTTP_401_UNAUTHORIZED)
                         data['usuario'] = DocenteSerializer(docente).data
                         data['tipo'] = 'docente'
                         valid_user = True
@@ -81,6 +81,9 @@ class LoginView(APIView):
                         valid_user = True
 
                 if valid_user:
+                    token, created = Token.objects.get_or_create(user=user)
+                    data['token'] = token.key
+                    data['created'] = created
                     return Response(data, status.HTTP_200_OK)
 
             data['msg'] = 'Usuario invalido.'
@@ -125,3 +128,32 @@ class ChangePasswordView(APIView):
             data['old_password'] = ['Contraseña incorrecta']
             return Response(data, status.HTTP_400_BAD_REQUEST)
         return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
+
+
+# --- aceptar docente con permission_classes IsAuthenticated
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def aceptar_docente(request):
+    respuesta = {}
+    datos = request.data
+    docente_id = datos['docente_id']
+    estate = datos['estate']
+    try:
+        docente = Docente.objects.get(id=docente_id)
+    except Docente.DoesNotExist:
+        respuesta['msg'] = 'El docente no existe'
+        return Response(respuesta, status.HTTP_404_NOT_FOUND)
+    
+    if docente.estate == estate:
+        respuesta['msg'] = 'El docente tiene el mismo estado'
+        return Response(respuesta, status.HTTP_400_BAD_REQUEST)
+    
+    docente.estate = estate
+    docente.save()
+    respuesta = {
+        'docente_id': docente_id,
+        'estado': docente.estate,
+        'msg': 'El estado fue actualizado correctamente',
+        'status': 'success',
+    }
+    return Response(respuesta, status.HTTP_200_OK)

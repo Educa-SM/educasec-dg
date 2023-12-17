@@ -10,10 +10,10 @@ class BaseModel(models.Model):
         auto_now=True,
     )
     
-    estate = models.CharField(
+    """estate = models.CharField(
         max_length=1,
         default='A',
-    )
+    )"""
 
     class Meta:
         abstract = True

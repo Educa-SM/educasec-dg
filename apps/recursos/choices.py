@@ -27,3 +27,27 @@ class TipoRecursoChoices(TextChoices):
         dict['value'] = self.get_value()
         dict['label'] = self.get_label()
         return dict
+
+class EstadoRecurso(TextChoices):
+    ACTIVO = 'A', _('Activo')
+    INACTIVO = 'I', _('Inactivo')
+
+class EstadoTipoJuego(TextChoices):
+    ACTIVO = 'A', _('Activo')
+    INACTIVO = 'I', _('Inactivo')
+
+class EstadoJuego(TextChoices):
+    ACTIVO = 'A', _('Activo')
+    INACTIVO = 'I', _('Inactivo')
+
+class EstadoOpcionJuego(TextChoices):
+    ACTIVO = 'A', _('Activo')
+    INACTIVO = 'I', _('Inactivo')
+
+class EstadoPatrocinador(TextChoices):
+    ACTIVO = 'A', _('Activo')
+    INACTIVO = 'I', _('Inactivo')
+
+class EstadoMiembroProyecto(TextChoices):
+    ACTIVO = 'A', _('Activo')
+    INACTIVO = 'I', _('Inactivo')

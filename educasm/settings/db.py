@@ -2,6 +2,7 @@ from decouple import config
 from . import BASE_DIR
 
 
+
 POSTGRESQL = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -17,5 +18,17 @@ SQLITE = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR/'db.sqlite3',
+    }
+}
+
+
+MYSQL = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'NAME': 'educasm',
+        'USER': 'root',
+        'PASSWORD':'',
     }
 }
