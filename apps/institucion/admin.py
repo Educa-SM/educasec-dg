@@ -8,14 +8,14 @@ class DocenteResource (resources.ModelResource):
     class Meta:
         model = Docente
         fields = ('nro_documento', 'nombres', 'apellido_paterno',
-                  'apellido_materno', 'tipo_documento', 'user')
+                  'apellido_materno', 'tipo_documento', 'user','estate')
 
 
 class DocenteAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     search_fields = ['nro_documento', 'nombres',
                      'apellido_paterno', 'apellido_materno']
     list_display = ('nro_documento', 'tipo_documento', 'nombres',
-                    'apellido_paterno', 'apellido_materno', 'user')
+                    'apellido_paterno', 'apellido_materno', 'user','estate')
     resources_class = DocenteResource
 
 

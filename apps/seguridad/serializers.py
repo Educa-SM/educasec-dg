@@ -66,6 +66,7 @@ class DocenteSerializer(ModelSerializer):
         user.groups.add(2)
         instituciones = validated_data.pop('instituciones')
         docente = Docente(**validated_data, user=user)
+        docente.estate = 'P'
         docente.save()
         if not docente.id:
             user.delete()

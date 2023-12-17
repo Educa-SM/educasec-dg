@@ -3,6 +3,9 @@ from rest_framework.views import APIView
 from .serializers import *
 from educasm.utils.errors import NotAuthError, ServerError
 import datetime
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework import status
 
 class InstitucionesView(APIView):
     def get(self, request):
@@ -73,3 +76,61 @@ class MensajesHoyView(APIView):
             return Response(serializer.data)
         except:
             raise ServerError("Error inesperado")
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_docentes_pendientes(request):
+    try:
+        usuario = request.user
+        if not usuario.is_admin_recursos():
+           return Response({'msg': 'No Autorizado.'}, status.HTTP_401_UNAUTHORIZED)
+        docentes = Docente.objects.filter(estate='P')
+        serializer = DocenteSerializer(docentes, many=True)
+        return Response(serializer.data)
+    except:
+        raise ServerError("Error inesperado")
+    
+
+# info for dashboard - docente -> login
+# Institucion : #cursos, #docentes
+"""
+instituciones: {
+    "nombre": "Institucion",
+    "id": 1,
+    "cursos": 10,
+    "docentes": 20
+}
+"""
+# Cuestionarios : activpos, pendientes, finalizados    
+"""
+cuestionario: {
+    "activos": 10,
+    "pendientes": 20,
+    "finalizados": 30
+}
+"""
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_info_dashboard_docente(request):
+    try:
+        usuario = request.user
+        if not usuario.is_docente():
+           return Response({'msg': 'No Autorizado.'}, status.HTTP_401_UNAUTHORIZED)
+        instituciones = Institucion.objects.filter(docente__id=usuario.docente.id)
+        """institucion = Institucion.objects.get(id=usuario.docente.institucion.id)
+        cursos = Curso.objects.filter(institucion=institucion)
+        cuestionarios = Cuestionario.objects.filter(curso__in=cursos)
+        serializer = InstitucionSerializer(institucion)
+        serializer_cuestionarios = CuestionarioDashboardSerializer(cuestionarios, many=True)
+        return Response({
+            'institucion': serializer.data,
+            'cuestionarios': serializer_cuestionarios.data
+        })"""
+        data = {
+            "instituciones": instituciones.count(),
+        }
+        return Response(data)
+    except:
+        raise ServerError("Error inesperado")
+    pass

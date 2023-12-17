@@ -3,43 +3,17 @@ from django.db.models import CharField, FileField, ForeignKey, ImageField, URLFi
 from django.db.models.deletion import CASCADE
 from django.forms import model_to_dict
 from apps.institucion.models import Institucion
-from apps.recursos.choices import TipoRecursoChoices
+from apps.recursos.choices import *
 from educasm.utils.defs import upload_to
 from educasm.utils.models import BaseModel
 
 
 class Recurso(BaseModel):
-    titulo = CharField(
-        'Título',
-        max_length=500,
-        default='',
-        blank=False,
-        null=False,
-    )
-    descripcion = TextField(
-        'Descripción',
-        blank=False,
-        null=False,
-    )
-    contenido = CharField(
-        'Contenido',
-        max_length=500,
-        blank=True,
-        null=True,
-    )
-    tipo = CharField(
-        'Tipo',
-        max_length=1,
-        choices=TipoRecursoChoices.choices,
-        blank=False,
-        null=False,
-    )
-    institucion = ForeignKey(
-        Institucion,
-        on_delete=CASCADE,
-        blank=True,
-        null=True,
-    )
+    titulo = CharField( 'Título', max_length=500, default='', blank=False, null=False,)
+    descripcion = TextField( 'Descripción', blank=False, null=False,)
+    contenido = CharField( 'Contenido', max_length=500, blank=True, null=True,)
+    tipo = CharField( 'Tipo', max_length=1, choices=TipoRecursoChoices.choices, blank=False, null=False,)
+    institucion = ForeignKey( Institucion, on_delete=CASCADE, blank=True, null=True,)
     original_filename = FileField(
         'Archivo Original',
         upload_to=upload_to(
@@ -55,6 +29,8 @@ class Recurso(BaseModel):
         null=False,
     )
 
+    estate = CharField( 'Estado', max_length=1, choices=EstadoRecurso.choices, default=EstadoRecurso.ACTIVO,)
+
     def __str__(self):
         return self.titulo
 
@@ -69,32 +45,18 @@ class Recurso(BaseModel):
 
 
 class TipoJuego(BaseModel):
-    nombre = CharField(
-        'Nombre',
-        max_length=100,
-        null=False,
-        unique=True,
-    )
+    nombre = CharField( 'Nombre', max_length=100, null=False, unique=True, )
+    estate = CharField( 'Estado', max_length=1, choices=EstadoTipoJuego.choices, default=EstadoTipoJuego.ACTIVO,)
 
     def __str__(self):
         return self.nombre
 
 
 class Juego(BaseModel):
-    texto = CharField(
-        'Texto',
-        max_length=255,
-        null=True,
-        blank=True,
-    )
-    recurso = ForeignKey(
-        Recurso,
-        on_delete=CASCADE,
-    )
-    tipo_juego = ForeignKey(
-        TipoJuego,
-        on_delete=CASCADE,
-    )
+    texto = CharField( 'Texto', max_length=255, null=True, blank=True, )
+    recurso = ForeignKey( Recurso, on_delete=CASCADE, )
+    tipo_juego = ForeignKey( TipoJuego, on_delete=CASCADE, )
+    estate = CharField( 'Estado', max_length=1, choices=EstadoJuego.choices, default=EstadoJuego.ACTIVO,)
 
     def __str__(self):
         return self.texto
@@ -117,7 +79,7 @@ class OpcionJuego(BaseModel):
         Juego,
         on_delete=CASCADE,
     )
-
+    estate =  CharField( 'Estado', max_length=1, choices=EstadoOpcionJuego.choices, default=EstadoOpcionJuego.ACTIVO,)
     def __str__(self):
         return self.texto
 
@@ -167,7 +129,7 @@ class Patrocinador(BaseModel):
         blank=True,
         null=True,
     )
-
+    estate = CharField( 'Estado', max_length=1, choices=EstadoPatrocinador.choices, default=EstadoPatrocinador.ACTIVO,)
     def __str__(self):
         return self.nombre
 
@@ -199,6 +161,8 @@ class MiembroProyecto(BaseModel):
         blank=True,
         null=True,
     )
+
+    estate = CharField( 'Estado', max_length=1, choices=EstadoMiembroProyecto.choices, default=EstadoMiembroProyecto.ACTIVO,)
 
     def __str__(self):
         return self.nombre

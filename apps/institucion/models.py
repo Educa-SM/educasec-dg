@@ -4,15 +4,15 @@ from django.db.models import (
     DateField,ImageField
 )
 from django.db.models.deletion import CASCADE, SET_NULL
-from django.utils.translation import gettext_lazy as _
 from apps.seguridad.models import User
 from educasm.utils.models import BaseModel
-from .choices import TipoDocIdentidad
+from .choices import *
 from educasm.utils.defs import upload_to
 
 class Institucion(BaseModel):
     nombre = CharField( 'Nombre', max_length=255, null=False, blank=False, )
     direccion = CharField( 'Direccion', max_length=255, blank=True, null=True, )
+    estate = CharField( 'Estado', max_length=1, choices=EstadoInstitucion.choices, default=EstadoInstitucion.ACTIVO,)
 
     def __str__(self):
         return self.nombre
@@ -23,15 +23,13 @@ class Docente(BaseModel):
     apellido_paterno = CharField( 'Apellido Paterno', max_length=150, null=False, blank=False, )
     apellido_materno = CharField( 'Apellido Materno', max_length=150, null=False, blank=False, )
     direccion = CharField( 'Direccion', max_length=255, blank=True, null=True, )
-    tipo_documento = CharField( 'Tipo de Documento', max_length=3,
-        choices=TipoDocIdentidad.choices,
-        default=TipoDocIdentidad.DNI, )
-    nro_documento = CharField( 'Numero de Documento de Identidad',
-        unique=True, max_length=12, )
+    tipo_documento = CharField( 'Tipo de Documento', max_length=3, choices=TipoDocIdentidad.choices, default=TipoDocIdentidad.DNI, )
+    nro_documento = CharField( 'Numero de Documento de Identidad', unique=True, max_length=12, )
+    estate = CharField( 'Estado', max_length=1, choices=EstadoDocente.choices, default=EstadoDocente.PENDIENTE,)
 
     user = OneToOneField( User, on_delete=CASCADE, )
     instituciones = ManyToManyField(Institucion, )
-
+   
     def __str__(self):
         return self.nombres + ' '+self.apellido_paterno+' '+self.apellido_materno
 
@@ -44,6 +42,7 @@ class Alumno(BaseModel):
     apellido_materno = CharField( 'Apellido Materno', max_length=150, blank=False, )
     tipo_documento = CharField( 'Tipo de Documento', max_length=3, 
             choices=TipoDocIdentidad.choices, default=TipoDocIdentidad.DNI, )
+    estate = CharField( 'Estado', max_length=1, choices=EstadoAlumno.choices, default=EstadoAlumno.ACTIVO,)
     user = OneToOneField( User, on_delete=CASCADE, )
 
     def __str__(self):
@@ -61,6 +60,8 @@ class MensajeInicio(BaseModel):
             path=dt.today().strftime('%Y/%m/%d')
         ), 
         blank=True, null=True, )
+    
+    estate = CharField( 'Estado', max_length=1, choices=EstadoMensajeInicio.choices, default=EstadoMensajeInicio.ACTIVO,)
 
     usuario = ForeignKey( User, on_delete=SET_NULL, blank=True, null=True)
 
