@@ -6,6 +6,8 @@ import datetime
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
+from apps.cursos.models import Curso
+from apps.cuestionarios.models import Cuestionario, Pregunta
 
 class InstitucionesView(APIView):
     def get(self, request):
@@ -92,24 +94,7 @@ def get_docentes_pendientes(request):
         raise ServerError("Error inesperado")
     
 
-# info for dashboard - docente -> login
-# Institucion : #cursos, #docentes
-"""
-instituciones: {
-    "nombre": "Institucion",
-    "id": 1,
-    "cursos": 10,
-    "docentes": 20
-}
-"""
-# Cuestionarios : activpos, pendientes, finalizados    
-"""
-cuestionario: {
-    "activos": 10,
-    "pendientes": 20,
-    "finalizados": 30
-}
-"""
+# info for dashboard - docente
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_info_dashboard_docente(request):
@@ -118,19 +103,50 @@ def get_info_dashboard_docente(request):
         if not usuario.is_docente():
            return Response({'msg': 'No Autorizado.'}, status.HTTP_401_UNAUTHORIZED)
         instituciones = Institucion.objects.filter(docente__id=usuario.docente.id)
-        """institucion = Institucion.objects.get(id=usuario.docente.institucion.id)
-        cursos = Curso.objects.filter(institucion=institucion)
-        cuestionarios = Cuestionario.objects.filter(curso__in=cursos)
-        serializer = InstitucionSerializer(institucion)
-        serializer_cuestionarios = CuestionarioDashboardSerializer(cuestionarios, many=True)
-        return Response({
-            'institucion': serializer.data,
-            'cuestionarios': serializer_cuestionarios.data
-        })"""
+        data_instituciones = []
+
+        num_empezar = 0
+        num_finalizados = 0
+        num_activos = 0
+        date_now = datetime.datetime.now().timestamp()
+        
+        for institucion in instituciones:
+            cursos = Curso.objects.filter(
+                institucion__id=institucion.id,  docente__id=usuario.docente.id
+            )
+            cuestionarios = Cuestionario.objects.filter(
+                curso__in=cursos, estate='A'
+            )
+            for cuestionario in cuestionarios:
+                if cuestionario.fecha_asignacion.timestamp() > date_now:
+                    num_empezar += 1
+                elif cuestionario.fecha_expiracion.timestamp() < date_now:
+                    num_finalizados += 1
+                else:
+                    num_activos += 1
+
+            num_preguntas = Pregunta.objects.filter(
+                cuestionario__in=cuestionarios, estate='A'
+            ).count()
+
+            data_instituciones.append({
+                "nombre": institucion.nombre,
+                "id": institucion.id,
+                "cursos": cursos.count(),
+                "cuestionarios": cuestionarios.count(),
+                "preguntas": num_preguntas,
+            })
+
+        data_cuestionarios = {
+            "empezar" : num_empezar,
+            "activos" : num_activos,
+            "finalizados" : num_finalizados
+        }
+
         data = {
-            "instituciones": instituciones.count(),
+            "instituciones": data_instituciones,
+            "cuestionarios": data_cuestionarios,
         }
         return Response(data)
     except:
         raise ServerError("Error inesperado")
-    pass

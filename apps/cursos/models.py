@@ -32,7 +32,7 @@ class Curso(BaseModel):
     nombre = CharField( 'Nombre', max_length=150, blank=False, null=False,)
     grado = ForeignKey( Grado, on_delete=SET_NULL, blank=True, null=True )
     docente = ForeignKey( Docente, on_delete=CASCADE,)
-    institucion = ForeignKey( Institucion, on_delete=CASCADE,)
+    institucion = ForeignKey( Institucion, on_delete=CASCADE, related_name='cursos',)
     codigo_inscripcion = CharField( 'Codigo', max_length=50, unique=True, null=False, blank=True, )
 
     def __str__(self):
@@ -49,7 +49,7 @@ class Curso(BaseModel):
 class AlumnoInscripcionCurso(BaseModel):
     alumno = ForeignKey( Alumno, on_delete=CASCADE, )
     curso = ForeignKey( Curso, on_delete=CASCADE, related_name='inscripciones', )
-    estate = CharField( 'Estado', max_length=1, choices=EstadoCursoInscripcion.choices, default=EstadoCursoInscripcion.ACTIVO,)
+    estate = CharField( 'Estado', max_length=1, choices=EstadoCursoInscripcion.choices, default=EstadoCursoInscripcion.PENDIENTE,)
 
     class Meta:
         unique_together = ('alumno', 'curso',)

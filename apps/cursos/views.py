@@ -101,7 +101,7 @@ class CursoIdView(APIView):
                 curso = Curso.objects.get(id=id)
                 docente = Docente.objects.get(
                     nro_documento=usuario.username)
-                if curso.docente == docente or curso.estate == 'A':
+                if curso.docente == docente or curso.estate == EstadoCurso.ACTIVO:
                     serializer = CursoSerializer(curso)
                     return Response(serializer.data, 200)
                 else:
@@ -136,7 +136,7 @@ class CursoInscripcionDetailView(APIView):
                 curso = Curso.objects.get(id=id)
                
                 inscripciones = AlumnoInscripcionCurso.objects.filter(
-                    alumno=alumno, curso=curso, estate='D').first()
+                    alumno=alumno, curso=curso, estate=EstadoCursoInscripcion.INSCRITO).first()
                 serializer = IncripcionCursoSerializer(
                     inscripciones)
                 return Response(serializer.data, 200)
@@ -154,7 +154,7 @@ class CursoInscripcionDetailView(APIView):
                 docente = Docente.objects.get(
                     nro_documento=usuario.username)
                 if inscripcion.curso.docente == docente:
-                    inscripcion.estate = 'D'
+                    inscripcion.estate = EstadoCursoInscripcion.INSCRITO
                     inscripcion.save()
                     return Response({'msg': 'Exito'}, 200)
                 else:
