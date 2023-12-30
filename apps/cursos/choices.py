@@ -16,7 +16,8 @@ class EstadoCurso(TextChoices):
     CERRADO = 'C', _('Cerrado')
 
 class EstadoCursoInscripcion(TextChoices):
-    ACTIVO = 'A', _('Inscrito')
+    PENDIENTE = 'A', _('Inscrito') # INICIO cuando se registra con codigo
     RETIRADO = 'R', _('Retirado')
-    APROBADO = 'P', _('Aprobado')
     REPROBADO = 'E', _('Reprobado')
+    APROBADO = 'P', _('Aprobado')
+    INSCRITO = 'D', _('Inscrito')   # cuando el docente lo aprueba o el docente lo registra

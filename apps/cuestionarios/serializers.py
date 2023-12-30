@@ -149,21 +149,21 @@ class CuestionarioSerializer(serializers.ModelSerializer):
             'curso': {'required': False,'read_only': True},
             'imagen': {'read_only': True},
             'institucion_id': {'read_only': True},
-            'preguntas': {'required': False, 'read_only': True},
+            'preguntas': {'required': False},
         }
 
-    """def create(self, validated_data):
+    def create(self, validated_data):
         preguntas = validated_data.pop('preguntas', [])
         cuestionario = Cuestionario.objects.create(**validated_data)
         # pregunta del cuestionario
-        for pregunta in preguntas:
+        """for pregunta in preguntas:
             if 'id' in pregunta:
                 data_pregunta = Pregunta.objects.get(id=pregunta['id'])
             else:
                 preguntaSerializer = PreguntaSerializer(pregunta)
                 data_pregunta = preguntaSerializer.create(pregunta)
-            cuestionario.preguntas.add(data_pregunta)
-        return cuestionario"""
+            cuestionario.preguntas.add(data_pregunta)"""
+        return cuestionario
 
     def update(self, instance, validated_data):
         instance.nombre = validated_data.get('nombre', instance.nombre)

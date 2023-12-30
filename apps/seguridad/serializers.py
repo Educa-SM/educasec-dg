@@ -1,4 +1,4 @@
-from rest_framework.serializers import CharField, ModelSerializer, PrimaryKeyRelatedField, Serializer, SlugRelatedField
+from rest_framework.serializers import CharField, ModelSerializer, PrimaryKeyRelatedField, Serializer, SlugRelatedField, IntegerField
 from apps.institucion.models import Alumno, Docente, Institucion
 from .models import User
 
@@ -81,6 +81,7 @@ class AlumnoSerializer(ModelSerializer):
     class Meta:
         model = Alumno
         fields = [
+            'id',
             'user',
             'nombres',
             'apellido_materno',
@@ -109,3 +110,11 @@ class ChangePasswordSerializer(Serializer):
     model = User
     old_password = CharField(required=True)
     new_password = CharField(required=True)
+
+
+class PostRegistrarAlumnoCurso(Serializer):
+    username = CharField(required=True, max_length=12)
+    apellido_paterno = CharField(required=True, max_length=150)
+    apellido_materno = CharField(required=True, max_length=150)
+    tipo_documento = CharField(required=True,)
+    id_curso = IntegerField(required=True)

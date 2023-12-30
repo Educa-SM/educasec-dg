@@ -9,8 +9,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from apps.institucion.models import Alumno, Docente
 from apps.seguridad.models import User
-from apps.seguridad.serializers import AlumnoSerializer, ChangePasswordSerializer, DocenteSerializer
+from apps.seguridad.serializers import AlumnoSerializer, ChangePasswordSerializer, DocenteSerializer, PostRegistrarAlumnoCurso
 from rest_framework.decorators import api_view, permission_classes
+from apps.cursos.models import Curso, AlumnoInscripcionCurso, EstadoCursoInscripcion
 
 class RegisterDocenteView(APIView):
     def post(self, request):
@@ -157,3 +158,90 @@ def aceptar_docente(request):
         'status': 'success',
     }
     return Response(respuesta, status.HTTP_200_OK)
+
+#--- bucar estudiante por nro_documento
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_estudiante_by_nro_documento(request, nro_documento):
+    try:
+        usuario = request.user
+        if not usuario.is_docente():
+            return Response({'msg': 'No Autorizado.'}, status.HTTP_401_UNAUTHORIZED)
+        user_found = User.objects.filter(username=nro_documento).first()
+        if not user_found:
+            return Response({'msg': 'El usuario no existe.'}, status.HTTP_404_NOT_FOUND)
+        if user_found.is_alumno():
+            estudiante = Alumno.objects.filter(nro_documento=nro_documento).first()
+            if not estudiante:
+                return Response({'msg': 'El estudiante no existe.'}, status.HTTP_404_NOT_FOUND)
+            serializer = AlumnoSerializer(estudiante)
+            return Response(serializer.data)
+        else:
+            return Response({'msg': 'El usuario no es estudiante.'}, status.HTTP_400_BAD_REQUEST)
+    except:
+        return Response({'msg': 'Error inesperado.'}, status.HTTP_400_BAD_REQUEST)
+
+# registrar alumno y agregarlo al curso
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def registrar_alumno_curso(request):
+    try:
+        usuario = request.user
+        if not usuario.is_docente():
+            return Response({'msg': 'No Autorizado.'}, status.HTTP_401_UNAUTHORIZED)
+        
+        serializer = PostRegistrarAlumnoCurso(data=request.data)
+        if not serializer.is_valid():
+            return Response({'msg': 'Datos ingresados incorrectos.'}, status.HTTP_400_BAD_REQUEST)
+        
+        data = serializer.data
+
+        # buscar curso
+        curso = Curso.objects.filter(id=data.get('id_curso')).first()
+        if not curso:
+            return Response({'msg': 'El curso no existe.'}, status.HTTP_404_NOT_FOUND)
+
+        # buscar alumno
+        user = User.objects.filter(username=data.get('username')).first()
+        alumno = {}
+        if user:
+            if not user.is_alumno():
+                return Response({'msg': 'El usuario no es alumno.'}, status.HTTP_400_BAD_REQUEST)
+            alumno = Alumno.objects.filter(nro_documento=data.get('username')).first()
+        else:
+            # crear usuario
+            user = User(username=data.get('username'))
+            user.set_password(data.get('username'))
+            user.save()
+            user.groups.add(4)
+            if not user.id:
+                return Response({'msg': 'Error al registrar el usuario.'}, status.HTTP_400_BAD_REQUEST)
+             
+            # crear alumno
+            alumno = Alumno(
+                user=user,
+                apellido_paterno=data.get('apellido_paterno'),
+                apellido_materno=data.get('apellido_materno'),
+                tipo_documento=data.get('tipo_documento'),
+                nro_documento=data.get('username'),
+            )
+            alumno.save()
+            if not alumno.id:
+                user.delete()
+                return Response({'msg': 'Error al registrar el alumno.'}, status.HTTP_400_BAD_REQUEST)
+
+        inscripcion = AlumnoInscripcionCurso(
+            alumno=alumno,
+            curso=curso,
+            estate = EstadoCursoInscripcion.INSCRITO
+        )
+        inscripcion.save()
+        if not inscripcion.id:
+            return Response({'msg': 'Error al registrar la inscripción.'}, status.HTTP_400_BAD_REQUEST)
+        return Response({
+            'msg': 'El alumno fue registrado correctamente.',
+            "username": data.get('username'),
+            "password": data.get('username'),
+        }, status.HTTP_200_OK)
+    except:
+        return Response({'msg': 'Error inesperado.'}, status.HTTP_400_BAD_REQUEST)
