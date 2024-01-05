@@ -4,11 +4,11 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from apps.cuestionarios.serializers import *
-
+from rest_framework.decorators import api_view, permission_classes
 # *********************** DOCENTE *****************************************
 
 """
-Soluciones de cueestionario 
+Soluciones de cuestionario 
 """
 class SolucionCuestionarioView(APIView):
     permission_classes = [IsAuthenticated]
@@ -99,3 +99,18 @@ class SolucionCursoView(APIView):
                 return Response({'msg': 'No autorizado'}, 401)
         except Curso.DoesNotExist:
             return Response({'msg': 'El curso No Existe'}, 404)
+
+# solucion de cada pregunta
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def solucion_alumno(request):
+    try:
+        usuario = request.user
+        if usuario.is_alumno():
+            alumno = Alumno.objects.get(user=request.user)
+
+
+        else:
+            return Response({'msg': 'No autorizado'}, 401)
+    except Curso.DoesNotExist:
+        return Response({'msg': 'El curso No Existe'}, 404)
