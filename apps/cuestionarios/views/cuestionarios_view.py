@@ -142,10 +142,12 @@ class ListCuestionarioAlumnoView(APIView):
             if usuario.is_alumno():
                 alumno = Alumno.objects.get(user=request.user)
                 inscripcion = AlumnoInscripcionCurso.objects.get(alumno__id=alumno.id,curso__id=id)
-                if inscripcion.estate=='A':
+                if inscripcion.estate==EstadoCursoInscripcion.PENDIENTE:
                     return Response([], 200)
-                cuestionarios = Cuestionario.objects.filter(
-                    curso__id=id).exclude(soluciones__alumno=alumno).order_by('id').reverse()
+                cuestionarios = Cuestionario.objects.filter(curso__id=id).exclude(
+                        soluciones__alumno=alumno, 
+                        soluciones__estate=EstadoSolucion.EN_REVISION
+                    ).exclude(soluciones__estate=EstadoSolucion.REVISADA).order_by('id').reverse()
                 serializer = CuestionarioAlumnoSerializer(
                     cuestionarios, many=True)
                 return Response(serializer.data, 200)
@@ -170,10 +172,10 @@ class ListCuestionarioResueltosView(APIView):
             if usuario.is_alumno():
                 alumno = Alumno.objects.get(user=request.user)
                 inscripcion = AlumnoInscripcionCurso.objects.get(alumno__id=alumno.id,curso__id=id)
-                if inscripcion.estate=='A':
+                if inscripcion.estate==EstadoCursoInscripcion.PENDIENTE:
                     return Response([], 200)
-                cuestionarios = Cuestionario.objects.filter(
-                    curso=curso).filter(soluciones__alumno=alumno).order_by('id').reverse()
+                cuestionarios = Cuestionario.objects.filter(curso=curso).filter(soluciones__alumno=alumno
+                                    ).exclude(soluciones__estate=EstadoSolucion.EN_PROCESO).order_by('id').reverse()
                 serializer = CuestionarioAlumnoSerializer(
                     cuestionarios, many=True)
                 return Response(serializer.data, 200)
@@ -194,7 +196,7 @@ class CuestionarioAlumnoView(APIView):
             usuario = request.user
             if usuario.is_alumno():
                 cuestionarios = Cuestionario.objects.get(id=id)
-                serializer = CuestionarioSerializer(cuestionarios)
+                serializer = CuestionarioAlumnoSerializer(cuestionarios)
                 return Response(serializer.data, 200)
             else:
                 return Response({'msg': 'No autorizado'}, 401)

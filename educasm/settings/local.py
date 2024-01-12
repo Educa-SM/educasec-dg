@@ -8,7 +8,8 @@ ALLOWED_HOSTS = [
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-DATABASES = db.MYSQL
+#DATABASES = db.MYSQL
+DATABASES = db.SQLITE
 
 
 #CORS_ORIGIN_ALLOW_ALL = False

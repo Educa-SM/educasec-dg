@@ -1,4 +1,4 @@
-from rest_framework.serializers import ModelSerializer, SlugRelatedField
+from rest_framework import serializers
 from apps.cursos.serializers import *
 from .models import *
 
@@ -19,9 +19,20 @@ class OpcionPreguntaListSerializer(serializers.ModelSerializer):
             'correcta': {'required': False}
         }
 
+class OpcionPreguntaAlumnoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OpcionPregunta
+        fields = [
+            'id',
+            'texto'
+        ]
+        extra_kwargs = {
+            'id': {'required': False},
+        }
+
 
 ## para creacion y actualizacion
-class PreguntaSerializer(ModelSerializer):
+class PreguntaSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(required=False)
     #tipo_curso = serializers.SlugRelatedField(read_only=True, slug_field='id')
     opciones = OpcionPreguntaListSerializer(many=True, required=False)
@@ -89,6 +100,27 @@ class PreguntaSerializer(ModelSerializer):
                     opcion_instance.correcta = opcion['correcta']
                     opcion_instance.save()
         return instance
+
+class PreguntaAlumnoSerializer(serializers.ModelSerializer):
+    opciones = OpcionPreguntaAlumnoSerializer(many=True, required=False)
+    class Meta:
+        model = Pregunta
+        fields = [
+            'id',
+            'texto',
+            'tipo',
+            'intentos_disponibles',
+            'puntaje_asignado',
+            'nombre',
+            'opciones',
+            'imagen'
+        ]
+        extra_kwargs = {
+            'id': {'required': False},
+            'texto': {'required': False},
+            'opciones': {'required': False},
+            'imagen': {'read_only': True},
+        }
 
 
 """**********************   Cuestionarios       ***************************"""
@@ -175,8 +207,8 @@ class CuestionarioSerializer(serializers.ModelSerializer):
 
 
 # cuestonario pregunta
-class CuestionarioAlumnoSerializer(ModelSerializer):
-    curso = SlugRelatedField(read_only=True, slug_field='nombre')
+class CuestionarioAlumnoSerializer(serializers.ModelSerializer):
+    curso = serializers.SlugRelatedField(read_only=True, slug_field='nombre')
 
     class Meta:
         model = Cuestionario
@@ -200,7 +232,7 @@ class CuestionarioAlumnoSerializer(ModelSerializer):
 """
 Solucion de cuestionarios por parte del alumno
 """
-class SolucionPreguntaSerializer(ModelSerializer):
+class SolucionPreguntaSerializer(serializers.ModelSerializer):
     pregunta_id = serializers.PrimaryKeyRelatedField(
                                 queryset=Pregunta.objects.all(), 
                                 source='pregunta',
@@ -233,44 +265,9 @@ class SolucionPreguntaSerializer(ModelSerializer):
         }
 
 
-class SolucionSerializer(ModelSerializer):
-    cuestionario_id = serializers.PrimaryKeyRelatedField(
-        queryset=Cuestionario.objects.all(), source='cuestionario')
-    soluciones_preguntas = SolucionPreguntaSerializer(many=True)
-    cuestionario = CuestionarioAlumnoSerializer(required=False, many=False)
-    class Meta:
-        model = Solucion
-        fields = [
-            'id',
-            'comentario',
-            'cuestionario_id',
-            'soluciones_preguntas',
-            'fecha_solucion',
-            'fecha_revision',
-            'cuestionario',
-        ]
-        extra_kwargs = {
-            'id': {'read_only': True},
-            'is_revisado': {'read_only': True},
-            'comentario': {'required': False},
-            'fecha_solucion': {'read_only': True},
-            'fecha_revision': {'read_only': True},
-            'cuestionario': {'read_only': True},
-        }
-
-    def create(self, validated_data):
-        soluciones = validated_data.pop('soluciones_preguntas', [])
-        solucion = Solucion.objects.create(**validated_data)
-        for opcion in soluciones:
-            # ver soluciones
-            pregunta = opcion['pregunta']
-            if pregunta.tipo=='O' and opcion['situacion_respuesta']=='B':
-                opcion['puntaje_obtenido'] = pregunta.puntaje_asignado
-            SolucionPregunta.objects.create(solucion=solucion, **opcion)
-        return solucion
 
 
-class SolucionDocenteSerializer(ModelSerializer):
+class SolucionDocenteSerializer(serializers.ModelSerializer):
     cuestionario_id = serializers.PrimaryKeyRelatedField(
         queryset=Cuestionario.objects.all(), source='cuestionario')
     soluciones_preguntas = SolucionPreguntaSerializer(many=True)
@@ -296,6 +293,7 @@ class SolucionDocenteSerializer(ModelSerializer):
     def update(self, instance, validated_data):
         soluciones = validated_data.pop('soluciones_preguntas', [])
         instance.comentario = validated_data.get('comentario', instance.comentario)
+        instance.estate = EstadoSolucion.REVISADA
         instance.fecha_revision = dt.now()
         
         for pregunta in soluciones:
@@ -307,3 +305,85 @@ class SolucionDocenteSerializer(ModelSerializer):
                 pregunta_instance.save()
         instance.save()
         return instance
+
+
+
+class SolucionSerializer(serializers.ModelSerializer):
+    cuestionario_id = serializers.PrimaryKeyRelatedField(
+        queryset=Cuestionario.objects.all(), source='cuestionario')
+    soluciones_preguntas = SolucionPreguntaSerializer(many=True)
+    cuestionario = CuestionarioAlumnoSerializer(required=False, many=False)
+    class Meta:
+        model = Solucion
+        fields = [
+            'id',
+            'comentario',
+            'cuestionario_id',
+            'soluciones_preguntas',
+            'fecha_solucion',
+            'fecha_revision',
+            'cuestionario',
+            'estate'
+        ]
+        extra_kwargs = {
+            'id': {'read_only': True},
+            'is_revisado': {'read_only': True},
+            'comentario': {'required': False},
+            'fecha_solucion': {'read_only': True},
+            'fecha_revision': {'read_only': True},
+            'cuestionario': {'read_only': True},
+            'estate': {'read_only': True},
+        }
+
+    def create(self, validated_data):
+        soluciones = validated_data.pop('soluciones_preguntas', [])
+        solucion = Solucion.objects.create(**validated_data)
+        for opcion in soluciones:
+            # ver soluciones
+            pregunta = opcion['pregunta']
+            if pregunta.tipo=='O' and opcion['situacion_respuesta']=='B':
+                opcion['puntaje_obtenido'] = pregunta.puntaje_asignado
+            SolucionPregunta.objects.create(solucion=solucion, **opcion)
+        return solucion
+    
+# no utilizada
+class IniciarEvalucionSerializar(serializers.ModelSerializer):
+    cuestionario_id = serializers.PrimaryKeyRelatedField(
+        queryset=Cuestionario.objects.all(), source='cuestionario')
+    id = serializers.IntegerField(required=False)
+    class Meta:
+        model = Solucion
+        fields = [
+            'id',
+            'cuestionario_id',
+        ]
+        extra_kwargs = {
+            'id': {'read_only': True},
+        }
+
+
+class SolucionAlumnoPreguntaSerializer(serializers.ModelSerializer):
+    pregunta_id = serializers.PrimaryKeyRelatedField(
+            queryset=Pregunta.objects.all(), source='pregunta')
+    solucion_id = serializers.PrimaryKeyRelatedField(
+            queryset=Solucion.objects.all(), source='solucion')
+    opcion_pregunta_id = serializers.PrimaryKeyRelatedField( queryset=OpcionPregunta.objects.all(), 
+            source='opcion_pregunta', required=False)
+    id = serializers.IntegerField(required=False)
+    class Meta:
+        model = SolucionPregunta
+        fields = [
+            'id',
+            'respuesta',  
+            'comentario',
+            'solucion_id',
+            'pregunta_id',
+            'opcion_pregunta_id',
+        ]
+        extra_kwargs = {
+            'id': {'read_only': False},
+            'opcion_pregunta_id': {'required': False},
+            'comentario': {'required': True},
+            'respuesta': {'required': True},
+            
+        }
