@@ -133,7 +133,16 @@ class RecursoPublicAPIView(APIView):
     def get(self, request):
         data = {}
         try:
-            recurso = Recurso.objects.all().order_by('id')
+            tipo = request.query_params.get('tipo', None)
+            recurso = None
+            if tipo:
+                if not is_recurso_grupo(tipo):
+                    data['msg'] = 'No exite el grupo de recursos'
+                    return Response(data, status.HTTP_400_BAD_REQUEST)
+                filters_tipos = get_grupo_recurso(tipo)
+                recurso = Recurso.objects.filter(tipo__in=filters_tipos).order_by('id')
+            else:
+                recurso = Recurso.objects.all().order_by('id')
             serializer = RecursoSerializer(recurso, many=True)
             data = serializer.data
             return Response(data, status.HTTP_200_OK)
