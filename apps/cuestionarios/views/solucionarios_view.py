@@ -7,7 +7,8 @@ from apps.cuestionarios.serializers import *
 from rest_framework.decorators import api_view, permission_classes
 import datetime
 import pytz
-utc=pytz.UTC
+# BOGOTA -LIMA
+time_bogota=pytz.timezone('America/Bogota')
 # *********************** DOCENTE *****************************************
 
 """
@@ -92,8 +93,8 @@ def iniciar_evaluacion(request):
             id = request.data['cuestionario_id']
             cuestionario = Cuestionario.objects.get(id=id)
             inscripcion = AlumnoInscripcionCurso.objects.get(alumno=alumno, curso=cuestionario.curso)
-            
-            if cuestionario.fecha_asignacion.replace(tzinfo=utc) > datetime.datetime.now().replace(tzinfo=utc):
+
+            if cuestionario.fecha_asignacion > datetime.datetime.now().replace(tzinfo=time_bogota):
                 return Response({'msg': 'El cuestionario aun no esta disponible'}, 400)
             
             #verificar si la solucion ya esta registrada, si no registrarla y retornar el nro de pregunta
