@@ -8,3 +8,4 @@ coreapi
 Pillow
 python-decouple
 whitenoise
+pytz
