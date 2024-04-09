@@ -30,6 +30,7 @@ LOCAL_APPS = [
     'apps.institucion',
     'apps.recursos',
     'apps.seguridad',
+    'apps.inicio',
 ]
 THIRD_APPS = [
     'corsheaders',
@@ -67,7 +68,7 @@ ROOT_URLCONF = 'educasm.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [ ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

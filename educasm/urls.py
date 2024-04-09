@@ -11,7 +11,8 @@ urlpatterns = [
     path('api/recursos/', include('apps.recursos.urls')),
     path('api/cuestionarios/', include('apps.cuestionarios.urls')),
     path('api/institucion/', include('apps.institucion.urls')),
-     path('docs/', include_docs_urls(title='EDUCASM API')),
+    path('docs/', include_docs_urls(title='EDUCASM API')),
+    path('', include('apps.inicio.urls')),
 ]
 
 urlpatterns += static(MEDIA_URL, document_root=MEDIA_ROOT)
