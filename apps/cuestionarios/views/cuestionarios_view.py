@@ -5,6 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from apps.cuestionarios.serializers import *
+from django.db.models import Q
 
 # *********************** DOCENTE *****************************************
 # --------------   Cuestionarios      -----------------------------------
@@ -147,11 +148,11 @@ class ListCuestionarioAlumnoView(APIView):
                 # 2 states: EN_PROCESO, EN_REVISION
                 
                 cuestionarios = Cuestionario.objects.filter(curso__id=id).exclude(
-                        soluciones__alumno=alumno, 
-                        soluciones__estate=EstadoSolucion.EN_REVISION
+                        Q(soluciones__alumno=alumno) & 
+                        Q(soluciones__estate=EstadoSolucion.EN_REVISION)
                     ).exclude(
-                        soluciones__alumno=alumno,
-                        soluciones__estate=EstadoSolucion.REVISADA
+                        Q(soluciones__alumno=alumno) &
+                        Q(soluciones__estate=EstadoSolucion.REVISADA)
                     ).order_by('id').reverse()
                 
                 serializer = CuestionarioAlumnoSerializer(cuestionarios, many=True)
