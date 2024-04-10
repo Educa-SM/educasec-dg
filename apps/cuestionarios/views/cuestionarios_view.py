@@ -146,7 +146,8 @@ class ListCuestionarioAlumnoView(APIView):
                     return Response([], 200)
                 cuestionarios = Cuestionario.objects.filter(curso__id=id).exclude(
                         soluciones__alumno=alumno, 
-                        soluciones__estate=EstadoSolucion.EN_REVISION
+                        soluciones__estate=EstadoSolucion.EN_REVISION,
+                        soluciones__estate=EstadoSolucion.EN_PROCESO
                     ).exclude(soluciones__estate=EstadoSolucion.REVISADA).order_by('id').reverse()
                 serializer = CuestionarioAlumnoSerializer(
                     cuestionarios, many=True)
