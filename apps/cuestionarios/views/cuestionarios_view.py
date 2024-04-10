@@ -145,12 +145,16 @@ class ListCuestionarioAlumnoView(APIView):
                 if inscripcion.estate==EstadoCursoInscripcion.PENDIENTE:
                     return Response([], 200)
                 # 2 states: EN_PROCESO, EN_REVISION
+                
                 cuestionarios = Cuestionario.objects.filter(curso__id=id).exclude(
                         soluciones__alumno=alumno, 
                         soluciones__estate=EstadoSolucion.EN_REVISION
-                    ).exclude(soluciones__estate=EstadoSolucion.REVISADA).order_by('id').reverse()
-                serializer = CuestionarioAlumnoSerializer(
-                    cuestionarios, many=True)
+                    ).exclude(
+                        soluciones__alumno=alumno,
+                        soluciones__estate=EstadoSolucion.REVISADA
+                    ).order_by('id').reverse()
+                
+                serializer = CuestionarioAlumnoSerializer(cuestionarios, many=True)
                 return Response(serializer.data, 200)
             else:
                 return Response({'msg': 'No autorizado'}, 401)
