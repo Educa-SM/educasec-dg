@@ -148,10 +148,10 @@ class ListCuestionarioAlumnoView(APIView):
                 # 2 states: EN_PROCESO, EN_REVISION
                 
                 cuestionarios = Cuestionario.objects.filter(curso__id=id).exclude(
-                        Q(soluciones__alumno=alumno) & 
+                        Q(soluciones__alumno=alumno) | 
                         Q(soluciones__estate=EstadoSolucion.EN_REVISION)
                     ).exclude(
-                        Q(soluciones__alumno=alumno) &
+                        Q(soluciones__alumno=alumno) |
                         Q(soluciones__estate=EstadoSolucion.REVISADA)
                     ).order_by('id').reverse()
                 
