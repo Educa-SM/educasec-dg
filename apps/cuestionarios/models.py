@@ -27,6 +27,7 @@ class Cuestionario(BaseModel):
     estate = CharField( 'Estado', max_length=1, choices=EstadoCuestionario.choices, default=EstadoCuestionario.ACTIVO,)
 
     curso = ForeignKey( Curso, on_delete=SET_NULL, null=True, blank=True, related_name='cuestionarios',)
+    
 
     def __str__(self):
         return self.nombre

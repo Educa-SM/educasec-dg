@@ -209,7 +209,6 @@ class CuestionarioSerializer(serializers.ModelSerializer):
 # cuestonario pregunta
 class CuestionarioAlumnoSerializer(serializers.ModelSerializer):
     curso = serializers.SlugRelatedField(read_only=True, slug_field='nombre')
-
     class Meta:
         model = Cuestionario
         fields = [
