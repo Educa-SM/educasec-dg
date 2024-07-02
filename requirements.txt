@@ -4,8 +4,10 @@ django-import-export
 django-cors-headers
 django-filter
 psycopg2
+django-coreapi
 coreapi
 Pillow
 python-decouple
 whitenoise
 pytz
+setuptools

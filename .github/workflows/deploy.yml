@@ -22,5 +22,6 @@ jobs:
                     git fetch 
                     git checkout ${{ secrets.MAIN_BRANCH }} 
                     git pull 
+                    pip install -r requirements.txt
                     pm2 restart app-educa 
                     exit
