@@ -13,12 +13,12 @@ from .views.cuestionarios_view import (
     ListCuestionarioAlumnoView,
     ListCuestionarioResueltosView,
     CuestionarioAlumnoView,
-    CuestionarioImagenView
+    CuestionarioImagenView,
 )
 
 from .views.solucionarios_view import (
     SolucionCuestionarioView,
-    SolucionCursoView
+    iniciar_evaluacion, solucion_pregunta
 )
 
 urlpatterns = [
@@ -39,5 +39,6 @@ urlpatterns = [
     path('alumno/<int:id>/', ListCuestionarioAlumnoView.as_view()),
     path('alumno/<int:id>/resultado/', ListCuestionarioResueltosView.as_view()),
     path('alumno/cuestionario/<int:id>/', CuestionarioAlumnoView.as_view()),
-    path('alumno/solucion/', SolucionCursoView.as_view()),
+    path('alumno/iniciar_evaluacion/', iniciar_evaluacion),
+    path('alumno/solucion_pregunta/', solucion_pregunta)
 ]

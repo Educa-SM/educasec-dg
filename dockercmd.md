@@ -13,7 +13,7 @@ eliminar un docker
 asegurarse de caargar la data.
 
 -- guardar backup
-> python manage.py dumpdata -o main.json 
+> python -Xutf8 ./manage.py dumpdata > main.json
 
 -- ingresar backup
 > python manage.py loaddata main.json

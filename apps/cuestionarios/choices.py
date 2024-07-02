@@ -15,8 +15,10 @@ class EstadoOpcionPregunta(TextChoices):
     INACTIVO = 'I', _('Inactivo')
 
 class EstadoSolucion(TextChoices):
-    ACTIVO = 'A', _('Activo')
+    EN_REVISION = 'A', _('En Revision')
     INACTIVO = 'I', _('Inactivo')
+    EN_PROCESO = 'P', _('En Proceso')
+    REVISADA = 'R', _('Revisada')
 
 class EstadoSolucionPregunta(TextChoices):
     ACTIVO = 'A', _('Activo')

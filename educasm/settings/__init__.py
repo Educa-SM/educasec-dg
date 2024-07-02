@@ -30,12 +30,14 @@ LOCAL_APPS = [
     'apps.institucion',
     'apps.recursos',
     'apps.seguridad',
+    'apps.inicio',
 ]
 THIRD_APPS = [
     'corsheaders',
     'import_export',
     'rest_framework',
     'rest_framework.authtoken',
+    'coreapi',
 ]
 
 INSTALLED_APPS = BASE_APPS + LOCAL_APPS + THIRD_APPS
@@ -44,7 +46,8 @@ INSTALLED_APPS = BASE_APPS + LOCAL_APPS + THIRD_APPS
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
-    )
+    ),
+    "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
 }
 
 
@@ -65,7 +68,7 @@ ROOT_URLCONF = 'educasm.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [ ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -105,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'es-pe'
 
-TIME_ZONE = 'America/Lima'
+TIME_ZONE = 'America/Bogota'
 
 USE_I18N = True
 

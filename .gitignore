@@ -5,6 +5,7 @@
 
 # Jet Brains IDEs
 .idea/
+static/
 
 # Django
 **/migrations/*.py

@@ -27,6 +27,7 @@ class Cuestionario(BaseModel):
     estate = CharField( 'Estado', max_length=1, choices=EstadoCuestionario.choices, default=EstadoCuestionario.ACTIVO,)
 
     curso = ForeignKey( Curso, on_delete=SET_NULL, null=True, blank=True, related_name='cuestionarios',)
+    
 
     def __str__(self):
         return self.nombre
@@ -78,7 +79,7 @@ class Solucion(BaseModel):
     alumno = ForeignKey( Alumno, on_delete=CASCADE, )
     cuestionario = ForeignKey( Cuestionario, on_delete=CASCADE, related_name='soluciones')
 
-    estate = CharField( 'Estado', max_length=1, choices=EstadoSolucion.choices, default=EstadoSolucion.ACTIVO,)
+    estate = CharField( 'Estado', max_length=1, choices=EstadoSolucion.choices, default=EstadoSolucion.EN_PROCESO,)
 
     class Meta:
         unique_together = ('alumno', 'cuestionario',)

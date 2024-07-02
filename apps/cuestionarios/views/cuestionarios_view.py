@@ -5,6 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from apps.cuestionarios.serializers import *
+from django.db.models import Q
 
 # *********************** DOCENTE *****************************************
 # --------------   Cuestionarios      -----------------------------------
@@ -142,12 +143,18 @@ class ListCuestionarioAlumnoView(APIView):
             if usuario.is_alumno():
                 alumno = Alumno.objects.get(user=request.user)
                 inscripcion = AlumnoInscripcionCurso.objects.get(alumno__id=alumno.id,curso__id=id)
-                if inscripcion.estate=='A':
+                if inscripcion.estate==EstadoCursoInscripcion.PENDIENTE:
                     return Response([], 200)
-                cuestionarios = Cuestionario.objects.filter(
-                    curso__id=id).exclude(soluciones__alumno=alumno).order_by('id').reverse()
-                serializer = CuestionarioAlumnoSerializer(
-                    cuestionarios, many=True)
+                # 2 states: EN_PROCESO, EN_REVISION
+                
+                cuestionarios = Cuestionario.objects.filter(curso__id=id).order_by('id').reverse()
+                
+                solucion = Solucion.objects.filter(alumno=alumno, cuestionario__curso__id=id).first()
+                if solucion:
+                    if solucion.estate == EstadoSolucion.EN_REVISION or solucion.estate == EstadoSolucion.REVISADA:
+                        cuestionarios = cuestionarios.exclude(id=solucion.cuestionario.id)
+                
+                serializer = CuestionarioAlumnoSerializer(cuestionarios, many=True)
                 return Response(serializer.data, 200)
             else:
                 return Response({'msg': 'No autorizado'}, 401)
@@ -170,12 +177,23 @@ class ListCuestionarioResueltosView(APIView):
             if usuario.is_alumno():
                 alumno = Alumno.objects.get(user=request.user)
                 inscripcion = AlumnoInscripcionCurso.objects.get(alumno__id=alumno.id,curso__id=id)
-                if inscripcion.estate=='A':
+                if inscripcion.estate==EstadoCursoInscripcion.PENDIENTE:
                     return Response([], 200)
-                cuestionarios = Cuestionario.objects.filter(
-                    curso=curso).filter(soluciones__alumno=alumno).order_by('id').reverse()
+                cuestionarios = Cuestionario.objects.filter(curso=curso).order_by('id').reverse()
+                                #filter(soluciones__alumno=alumno).exclude(soluciones__estate=EstadoSolucion.EN_PROCESO).
+                                
+                
+                for cuestionario in cuestionarios:
+                    solucion = Solucion.objects.filter(cuestionario=cuestionario, alumno=alumno).first()
+                    if solucion:
+                        if solucion.estate == EstadoSolucion.EN_PROCESO:
+                            cuestionarios = cuestionarios.exclude(id=cuestionario.id)
+                            
+                
                 serializer = CuestionarioAlumnoSerializer(
                     cuestionarios, many=True)
+            
+                
                 return Response(serializer.data, 200)
             else:
                 return Response({'msg': 'No autorizado'}, 401)
@@ -194,7 +212,7 @@ class CuestionarioAlumnoView(APIView):
             usuario = request.user
             if usuario.is_alumno():
                 cuestionarios = Cuestionario.objects.get(id=id)
-                serializer = CuestionarioSerializer(cuestionarios)
+                serializer = CuestionarioAlumnoSerializer(cuestionarios)
                 return Response(serializer.data, 200)
             else:
                 return Response({'msg': 'No autorizado'}, 401)
